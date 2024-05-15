@@ -1,0 +1,17 @@
+{
+  "name": "@tago-io/decoders",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "linter": "biome lint functions/"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@swc/core": "1.5.7",
+    "@types/node": "20.12.12",
+    "moment-timezone": "0.5.45",
+    "vitest": "1.6.0",
+    "vm2": "3.9.19"
+  }
+}
