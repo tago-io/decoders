@@ -1,0 +1,1 @@
+IoT endpoint with temperature and humidity sensors over MQTT/Cellular

@@ -1,0 +1,1 @@
+Use this connector to add any LOKA's Sigfox devices

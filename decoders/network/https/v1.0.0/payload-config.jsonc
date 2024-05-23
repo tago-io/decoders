@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "label": ""
+  },
+  "device_parameters": [],
+  "documentation_url": "https://help.tago.io/portal/en/kb/articles/34-sending-data"
+}

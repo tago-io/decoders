@@ -1,0 +1,1 @@
+Khomp IoT Standalone Sensor - Supports LTE Cat M1, NB-IOT 2 and GPRS

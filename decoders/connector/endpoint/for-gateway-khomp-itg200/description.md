@@ -1,0 +1,1 @@
+Wireless temperature, humidity, and dry contact sensor over LoRa

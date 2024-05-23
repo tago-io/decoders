@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "case": "",
+    "label": "IMSI",
+    "mask": "",
+    "required": true
+  },
+  "device_parameters": []
+}

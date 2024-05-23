@@ -1,0 +1,1 @@
+IoT endpoint for power metering and sending data via LoRaWAN™

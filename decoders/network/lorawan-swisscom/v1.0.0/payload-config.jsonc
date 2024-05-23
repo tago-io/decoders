@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "Device EUI",
+    "mask": "ff-ff-ff-ff-ff-ff-ff-ff"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "swisscom.middleware.tago.io",
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-swisscom-lorawan-ns/440"
+}

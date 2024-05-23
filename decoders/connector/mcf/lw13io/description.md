@@ -1,0 +1,1 @@
+mcf88 LoRaWAN™ wireless opto-isolated inputs, relay actuator and CANBUS 

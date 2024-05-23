@@ -1,0 +1,1 @@
+Generic connector for Chirpstack v4 and Khomp Devices

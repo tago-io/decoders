@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Connect your NIT-20/21 LI through your network.**\n\nKhomp NIT-2x LI are wireless transmitter from the IoT Endpoints line, which operate via LoRa® radio and the LoRaWAN™ 1.0.3 protocol\n\n> If your endpoint is connected on a Khomp ITG200 Gateway, search for \"Khomp ITG200 LoRa Connector\".\n\n**There are two models available:**\n* NIT 20 LI - Indoor transmitter node, base version.\n* NIT 21 LI - Indoor transmitter node, with on-board temperature and humidity sensor.\n\nAdditionaly, the IoT Endpoints line offers **extension modules** including:\n* EM C104 - Current sensors;\n* EM R102 - I/O extensors;\n* EM S104 - Soil sensors;\n* EM ACW 100 - Analog temperature conversor and 1-Wire interface;\n* EM THW 100 - Temperature and umidity 1-Wire probe;\n* EM THW 200 - Two 1-Wire interfaces and on board temperature, umidity, noise and luminosity;\n* EM THW 201 - Two 1-Wire interfaces, on board temperature, umidity, noise and luminosity and analog temperature conversor;\n\nFor more information about our transmitters and extension modules, acess the [support area](https://www.khomp.com/suporte/).\n\n**The connector supports all extension modules.**\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
+  "install_end_text": "Device created sucessful.\n\nGet your basic [template here](https://admin.tago.io/template/60e7426d3c3ac60019c5af2d).\n\nWe recommend adding a filter on your device Payload parser, removing unecessary measures.\n\nFor more information about our products, acess the [support area](https://www.khomp.com/suporte/).",
+  "device_annotation": "Get your basic [template here](https://admin.tago.io/template/60e7426d3c3ac60019c5af2d).\n\nKHOMP NIT 20/21 LI Device.\n\nFor more information about our products, acess the [support area](https://www.khomp.com/suporte/).",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js"
+  ]
+}

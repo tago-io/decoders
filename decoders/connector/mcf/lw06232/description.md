@@ -1,0 +1,1 @@
+mcf88 Serial RS232 to LoRaWAN™ interface

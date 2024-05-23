@@ -1,0 +1,1 @@
+Connector to parse ITG200 measures.

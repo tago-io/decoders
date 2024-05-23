@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Connect your Khomp ITE through your network.**\n\nKhomp ITP is a IoT Photocell endpoint and sending data via LoRaWAN™\n\n> If your ITP is connected on a Khomp ITG200 Gateway, search for \"Khomp ITG200 LoRa Connector\".\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
+  "install_end_text": "Device created sucessful.",
+  "device_annotation": "**Connect your Khomp ITE through your network.**\n\nKhomp ITP is a IoT Photocell endpoint and sending data via LoRaWAN™\n\n> If your ITP is connected on a Khomp ITG200 Gateway, search for \"Khomp ITG200 LoRa Connector\".\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js"
+  ]
+}

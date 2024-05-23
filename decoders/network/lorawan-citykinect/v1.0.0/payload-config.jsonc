@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "Device EUI",
+    "case": "lower",
+    "mask": "FF-FF-FF-FF-FF-FF-FF-FF"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "citykinect.middleware.tago.io",
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-citykinect-lorawan/190"
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "label": "EUI",
+    "mask": "FF-FF-FF-FF-FF-FF-FF-FF",
+    "required": true
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "brdot.middleware.tago.io",
+  "documentation_url": "https://help.tago.io/portal/en/community/topic/integrating-brdot-lorawan-with-tagoio"
+}

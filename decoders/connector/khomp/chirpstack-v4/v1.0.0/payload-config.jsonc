@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "This is a generic connector for Khomp LoRaWAN devices.\n\nUse our forked Chirpstack server to easily deploy your application.\nhttps://github.com/support-khomp/chirpstack-docker",
+  "install_end_text": "You sucessfully created your device.",
+  "device_annotation": "Khomp - Chirpstack generic Connector;\n\nGet more information about Khomp devices in iot.khomp.com.",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js"
+  ]
+}

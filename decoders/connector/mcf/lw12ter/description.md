@@ -1,0 +1,1 @@
+mcf88 indoor environmental sensor over LoRaWAN™ 

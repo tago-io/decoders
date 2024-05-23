@@ -1,0 +1,1 @@
+Multi-mode tracker in ID card format, supporting outdoor and indoor geolocation over LoRaWAN™

@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "case": "upper",
+    "label": "EUI",
+    "mask": "FFFFFFFFFFFFFFFF",
+    "required": true
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "helium.middleware.tago.io",
+  "documentation_url": "https://docs.helium.com/use-the-network/console/integrations/tago/"
+}

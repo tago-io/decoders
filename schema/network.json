@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON Schema for main Network information",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the configuration."
+    },
+    "images": {
+      "type": "object",
+      "description": "A collection of image paths.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Path to the logo image."
+        },
+        "banner": {
+          "type": "string",
+          "description": "Path to the banner image."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Path to the icon image."
+        }
+      },
+      "required": ["logo", "banner", "icon"]
+    },
+    "versions": {
+      "type": "object",
+      "description": "Object containing the version and manifest of the payload parser",
+      "patternProperties": {
+        "^v\\d+\\.\\d+\\.\\d+$": {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string",
+              "description": "Path to the source file."
+            },
+            "manifest": {
+              "type": "string",
+              "description": "Path to the manifest file."
+            }
+          },
+          "required": ["src", "manifest"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^name\\[([a-z]{2})(-[a-z]{2})?\\]$": {
+      "type": "string",
+      "description": "Multilingual support for name field"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "images", "versions"]
+}

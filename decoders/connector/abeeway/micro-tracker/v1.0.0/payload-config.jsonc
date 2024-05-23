@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Micro tracker**\n\nMulti-mode tracker with embedded sensors combining GPS, Low-power GPS, Wi-Fi Sniffer, BLE and LoRaWAN TDoA geolocation technologies, for accurate outdoor and indoor geolocation. With its small size and long battery life.\n \nLight, handy, yet powerful. Enables you to track and protect things (or people and pets) of value.\nIP 65 – ATEX*, 450mAh rechargeable battery, Buzzer, multimode button.\n\nBattery life :\n*  Proximity mode : 5 days to 2 weeks depending on data precision \n*  Location mode : 90 days battery life at 40 fix per day with indoor/outdoor positioning.\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

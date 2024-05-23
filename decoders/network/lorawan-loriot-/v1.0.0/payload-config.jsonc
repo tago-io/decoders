@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "Device EUI"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "loriot.middleware.tago.io",
+  "documentation_url": "https://docs.tago.io/articles/137"
+}

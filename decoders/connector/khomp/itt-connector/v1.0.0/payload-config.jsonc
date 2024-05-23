@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Connect your Khomp ITT through your network.**\n\nKhomp ITT is a LoRa Tracker from the IoT Endpoints line.\n\n> If your ITC is connected on a Khomp ITG200 Gateway, search for \"Khomp ITG200 LoRa Connector\".\n\n**Measures include:**\n* ITT specific: gps_availability, gps, lat, long\n* General: signal_quality, battery, bat_status, version (firmware version).\n* And the defaults from your network.\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
+  "install_end_text": "Device created sucessful.\n\nYou can get a ITT Dashboard template [here.](http://admin.tago.io/template/603fb987ed77540011beaef7)\n\nJust add to your Dashboards and select the device you just created. \n\nWe recommend adding a filter on your device Payload parser, removing unecessary measures.\n\nFor more information about our products, acess the [support area](https://www.khomp.com/suporte/).\n\n",
+  "device_annotation": "**KHOMP ITT Connector**\nKhomp ITT is a LoRa Tracker from the IoT Endpoints line.\n\nYou can get a [ITT Dashboard template here](http://admin.tago.io/template/603fb987ed77540011beaef7)\n\n\n**Measures include:**\n* ITT specific: gps_availability, gps, lat, long\n* General: signal_quality, battery, bat_status, version (firmware version).\n* And the defaults from your network.\n\nFor more information about our products, acess the [support area](https://www.khomp.com/suporte/).\n\nParser version: 1.0.0.0",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js"
+  ]
+}

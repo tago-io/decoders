@@ -1,0 +1,10 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "IMEI",
+    "case": "upper"
+  },
+  "device_parameters": []
+}

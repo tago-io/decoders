@@ -1,0 +1,1 @@
+Use this custom connector if your device using machineQ doesn't show up in this list. No payload parser is added.  
