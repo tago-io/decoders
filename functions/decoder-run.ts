@@ -22,8 +22,8 @@ function decoderRun(file_path: string, params = {}) {
   vm.freeze(moment, "moment");
   const footer = "\n ; this.payload";
   return vm.run(`${file}${footer}`);
-};
+}
 
 // ? It is necessary to export in this way to be used in the tests
 module.exports = decoderRun; // ? CommonJS
-export default decoderRun; // ? ESM
+export { decoderRun }; // ? ESM
