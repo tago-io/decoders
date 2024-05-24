@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON Schema for main Connector information",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the connector."
+    },
+    "images": {
+      "type": "object",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Path to the logo image.",
+          "format": "uri-reference"
+        }
+      },
+      "required": ["logo"],
+      "additionalProperties": false
+    },
+    "versions": {
+      "type": "object",
+      "patternProperties": {
+        "^v\\d+\\.\\d+\\.\\d+$": {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string",
+              "description": "Path to the source file.",
+              "format": "uri-reference"
+            },
+            "manifest": {
+              "type": "string",
+              "description": "Path to the manifest file.",
+              "format": "uri-reference"
+            }
+          },
+          "required": ["src", "manifest"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^name\\[([a-z]{2})(-[a-z]{2})?\\]$": {
+      "type": "string",
+      "description": "Multilingual support for name field"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "images", "versions"]
+}
