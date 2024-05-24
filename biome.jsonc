@@ -6,11 +6,13 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 120,
+    "lineWidth": 180,
     "attributePosition": "auto"
   },
   "organizeImports": { "enabled": true },
   "linter": {
+    "include": ["functions/**/*.ts",  "decoders/**/*.ts"],
+    "ignore": ["node_modules"],
     "enabled": true,
     "rules": {
       "recommended": false,
@@ -99,6 +101,7 @@
       "bracketSameLine": false,
       "quoteStyle": "double",
       "attributePosition": "auto"
-    }
+    },
+    "globals": ["test", "it", "expect", "describe", "beforeEach", "afterEach", "beforeAll", "afterAll"]
   }
 }

@@ -38,6 +38,13 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
+# Ignore built ts files
+dist
+build
+.build
+.serverless
+.tagoio
+
 # Dependency directories
 node_modules/
 jspm_packages/

@@ -4,13 +4,18 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "linter": "biome lint functions/"
+    "test:single": "vitest --",
+    "linter": "biome lint ./functions ./decoders --diagnostic-level=error",
+    "build": "rm -rf ./build; tsc --build"
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
     "@swc/core": "1.5.7",
+    "@tago-io/sdk": "11.2.1",
     "@types/node": "20.12.12",
     "moment-timezone": "0.5.45",
+    "typescript": "5.4.5",
+    "unplugin-swc": "1.4.5",
     "vitest": "1.6.0",
     "vm2": "3.9.19"
   }
