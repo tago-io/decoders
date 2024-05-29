@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Features:\n\n* Kineis satellite connectivity\n* Built-in GNSS solution\n* Built-in 3-axis accelerometer for motion detection capability\n* The device is powered by a SAFT 17Ah non-rechargeable battery\n* Expected battery life of 5 years based on 20 messages via Kineis satellite per day\n* The device shall operate in ambient temperature between -20℃ and +55℃.\n* Maintenance-free design\n* The device shall measure or estimate the remaining battery level.\n* Device configuration and firmware update OTA via BLE.\n* Weight : approx. 280g\n* Dimensions : 84.5 x 130.8 x 44 mm\n* Ingress Protection : IP69K\n\nDevice URL: \n\n* https://www.globalsat.com.tw/en/product-283464/Kineis-Satellite-Tracker-KT-520.html",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/kinis/v1.0.0/payload.js"
+  ]
+}
