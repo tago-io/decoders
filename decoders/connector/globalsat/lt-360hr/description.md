@@ -1,0 +1,1 @@
+GPS/ Heart Rate Monitor Watch with BLE for LoRaWAN™ 

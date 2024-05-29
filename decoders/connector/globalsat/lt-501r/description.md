@@ -1,0 +1,1 @@
+Flexible GPS Tracker for both Outdoor and Indoor (BLE Beacon) with LoRaWAN™  
