@@ -101,6 +101,6 @@
       "quoteStyle": "double",
       "attributePosition": "auto"
     },
-    "globals": ["payload"]
+    "globals": ["payload", "test", "it", "expect", "describe", "beforeEach", "afterEach", "beforeAll", "afterAll"]
   }
 }
