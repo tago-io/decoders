@@ -1,0 +1,1 @@
+LoRaWAN Operated Low Power Level Transmitter for Liquid with Built-in Temperature Sensor

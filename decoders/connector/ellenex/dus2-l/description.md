@@ -1,0 +1,1 @@
+LoRaWAN low power  ultrasonic level sensor for liquid or solid media
