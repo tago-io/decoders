@@ -1,0 +1,1 @@
+Laboratory CO2, Temperature, Humidity, Barometric Pressure over LoRaWAN™
