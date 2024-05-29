@@ -1,0 +1,1 @@
+mcf88 LoRaWAN™ indoor environmental sensor reads temperature, humidity, pressure, light intensity, air quality VOC & LUX & CO2 

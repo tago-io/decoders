@@ -1,0 +1,1 @@
+Outdoor Object Monitor generates an alert when a monitored object is moved or when the devices itself is tampered using Sigfox

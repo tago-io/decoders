@@ -1,0 +1,1 @@
+Anti-theft monitor for stationary objects using Sigfox

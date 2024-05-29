@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nIOTA door sensor, equipped with SIGFOX wireless transmission module, allows to detect if and when doors are opened/closed. \n\nIt is being used mostly to monitor doors/flaps in objects that are located remotely, to make sure doors/flaps are properly closed. \n\nWhen doors are opened or closed, the device instantly sends a message that can be pushed as email/sms or visualised in an application.  \n\nThe mechanical switch used in the device eliminates false alarms and provides high resistance against tamper.\n##\nThe device has also additional features:\n* informs weekly about state of battery („awake” message)\n* detects movements/shocks (optionally).\n##\nMore information about this device can be found [here.](http://iota-devices.com/) ",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}

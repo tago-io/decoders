@@ -1,0 +1,1 @@
+Mechanical door sensor for monitoring of access to normally-closed objects using Sigfox

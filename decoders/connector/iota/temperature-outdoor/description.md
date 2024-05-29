@@ -1,0 +1,1 @@
+Temperature Probe for Outdoor operation using Sigfox
