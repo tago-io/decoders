@@ -4,7 +4,25 @@
   "install_text": "**Smart Badge**\n\nMulti-mode tracker in ID card format with embedded sensors combining GPS, Low-power GPS, Wi-Fi Sniffer, BLE and LoRaWAN TDoA geolocation technologies, supporting accurate and continious outdoor and indoor geolocation. \n\nIdeal for worker protection and zone alerts, IP65, ATEX*, Buzzer with 70dB high volume, industrialized magnetic connector, 1300mAh rechargeable battery, multimode button.\n\nBattery life : \n* Proximity mode : 1 to 2 months depending on data precision\n* Location mode :120 days battery life at 60 fix per day with indoor/outdoor positioning.\n",
   "install_end_text": "",
   "device_annotation": "",
-  "device_parameters": [],
+  "device_parameters": [
+    {
+      "name": "beacon_decoder",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": false,
+          "label": "One variable with all beacon",
+          "value": "simple"
+        },
+        {
+          "is_default": true,
+          "label": "Split beacon in different variables",
+          "value": "splitted"
+        }
+      ],
+      "label": "Beacon decoder type"
+    }
+  ],
   "networks": [
     "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
     "../../../../network/lorawan-actility/v1.0.0/payload.js",
