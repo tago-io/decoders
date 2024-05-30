@@ -1,0 +1,1 @@
+GPS-enabled real-time location with detection of motion over LoRaWAN™

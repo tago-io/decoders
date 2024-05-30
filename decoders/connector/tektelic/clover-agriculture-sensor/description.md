@@ -1,0 +1,1 @@
+Soil and ambient sensor for smart agriculture deployments over LoRaWAN™

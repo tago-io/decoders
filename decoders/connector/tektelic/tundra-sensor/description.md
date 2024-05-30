@@ -1,0 +1,1 @@
+Temperature and Humidity Sensor for cold chain monitoring over LoRaWAN™

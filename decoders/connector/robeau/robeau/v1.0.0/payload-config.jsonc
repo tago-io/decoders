@@ -1,0 +1,98 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "In-building water management solution composed with\n- one sensor using turbine to calculate flow and volume of water\n- one datalogger to transmit data with Lora protocole\nWith this IoT device, you can :\n- detect leaks in real time and receive alerts (emailor text message) in case of over-consumption or leak\n- monitor your water network and analyse your water consumption everywhere in your building and do predictive maintenance\n- save water and then save money on your water bill\n- conserve water and have an environmental impact",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [
+    {
+      "type": "dropdown",
+      "label": "Sensor 1 type",
+      "name": "sensor_1",
+      "group": "advanced",
+      "options": [
+        {
+          "is_default": true,
+          "label": "DN20",
+          "value": "1000"
+        },
+        {
+          "is_default": false,
+          "label": "DN25",
+          "value": "336.89"
+        }
+      ]
+    },
+    {
+      "name": "sensor_2",
+      "label": "Sensor 2 type",
+      "type": "dropdown",
+      "group": "advanced",
+      "options": [
+        {
+          "is_default": true,
+          "label": "DN20",
+          "value": "1000"
+        },
+        {
+          "is_default": false,
+          "label": "DN25",
+          "value": "336.89"
+        }
+      ]
+    },
+    {
+      "name": "sensor_3",
+      "label": "Sensor 3 type",
+      "type": "dropdown",
+      "group": "advanced",
+      "options": [
+        {
+          "is_default": true,
+          "label": "DN20",
+          "value": "1000"
+        },
+        {
+          "is_default": false,
+          "label": "DN25",
+          "value": "336.89"
+        }
+      ]
+    },
+    {
+      "name": "sensor_4",
+      "label": "Sensor 4 type",
+      "type": "dropdown",
+      "group": "advanced",
+      "options": [
+        {
+          "is_default": true,
+          "label": "DN20",
+          "value": "1000"
+        },
+        {
+          "is_default": false,
+          "label": "DN25",
+          "value": "336.89"
+        }
+      ]
+    }
+  ],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

@@ -1,0 +1,1 @@
+Mulch temperature monitoring sensor over LoRaWAN™
