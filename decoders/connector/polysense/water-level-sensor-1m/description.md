@@ -1,0 +1,1 @@
+WxS Ext-021WL Water Level Sensor (1M) over LoRaWAN™

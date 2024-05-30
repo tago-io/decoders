@@ -1,0 +1,1 @@
+WxS 880-060 Bidirectional People Counting Sensor End Node over LoRaWAN™

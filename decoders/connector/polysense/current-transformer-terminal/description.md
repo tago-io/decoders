@@ -1,0 +1,1 @@
+WxS 880-043 Current Transformer Terminal over LoRaWAN™

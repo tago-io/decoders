@@ -1,0 +1,1 @@
+WxS 880-007 Tilt Sensor over LoRaWAN™

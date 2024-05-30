@@ -1,0 +1,1 @@
+WxS 880-0M2 modem for wide external sensor connectivity over LoRaWAN™

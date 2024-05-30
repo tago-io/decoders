@@ -1,0 +1,1 @@
+WxS 880-000/00 Modem for wide external sensor connectivity over LoRaWAN™

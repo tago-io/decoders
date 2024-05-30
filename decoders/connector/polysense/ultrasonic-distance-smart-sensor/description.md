@@ -1,0 +1,1 @@
+WxS 880-010 Ultrasonic Distance Smart Sensor over LoRaWAN™

@@ -1,0 +1,1 @@
+WxS Ext-WQ-PH PH Monitoring Sensor over LoRaWAN™

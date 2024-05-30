@@ -1,0 +1,1 @@
+WxS 880-044 Air Pressure/Water Pressure Sensor over LoRaWAN™
