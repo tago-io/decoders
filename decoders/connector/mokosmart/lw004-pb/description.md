@@ -1,0 +1,1 @@
+LW004 series is a LoRaWAN panic button with 3-axis accelerometer for motion detect built-in.
