@@ -13,7 +13,7 @@ const migrationConfig: Knex.MigratorConfig = {
   disableMigrationsListValidation: true,
 };
 
-async function digestData(knexClient: Knex): Promise<void> {
+async function digestDecoders(knexClient: Knex): Promise<void> {
   try {
     await createNetworks(knexClient, "decoders/network");
 
@@ -26,7 +26,7 @@ async function digestData(knexClient: Knex): Promise<void> {
   }
 }
 
-async function setupDatabase(data: { file: string; directory: string }): Promise<void> {
+async function generateDatabase(data: { file: string; directory: string }): Promise<void> {
   fs.mkdirSync(data.directory, { recursive: true });
 
   const dbPath = path.join(data.directory, data.file);
@@ -47,9 +47,9 @@ async function setupDatabase(data: { file: string; directory: string }): Promise
 
   await knexClient.migrate.latest(migrationConfig);
 
-  await digestData(knexClient);
+  await digestDecoders(knexClient);
 
   await knexClient.destroy();
 }
 
-setupDatabase({ directory: "data", file: "data.db" }).catch((error) => console.error(error));
+generateDatabase({ directory: "data", file: "data.db" }).catch((error) => console.error(error));
