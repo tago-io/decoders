@@ -11,6 +11,11 @@ import { resolvePayload } from "./resolve-payload";
 async function createConnectorVersion(knexClient: Knex, mainObj: Connector, filePath: string) {
   const versionKeys = Object.keys(mainObj.versions);
 
+  if (versionKeys.length > 1) {
+    throw `The decoders system allows only one version for now, it will be available soon. ${filePath}`;
+
+  }
+
   for (const version of versionKeys) {
     const detailsPath = path.join(filePath, mainObj.versions[version].manifest);
 

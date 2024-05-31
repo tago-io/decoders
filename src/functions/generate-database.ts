@@ -52,4 +52,4 @@ async function generateDatabase(data: { file: string; directory: string }): Prom
   await knexClient.destroy();
 }
 
-generateDatabase({ directory: "data", file: "data.db" }).catch((error) => console.error(error));
+generateDatabase({ directory: "data", file: "decoders.db" }).catch((error) => console.error(error));
