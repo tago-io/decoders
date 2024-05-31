@@ -11,7 +11,13 @@
   },
   "organizeImports": { "enabled": true },
   "linter": {
-    "ignore": ["node_modules"],
+    "ignore": [
+      "node_modules",
+      "decoders/connector/adenuis/analog-and-power/v1.0.0/payload.js",
+      "decoders/connector/adenuis/comfort/v1.0.0/payload.js",
+      "decoders/connector/adenuis/temperature/v1.0.0/payload.js",
+      "decoders/connector/adenuis/dry-contacts/v1.0.0/payload.js"
+    ],
     "enabled": true,
     "rules": {
       "recommended": true,
