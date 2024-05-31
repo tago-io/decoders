@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nReporting Status and Controlling relays inputs/outputs over Sigfox\n##\nHighlights:\n* 4 configurable inputs/outputs\n* Local and remote configuration\n* Consumption controlled for optimized autonomy\n* Develop new preventive maintenance services, alerts and analyses\n\nTechnical specifications:\n* Periodic or event modes\n* Replaceable battery\n* Dimensions: 105 x 50 x 27 mm\n* Box: IP67 (IP68 on request)\n* Integrated fastening system: DIN rail, tube, wall mount, flange\n* Operating temperature range: -25°C to + 70°C\n* Weight: 92.74 g\n* Standards: Directive 2014/53/EU (RED)\n* Product error alert, configuration error, low battery\n* Configurable Life Screen\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [
+    {
+      "name": "parse_type",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": true,
+          "label": "Dry Contacts",
+          "value": "drycontacts"
+        },
+        {
+          "label": "Dry Contacts 2",
+          "value": "drycontacts2"
+        }
+      ],
+      "label": "Device Type"
+    }
+  ],
+  "networks": [
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

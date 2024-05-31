@@ -1,0 +1,1 @@
+Field Test Device over LoRaWAN™

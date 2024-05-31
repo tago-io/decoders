@@ -24,7 +24,7 @@
       "type": "array",
       "description": "List of device parameters.",
       "items": {
-        "type": "string"
+        "type": "object"
       }
     },
     "networks": {
@@ -50,6 +50,9 @@
       "description": "Multilingual support for device_annotation field"
     }
   },
-  "required": ["description", "networks"],
+  "required": [
+    "description",
+    "networks"
+  ],
   "additionalProperties": false
 }
