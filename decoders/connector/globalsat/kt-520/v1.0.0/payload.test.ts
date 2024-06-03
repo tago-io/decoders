@@ -1,9 +1,10 @@
-import decoderRun from "../../../../../functions/decoder-run";
+import { describe, expect, it, test } from "vitest";
+import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-const file_path = "decoders/connector/globalsat/kt-520/v1.0.0/payload.test.ts" as const;
+const file_path = "decoders/connector/globalsat/kt-520/v1.0.0/payload.ts" as const;
 
 function preparePayload(payloadHex: string) {
-  let payload = [{ variable: "sensors_raw_data", value: payloadHex, unit: "" }];
+  let payload = [{ variable: "sensors_raw_data", value: payloadHex, unit: "" } as any];
   payload = decoderRun(file_path, { payload });
   const period_between_gps_acq = payload.find((item) => item.variable === "period_between_gps_acq");
   const location = payload.find((item) => item.variable === "location");
