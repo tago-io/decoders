@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Description:\n* Robust battery-powered or wired GPS tracking device with inputs/outputs, I²C Sensor Interface, and WiFi Positioning for indoor and outdoor asset tracking and sensor monitoring.\n\nFeatures:\n* High-precision GPS/GLONASS tracking device with WiFi Access Point Scanning.\n* Flexible Power Options: 3 x AA Batteries with up to 7 years battery life or wired to permanent power.\n* 1 x Analog Input, 2 x Digital Inputs, 1 x Switched Ground Digital Output, 1 x Ignition Digital Input, Switched Power Out.\n* I²C Sensor Interface.\n* Weatherproof and ultra-rugged IP67 Housing.\n* Uses Cellular 2G or LTE-M / NB-IoT.\n* Built-in Battery Meter for monitoring battery use and remaining life predictions.\n* Configure impact-detection alerts when g-forces are exceeded by a user-defined threshold.\n* Stationary devices enter sleep mode until movement occurs to conserve battery life and optimize data usage.\n\nTech-specs:\n* https://www.digitalmatter.com/devices/falcon/tech-specs/",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/https/v1.0.0/payload.js"
+  ]
+}

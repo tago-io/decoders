@@ -1,0 +1,1 @@
+Tabs Motion Sensor  to communicate the presence or not of a person over LoRaWAN™

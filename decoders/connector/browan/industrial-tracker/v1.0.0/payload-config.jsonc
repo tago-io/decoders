@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The Industrial Tracker is a general-purpose tracker, designed for GPS tracking on various applications: bicycles, cars, or pets. It is equipped with GPS and 3-axis accelerometer, that provides a much more cost-effective way for service providers to deploy this for tracking applications than to use the GPRS network. \n\n**Specifications**\n* Size: 107 x 52 x 27 mm\n* Weight: 35g without battery, 45g with battery\n* Sensors: GNSS module, 3D MEMs accelerometer, Hall-effect\n* Temperature: -20°C to +70°C\n* IP Rating: IP 66 equivalent\n* Power Source: 3.6V 1/2 AA Li/SOCl2 1200 mAh battery (2)\n* Frequency: 863-870MHz for EU, 902-928MHz for North America\n* Tx Power: +19dBm conducted\n* Rx Sensitivity: -138dBm conducted\n* Antenna Gain: 0dBi Peak, -3dBi Avg",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

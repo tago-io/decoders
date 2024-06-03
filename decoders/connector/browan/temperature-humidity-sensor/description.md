@@ -1,0 +1,1 @@
+Tabs Temperature & humidity sensor designed for in-home and in-building over LoRaWAN™

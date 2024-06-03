@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The Tabs Object Locator utilizes LoRaWAN connectivity to communicate the location of the device. The intended use is to attach the sensor to an object like a backpack or a purse to be able to remotely know its location. The sensor is composed of a GNSS receive,  a push button, an LED indicator, and a USB-C connector. The device contains a LiPo battery that can be recharged through the USB-C  connector. \n\n**Specifications**\n* Size: 50 x 13 x 50mm\n* Weight: 28g\n* Sensors: GNSS, 3D MEMs accelerometer, Push Button\n* Temperature: 0°C to +50°C\n* IP Rating: IP 64 equivalent\n* Power Source: 4.2V LiPo 540mAh battery\n* Frequency: 863-870MHz for EU, 902-928MHz for North America\n* Tx Power: +19dBm conducted\n* Rx Sensitivity: -140dBm conducted\n* Antenna Gain: -5dBi Peak, -8dBi Avg",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}
