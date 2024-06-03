@@ -4,19 +4,25 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "linter": "biome lint functions/",
-    "validator": "npx --yes tsx functions/tagoio-validator.ts"
+    "linter": "biome lint --diagnostic-level=error .",
+    "start": "npx --yes tsx src/main.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
-    "@swc/core": "1.5.7",
+    "@swc/core": "1.5.24",
     "@types/node": "20.12.12",
-    "moment-timezone": "0.5.45",
-    "vitest": "1.6.0",
-    "vm2": "3.9.19"
-  },
-  "dependencies": {
+    "@types/uuid": "9.0.8",
+    "@types/validator": "13.11.10",
     "ajv": "8.13.0",
-    "ajv-formats": "3.0.1"
+    "ajv-formats": "3.0.1",
+    "better-sqlite3": "10.0.0",
+    "knex": "3.1.0",
+    "moment-timezone": "0.5.45",
+    "sqlite3": "5.1.7",
+    "uuid": "9.0.1",
+    "validator": "13.12.0",
+    "vitest": "1.6.0",
+    "vm2": "3.9.19",
+    "zod": "3.23.8"
   }
 }
