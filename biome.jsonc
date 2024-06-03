@@ -14,7 +14,7 @@
     "ignore": ["node_modules"],
     "enabled": true,
     "rules": {
-      "recommended": false,
+      "recommended": true,
       "complexity": {
         "noBannedTypes": "warn",
         "noExtraBooleanCast": "error",
@@ -51,6 +51,7 @@
         "useYield": "error"
       },
       "style": {
+        "noVar": "error",
         "noDefaultExport": "warn",
         "noNamespace": "error",
         "useAsConstAssertion": "error",
@@ -101,6 +102,28 @@
       "quoteStyle": "double",
       "attributePosition": "auto"
     },
-    "globals": ["payload", "test", "it", "expect", "describe", "beforeEach", "afterEach", "beforeAll", "afterAll"]
-  }
+    "globals": ["payload"]
+  },
+  "overrides": [
+    {
+      "include": ["decoders/*.js"],
+      "linter": {
+        "rules": {
+          "recommended": false,
+          "suspicious": {
+            "noPrototypeBuiltins": "warn"
+          },
+          "correctness": {
+            "noUnusedVariables": "warn",
+            "noInnerDeclarations": "warn",
+            "noUndeclaredVariables": "warn"
+          },
+          "style": {
+            "noVar": "warn",
+            "useBlockStatements": "warn"
+          }
+        }
+      }
+    }
+  ]
 }

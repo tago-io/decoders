@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["functions/**/*.ts", "schema/**/*.json"]
+  "include": ["src/**/*.ts", "src/validator/**/*.json"]
 }

@@ -2,11 +2,11 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import Ajv, { JSONSchemaType } from "ajv";
 import addFormats from "ajv-formats";
-import networkSchema from "../schema/network.json" assert { type: "json" };
-import networkDetailsSchema from "../schema/network_details.json" assert { type: "json" };
-import connectorSchema from "../schema/connector.json" assert { type: "json" };
-import connectorDetailsSchema from "../schema/connector_details.json" assert { type: "json" };
-import type { Connector, Network, Versions } from "../schema/types";
+import networkSchema from "../../schema/network.json" assert { type: "json" };
+import networkDetailsSchema from "../../schema/network_details.json" assert { type: "json" };
+import connectorSchema from "../../schema/connector.json" assert { type: "json" };
+import connectorDetailsSchema from "../../schema/connector_details.json" assert { type: "json" };
+import type { Connector, Network, Versions } from "../../schema/types";
 
 const isVerbose = process.argv[2] === "--verbose";
 
@@ -82,6 +82,7 @@ async function validateNetworkFiles(directoryPath: string): Promise<void> {
         console.info("Validated:", filePath);
       }
     }
+    console.info("All Networks successfully validated! 🚀");
   } catch (error) {
     console.error("Error processing network directories:", error);
     process.exit(1);
@@ -134,6 +135,7 @@ async function validateConnectorFiles(directoryPath: string): Promise<void> {
         }
       }
     }
+    console.info("All Connectors successfully validated! 🚀");
   } catch (error) {
     console.error("Error processing connector directories:", error);
     process.exit(1);
