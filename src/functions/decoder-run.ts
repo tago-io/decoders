@@ -8,15 +8,12 @@ import path from "node:path";
 import fs from "node:fs";
 import { VM } from "vm2";
 import moment from "moment-timezone";
-import { transformSync } from "@swc/core";
+import { buildTS } from "../helpers/build-ts";
 
 function decoderRun(file_path: string, params = {}) {
   let file = fs.readFileSync(path.join(__dirname, "../", file_path), "utf-8");
 
-  if (file_path.endsWith(".ts")) {
-    const { code } = transformSync(file, { cwd: __dirname, jsc: { parser: { syntax: "typescript" } } });
-    file = code;
-  }
+  file = buildTS(file);
 
   const vm = new VM({ timeout: 1000, wasm: false, sandbox: params });
   vm.freeze(moment, "moment");
@@ -26,4 +23,4 @@ function decoderRun(file_path: string, params = {}) {
 
 // ? It is necessary to export in this way to be used in the tests
 module.exports = decoderRun; // ? CommonJS
-export default decoderRun; // ? ESM
+export {decoderRun }; // ? ESM
