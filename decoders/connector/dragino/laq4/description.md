@@ -1,0 +1,1 @@
+Air Quality Sensor with TVOC, CO2, Temperature and Humidity Sensors over LoRaWAN™

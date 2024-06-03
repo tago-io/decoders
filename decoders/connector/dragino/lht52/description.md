@@ -1,0 +1,1 @@
+Indoor LoRaWAN Temperature & Humidity Sensor

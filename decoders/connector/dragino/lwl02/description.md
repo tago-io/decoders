@@ -1,0 +1,1 @@
+The Dragino LWL02 is a LoRaWAN Water Sensor. When there is water between the two metal probes, LWL02 indicates a water leak event and uplink to IoT server via LoRaWAN network.

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nThe Dragino LHT65 Temperature & Humidity sensor is a Long Range LoRaWAN Sensor. It includes a built-in SHT20 Temperature & Humidity sensor and has an external sensor connector to connect to external sensors such as Temperature Sensor, Soil Moisture Sensor, Tilting Sensor etc.\n\n##\n\n##\nFeatures:\nLoRaWAN Class A protocol\nFrequency Bands: CN470/EU433/KR920/US915/EU868/AS923/AU915\nAT Commands to change parameters\nRemote configure parameters via LoRaWAN Downlink\nFirmware upgradable via program port\nBuilt-in 2400mAh battery for more than 10 year use.\nOptional External Sensors\n3200 set sensor record with time stamp",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5daf4012b247ca001b2a2d7d",
+  "device_parameters": [
+    {
+      "default": "",
+      "group": "main",
+      "label": "Version",
+      "name": "version",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": true,
+          "label": "1.8",
+          "value": "1.8"
+        },
+        {
+          "label": "1.3",
+          "value": "1.3"
+        }
+      ]
+    }
+  ],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

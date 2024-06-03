@@ -1,0 +1,1 @@
+I/O Interfaces analog current Input, analog voltage input, relay output, digital input and digital output over LoRaWAN™

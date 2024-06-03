@@ -1,0 +1,1 @@
+Main process device for Dragino LoRaWAN weather station series products.

@@ -1,0 +1,1 @@
+The Dragino LSNPK01 is a LoRaWAN Soil NPK Sensor for IoT of Agriculture. It is designed to measure the Soil Fertility Nutrient and provide a plant growing reference. 

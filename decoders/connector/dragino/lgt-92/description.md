@@ -1,0 +1,1 @@
+GPS Tracker with 9-axis accelerometer and attitude detection over LoRaWAN™ 
