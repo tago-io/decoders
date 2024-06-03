@@ -1,0 +1,1 @@
+Network coverage quality tester over LoRaWAN or Sigfox

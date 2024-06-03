@@ -1,0 +1,1 @@
+Analog input reporting over LoRaWAN or Sigfox

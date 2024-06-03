@@ -1,0 +1,1 @@
+Dry contacts and Metering over LoRaWAN or Sigfox

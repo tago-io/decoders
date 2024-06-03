@@ -1,0 +1,1 @@
+Temperature sensor over LoRaWAN or Sigfox
