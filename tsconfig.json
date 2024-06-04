@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["vitest/importMeta", "vitest/globals"],
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "node",
