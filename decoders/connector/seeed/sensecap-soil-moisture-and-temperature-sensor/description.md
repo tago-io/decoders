@@ -1,0 +1,1 @@
+Soil Moisture and Temperature sensor over LoRaWAN™
