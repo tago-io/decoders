@@ -1,0 +1,1 @@
+The AM300 is a Ambience monitoring sensor over LoRaWAN™ 

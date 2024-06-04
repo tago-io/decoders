@@ -1,0 +1,1 @@
+The VS121 is a monitor occupancy Artificial Intelligence workplace sensor over LoRaWAN®

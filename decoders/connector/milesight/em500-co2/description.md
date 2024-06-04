@@ -1,0 +1,1 @@
+CO2, barometric pressure, temperature and humidity sensors over LoRaWAN™ (Ursalink)

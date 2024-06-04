@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "UC11-T1 is a smart wireless module, featuring LoRaWAN protocol, equipped with a high-precision temperature and relative humidity sensor. This sensor can measure temperatures from -40°C to +70°C, as well as air humidity from 0 to 100%.\n\n**LoRaWan**\n* Frequency: EU433/ CN470/ IN865/ EU868/ US915/ AU915/ KR920/ AS923\n* TxPower: 20dBm\n* Sensitivity: -147dBm @300bps\n* Mode: OTAA/ ABP Class A\n\n\n**Physical Characteristics**\n* Operating Temperature: -40°C to +70°C\n* Relative Humidity: 0% to 100% (non-condensing)\n* Dimension: 111 × 92 × 33mm (4.3 × 3.6 × 1.3 in)\n* Weight: 147g\n* Power Input: 8000mAh replaceable Li-SOCL2 battery",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

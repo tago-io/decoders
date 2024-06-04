@@ -1,0 +1,1 @@
+LoRa-Enabled Temperature & Humidity sensors over LoRaWAN™ 

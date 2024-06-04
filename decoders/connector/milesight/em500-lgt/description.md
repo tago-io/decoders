@@ -1,0 +1,1 @@
+Outdoor environment monitoring sensor mainly used to measure environment light over LoRaWAN™ (Ursalink)

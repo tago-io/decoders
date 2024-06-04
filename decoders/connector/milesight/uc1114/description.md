@@ -1,0 +1,1 @@
+Remote I/O with 2 dry contacts and 2 drivable relay outputs for industrial application over LoRaWAN™

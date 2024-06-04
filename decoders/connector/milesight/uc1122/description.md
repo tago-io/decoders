@@ -1,0 +1,1 @@
+Remote I/O with 1 DC signal, 1 drivable relay output and 2 analog inputs for industrial application over LoRaWAN™

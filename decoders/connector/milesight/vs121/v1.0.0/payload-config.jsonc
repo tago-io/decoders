@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "VS121, based on Artificial Intelligence (AI) technology, is an AI workplace sensor designed to monitor occupancy & utilization in modern workspace, which can reach up to 95% recognition rate. With the ability to sense from up to 78 m2, fewer sensors are needed to cover the same area, decreasing the deploy costs for users. Only counter values are transmitted over LoRaWAN® network to prevent the privacy concerns. VS121 is equipped with Wi-Fi for easy configuration without any tools.\n\n**Features**\n\n* Recognition rate is up to 95% based on advanced AI identification and analysis technology and wide detection range\n* Support to map up to 12 custom regions\n* No image data is collected, free from privacy concerns\n* Equipped with Wi-Fi for web GUI configuration\n* Function well with standard LoRaWAN® gateways",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}
