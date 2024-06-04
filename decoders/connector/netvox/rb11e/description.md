@@ -1,0 +1,1 @@
+Wireless PIR Occupancy & Temperature & Light sensor over LoRaWAN™ 

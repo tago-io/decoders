@@ -1,0 +1,1 @@
+Wireless Dimming Light Sensor over LoRaWAN™

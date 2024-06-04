@@ -1,0 +1,1 @@
+Wireless Smoke Detector Photoelectric over LoRaWAN™ 

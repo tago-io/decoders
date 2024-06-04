@@ -1,0 +1,1 @@
+Wireless 0-5V ADC Sampling Interface over LoRaWAN™

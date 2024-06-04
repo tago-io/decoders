@@ -1,0 +1,1 @@
+Wireless Outdoor PM2.5 Temperature Humidity Sensor over LoRaWAN™
