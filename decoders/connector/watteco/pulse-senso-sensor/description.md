@@ -1,0 +1,1 @@
+The Pulse Sens’O sensor is used to remotely read metering data from three meters: water, electricity or energy. It turns   existing meters into smart meters via a public or private LoRaWAN® network.

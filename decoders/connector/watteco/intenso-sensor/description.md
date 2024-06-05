@@ -1,0 +1,1 @@
+The Intens’O sensor measures the intensity of electric current using its clamp-on ammeter and determines the state of the equipment based on a selectable current threshold. The data is then transmitted over a public or private LoRaWAN™ radio network.

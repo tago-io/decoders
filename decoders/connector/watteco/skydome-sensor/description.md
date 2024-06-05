@@ -1,0 +1,1 @@
+The Skydome sensor detects the opening and closing of a roof window. It uses its onboard accelerometer to measure its own tilt angle. The sensor regularly measures the angle and transmits data via a public or private LoRaWAN™ radiofrequency network.

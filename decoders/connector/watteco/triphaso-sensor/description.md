@@ -1,0 +1,1 @@
+The Triphas’O sensor is used to remotely read the electrical energy consumption of a three-phase installation in a non-intrusive way via the LoRaWAN™ network. It is specially designed to meet the energy management needs of industrial and tertiary buildings that operate with medium / high power, energy intensive equipment.

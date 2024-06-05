@@ -1,0 +1,1 @@
+Transforms any 4-20 mA and 0-10V gauge to a sensor connected to a LoRaWAN network

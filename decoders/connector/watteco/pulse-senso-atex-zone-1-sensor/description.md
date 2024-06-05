@@ -1,0 +1,1 @@
+The Pulse Sens’O AtEx zone 1 remotely reads metering data from water, gas (such as Itron, Esther and Gazpar) or electricity in AtEx zone 1 sensitive areas. Pulse Sens’O AtEx zone 1 sensor allows you to make all your mechanical pressure switches communicate with each other in AtEx zone 1 explosive atmospheres.
