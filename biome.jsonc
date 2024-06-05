@@ -11,7 +11,7 @@
   },
   "organizeImports": { "enabled": true },
   "linter": {
-    "ignore": ["node_modules"],
+    "ignore": ["node_modules", "./decoders/**/v1.0.0/*.ts", "./decoders/**/v1.0.0/payload.js"],
     "enabled": true,
     "rules": {
       "recommended": true,
