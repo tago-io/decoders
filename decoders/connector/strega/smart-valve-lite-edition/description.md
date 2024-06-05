@@ -1,0 +1,1 @@
+Extreme range LoraWaN Shut-off Valve  (Class A)
