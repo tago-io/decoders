@@ -32,6 +32,7 @@ async function createNetworkVersion(knexClient: Knex, mainObj: Network, filePath
       id: generateID({ name: mainObj.name, version: version }),
       name: mainObj.name,
       version: version,
+      middleware_endpoint: detailsData?.middleware_endpoint,
       documentation_url: detailsData?.documentation_url,
       device_parameters: detailsData?.device_parameters || [],
       serial_number: detailsData?.serial_number_config || {},
