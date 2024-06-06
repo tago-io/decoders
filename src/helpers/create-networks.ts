@@ -58,7 +58,7 @@ async function createNetworks(knexClient: Knex, directoryPath: string): Promise<
     }
     const networkPath = path.join(filePath, "network.jsonc");
     if (!fs.existsSync(networkPath)) {
-      throw `Network file not found in ${filePath}`;
+      throw `network.jsonc manifest file not found in ${filePath}`;
     }
     const networkData: Network = JSON.parse(
       fs.readFileSync(networkPath, "utf8")

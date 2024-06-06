@@ -67,7 +67,7 @@ async function createConnectors(knexClient: Knex, directoryPath: string): Promis
       const connectorPath = path.join(modelPath, "connector.jsonc");
 
       if (!fs.existsSync(connectorPath)) {
-        throw `Connector file not found in ${modelPath}`;
+        throw `connector.jsonc manifest file not found in ${modelPath}`;
       }
 
       const connectorData: Connector = JSON.parse(fs.readFileSync(connectorPath, "utf8"));
