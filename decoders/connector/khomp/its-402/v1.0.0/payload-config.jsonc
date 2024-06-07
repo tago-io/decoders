@@ -4,7 +4,31 @@
   "install_text": "**Khomp IoT Standalone with support for LTE Cat M1, NB-IOT 2 or GPRS networks**\n\nKhomp ITS 402 comunicates via LTE Cat M1, NB-IOT 2 or GPRS networks;\n\nFeatures include:\n* GPS with internal antenna and external antenna connector;\n* MQTT Integration;\n* Internal Relay;\n* Two dry contact or external temperature sensors;\n* Bluetooth Low Energy (BLE) integration for configs;\n\nAlso supports Khomp IoT extensors, including: Relay, Current (4-20 mA), Precision temperature probes and more.\n\n**[More information on official website.](https://www.khomp.com/en/categoria-de-produto/linha-iot-khomp/)**\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
   "install_end_text": "**Device created sucessful**\n\nDon't forget to create an action that triggers the configured MQTT Topic.\n\nParser supports English (EN), Portuguese (PT) and raw languages for value strings.\nChoose in the device configuration parameters.\n\n",
   "device_annotation": "Don't forget to create an action that triggers the configured MQTT Topic.\n\nParser supports English (EN), Portuguese (PT) and raw languages for value strings.\nChoose in the device configuration parameters.\n\n**[More information on official website.](https://www.khomp.com/en/categoria-de-produto/linha-iot-khomp/)**\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
-  "device_parameters": [],
+  "device_parameters": [
+    {
+      "default": "",
+      "group": "advanced",
+      "label": "Available languages: PT, EN, raw",
+      "name": "language",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": true,
+          "label": "Português",
+          "value": "PT"
+        },
+        {
+          "is_default": false,
+          "label": "English",
+          "value": "EN"
+        },
+        {
+          "label": "Raw",
+          "value": "raw"
+        }
+      ]
+    }
+  ],
   "networks": [
     "../../../../network/mqtt/v1.0.0/payload.js"
   ]
