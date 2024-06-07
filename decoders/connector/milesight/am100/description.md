@@ -1,0 +1,1 @@
+Compact indoor ambience monitoring sensor including motion, humidity, temperature and light over LoRaWAN™ (Ursalink)

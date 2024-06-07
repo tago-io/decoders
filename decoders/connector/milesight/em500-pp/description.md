@@ -1,0 +1,1 @@
+Outdoor sensor mainly used to pipe pressure measurement and leak detection over LoRaWAN™ (Ursalink)

@@ -1,0 +1,1 @@
+Smart wireless module equipped with a high-precision temperature and relative humidity sensor over LoRaWAN™ (Ursalink)

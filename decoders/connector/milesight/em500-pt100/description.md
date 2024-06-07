@@ -1,0 +1,1 @@
+Outdoor environment monitoring sensor mainly used to collect temperature data over LoRaWAN™ (Ursalink)

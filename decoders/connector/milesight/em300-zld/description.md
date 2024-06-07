@@ -1,0 +1,1 @@
+Temperature, humidity and zone leak detection sensors over LoRaWAN™

@@ -1,0 +1,1 @@
+Remote I/O with 1 RS485, 1 RS232, 1 DC signal and 1 drivable relay output for industrial application over LoRaWAN™

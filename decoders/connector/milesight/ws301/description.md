@@ -1,0 +1,1 @@
+The WS301 is a magnetic door/window contact switch, wire free over LoRaWAN®

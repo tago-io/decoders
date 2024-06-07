@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Milesight UC1152 is designed as a cost-effective industrial machine monitoring device that monitors and controls up to 1 RS485, 1 RS232, 1 DC signal and 1 drivable relay output. With the aid of Milesight UC1152, the alarm condition brings attention to engineering personnel\nimmediately. The output can be connected with an alarm indication device, such as a light or horn. The module can give immediate response to the status of both the input and output conditions. A LoRa module is embedded in the Milesight UC1152 . \n\n**Parameters**\n* Antenna: 50 Ω SMA Antenna Interface\n* Frequency Band: EU 433, CN 470-510, IN865, EU 863-870, US 902-928, AU 915-928, KR 920-923\n* Sensitivity: -147 dBm @300bps\n* Output Power: 20 dBm\n* Protocol: LoRaWAN Class C\n* RS485: Baud rate: 2400-115200bps. Protocol: Modbus RTU\n* RS232: Baud rate: 4800-115200bps\n* Digital Input: Opto-isolated depending on voltage. Can accept any DC signals of any type, including: ➢ Dry Contacts ➢ DC Voltage (3 - 20V). High Voltage: +3V ~ +24V. Low Voltage: +1V max.\n* Digital Output: 1 x SPDT Relay Contact Rating: Maximum Load Current: 250VAC/30VDC@3A\n* IO Connector Type: Screw terminals\n* DC Power Supply: 5-24 VDC\n* Operating Temperature: -40°C to +70°C (-40°F to +158°F)\n* Relative Humidity: 0% to 95% (non-condensing)\n* Dimensions: 79 x 60 x 24 mm",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}
