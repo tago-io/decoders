@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The Tabs Ambient Light Sensor utilizes LoRaWAN connectivity to provide measurements of ambient light intensity which matches the human eye's response to light under a variety of lighting conditions.\n\n**Specifications**\n* Size: 50 x 20 x 50 mm\n* Weight: 30g without battery, 40g with battery\n* Sensors: Temperature, Humidity and Water leak detection\n* Temperature: 0°C to +50°C\n* IP Rating: IP 40 equivalent\n* Power Source: 3.6V 1/2 AA Li-SOCl2 1200mAh battery\n* Frequency: 863-870MHz for EU, 902-928MHz for North America\n* Tx Power: US: +19dBm, EU: +17dBm\n* Rx Sensitivity: -135dBm\n* Antenna Gain: -2dBi Peak, -5dBi Avg",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

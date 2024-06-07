@@ -1,0 +1,1 @@
+Tracking with GPS and 3-axis accelerometer over LoRaWAN™

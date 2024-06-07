@@ -1,0 +1,1 @@
+Water Leakage sensor over LoRaWAN™

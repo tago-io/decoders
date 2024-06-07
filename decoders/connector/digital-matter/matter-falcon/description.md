@@ -1,0 +1,1 @@
+Battery-powered or wired GPS tracking device with inputs/outputs over HTTP.
