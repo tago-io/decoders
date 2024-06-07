@@ -1,0 +1,1 @@
+LoRaWAN Operated Low Power Temperature Transmitter for Liquid and Gas Media

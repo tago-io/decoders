@@ -24,7 +24,7 @@
       "type": "array",
       "description": "List of device parameters.",
       "items": {
-        "type": "string"
+        "type": "object"
       }
     },
     "networks": {

@@ -1,0 +1,1 @@
+LoRaWAN Operated Low Power Differential Pressure Transmitter for Liquid and Gas Media

@@ -1,0 +1,1 @@
+LoRaWAN low power  soil/earth pressure transmitter  for land movement, pavement, and instruction overload liquid, sludge level monitoring
