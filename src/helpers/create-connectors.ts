@@ -7,13 +7,13 @@ import { readFileFromPath } from "../helpers/read-file";
 import { buildTS } from "../helpers/build-ts";
 import { zConnector } from "../validator/connector";
 import { resolvePayload } from "./resolve-payload";
+import { generateAssetURL } from "./create-asset-url";
 
 async function createConnectorVersion(knexClient: Knex, mainObj: Connector, filePath: string) {
   const versionKeys = Object.keys(mainObj.versions);
 
   if (versionKeys.length > 1) {
     throw `The decoders system allows only one version for now, it will be available soon. ${filePath}`;
-
   }
 
   for (const version of versionKeys) {
@@ -25,8 +25,9 @@ async function createConnectorVersion(knexClient: Knex, mainObj: Connector, file
 
     const detailsData: ConnectorDetails = JSON.parse(fs.readFileSync(detailsPath, "utf8"));
 
+    const id = generateID({ name: mainObj.name, version: version }, true)
     const data = {
-      id: generateID({ name: mainObj.name, version: version }, true),
+      id,
       name: mainObj.name,
       version: version,
       description: readFileFromPath(`${filePath}/${version}`, detailsData.description, true),
@@ -35,7 +36,7 @@ async function createConnectorVersion(knexClient: Knex, mainObj: Connector, file
       install_text: detailsData?.install_text,
       install_end_text: detailsData?.install_end_text,
       device_annotation: detailsData?.device_annotation,
-      logo: readFileFromPath(filePath, mainObj?.images?.logo),
+      logo: generateAssetURL(id, mainObj?.images?.logo),
       payload_decoder: resolvePayload(filePath, mainObj.versions[version].src),
     };
 

@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { zBufferPayloadSize, zDomain, zBufferOrString } from "./common";
+import { zBufferPayloadSize, zDomain } from "./common";
 import { zIntegrationParameters } from "./integration-parameters";
 
 const zSerialNumber = z.object({
   case: z.enum(["lower", "upper", ""]).optional(),
-  image: zBufferOrString.optional(),
+  image: z.string().nullish(),
   label: z.string().max(100).optional(),
   mask: z.string().max(100).optional(),
   required: z.boolean().default(false),
@@ -24,9 +24,9 @@ const zNetwork = z.object({
   middleware_endpoint: zDomain.nullish(),
   serial_number: zSerialNumber.nullish(),
   device_parameters: zIntegrationParameters.nullish(),
-  icon: zBufferOrString.nullish(),
-  logo: zBufferOrString.nullish(),
-  banner: zBufferOrString.nullish(),
+  icon: z.string().nullish(),
+  logo: z.string().nullish(),
+  banner: z.string().nullish(),
   payload_decoder: zBufferPayloadSize(64).nullish(),
 });
 

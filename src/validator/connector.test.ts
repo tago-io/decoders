@@ -13,7 +13,7 @@ describe('zConnector schema', () => {
       install_end_text: 'End of installation instructions',
       device_annotation: 'Device annotation text',
       device_parameters: [{}],
-      logo: Buffer.from('logo data'),
+      logo: "https://file.tago.io/123456789012345678901234/logo.png",
       payload_decoder: Buffer.from('decoder data'),
     };
 
@@ -50,7 +50,7 @@ describe('zConnector schema', () => {
       expect(result.error.issues[1].message).toBe('Expected array, received object');
 
       expect(result.error.issues[2].path[0]).toBe('logo');
-      expect(result.error.issues[2].message).toBe('Invalid input');
+      expect(result.error.issues[2].message).toBe('Expected string, received number');
 
       expect(result.error.issues[3].path[0]).toBe('payload_decoder');
       expect(result.error.issues[3].message).toBe('Invalid Payload Parser');

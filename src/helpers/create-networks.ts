@@ -7,6 +7,7 @@ import { readFileFromPath } from "../helpers/read-file";
 import { buildTS } from "../helpers/build-ts";
 import { zNetwork } from "../validator/network";
 import { resolvePayload } from "./resolve-payload";
+import { generateAssetURL } from "./create-asset-url";
 
 async function createNetworkVersion(knexClient: Knex, mainObj: Network, filePath: string) {
   const versionKeys = Object.keys(mainObj.versions);
@@ -28,8 +29,9 @@ async function createNetworkVersion(knexClient: Knex, mainObj: Network, filePath
 
     const detailsData: NetworkDetails = JSON.parse(fs.readFileSync(detailsPath, "utf8"));
 
+    const id = generateID({ name: mainObj.name, version: version })
     const data = {
-      id: generateID({ name: mainObj.name, version: version }),
+      id,
       name: mainObj.name,
       version: version,
       middleware_endpoint: detailsData?.middleware_endpoint,
@@ -37,9 +39,9 @@ async function createNetworkVersion(knexClient: Knex, mainObj: Network, filePath
       device_parameters: detailsData?.device_parameters || [],
       serial_number: detailsData?.serial_number_config || {},
       description: readFileFromPath(`${filePath}/${version}`, detailsData.description, true),
-      logo: readFileFromPath(filePath, mainObj?.images?.logo),
-      banner: readFileFromPath(filePath, mainObj?.images?.banner),
-      icon: readFileFromPath(filePath, mainObj?.images?.icon),
+      logo: generateAssetURL(id, mainObj?.images?.logo),
+      banner: generateAssetURL(id, mainObj?.images?.banner),
+      icon: generateAssetURL(id, mainObj?.images?.icon),
       payload_decoder: resolvePayload(filePath, mainObj.versions[version].src),
     };
 
