@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nLT-100 is a LoRaWAN™ compliant RF Tracker which includes Asia’s first LoRaWAN™ certified module by GlobalSat. It is designed for asset tracking, pet tracking, and personal monitoring of children and elderly. It has built-in Help button for emergency report which allows immediate notification to the care giver/ monitor. It is also equipped with a high capacity battery which avoids the need of frequent charging. LT-100 is fully compatible with LoRaWAN™ compliant gateways.\n##\n* LoRaWAN™ compliant\n* Support fall advisory (Model: LT-100HP/ LT-100EP)\n* Built-in help button for emergency situation\n* Built- in 3 axis accelerometer for motion sensing capability\n* Vibrating alert/ Buzzer alert/ Power low alert/ Power off alert\n* Support Class A/ Class C\n* Charging clip with I/O pin connected charging\n* Support collar accessory\n* Configurable periodic report\n* Support motion detection\n* Support both OTAA and ABP mode\n* Regular/ Real-time tracking by remote configuration\n##\nMore information about this device can be found [here.](https://www.globalsat.com.tw/en/product-199335/GPS-Tracker-with-LoRaWAN%E2%84%A2-Certified-Module-LT-100-Series.html) \n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}
