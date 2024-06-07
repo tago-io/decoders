@@ -7,7 +7,14 @@
     "case": "lower",
     "mask": "FF-FF-FF-FF-FF-FF-FF-FF"
   },
-  "device_parameters": [],
+  "device_parameters": [
+    {
+      "name": "downlink",
+      "label": "Test",
+      "group": "hide",
+      "default": "Your downlink data here"
+    }
+  ],
   "middleware_endpoint": "everynet-oauth.middleware.tago.io",
   "documentation_url": "https://docs.tago.io/articles/129"
 }

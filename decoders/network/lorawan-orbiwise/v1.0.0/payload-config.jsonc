@@ -11,17 +11,20 @@
       "name": "downlink",
       "label": "Downlink [optional]",
       "group": "hide",
+      "type": "text",
       "default": "Your downlink data here"
     },
     {
       "name": "port",
       "label": "Port [optional]",
       "group": "hide",
+      "type": "text",
       "default": "1"
     },
     {
       "name": "confirmed",
       "default": "true",
+      "type": "text",
       "group": "hide"
     }
   ],

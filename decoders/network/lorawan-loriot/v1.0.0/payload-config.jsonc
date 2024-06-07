@@ -5,7 +5,13 @@
     "required": true,
     "label": "Device EUI"
   },
-  "device_parameters": [],
+  "device_parameters": [
+    {
+      "name": "downlink",
+      "group": "hide",
+      "default": "Your Downlink Data here"
+    }
+  ],
   "middleware_endpoint": "loriot.middleware.tago.io",
   "documentation_url": "https://docs.tago.io/articles/137"
 }

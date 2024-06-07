@@ -6,7 +6,14 @@
     "label": "Device EUI",
     "required": true
   },
-  "device_parameters": [],
+  "device_parameters": [
+    {
+      "default": "Your downlink data here",
+      "group": "hide",
+      "name": "downlink",
+      "type": "text"
+    }
+  ],
   "middleware_endpoint": "machineq.middleware.tago.io",
   "documentation_url": "https://docs.tago.io/articles/159"
 }
