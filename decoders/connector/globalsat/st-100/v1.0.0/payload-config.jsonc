@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nST-100 is a simple tracker with GPS/ Sigfox functions.\nIt has built-in help button for emergency report which allows immediate notification to the care giver/ monitor.\n\nIt is also equipped with a high capacity battery which avoids the need of frequent charging. \n\n* Sigfox certification\n* Built-in help button for Emergency situation\n* Built- in 3 axis accelerometer for motion sensing capability\n* Vibrating alert/ Buzzer alert\n* Power Low/ Off alert\n* Charging clip with I/O pin connected charging, Support collar accessory\n* Periodic report\n* Support motion detection, Regular/ Real-time tracking\n##\nMore information about this device can be found [here.](https://www.globalsat.com.tw/en/product-259335/GPS-Tracker-for-Sigfox-Technology-ST-100-Series.html)\n",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5d25e59303fe45001be0e661",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}

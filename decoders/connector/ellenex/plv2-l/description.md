@@ -1,0 +1,1 @@
+LoRaWAN Operated IP68 Low Power Floating Level Transmitter for Water Resource Management

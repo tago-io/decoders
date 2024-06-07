@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nLS-112P is designed to measure Carbon Monoxide (CO) , Temperature and Humidity by LoRa® long-range and low-power wireless connectivity. It is integrated LoRa® wireless technology, CO sensor knowhow and high-performance MCU solution for various IoT markets usage. With calibrated CO sensor module and compensated Temperature/ Humidity sensor integration, the data is ready for use. It is perfect for monitoring air quality in basement parking, garage, Gas ranges/ ovens and Furnaces.\n##\n* LoRaWAN™ compliant\n* High receiver sensitivity and long range solution\n* Integrated with calibrated CO sensor \n* Accuracy: ± 5% or ±30ppm\n* Range: 0 ~ 500ppm\n* Integrated with compensated Temp/RH sensor\n* Wide range DC power-in, 8~24V /or Micro-USB DC power-in, 5V\n* Display CO concentration, Temp/ RH\n* Alarm LED indicator\n##\nMore information about this device can be found [here.](https://www.globalsat.com.tw/en/product-225266/CO-and-Temperature-Humidity-Detector-with-LoRaWAN%E2%84%A2-Certified-Module-LS-112P.html) \n\n##\nThis quick setup will create and prepare a device, then you need to setup  your account at TTN to complete the integration.\n##\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/globalsat/ls-112p.jpg)",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js"
+  ]
+}

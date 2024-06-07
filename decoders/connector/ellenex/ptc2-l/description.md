@@ -1,0 +1,1 @@
+LoRaWAN Operated Low Power Pressure Transmitter for Corrosive Liquid and Gas Media

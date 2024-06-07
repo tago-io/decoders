@@ -1,0 +1,1 @@
+LoRaWAN Operated IP68 Low Power Level Transmitter for Liquid Media
