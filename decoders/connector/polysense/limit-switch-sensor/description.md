@@ -1,0 +1,1 @@
+WxS Ext-021CM Limit Switch Sensor over LoRaWAN™

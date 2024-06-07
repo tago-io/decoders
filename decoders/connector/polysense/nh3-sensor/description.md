@@ -1,0 +1,1 @@
+WxS 880-023 NH3 Sensor over LoRaWAN™

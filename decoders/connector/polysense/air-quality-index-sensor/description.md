@@ -1,0 +1,1 @@
+WxS 8800-AQI Air Quality Index Sensor over LoRaWAN™

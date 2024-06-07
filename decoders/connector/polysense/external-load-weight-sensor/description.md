@@ -1,0 +1,1 @@
+WxS Ext-060B External Load Weight Sensor over LoRaWAN™

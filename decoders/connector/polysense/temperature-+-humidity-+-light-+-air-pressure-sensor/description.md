@@ -1,0 +1,1 @@
+WxS 880-0M2 Temperature + Humidity +Light + Air Pressure Sensor over LoRaWAN™

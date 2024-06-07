@@ -1,0 +1,1 @@
+WxS 880-000/00 externally connected Sensor over LoRaWAN™

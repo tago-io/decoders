@@ -1,0 +1,1 @@
+WxS 880-21LS1 Leak Monitoring Sensor over LoRaWAN™

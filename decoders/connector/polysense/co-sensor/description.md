@@ -1,0 +1,1 @@
+WxS 880-012 CO Sensor over LoRaWAN™

@@ -1,0 +1,1 @@
+WxS Ext-051 Rainfall Sensor over LoRaWAN™

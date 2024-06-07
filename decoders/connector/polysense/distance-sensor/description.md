@@ -1,0 +1,1 @@
+WxS 880-017 Distance Sensor over LoRaWAN™

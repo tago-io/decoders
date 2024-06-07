@@ -1,0 +1,1 @@
+WxS 880-021FS Fire and Smoke Sensor over LoRaWAN™

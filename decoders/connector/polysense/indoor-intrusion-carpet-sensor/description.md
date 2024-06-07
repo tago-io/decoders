@@ -1,0 +1,1 @@
+WxS Ext-021PI Indoor Intrusion Carpet Sensor over LoRaWAN™

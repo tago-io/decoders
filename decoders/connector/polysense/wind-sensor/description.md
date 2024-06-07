@@ -1,0 +1,1 @@
+WxS Ext-049 Wind Sensor over LoRaWAN™

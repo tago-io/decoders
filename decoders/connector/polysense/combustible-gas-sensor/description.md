@@ -1,0 +1,1 @@
+WxS Ext-021FG Combustible Gas Sensor over LoRaWAN™

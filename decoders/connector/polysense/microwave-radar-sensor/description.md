@@ -1,0 +1,1 @@
+WxS 880-019MR Microwave Radar Sensor over LoRaWAN™

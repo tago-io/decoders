@@ -1,0 +1,1 @@
+WxS 8800 Flow Meter over LoRaWAN™

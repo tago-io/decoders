@@ -1,0 +1,1 @@
+WxS Ext-021DM Magnetic Switch Sensor over LoRaWAN™
