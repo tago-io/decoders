@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "SenseCAP Wireless Barometric Pressure Sensor measures atmospheric pressure in the range of 300~1100 hPa. Featuring high-precision, stability, and high EMC robustness, this sensor is suitable for industrial applications such as weather stations, outdoor farms, tea plantations, greenhouses, and more. \n\n \nThis device incorporates a built-in LoRa transmitter based on SX1276 for long-range transmission, a barometric sensor, and a custom battery. It is specifically designed and optimized for use cases powering end devices by batteries for years. To minimize the power consumption, the device wakes up, transmits the collected air pressure data to the gateway, and then goes back to sleep.\n\n**Barometric Pressure Sensor Specifications**\n* Range: 300 to 1100 hPa\n* Resolution: 1 Pa\n* Relative Accuracy: ±0.12 hPa (condition: 700 to 900 hPa, 25 to 40 ℃)\n* Absolute Accuracy: ±1.7 hPa (condition: 300 to 1100 hPa, -20 to 0 ℃)\n* Absolute Accuracy: ±1.0 hPa (condition: 300 to 1100 hPa, 0 to 65 ℃)\n* Temperature Coefficient Offset: 1.5 Pa/K (condition: 900 hPa, 25 to 40 ℃)\n* Drift: ±1.0 hPa/year",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

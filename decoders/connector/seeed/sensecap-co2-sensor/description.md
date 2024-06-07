@@ -1,0 +1,1 @@
+CO2 sensor over LoRaWAN™

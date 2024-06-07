@@ -1,0 +1,1 @@
+SenseCAP LoRaWAN S2120 Weather Station provides you with hyperlocal weather 

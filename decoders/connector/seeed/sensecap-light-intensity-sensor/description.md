@@ -1,0 +1,1 @@
+Light Intensity Sensor over LoRaWAN™

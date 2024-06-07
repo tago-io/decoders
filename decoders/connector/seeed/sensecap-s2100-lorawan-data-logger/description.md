@@ -1,0 +1,1 @@
+The SenseCAP S2100 the sensor, collects the Data, and uploads it to the LoRaWAN gateway
