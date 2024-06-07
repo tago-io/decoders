@@ -1,0 +1,1 @@
+Wireless Indoor Temperature, Humidity, and CO2 sensor over LoRaWAN™

@@ -1,0 +1,1 @@
+Wireless 2-Gang Temperature Sensor over LoRaWAN™

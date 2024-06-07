@@ -1,0 +1,1 @@
+Wireless Vibration Sensor, Rolling Ball Type over LoRaWAN™

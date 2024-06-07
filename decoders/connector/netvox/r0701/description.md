@@ -1,0 +1,1 @@
+Wireless CO Sensor over LoRaWAN™

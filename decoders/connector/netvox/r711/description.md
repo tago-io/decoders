@@ -1,0 +1,1 @@
+Wireless Indoor Temperature Humidity Sensor over LoRaWAN™

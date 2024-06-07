@@ -1,0 +1,1 @@
+Wireless 2-Gang Reed Switch Open/Close Detection Sensor over LoRaWAN™

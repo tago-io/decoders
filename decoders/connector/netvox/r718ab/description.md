@@ -1,0 +1,1 @@
+Temperature And Humidity Sensor over LoRaWAN™ 

@@ -1,0 +1,1 @@
+Wireless Reed Switch Open/Close Detection Sensor over LoRaWAN™

@@ -1,0 +1,1 @@
+pH sensor over LoRaWAN™ 

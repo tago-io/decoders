@@ -1,0 +1,1 @@
+Wireless Outdoor Temperature Humidity Sensor over LoRaWAN™
