@@ -1,0 +1,1 @@
+vNode integration over MQTT. Works with Compact and Extended mode.

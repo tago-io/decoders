@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "####PMS-100 for Sigfox\nThe PMS-100 is a multi-sensor device, designed to implentent IoT Projects using Sigfox Network.\n\nThe user or developer/integrator can use onboard sensors or connect external sensors to monitor temperature, relative humidity, pulse sensors and hidrometers. \n\nThis device is certified as Sigfox Ready and has also Anatel Certification.\n##\nMore information about this device can be found [here](https://www.udev.com.br/).\n###\n",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5c80263d086c3d001db53b54",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}
