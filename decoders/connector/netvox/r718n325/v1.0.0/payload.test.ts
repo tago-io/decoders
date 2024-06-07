@@ -73,7 +73,6 @@ describe("Port 6, 0x02, unit tests", () => {
   });
 
   test("Check variable values", () => {
-    console.log(result);
     expect(result.battery?.value).toBe(3.6);
     expect(result.multiplier2?.value).toBe(1);
     expect(result.multiplier3?.value).toBe(1);

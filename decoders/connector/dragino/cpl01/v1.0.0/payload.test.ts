@@ -35,8 +35,6 @@ function preparePayload(payloadHex: string) {
 describe("unit tests", () => {
   const payloadHex = "f86778705021331700640c7817010000000000090000026315537b0100000b00002663510fed0100000b00002663510fed0100000b00002663510fed0100000b00002663510fed0100000b00002663510fed0100000b00002663510fed0100000b00002663510fed0100000b00002663510882";
   const result = preparePayload(payloadHex);
-  console.log(result.parse_error);
-  console.log(result);
 
   test("Output result is type: array", () => {
     expect(Array.isArray(result.payload)).toBe(true);

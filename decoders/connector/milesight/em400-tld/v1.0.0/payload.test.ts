@@ -32,8 +32,6 @@ describe("First unit test. battery, temp, dist ,position", () => {
   const payloadHex = "0175640367f80004820101050000";
   const result = preparePayload(payloadHex);
 
-  console.log(result);
-
   test("Output result is type: array", () => {
     expect(Array.isArray(result.payload)).toBe(true);
   });
