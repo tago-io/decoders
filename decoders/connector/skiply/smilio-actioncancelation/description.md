@@ -1,0 +1,1 @@
+Buttons to report any kind of event over LoRaWAN and Sigfox using SKIPLY Server
