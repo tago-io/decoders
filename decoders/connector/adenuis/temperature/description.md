@@ -1,0 +1,1 @@
+Integrated and remote temperature probes over LoRaWAN™

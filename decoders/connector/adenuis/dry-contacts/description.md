@@ -1,0 +1,1 @@
+Reporting Status and Controlling relays inputs/outputs over LoRaWAN™
