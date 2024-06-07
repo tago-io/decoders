@@ -17,7 +17,8 @@ function generateID({ name, version }: TypeVersion, isConnector = false): string
     const connectorSplitted = normalizedName.split(/-(.+)/);
     const manufacturer = connectorSplitted[0];
     const connectorModel = connectorSplitted[1] || manufacturer;
-    normalizedName = `connector:${connectorModel}`;
+
+    normalizedName = `connector:${manufacturer}${connectorModel}`;
   }
 
   const combinedString = `${normalizedName}-${version}`;

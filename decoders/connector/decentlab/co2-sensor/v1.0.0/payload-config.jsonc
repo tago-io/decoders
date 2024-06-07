@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "DecentLab offers its advanced sensor for CO2, temperature, humidity, and barometric pressure using LoRaWAN™ technology. LoRaWAN Sensor Device supports nearly all sensors found in our comprehensive sensor portfolio.\nNDIR CO2, temperature, humidity, and barometric pressure sensor. \n* CO2 Range: 0 to 10 000 ppm \n* Accuracy: ±50 ppm, ±3 % of reading \n* Temperature  Range: -40 to +125°C \n* Accuracy: ± 0.3°C Humidity Range: 0 - 100% \n* RH Accuracy: ±2% \n* RH Barometric pressure Range: 300 ... 1100 hPa \n* Accuracy: ~ ±1 hPa (absolute), ± 0.12 hPa (typical) equivalent to ±1 m \n* Internal battery 2 x C-type\n* Operating conditions -30°C to 60°C ./ 100% RH \\nLoRaWAN compatible sensor device.\n",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5c486affdb2ffa001da3fc4e",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js"
+  ]
+}

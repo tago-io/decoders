@@ -1,0 +1,1 @@
+DL-PR36CTD is a high-precision pressure/liquid level, temperature and electrical conductivity sensor over LoRaWAN®

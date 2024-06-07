@@ -32,6 +32,7 @@ async function createNetworkVersion(knexClient: Knex, mainObj: Network, filePath
       id: generateID({ name: mainObj.name, version: version }),
       name: mainObj.name,
       version: version,
+      middleware_endpoint: detailsData?.middleware_endpoint,
       documentation_url: detailsData?.documentation_url,
       device_parameters: detailsData?.device_parameters || [],
       serial_number: detailsData?.serial_number_config || {},
@@ -58,7 +59,7 @@ async function createNetworks(knexClient: Knex, directoryPath: string): Promise<
     }
     const networkPath = path.join(filePath, "network.jsonc");
     if (!fs.existsSync(networkPath)) {
-      throw `Network file not found in ${filePath}`;
+      throw `network.jsonc manifest file not found in ${filePath}`;
     }
     const networkData: Network = JSON.parse(
       fs.readFileSync(networkPath, "utf8")

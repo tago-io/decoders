@@ -1,0 +1,1 @@
+LoRaWAN Operated Low Power Level Transmitter for Corrosive Liquid Media

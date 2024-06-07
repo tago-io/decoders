@@ -1,0 +1,1 @@
+Water meter with LoRaWAN™

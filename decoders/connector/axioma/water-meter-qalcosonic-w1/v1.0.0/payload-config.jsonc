@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nAxioma water meter QALCOSONIC W1 is designed for accurate measurement of cold and hot water consumption in households, apartment buildings and small commercial premises.\n\n##\n* Temperature class T30, T50, T30/90, T90\n* Nominal flow 1.6 / 2.5 / 4.0 m3/h\n* Wide measurement range\n* Q3/Q1 = R 250/400/800 (optional)\n* No straight sections required\n* Installation in any position\n* No measurement of air\n* Environment class E2/M1\n* Protection class IP68\n* Nominal pressure PN16\n* Metering archive registration\n* Maintenance free device, battery lifetime > 16 years\n* Bi-directional flow measurements\n* Flow direction indication\n* Meter parametrisation and archive reading via NFC or optical interface\n* Durable composite body\n* Measurement units: m3-m3/h,\n* Gal-GPM. ft3-ft3/h (optional)\n* Strainer and back flow valve (optional)\n* OIML R49 Compliant / EN ISO 4064\n* RoHS Directive Reach\n##\nMore information about this device can be found [here.](https://www.axiomametering.com/en/products/water-metering-devices/ultrasonic/qalcosonic-w1)",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

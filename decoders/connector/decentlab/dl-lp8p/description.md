@@ -1,0 +1,1 @@
+DL-LP8P is a co2, temperature, humidity and barometric pressure sensor over LoRaWAN®

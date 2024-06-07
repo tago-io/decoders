@@ -1,0 +1,1 @@
+LoRaWAN low power  pulse counter and analogue interface for the water meter and flowmeter totalising for usage and leakage monitoring

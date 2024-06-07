@@ -1,0 +1,1 @@
+Low Power Flush Type Pressure Transmitter for Liquid and Gas Media over LoRaWAN or Satellite

@@ -1,0 +1,1 @@
+Simple tracker with GPS, emergency and accelerometer over Sigfox
