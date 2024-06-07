@@ -1,0 +1,1 @@
+All-in-one Home monitoring Sensor over LoRaWAN™

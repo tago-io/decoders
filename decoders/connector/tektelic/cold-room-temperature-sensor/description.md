@@ -1,0 +1,1 @@
+Device for cold chain environment monitoring over LoRaWAN™

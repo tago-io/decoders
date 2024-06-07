@@ -1,0 +1,1 @@
+GPS Tracker for Industrial Asset Management over LoRaWAN™

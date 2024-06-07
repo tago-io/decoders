@@ -1,0 +1,1 @@
+Non dispersive infrared (NDIR) CO2 sensor over LoRaWAN™
