@@ -1,0 +1,1 @@
+DL-PR36 is a high-precision pressure/liquid level and temperature sensor over LoRaWAN®
