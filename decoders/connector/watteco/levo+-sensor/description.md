@@ -1,0 +1,1 @@
+The Lev’O+ sensor allows you to know the level of tanks or cavities in percentage, to accurately monitor variations of the liquid level, and does not require knowledge of its geometric dimensions. By measuring the relative pressure of the liquid (water, fuel, oil, fertiliser, etc.), the Lev’O+ sensor transmits the data to a public or private LoRaWAN® radio network

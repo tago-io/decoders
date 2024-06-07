@@ -1,0 +1,1 @@
+The water presence detection sensor Humid’O is equipped with a detection probe and its LoRaWAN™ transmitter

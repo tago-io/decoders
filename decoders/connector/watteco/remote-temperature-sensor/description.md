@@ -1,0 +1,1 @@
+The remote temperature sensor is dedicated to temperature measurement in buildings, temperature-controlled rooms, cooling towers, and transmits the data over a public or private LoRaWAN™ radio network

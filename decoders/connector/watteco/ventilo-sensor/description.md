@@ -1,0 +1,1 @@
+The Ventil’O sensor measures the vacuum established by outdoor ventilation chambers. It regularly transmits its data over the public or private LoRaWAN™ radio network.

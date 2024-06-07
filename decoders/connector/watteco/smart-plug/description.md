@@ -1,0 +1,1 @@
+Smart Plug is a plug connected to a public or private LoRaWAN™ network, which is used to remotely manage the operation of common household electrical appliances

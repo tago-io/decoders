@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "* Temperature and Accelerometer sensor\n* Allows to know if a machine is abnormaly vibrating\n* 4 types of report : state, alarm, learning and classic report\n* LoRaWAN Class A \n* EU 863-870 MHz\n* Operates between -20 to 60°C\n* IP68\n* Replaceable AA Battery\n* Dimension in mm : 76x79x23\n* Weight : 75 g\n* QR Code to ease the identification\n* Delivered with a magnet kit composed of 2 round magnets to ease the fixation on a machine\n* To turn the sensor on, press 2 seconds the button until the LED blinks green 2 times, it will then be in continuous in blue during average 1min 35 sec and blink green 5 times ",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js"
+  ]
+}

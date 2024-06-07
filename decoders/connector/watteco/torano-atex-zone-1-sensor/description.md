@@ -1,0 +1,1 @@
+The Toran’O AtEx Zone 1 sensor is used to report status changes, pulse count values and analog measurements of equipment in the AtEx 1 sensitive zone such as water, gas, electricity or thermal energy meters, mechanical pressure switches, pressure transducers. It makes existing equipment communicate on a public or private LoRaWAN® network.
