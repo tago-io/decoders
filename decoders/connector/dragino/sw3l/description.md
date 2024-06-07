@@ -1,0 +1,1 @@
+The Dragino SW3L is a LoRaWAN Outdoor Flow Sensor

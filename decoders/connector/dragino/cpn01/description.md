@@ -1,0 +1,1 @@
+NB-IoT Dry Contact Sensor

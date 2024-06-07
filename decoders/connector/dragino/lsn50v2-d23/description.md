@@ -1,0 +1,1 @@
+LoRaWAN Waterproof /Outdoor Temperature Sensor

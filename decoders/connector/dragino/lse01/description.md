@@ -1,0 +1,1 @@
+The Dragino LSE01 is a LoRaWAN Soil Moisture & EC Sensor for IoT of Agriculture. 

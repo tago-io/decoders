@@ -1,0 +1,1 @@
+The Dragino LLDS12 is a LoRaWAN LiDAR ToF (Time of Flight) Distance Sensor for Internet of Things solution. It is capable to measure the distance to an object as close as 10 centimeters (+/- 5cm up to 6m) and as far as 12 meters (+/-1% starting at 6m)!. The LiDAR probe uses laser induction technology for distance measurement.

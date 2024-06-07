@@ -1,0 +1,1 @@
+LoRaWAN Microwave Radar Distance Detection Sensor

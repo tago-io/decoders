@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The Dragino LAQ4 is a LoRaWAN Air Quality Sensor for Internet of Things solution. It is designed to measure the surrounding environment parameters include: TVOC(Total Volatile Organic Compound), eCO2(equivalent CO2), temperature and relative air humidity, and then upload to IoT server via LoRaWAN wireless protocol.\n\nIAQ (Indoor Air Quality) is very important factor for indoor activity and human life. VOC(Volatile Organic Compound) are emitted as gases from certain solids or liquids and they are the main source for poor indoor air quality. LAQ4 provides the trend for IAQ measurement and, like all other TVOC sensors, LAQ4 requires calibration for more accuracy measurement on TVOC and eCO2.\n\n**General Specifications**\n* Supply Voltage: built in 4000mAh Li-SOCI2 battery\n* Operating Temperature: -40 ~ 85°C\n* Deep Sleep Mode / IDLE Mode: 9uA\n* Sampling Mode: 11.8mA @ 2s for every 60 seconds.\n* LoRaWAN Transmit Mode: 125mA.\n* Battery Life: 7 ~ 10 months\n\n**TVOC Sensor Specifications**\n* Range: 0 ~ 29206 ppb. Values outside this range are clipped.\n* Temperature and Humidity Compensation\n\n**eCO2 Sensor Specifications**\n* eCO2 Sensor range: 400ppm to 32768 ppm. Values outside this range are clipped.\n* Temperature and Humidity Compensation\n* Note: eCO2 (equivalent calculated carbon-dioxide) is different things vs the real CO2. It is calculated by TVOC value.\n\n**Temperature Sensor Specifications**\n* Range: -40 to + 80°C\n* Accuracy: Typ ±0.3 @ 0-90 °C\n* Resolution: 0.01°C\n* Long Term Shift: Typ  <0.02 °C/yr\n\n**Relative Humidity Sensor Specifications**\n* Range: 0 ~ 99.9% RH\n* Accuracy: ± 3%RH ( 0 ~ 100%RH)\n* Resolution: 0.04% RH\n* Long Term Shift: <0.25 %RH/yr\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

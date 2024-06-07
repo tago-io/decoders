@@ -1,0 +1,1 @@
+Waterproof Long Range Wireless Sensor Node over LoRaWAN™ 

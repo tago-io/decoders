@@ -1,0 +1,1 @@
+TrackerD is an Open Source LoRaWAN Tracker based on ESP32 MCU and Semtech LoRa Wireless Chip.

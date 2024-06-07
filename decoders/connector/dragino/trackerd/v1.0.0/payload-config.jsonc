@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Description\n\n* TrackerD is an Open Source LoRaWAN Tracker based on ESP32 MCU and Semtech LoRa Wireless Chip. The LoRa wireless technology used in TrackerD allows the user to send data and reach extremely long ranges at low data-rates. It provides ultra-long range spread spectrum communication and high interference immunity whilst minimizing current consumption. It targets professional tracking services.\n\nFeatures\n\n* LoRaWAN 1.0.3 Class A\n* ESP32 PICO D4\n* SX1276/78 Wireless Chip\n* Arduino IDE Compatible\n* Open source hardware / software\n* Regular/ Real-time GPS,BLE,WIFI tracking\n* Built-in3 axis accelerometer (LIS3DH)\n* Humidity / temperature sensor : GXCAS Technology GXHT3X\n* Motion sensing capability\n* Power Monitoring\n* Charging circuit via USB port\n* 1000mA Li-on Battery power\n* Tri-color LED, Alarm button\n* Datalog\n\nProduct link:\n\n* https://www.dragino.com/products/tracker/item/234-trackerd.html",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/https/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

@@ -1,0 +1,1 @@
+GPS HAT expansion board for RaspberryPi over LoRaWAN™ 
