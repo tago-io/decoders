@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nThe DUODIGIT SX is a rugged, easy-to-install equipment designed to transmit meter reading data (water, gas and power) through the LPWA Sigfox network. \n\nThe equipment can also be used in alarm systems and event occurrences. \n\nIt has a primary Thionyl Chloride Lithium baery of 6500mA to operate for several years according to the number of daily transmissions.\n##\nApplications:\n* Water metering system\n* Gas metering system;\n* Power measurement system;\n* Alarms;\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}

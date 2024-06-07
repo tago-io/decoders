@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\n\nSome manholes need instant monitoring: to reduce risk of accidents or to detect intruders or simply to get immediate alert when a manhole cover is being opened, to trigger an appropriate action. This is what IOTA MHC has been designed for. It is a robust, industrial grade device, with protection rating IP69. It is very difficult to be tampered, so one can be sure to be alerted whenever a manhole cover is opened or someone is just playing with the device to stop it from alerting you. And, what is more, it is mobile and installable in seconds.\n##\nMore information about this device can be found [here.](http://iota-devices.com/) \n##",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}

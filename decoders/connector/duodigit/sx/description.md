@@ -1,0 +1,1 @@
+Wireless transmit meter reading data for water, gas, and power over Sigfox
