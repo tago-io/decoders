@@ -1,0 +1,1 @@
+Indoor Temperature and Humidity sensor over LoRaWAN or Sigfox

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The ACW-GW radio modem is a repeater that allows radio message reporting from an 868MHz to the Sigfox network. Connect to Sigfox any type of ACW sensor through this repeater.\n\n**Technical Data**\n* Dimensions: 90 x 52 x 17,9 mm\n* Weight: 50g\n* Antenna: External antenna (SMA connector)\n* Temperature: -20°C to +55°C (operation), -40°C to +70°C (storage)\n* Mounts to: DIN rail\n* Power supply: 10-30Vcc\n* Frequency: 865-870 MHz\n* Power: 25 mW (14 dBm)\n* Output: Local: 1.2 to 115 kbits/s, Sigfox: 100 bit/s",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}

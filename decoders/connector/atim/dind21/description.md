@@ -1,0 +1,1 @@
+Digital Input/Output and Metering over LoRaWAN or Sigfox

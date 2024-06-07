@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "This tester enables you to accurately evaluate the LoRaWAN/Sigfox network coverage quality. A multicolored LED displays a color according to the coverage quality at your location. Test frames emitted by the push of the central button are visible on our Platform, and on your national LoRaWAN/Sigfox operator’s backend. Very useful for discovering and mastering LPWAN technologies and the realization of \"Proof of Concept\".\n\n**Technical Data**\n* Dimensions: 90 x 45 x 15 mm\n* Housing: Plastic\n* Power supply: Internal LiPo Battery 325mAh, rechargeable via micro USB port (micro USB wire not included)\n* Weight: 30g\n* Frequency: 868 MHz\n* Power: 25 mW (14 dBm)\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/sigfox/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

@@ -1,0 +1,1 @@
+Outdoor Temperature + GPS sensor over LoRaWAN
