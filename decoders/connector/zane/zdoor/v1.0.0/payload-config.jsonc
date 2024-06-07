@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "zDoor is a LoRaWAN compliant contact sensor suitable for sensing door/window openings. The device’s enclosure is IP65 rated, which allows outdoor usage.\n\nThis device is a really simple tool. You can install it on the door or window. The device contains a reed magnetic sensor. You will get a mountable magnet within the package. You have to install the magnet close to the proper side of the box. Once the magnet is moved away (the door or window has opened), the unit will report the event to the LoRaWAN network. If you setup your network to forward the message to the assigned application, then you will get the message about this event even on your mobile phone.\n\nA LoRaWan door sensor can be useful in every house or places where we would like to know the number of door or window openings. From these information we can see how often is a room or place been visited.\n\n* smart cities\n* smart home monitoring\n* industrial sensor",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

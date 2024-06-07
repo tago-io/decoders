@@ -1,0 +1,1 @@
+Intelligent LoRaWAN C-class light controller device
