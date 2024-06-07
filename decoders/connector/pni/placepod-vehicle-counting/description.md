@@ -1,0 +1,1 @@
+IoT-enabled smart parking sensor for on-street and off-street public and private parking management over LoRaWAN

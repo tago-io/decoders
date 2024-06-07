@@ -1,0 +1,1 @@
+Differential pressure sensors measures difference in pressures delivered to two inputs and transmits the measurements in regular intervals using Sigfox

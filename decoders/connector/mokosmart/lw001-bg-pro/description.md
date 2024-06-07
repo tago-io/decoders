@@ -1,0 +1,1 @@
+LW001-BG PRO is a wireless smart, ultra-low power consumption, indoor and outdoor LoRaWAN Tracker. 
