@@ -11,9 +11,9 @@ export async function up(knex: Knex): Promise<void> {
       table.text("documentation_url");
       table.text('device_parameters');  // JSON stringify
       table.text("middleware_endpoint");
-      table.binary("logo");
-      table.binary("icon");
-      table.binary("banner");
+      table.text("logo");
+      table.text("icon");
+      table.text("banner");
       table.binary("payload_decoder");
 
       // creating indexes
@@ -35,7 +35,7 @@ export async function up(knex: Knex): Promise<void> {
       table.text("install_text");
       table.text("install_end_text");
       table.text("device_annotation");
-      table.binary("logo");
+      table.text("logo");
       table.binary("payload_decoder");
 
       // creating indexes

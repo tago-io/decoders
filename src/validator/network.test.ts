@@ -12,20 +12,20 @@ describe('zNetwork schema', () => {
       middleware_endpoint: 'middleware.example.com',
       serial_number: {
         case: 'upper',
-        image: Buffer.from('image data'),
+        image: "https://file.tago.io/123456789012345678901234/image.png",
         label: 'Test Label',
         mask: 'Test Mask',
         required: true,
       },
       device_parameters: null,
-      icon: Buffer.from('icon data'),
-      logo: 'logo data',
-      banner: Buffer.from('banner data'),
+      icon: "https://file.tago.io/123456789012345678901234/icon.png",
+      logo: "https://file.tago.io/123456789012345678901234/logo.png",
+      banner: "https://file.tago.io/123456789012345678901234/banner.png",
       payload_decoder: Buffer.from('decoder data'),
     };
 
     const result = zNetwork.safeParse(validData);
-
+    console.log(result.error);
     expect(result.success).toBe(true);
   });
 
