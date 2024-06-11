@@ -1,0 +1,1 @@
+DL-SMTP is a soil moisture and temperature profile over LoRaWAN®

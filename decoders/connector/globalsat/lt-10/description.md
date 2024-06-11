@@ -1,0 +1,1 @@
+LT-10 is a LoRaWAN compliant light solar tracker

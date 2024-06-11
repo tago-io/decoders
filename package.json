@@ -5,7 +5,7 @@
   "scripts": {
     "test": "vitest",
     "linter": "biome lint --diagnostic-level=error .",
-    "start": "npx --yes tsx src/main.ts"
+    "start": "npx --yes tsx --env-file .env src/main.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",

@@ -1,0 +1,1 @@
+DL-TRS11 is a soil moisture, temperature and electrical conductivity sensor over LoRaWAN®

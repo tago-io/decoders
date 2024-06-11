@@ -59,7 +59,7 @@ async function validateNetworkFiles(directoryPath: string): Promise<void> {
       const networkPath = path.join(filePath, "network.jsonc");
 
       if (!fs.existsSync(networkPath)) {
-        throw `Network file not found in ${filePath}`;
+        throw `network.jsonc manifest file not found in ${filePath}`;
       }
 
       const networkData: Network = JSON.parse(
@@ -112,7 +112,7 @@ async function validateConnectorFiles(directoryPath: string): Promise<void> {
         const connectorPath = path.join(modelPath, "connector.jsonc");
 
         if (!fs.existsSync(connectorPath)) {
-          throw `Connector file not found in ${modelPath}`;
+          throw `connector.jsonc manifest file not found in ${modelPath}`;
         }
 
         const connectorData: Connector = JSON.parse(

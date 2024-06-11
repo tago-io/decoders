@@ -12,7 +12,7 @@ const zConnector = z.object({
   install_end_text: z.string().nullish(),
   device_annotation: z.string().nullish(),
   device_parameters: zIntegrationParameters.nullish(),
-  logo: zBufferOrString.nullish(),
+  logo: z.string().nullish(),
   payload_decoder: zBufferPayloadSize(64).nullish(),
 });
 

@@ -1,0 +1,1 @@
+The LT-20 is a solar powered LoRaWAN GPS tracker with 3 axis accelerometer built-in.

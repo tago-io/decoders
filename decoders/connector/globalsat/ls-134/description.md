@@ -1,0 +1,1 @@
+Smoke and Heat Detector with LoRaWAN™  
