@@ -94,8 +94,6 @@ jobs:
         with:
           name: decoders-db
           path: ./data
-      - name: List contents of data directory
-        run: ls -la ./data
       - name: Upload decoders.db to GitHub release
         uses: actions/upload-release-asset@v1
         env:
