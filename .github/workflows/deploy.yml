@@ -1,72 +1,85 @@
-name: Deploy new version
+name: Generate and Release Decoders
 
 on:
   release:
     types: [published]
 
 permissions:
-  contents: write  # This grants write permission to contents, which includes releases
+  contents: write
 
 jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js LTS
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
   linter:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js LTS
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-      - run: npm ci
-      - run: npm run linter
+      - name: Install dependencies
+        run: npm ci
+      - name: Run linter
+        run: npm run linter
 
   test:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js LTS
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-      - run: npm ci
-      - run: npm test
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
 
   validator:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js LTS
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-      - run: npm ci
-      - run: npm start validator
+      - name: Install dependencies
+        run: npm ci
+      - name: Run validator
+        run: npm run validator
 
   generate:
     runs-on: ubuntu-latest
-    needs: [linter, test, validator]
+    needs: [setup, linter, test, validator]
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js LTS
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-      - run: npm ci
-      - name: Generate Database
+      - name: Install dependencies
+        run: npm ci
+      - name: Generate decoders.db
         run: npm start generate
-      - name: Upload decoders.db
+      - name: Upload decoders.db artifact
         uses: actions/upload-artifact@v3
         with:
           name: decoders-db
@@ -76,15 +89,17 @@ jobs:
     runs-on: ubuntu-latest
     needs: generate
     steps:
-      - name: Download decoders.db
+      - name: Download decoders.db artifact
         uses: actions/download-artifact@v3
         with:
           name: decoders-db
-          path: ./data
-      - name: Create GitHub Release
+          path: data/decoders.db
+      - name: Upload decoders.db to GitHub release
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./data/decoders.db
+          asset_path: data/decoders.db
           asset_name: decoders.db
           asset_content_type: application/octet-stream
