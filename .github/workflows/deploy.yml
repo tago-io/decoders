@@ -107,6 +107,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: release
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - run: git branch -D gh-pages
       - run: git checkout --orphan gh-pages
       - run: find . -mindepth 1 -maxdepth 1 ! -name 'decoders' ! -name '.git' -exec rm -rf {} +
