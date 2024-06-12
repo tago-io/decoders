@@ -114,6 +114,9 @@ jobs:
       - run: find . -mindepth 1 -maxdepth 1 ! -name 'decoders' ! -name '.git' -exec rm -rf {} +
       - run: find . -type f ! \( -iname "*.png" -o -iname "*.svg" \) ! -path "./.git/*" -exec rm -f {} +
       - run: |
+          touch .nojekyll
+          echo "_decoders.tago.io" > CNAME
+      - run: |
           git config --global user.email "contact@tago.io"
           git config --global user.name "TagoIO"
           git add -A
