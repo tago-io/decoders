@@ -80,7 +80,7 @@ jobs:
       - name: Generate decoders.db
         run: npm start generate
       - name: Upload decoders.db artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: decoders-db
           path: data/decoders.db
@@ -90,7 +90,7 @@ jobs:
     needs: generate
     steps:
       - name: Download decoders.db artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: decoders-db
           path: ./data
