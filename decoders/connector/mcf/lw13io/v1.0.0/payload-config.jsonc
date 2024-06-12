@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nThis device can transmits the status of its input and control the output through the LoRaWAN™ network. Can be used for industrial process control and home automation, water treatment, agriculture irrigation and similar applications.\n\n* Class C LoRaWAN™ stack EU868, AS923\n* 16 opto-isolated input AC-DC, range 5-24Vac/dc\n* 8 relay output with COM, NO, NC contacts carrying 5Amp@230Vac\n* USB port for IoT node setup ad FW upgrade\n* CANBUS interface\n* Power supply 24 Vac/dc\n* Storage temperature range -20 + 80C°\n\n\nMore information about this device can be found [here.](https://www.mcf88.it/prodotto/mcf-lw13io/) \n\n#",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5c4b3543db2ffa001dba6003",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}

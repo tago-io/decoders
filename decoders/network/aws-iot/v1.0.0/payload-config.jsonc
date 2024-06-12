@@ -1,0 +1,10 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "Asset ID"
+  },
+  "device_parameters": [],
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-aws-iot-core/874"
+}

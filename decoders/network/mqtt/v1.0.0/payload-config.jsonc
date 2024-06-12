@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {},
+  "device_parameters": [
+    {
+      "name": "payload_type",
+      "label": "Payload Type",
+      "type": "dropdown",
+      "options": [
+        {
+          "label": "Auto Parser (JSON or TEXT)",
+          "value": "auto",
+          "is_default": true
+        },
+        {
+          "label": "Hex (string with hex code)",
+          "value": "hex",
+          "is_default": false
+        }
+      ]
+  }
+  ],
+  "documentation_url": "https://docs.tago.io/articles/32"
+}

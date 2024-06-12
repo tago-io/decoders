@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "LT-501R is a RF Network tracker specifically designed for both indoor and outdoor monitoring on objects. It is compact, light, and easy to use. \n##\n* Support LoRaWAN™ Class A/ Class C\n* Outdoor/ Indoor geo-location\n* Long-distance transmission\n* Regular/ Real-time tracking (Report interval, Enable/ Disable GPS, Buzzer, Ping)\n* Built- in 3 axis accelerometer for motion detector\n* Built in BLE for beacon (Indoor positioning)\n* Setting via BLE\n##\nMore information about this device can be found [here.](https://www.globalsat.com.tw/en/product-258299/Flexible-Tracker-LoRaWAN%E2%84%A2-Certified-LT-501R-Series.html) \n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

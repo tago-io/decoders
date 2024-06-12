@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Connector details Configuration Schema",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Path to the markdown file containing the connector description.",
+      "format": "uri-reference"
+    },
+    "install_text": {
+      "type": "string",
+      "description": "Text containing installation instructions."
+    },
+    "install_end_text": {
+      "type": "string",
+      "description": "Text containing post-installation steps."
+    },
+    "device_annotation": {
+      "type": "string",
+      "description": "Notes or annotations to added to the device that will use the connector."
+    },
+    "device_parameters": {
+      "type": "array",
+      "description": "List of device parameters.",
+      "items": {
+        "type": "object"
+      }
+    },
+    "networks": {
+      "type": "array",
+      "description": "List of paths to network-specific payload configurations.",
+      "items": {
+        "type": "string",
+        "format": "uri-reference"
+      }
+    }
+  },
+  "patternProperties": {
+    "^install_text\\[([a-z]{2})(-[a-z]{2})?\\]$": {
+      "type": "string",
+      "description": "Multilingual support for install_text field"
+    },
+    "^install_end_text\\[([a-z]{2})(-[a-z]{2})?\\]$": {
+      "type": "string",
+      "description": "Multilingual support for install_end_text field"
+    },
+    "^device_annotation\\[([a-z]{2})(-[a-z]{2})?\\]$": {
+      "type": "string",
+      "description": "Multilingual support for device_annotation field"
+    }
+  },
+  "required": ["description", "networks"],
+  "additionalProperties": false
+}

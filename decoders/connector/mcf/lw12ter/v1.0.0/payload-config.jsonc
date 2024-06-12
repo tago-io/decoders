@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nThis IP67 battery powered sensor reads temperature, humidity and pressure and sends collected data over the LoRaWAN™ network. Ideally suited for a wide range of applications such as weather stations, urban monitoring, air quality, industrial, environmental or farming projects.\n\n* Class A LoRaWAN™ stack @868Mhz @920Mhz (SIN, HKG…)\n* Temperature -10….. 60 °C ( ±0.5°C)\n* Humidity 0%….. 100% ( 20% ….80% ±3% @25°C, 0%-20%-80%-100%@ 25°C ±5%)\n* Pressure 300….1100hPa (±1hPa)\n* Battery powered with 5 years of life (according radio propagation effectiveness and 10 min reading period)\n* NFC for IoT node setup, FW upgrade and data reading\n* Installation indoor\n* Storage temperature range -20 + 80C°\n* Working temperature range -10 + 60C\n\n\nMore information about this device can be found [here.](https://www.mcf88.it/prodotto/mcf-lw12ter/) ",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}

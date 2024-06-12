@@ -1,0 +1,1 @@
+DL-5TM is a legacy soil moisture and temperature sensor over LoRaWAN®

@@ -1,0 +1,1 @@
+mcf88 LoRaWAN™ mono-phase metering 

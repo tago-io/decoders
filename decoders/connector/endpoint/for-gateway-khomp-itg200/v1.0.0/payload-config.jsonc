@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nThe Khomp Endpoint LoRa is an endpoint IoT transmitter to integrate IoT projects that use a LoRa® wireless communication network.\n\n\nIt contains two 1-Wire ports for connection of temperature sensors, wait and get in touch by reading\nof these magnitudes.\n##\n\n* LoRaWAN ™ 1.1 Protocol\n* Frequency range: 860 to 930 MHz *\n* Channels: 8 (configurable)\n* Power: up to +20 dBm\n* Sensitivity: from -137 dBm\n* Communication distance: up to 3.5 km in open field\n* Anatel certification\n",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5d2f9b9e8cdba5001ba479cd",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/mqtt/v1.0.0/payload.js"
+  ]
+}

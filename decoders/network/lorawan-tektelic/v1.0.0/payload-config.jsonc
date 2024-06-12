@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "Device EUI",
+    "case": "upper",
+    "mask": "FF-FF-FF-FF-FF-FF-FF-FF"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "tektelic.middleware.tago.io"
+}

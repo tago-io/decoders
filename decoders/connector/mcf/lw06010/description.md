@@ -1,0 +1,1 @@
+mcf88 Serial LW06010 0-10V to LoRaWAN™ interface

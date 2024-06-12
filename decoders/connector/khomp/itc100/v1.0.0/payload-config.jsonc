@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Connect your Khomp ITC 100/101/102 through your network.**\n\nKhomp ITC is a wireless transmitter from the IoT Endpoints line, used to count events in equipment such as hydrometers and gasometers\n\n\n> If your ITC is connected on a Khomp ITG200 Gateway, search for \"Khomp ITG200 LoRa Connector\".\n\n**Measures include: **\n* ITC specific: resolution_configured, pulse_counter_flux, pulse_counter_reflux\n* General: signal_quality, battery, version.\n* Alerts: fraud_event, tamper_detection_event, resolution_ack. fraud_status. tamper_detection_status.\n* And the defaults from your network.\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
+  "install_end_text": "Device created sucessful.\n\nYou can get a ITC Dashboard template [here.](http://admin.tago.io/template/603950327aa19800110a8499)\n\nJust add to your Dashboards and select the device you just created. \n\nWe recommend adding a filter on your device Payload parser, removing unecessary measures.\n\nFor more information about our products, acess the [support area](https://www.khomp.com/suporte/).",
+  "device_annotation": "KHOMP ITC 100/101/102 Connector.\n\nYou can get a [ITC Dashboard template here](http://admin.tago.io/template/603950327aa19800110a8499)\n\nMeasures include: \nITC specific: resolution_configured, pulse_counter_flux, pulse_counter_reflux\nGeneral: signal_quality, battery, version.\nAlerts: fraud_event, tamper_detection_event, resolution_ack. fraud_status. tamper_detection_status.\nAnd the defaults from your network.\n\nFor more information about our products, acess the [support area](https://www.khomp.com/suporte/).\n\nParser version: 1.0.0.0",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js"
+  ]
+}

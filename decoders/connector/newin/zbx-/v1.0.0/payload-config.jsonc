@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "ZBX Pro Pulse Counter – Sigfox is a multisensor device that has the following features:\n* SigfoxReady;\n* Bluetooth Configuration and Firmware update;\n* 2 Pulse Counter Inputs;\n* Temperature Sensor(-40°C to +85°C, accuracy ±0.4°Cmax);\n* Humidity Sensor(0% to 100%, accuracy ±3% max);\n* Hall Effect Sensor;-Powered from 2 x AAA Lithium Batteries (1.5V each);\n##\nMore information about this device can be found [here](https://newintecnologias.com.br/index.html).\n",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5c083d8c1cf03d0031cfa5ae",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}

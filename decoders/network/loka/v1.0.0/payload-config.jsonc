@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "Sigfox Device ID",
+    "case": "upper"
+  },
+  "device_parameters": [],
+  "documentation_url": "https://tago.elevio.help/en/articles/173"
+}

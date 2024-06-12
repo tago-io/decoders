@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "Device EUI",
+    "case": "upper"
+  },
+  "device_parameters": [
+    {
+      "name": "downlink",
+      "label": "Downlink [optional]",
+      "group": "hide",
+      "default": "Your downlink data here"
+    },
+    {
+      "name": "port",
+      "label": "Port [optional]",
+      "group": "hide",
+      "default": "1"
+    },
+    {
+      "name": "confirmed",
+      "default": "true",
+      "group": "hide"
+    }
+  ],
+  "middleware_endpoint": "orbiwise.middleware.tago.io",
+  "documentation_url": "https://docs.tago.io/articles/160"
+}

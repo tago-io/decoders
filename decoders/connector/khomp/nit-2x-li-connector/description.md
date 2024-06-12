@@ -1,0 +1,1 @@
+Khomp NIT-2x LI are wireless transmitter from the IoT Endpoints line, which operate via LoRa® radio and the LoRaWAN™ 1.0.3 protocol

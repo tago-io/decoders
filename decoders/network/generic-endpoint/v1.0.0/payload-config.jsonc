@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "case": "upper",
+    "label": "Serial / Device EUI"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "generic.middleware.tago.io",
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-tago-with-a-generic-https-endpoint/1085"
+}

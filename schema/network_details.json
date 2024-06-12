@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Network details Configuration Schema",
+  "type": "object",
+  "properties": {
+    "serial_number_config": {
+      "type": "object",
+      "properties": {
+        "case": {
+          "type": "string",
+          "enum": ["upper", "lower", ""],
+          "description": "Defines the case of the serial number."
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for the serial number."
+        },
+        "mask": {
+          "type": "string",
+          "description": "The mask pattern for the serial number."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Indicates if the serial number is required."
+        }
+      }
+    },
+    "middleware_endpoint": {
+      "type": "string",
+      "description": "The middleware endpoint URL."
+    },
+    "documentation_url": {
+      "type": "string",
+      "description": "URL to the documentation."
+    },
+    "description": {
+      "type": "string",
+      "description": "Path to the markdown file containing the network description.",
+      "format": "uri-reference"
+    },
+    "device_parameters": {
+      "type": "array",
+      "description": "List of device parameters.",
+      "items": {}
+    }
+  },
+  "additionalProperties": false,
+  "required": ["description"]
+}

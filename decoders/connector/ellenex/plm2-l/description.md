@@ -1,0 +1,1 @@
+Low power level transmitter with a narrow (15.8mm) sensor head diameter for liquid media compatible with stainless steel (groundwater, etc.)

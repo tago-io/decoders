@@ -1,0 +1,1 @@
+mcf88 Serial LW06424 4 channel 4-20mA to LoRaWAN™ interface

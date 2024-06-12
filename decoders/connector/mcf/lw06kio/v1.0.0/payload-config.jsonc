@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nThis interface can be connected via RS232 serial port to send and receive data through the LoRaWan™platform. The device has a serial proprietary mcf88 protocol (available on request). The interface has five opto isolated inputs (4 working with low voltage, one working at 230VAC) and 2 relay outputs.\n\n* LiPo rechargeable battery\n* Class C LoRaWAN stack @868MHz\n* Serial interfaces: RS232\n* USB On The Go\n* IoT node setup ad firmware upgrade via USB interface\n* 4 opto-isolated inputs working range 5-24Vac/dc\n* 1 opto-isolated input working at 230Vac\n* 2 relay output with COM, NO, NC contacts carrying 5Amp@230Vac\n* External power supply 10-36Vdc\n* Storage temperature range -20 + 80 °C\n* Working temperature range -10 + 70 °C\n\nMore information about this device can be found [here.](https://www.mcf88.it/prodotto/mcf-lw06kio/) \n\n#",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}

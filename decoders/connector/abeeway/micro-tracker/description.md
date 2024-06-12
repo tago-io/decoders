@@ -1,0 +1,1 @@
+Multi-mode tracker, small size, supporting accurate outdoor and indoor geolocation over LoRaWAN™

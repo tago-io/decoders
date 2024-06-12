@@ -1,0 +1,1 @@
+mcf88 outdoor environmental sensor over LoRaWAN™  

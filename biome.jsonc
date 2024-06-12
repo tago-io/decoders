@@ -6,14 +6,15 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 120,
+    "lineWidth": 180,
     "attributePosition": "auto"
   },
   "organizeImports": { "enabled": true },
   "linter": {
+    "ignore": ["node_modules", "./decoders/**/v1.0.0/*.ts", "./decoders/**/v1.0.0/payload.js"],
     "enabled": true,
     "rules": {
-      "recommended": false,
+      "recommended": true,
       "complexity": {
         "noBannedTypes": "warn",
         "noExtraBooleanCast": "error",
@@ -50,6 +51,7 @@
         "useYield": "error"
       },
       "style": {
+        "noVar": "error",
         "noDefaultExport": "warn",
         "noNamespace": "error",
         "useAsConstAssertion": "error",
@@ -99,6 +101,29 @@
       "bracketSameLine": false,
       "quoteStyle": "double",
       "attributePosition": "auto"
+    },
+    "globals": ["payload"]
+  },
+  "overrides": [
+    {
+      "include": ["decoders/*.js"],
+      "linter": {
+        "rules": {
+          "recommended": false,
+          "suspicious": {
+            "noPrototypeBuiltins": "warn"
+          },
+          "correctness": {
+            "noUnusedVariables": "warn",
+            "noInnerDeclarations": "warn",
+            "noUndeclaredVariables": "warn"
+          },
+          "style": {
+            "noVar": "warn",
+            "useBlockStatements": "warn"
+          }
+        }
+      }
     }
-  }
+  ]
 }

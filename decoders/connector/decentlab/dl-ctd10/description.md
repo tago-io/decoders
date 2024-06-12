@@ -1,0 +1,1 @@
+DL-CTD10 is a pressure/liquid level, temperature and electrical conductivity sensor over LoRaWAN®

@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Connect your Khomp ITE through your network.**\n\nKhomp ITE is IoT endpoint for power metering and sending data via LoRaWAN™\n\n> If your ITE is connected on a Khomp ITG200 Gateway, search for \"Khomp ITG200 LoRa Connector\".\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
+  "install_end_text": "Device created sucessful.",
+  "device_annotation": "**Connect your Khomp ITE through your network.**\n\nKhomp ITE is IoT endpoint for power metering and sending data via LoRaWAN™\n\n> If your ITE is connected on a Khomp ITG200 Gateway, search for \"Khomp ITG200 LoRa Connector\".\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nConnect the Khomp ITG200 Gateway with the default payload parser.\n\n##\n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/khomp/logo_khomp.png)\n\n",
+  "install_end_text": "## **Device created successfully.**\n### - Navigate to your ITG200 interface -> Cloud Configuration -> MQTT, and configure the following:#### \n### - The parser supports datalogger messages, so you can view both data sets on the same topic.\n\n- Broker Address: mqtt.tago.io\n- Port: 1883\n- Username: itg200\n- Password: YOUR_DEVICE_TOKEN\n",
+  "device_annotation": "### - Navigate to your ITG200 interface -> Cloud Configuration -> MQTT, and configure the following:#### \n### - The parser supports datalogger messages, so you can view both data sets on the same topic.\n\n- Broker Address: mqtt.tago.io\n- Port: 1883\n- Username: itg200\n- Password: YOUR_DEVICE_TOKEN\n",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/mqtt/v1.0.0/payload.js"
+  ]
+}

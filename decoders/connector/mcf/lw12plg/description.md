@@ -1,0 +1,1 @@
+mcf88 LoRaWAN™ Energy Meter plug with On/Off 

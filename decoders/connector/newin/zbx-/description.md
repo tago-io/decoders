@@ -1,0 +1,1 @@
+Pulse counter, Temperature, Humidity, Hall Effect sensor, from Newin using Sigfox

@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "case": "upper",
+    "label": "Device EUI",
+    "required": true
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "machineq.middleware.tago.io",
+  "documentation_url": "https://docs.tago.io/articles/159"
+}

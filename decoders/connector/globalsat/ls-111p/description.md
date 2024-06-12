@@ -1,0 +1,1 @@
+Carbon Dioxide CO2 and Temperature & Humidity Detector with LoRaWAN™ 

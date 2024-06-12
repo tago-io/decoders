@@ -1,0 +1,1 @@
+mcf88 ModBus RS485 to LoRaWAN™ interface

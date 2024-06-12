@@ -1,0 +1,1 @@
+Use this custom connector if your device using Miotiq.

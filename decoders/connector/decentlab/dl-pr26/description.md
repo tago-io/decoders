@@ -1,0 +1,1 @@
+DL-PR26 is a pressure/liquid level and temperature sensor over LoRaWAN®

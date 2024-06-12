@@ -1,0 +1,1 @@
+mcf88 indoor environmental sensor VOC & LUX over LoRaWAN™ 

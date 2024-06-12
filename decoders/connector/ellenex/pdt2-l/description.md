@@ -1,0 +1,1 @@
+LoRaWAN Operated Low Power Differential Pressure Transmitter With Built-in Temperature Sensor for Pressure and Flow Measurement of Gas Media

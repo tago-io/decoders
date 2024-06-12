@@ -1,0 +1,10 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": false,
+    "mask": "FF-FF-FF-FF-FF-FF-FF-FF"
+  },
+  "device_parameters": [],
+  "documentation_url": "https://docs.tago.io/articles/142"
+}

@@ -1,0 +1,1 @@
+Connector for Queclink devices

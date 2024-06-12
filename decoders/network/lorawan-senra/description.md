@@ -1,0 +1,1 @@
+Use this custom connector if your device using SenRa doesn't show up in the list. No payload parser is added.  
