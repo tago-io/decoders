@@ -57,7 +57,7 @@ For Connector decoders it should follow the structure defined in [`connector.jso
 
 1. Create a new branch for your decoder.
 2. Add your decoder following the instructions above.
-3. Commit your changes and open a pull request to review. Befor commit the decoder run the command `npm start validator` to check if all data in the manifest file is correct.
+3. Commit your changes and open a pull request to review. Before commit the decoder run the command `npm start validator` to check if all data in the manifest file is correct.
 4. Wait for the Pull Request to be reviewed. You may need to make some changes based on the feedback you receive.
 5. Once your Pull Request is approved, it will be merged into the main codebase.
 
