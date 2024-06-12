@@ -112,9 +112,7 @@ jobs:
       - run: git branch -D gh-pages || true
       - run: git checkout --orphan gh-pages
       - run: find . -mindepth 1 -maxdepth 1 ! -name 'decoders' ! -name '.git' -exec rm -rf {} +
-      - run: |
-          find . -type f ! \( -iname "*.png" -o -iname "*.svg" \) -exec rm -f {} +
-          find . -mindepth 1 -maxdepth 1 -type d ! -name ".git" -exec rm -rf {} +
+      - run: find . -type f ! \( -iname "*.png" -o -iname "*.svg" \) ! -path "./.git/*" -exec rm -f {} +
       - run: |
           git config --global user.email "contact@tago.io"
           git config --global user.name "TagoIO"
