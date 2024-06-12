@@ -63,7 +63,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run validator
-        run: npm run validator
+        run: npm start validator
 
   generate:
     runs-on: ubuntu-latest
