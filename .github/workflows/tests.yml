@@ -49,7 +49,7 @@ jobs:
     - run: npm ci
     - run: npm start validator
 
-  setup-database:
+  generate:
     runs-on: ubuntu-latest
     needs: [linter, test, validator]
     steps:
