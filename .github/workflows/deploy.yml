@@ -119,7 +119,7 @@ jobs:
           echo "Disallow: /" >> robots.txt
       - run: |
           touch .nojekyll
-          echo "_decoders.tago.io" > CNAME
+          echo "decoders.assets.tago.io" > CNAME
       - run: |
           git config --global user.email "contact@tago.io"
           git config --global user.name "TagoIO"
