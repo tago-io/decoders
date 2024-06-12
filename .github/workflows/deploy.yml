@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write  # This grants write permission to contents, which includes releases
+
 jobs:
   setup:
     runs-on: ubuntu-latest
