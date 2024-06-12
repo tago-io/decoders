@@ -1,6 +1,8 @@
-name: Units Tests
+name: Deploy new version
 
-on: push
+on:
+  release:
+    types: [published]
 
 jobs:
   setup:
@@ -61,3 +63,24 @@ jobs:
     - run: npm ci
     - name: Generate Database
       run: npm start generate
+    - name: Upload decoders.db
+      uses: actions/upload-artifact@v3
+      with:
+        name: decoders-db
+        path: /data/decoders.db
+
+  release:
+    runs-on: ubuntu-latest
+    needs: generate
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: decoders-db
+        path: ./data
+    - name: Create GitHub Release
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./data/decoders.db
+        asset_name: decoders.db
+        asset_content_type: application/octet-stream
