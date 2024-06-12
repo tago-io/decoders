@@ -4,16 +4,19 @@ This repository contains the necessary tools and guidelines for creating and man
 
 ## Useful commands
 
-Validating your decoder manifest
+Installing all packages and libs needed
+`npm install`
+
+Validating Decoders manifest
 `npm start validator`
 
-Running Unit Tests
+Running Tests
 `npm test`
 
 Running Linter
 `npm linter`
 
-Running a Decoder
+Running a specific Decoder
 `npx tsx $your decoder path$`
 
 ## Folder Structure
