@@ -121,5 +121,5 @@ jobs:
           git config --global user.name "TagoIO"
           git add -A
           git commit -m "decoders assets"
-          git push origin gh-pages
+          git push origin gh-pages --force
 
