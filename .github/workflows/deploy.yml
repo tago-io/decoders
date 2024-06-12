@@ -8,79 +8,80 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
+      - uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - run: npm ci
 
   linter:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-    - run: npm run linter
+      - uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - run: npm ci
+      - run: npm run linter
 
   test:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-    - run: npm test
+      - uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - run: npm ci
+      - run: npm test
 
   validator:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-    - run: npm start validator
+      - uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - run: npm ci
+      - run: npm start validator
 
   generate:
     runs-on: ubuntu-latest
     needs: [linter, test, validator]
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-    - name: Generate Database
-      run: npm start generate
-    - name: Upload decoders.db
-      uses: actions/upload-artifact@v3
-      with:
-        name: decoders-db
-        path: /data/decoders.db
+      - uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - run: npm ci
+      - name: Generate Database
+        run: npm start generate
+      - name: Upload decoders.db
+        uses: actions/upload-artifact@v3
+        with:
+          name: decoders-db
+          path: data/decoders.db
 
   release:
     runs-on: ubuntu-latest
     needs: generate
     steps:
-    - uses: actions/download-artifact@v3
-      with:
-        name: decoders-db
-        path: ./data
-    - name: Create GitHub Release
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./data/decoders.db
-        asset_name: decoders.db
-        asset_content_type: application/octet-stream
+      - name: Download decoders.db
+        uses: actions/download-artifact@v3
+        with:
+          name: decoders-db
+          path: ./data
+      - name: Create GitHub Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./data/decoders.db
+          asset_name: decoders.db
+          asset_content_type: application/octet-stream
