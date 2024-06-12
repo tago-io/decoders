@@ -29,9 +29,8 @@ async function createNetworkVersion(knexClient: Knex, mainObj: Network, filePath
 
     const detailsData: NetworkDetails = JSON.parse(fs.readFileSync(detailsPath, "utf8"));
 
-    const id = generateID({ name: mainObj.name, version: version })
     const data = {
-      id,
+      id: generateID({ name: mainObj.name, version: version }),
       name: mainObj.name,
       version: version,
       middleware_endpoint: detailsData?.middleware_endpoint,
@@ -39,9 +38,9 @@ async function createNetworkVersion(knexClient: Knex, mainObj: Network, filePath
       device_parameters: detailsData?.device_parameters || [],
       serial_number: detailsData?.serial_number_config || {},
       description: readFileFromPath(`${filePath}/${version}`, detailsData.description, true),
-      logo: generateAssetURL(id, mainObj?.images?.logo),
-      banner: generateAssetURL(id, mainObj?.images?.banner),
-      icon: generateAssetURL(id, mainObj?.images?.icon),
+      logo: generateAssetURL(filePath, mainObj?.images?.logo),
+      banner: generateAssetURL(filePath, mainObj?.images?.banner),
+      icon: generateAssetURL(filePath, mainObj?.images?.icon),
       payload_decoder: resolvePayload(filePath, mainObj.versions[version].src),
     };
 

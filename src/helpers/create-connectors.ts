@@ -25,9 +25,8 @@ async function createConnectorVersion(knexClient: Knex, mainObj: Connector, file
 
     const detailsData: ConnectorDetails = JSON.parse(fs.readFileSync(detailsPath, "utf8"));
 
-    const id = generateID({ name: mainObj.name, version: version }, true)
     const data = {
-      id,
+      id: generateID({ name: mainObj.name, version: version }, true),
       name: mainObj.name,
       version: version,
       description: readFileFromPath(`${filePath}/${version}`, detailsData.description, true),
@@ -36,7 +35,7 @@ async function createConnectorVersion(knexClient: Knex, mainObj: Connector, file
       install_text: detailsData?.install_text,
       install_end_text: detailsData?.install_end_text,
       device_annotation: detailsData?.device_annotation,
-      logo: generateAssetURL(id, mainObj?.images?.logo),
+      logo: generateAssetURL(filePath, mainObj?.images?.logo),
       payload_decoder: resolvePayload(filePath, mainObj.versions[version].src),
     };
 
