@@ -8,23 +8,20 @@
   },
   "device_parameters": [
     {
-      "path": "device_parameters.0",
-      "value1": {
-        "name": "payload_type",
-        "type": "dropdown",
-        "options": [
-          {
-            "is_default": true,
-            "label": "Hexadecimal",
-            "value": "hex"
-          },
-          {
-            "label": "Base64",
-            "value": "base64"
-          }
-        ],
-        "label": "Payload format"
-      }
+      "name": "payload_type",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": true,
+          "label": "Hexadecimal",
+          "value": "hex"
+        },
+        {
+          "label": "Base64",
+          "value": "base64"
+        }
+      ],
+      "label": "Payload format"
     }
   ],
   "middleware_endpoint": "generic.middleware.tago.io",
