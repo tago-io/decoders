@@ -80,7 +80,7 @@ jobs:
       - name: Generate decoders.db
         run: npm start generate
       - name: Generate sha256 of decoders.db
-        run: sha256sum data/decoders.db > data/decoders.db.sha256
+        run: cd data && sha256sum decoders.db > ../decoders.db.sha256
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
