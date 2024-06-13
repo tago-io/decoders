@@ -96,7 +96,7 @@ jobs:
       - run: git branch -D gh-pages || true
       - run: git checkout --orphan gh-pages
       - run: find . -mindepth 1 -maxdepth 1 ! -name 'decoders' ! -name '.git' -exec rm -rf {} +
-      - run: find . -type f ! \( -iname "*.png" -o -iname "*.svg" -o -iname "decoders.db.sha256" \) ! -path "./.git/*" -exec rm -f {} +
+      - run: find . -type f ! \( -iname "*.png" -o -iname "*.svg" \) ! -path "./.git/*" -exec rm -f {} +
       - name: Create robots.txt to deny all
         run: |
           echo "User-agent: *" > robots.txt
