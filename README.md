@@ -29,11 +29,6 @@ This repository contains the necessary tools and guidelines for creating and man
   npm linter
   ```
 
-- **Running a Decoder:**
-  ```bash
-  npx tsx $your_decoder_path$
-  ```
-
 ## Folder Structure
 
 The project follows this folder structure:
@@ -133,12 +128,13 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 
 1. **Create a new folder:**
    - Navigate to [`./decoders/network/`](./decoders/network/) and create a new folder named after your network decoder.
-   
+
 2. **Create the manifest file:**
    - Inside this folder, create a `network.jsonc` file. Follow the structure defined in [`network.json`](./schema/network.json).
 
 3. **Create version folders:**
    - For each version of your network decoder, create a new folder inside your network decoder's folder. Name the folder with the version number.
+   - The pattern utilized for versioning is the [SemVer](https://semver.org/)
 
 4. **Create version manifest files:**
    - Inside each version folder, create a `manifest.jsonc` file. Follow the structure defined in [`network_details.json`](./schema/network_details.json).
@@ -153,6 +149,7 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 
 3. **Create version folders:**
    - For each version of your connector decoder, create a new folder inside your connector decoder's folder. Name the folder with the version number.
+   - The pattern utilized for versioning is the [SemVer](https://semver.org/)
 
 4. **Create version manifest files:**
    - Inside each version folder, create a `manifest.jsonc` file. Follow the structure defined in [`connector_details.json`](./schema/connector_details.json).
@@ -177,7 +174,7 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 6. **Merge your changes:**
    - Once your Pull Request is approved, it will be merged into the main codebase.
 
-> **Note:** The decoder code should be in TypeScript and have Unit Tests respecting the rules.
+### Note: The decoder code should be in TypeScript and have Unit Tests respecting the rules.
 
 ---
 
