@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "\r\n**Application already developed for Rain Gauge**\r\n\r\nThe SmartLogger 01 sensor is a multi-channel IoT Datalogger that runs on NB-IoT technology, \r\nenabling continuous monitoring in remote applications. \r\nThe collected data is recorded in the equipment's internal memory and published \r\nperiodically to other cloud systems.\r\n\r\n**   **\r\n**FEATURES:**\r\n* NB-IoT Transmission Technology\r\n* MQTT protocol\r\n* 02 Current Inputs of 4-20mA\r\n* 02 Pulse Inputs\r\n* 02 Indication Led's\r\n* External I2C interface \r\n* USB interface\r\n* 1Wire interface\r\n* 17Ah 3.6V battery\r\n* Antenna with IP68 External SMA connection\r\n* IP68 enclosure\r\n* 1Gbit Internal Memory\r\n** **\r\n\r\n**General:**\r\n* Power: 3.6V battery\r\n* Current Consumption in Sleep: 300μA\r\n* Indication: Transmit and receive leds\r\n* Connectorization: removable terminal\r\n* Operating Temperature: -40 to +85°C\r\n* Operating Humidity: 10% to 90% (non-condensing)\r\n\r\n**Made in Brazil by [Fractum](https://www.fractum.com.br/)**",
+  "install_end_text": "## SmartLogger 01 Documentation:\r\n\r\n### Download the file:\r\n### [**Datasheet SL-01**](https://www.fractum.com.br/_files/ugd/662363_3232b151fc1144738f254e8d8a7a7521.pdf) ",
+  "device_annotation": "",
+  "device_parameters": [
+    {
+      "default": "",
+      "group": "main",
+      "label": "Device Latitude",
+      "name": "lat",
+      "type": "number"
+    },
+    {
+      "default": "",
+      "group": "main",
+      "label": "Device longitude",
+      "name": "lng",
+      "type": "number"
+    }
+  ],
+  "networks": [
+    "../../../../network/mqtt/v1.0.0/payload.js"
+  ]
+}
