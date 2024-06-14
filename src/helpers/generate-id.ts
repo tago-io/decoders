@@ -53,4 +53,6 @@ function extractNameAndVersionFromPath(path: string): { name: string; version: s
   return { name, version };
 }
 
+console.log(generateID({ version: "v1.0.0", name: "lorawan-loriot" }))
+
 export { generateID, extractNameAndVersionFromPath };
