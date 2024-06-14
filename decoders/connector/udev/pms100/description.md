@@ -1,0 +1,1 @@
+Industrial Multi Sensor Device over Sigfox

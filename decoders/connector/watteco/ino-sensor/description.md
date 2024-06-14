@@ -1,0 +1,1 @@
+The In’O sensor turns any type of I/O sensor / actuator into a Class A or Class C sensor / actuator connected to a public or private LoRaWAN™ network

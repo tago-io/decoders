@@ -1,0 +1,1 @@
+The AM107 is a sensor for indoor ambience monitoring over LoRaWAN® 

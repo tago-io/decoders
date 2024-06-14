@@ -1,0 +1,1 @@
+Temperature and humidity sensor over Sigfox

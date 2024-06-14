@@ -1,0 +1,1 @@
+LoRaWAN device to measure water consumption and detect leaks

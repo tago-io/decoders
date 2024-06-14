@@ -1,0 +1,1 @@
+Leakage detection sensor over LoRaWAN or Sigfox

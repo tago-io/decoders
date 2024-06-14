@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The kuando Busylight IoT for LoRaWAN networks is a class C LoRaWAN device and can be installed in large variety of use cases. Through the LoRaWAN downlink package the Busylight can be programmed to show any color and used as a visual notifier, indicating a certain event, status or as a cue for specific handling. Installing the Busylight in networks combined with Class A sensors will complete the IoT experience and the use cases are basically endless.\r\n* Support frequencies for EU863-870, US902-928 and AU915-928 LoRaWAN bands\r\n* Multi color RGB LED light \r\n* Color, brightness and flashing can be customized through LoRaWAN payload\r\n* 360 degree visibility.\r\n* Power via 3 mtr./9 foot USB cord. USB Power adaptor incl.",
+  "install_end_text": "Power up your Busylight IoT. If already powered, cycle the power. ",
+  "device_annotation": "Downlink Payload for the Lora Busylight is a 5 byte array.\r\nByte 0: Red Color intensity (0..255)\r\nByte 1: Blue Color intensity (0..255)\r\nByte 2: Green Color intensity (0..255)\r\nByte 3: On duration (0..255) (value is 1/10 seconds)\r\nByte 4: Off duration (0..255) (value is 1/10 seconds)\r\n\r\nExample for a blue static light:\r\nByte[0]=0\r\nByte[1]=255\r\nByte[2]=0\r\nByte[3]=255\r\nByte[4]=0\r\n",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js"
+  ]
+}

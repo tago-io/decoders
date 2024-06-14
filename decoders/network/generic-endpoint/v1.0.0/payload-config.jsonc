@@ -6,7 +6,24 @@
     "case": "upper",
     "label": "Serial / Device EUI"
   },
-  "device_parameters": [],
+  "device_parameters": [
+    {
+      "name": "payload_type",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": true,
+          "label": "Hexadecimal",
+          "value": "hex"
+        },
+        {
+          "label": "Base64",
+          "value": "base64"
+        }
+      ],
+      "label": "Payload format"
+    }
+  ],
   "middleware_endpoint": "generic.middleware.tago.io",
   "documentation_url": "https://community.tago.io/t/how-to-integrate-tago-with-a-generic-https-endpoint/1085"
 }

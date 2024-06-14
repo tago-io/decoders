@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The Dragino CPL01 is a LoRaWAN Contact Sensor. It detects open/close status and uplinks to IoT server via LoRaWAN network. user can see the dry contact status, open time, open counts in the IoT Server.\n\nFeatures:\n* LoRaWAN v1.0.3 Class A protocol.\n* Frequency Bands: CN470/EU433/KR920/US915/EU868/AS923/AU915/IN865/RU864\n* Open/Close detect\n* Open/close statistics\n* 8500mAh industrial battery(none-rechargeable)\n* AT Commands to change parameters\n* Uplink on periodically and open/close event\n* Datalog feature\n* Remote configure parameters via LoRa Downlink\n* Firmware upgradable via program port\n* Wall Mountable\n* Outdoor Use",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

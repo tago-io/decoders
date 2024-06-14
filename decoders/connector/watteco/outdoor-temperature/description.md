@@ -1,0 +1,1 @@
+The outdoor temperature sensor is dedicated to temperature measurement in outdoor, and transmits the data over a public or private LoRaWAN® radio network.

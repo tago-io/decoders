@@ -1,0 +1,1 @@
+Manhole Cover Sensor detects opening of manhole cover and immediately sends an alert using Sigfox

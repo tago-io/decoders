@@ -1,0 +1,1 @@
+ Wireless Liquid Level Sensor connected to RS485 over LoRaWAN™

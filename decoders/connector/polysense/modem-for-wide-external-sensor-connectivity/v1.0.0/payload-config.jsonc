@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Modem for wide external sensor connectivity**\n\n• This product supports a rich set of interfaces for external sensor/device connectivity\n\n• Target to connect existing installed sensors, control devices, instrumental devices or to connect new sensors/devices\n\n• LoRaWAN 1.0.2\n\n• Up to 5km reach in NLoS (Non-Line-of-Sight) and up to 18km LoS (Line-of-Sight) environments\n\n• IP67 enclosure rating",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js"
+  ]
+}

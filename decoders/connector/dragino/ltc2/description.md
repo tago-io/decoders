@@ -1,0 +1,1 @@
+ Industrial LoRaWAN Temperature Transmitter

@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nLGT-92 is a Long Range / low power consumption LoRaWAN GPS tracker. \n\nLGT-92 get user’s location info via GPS and send it to IoT server via LoRaWAN wireless network. \n\nCompare to traditional GPS tracker, LGT-92 use much lower power consumption hence can last for longer time. I\n\n",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5c882ea4895c6a00262b889f",
+  "device_parameters": [
+    {
+      "name": "firmware_version",
+      "type": "dropdown",
+      "label": "Firmware",
+      "options": [
+        {
+          "is_default": true,
+          "label": "1.6",
+          "value": "1.6"
+        },
+        {
+          "is_default": false,
+          "label": "1.5",
+          "value": "1.5"
+        },
+        {
+          "label": "1.4 or older",
+          "value": "1.4"
+        }
+      ]
+    }
+  ],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

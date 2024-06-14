@@ -1,0 +1,1 @@
+The WATTECO Monit'O has sensors for measuring 0-70V or 0-100mV output over a public or private LoRaWAN® radio network.

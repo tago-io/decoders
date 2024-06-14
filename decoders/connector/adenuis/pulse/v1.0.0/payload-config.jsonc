@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nConnection for Meters with Pulse\n##\nHighlights:\n* Up to 2 connectable meters\n* Tamper and leak detection\n* Flow rate monitoring\n* Local and remote configuration\n* Controlled consumption for optimal autonomy\n* Exist in ATEX version\n\nTechnical specifications:\n* Periodic modes with log\n* Soldered battery\n* Dimensions: 105 x 50 x 27 mm\n* Box: IP67 (IP68 on request)\n* Integrated fastening system: DIN rail, tube, wall mount, flange\n* Operating temperature range: -25°C to + 70°C\n* Weight: 70 g\n* Standards: Directive 2014/53/EU (RED)\n* Alert concerning product, configuration error, low battery\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [
+    {
+      "name": "parse_type",
+      "group": "advanced",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": true,
+          "label": "Pulse",
+          "value": "pulse"
+        },
+        {
+          "label": "Pulse 3 ",
+          "value": "pulse3"
+        },
+        {
+          "label": "Pulse 4",
+          "value": "pulse4"
+        }
+      ],
+      "label": "Device Type"
+    }
+  ],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

@@ -1,0 +1,1 @@
+The sensor measures the ambient temperature and relative humidity in buildings, apartments, houses. It transmits the data via a public or private LoRaWAN™ radiofrequency network.

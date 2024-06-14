@@ -1,0 +1,1 @@
+LoRaWAN Temperature Sensor

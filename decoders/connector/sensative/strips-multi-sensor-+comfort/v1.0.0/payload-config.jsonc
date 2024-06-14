@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "With its low power consumption and long battery life of up to 10 years, it is the ideal choice for any professional indoor IoT application. With the MS +Comfort’s precise measuring, you can get a great overview of the climate in your property. Maybe you want to keep the climate in your office optimal or want to keep a close eye on any changes in temperature and humidity in vulnerable areas such as cellars or attics. \n\nStrips is a multi-sensor with multi-purposes, with humidity, temperature, and light (LUX) measuring, as well as magnetic open/close sensor (suitable for applications such as window or door monitoring). This multi-functionality means that the more you realize your own specific needs, the more value our sensors will bring to your company and its operations. Implementing MS +Comfort sensors is a great choice for stepping into the modern world of IoT and PropTech, energy optimization, automation, convenience services, and property protection.\n\n**Specifications**\n* Features: Humidity +/- 3% RH. Temperature +/- 0.40°C accuracy. Magnet Sensor. Light 1-64000 LUX. LED indication.\n* Reporting: Temperature  light reporting based on deviation to save battery.\n* Regions: Europe (863-870 MHz), North America (902-928 MHz)\n* Range: Up to + 14 dBm output power. Rx sensitivity -137 dBm. Up to 10 km range (free line of sight).\n* Dimensions: Sensor: 195 x 15 x 2.98 mm. Magnet: 12 x 2 mm. Mounting plate: 195 x 15 x 3 mm.\n* Operating conditions: -30 to +60 °C. Indoor usage.\n* Power supply: Built-in battery (LiMnO2). 10 years battery life.\n* Supports: LoRaWAN v1.0.3\n\n\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

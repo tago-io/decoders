@@ -1,0 +1,1 @@
+Barometric Pressure sensor over LoRaWAN™

@@ -1,0 +1,1 @@
+LoRaWAN Time-controlled Emitter for irrigation valve (Class A, Class C and IO’s)

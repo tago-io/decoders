@@ -1,0 +1,1 @@
+WxS 880-004 Noise Sensor over LoRaWAN™

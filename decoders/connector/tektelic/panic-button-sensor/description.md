@@ -1,0 +1,1 @@
+Instant Panic Event Notification Trigger over BLE or LoRaWAN™ 

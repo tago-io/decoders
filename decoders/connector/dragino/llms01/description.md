@@ -1,0 +1,1 @@
+The Dragino LLMS01 is a LoRaWAN Leaf Moisture Sensor for IoT of Agriculture. It is designed to measure the leaf moisture and temperature, so to send to the platform to analyze the leaf status such as : watering, moisturizing, dew, frozen. The probe is IP67 waterproof.

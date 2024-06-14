@@ -1,0 +1,1 @@
+Temperature, humidity, magnetic contact and LUX sensors over LoRaWAN™

@@ -1,0 +1,1 @@
+Electrical Outlet over LoRaWAN™

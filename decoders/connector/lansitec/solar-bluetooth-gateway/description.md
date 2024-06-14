@@ -1,0 +1,1 @@
+Solar BLE Gateway with built-in antenna and BLE5.0 over LoRaWAN™

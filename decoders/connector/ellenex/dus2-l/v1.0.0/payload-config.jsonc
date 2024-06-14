@@ -4,7 +4,13 @@
   "install_text": "",
   "install_end_text": "",
   "device_annotation": "",
-  "device_parameters": [],
+  "device_parameters": [
+    {
+      "name": "tank_height",
+      "label": "Tank height",
+      "type": "number"
+    }
+  ],
   "networks": [
     "../../../../network/lorawan-actility/v1.0.0/payload.js",
     "../../../../network/lorawan-citykinect/v1.0.0/payload.js",

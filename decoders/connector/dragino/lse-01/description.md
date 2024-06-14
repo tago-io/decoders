@@ -1,0 +1,1 @@
+LoRaWAN Soil Moisture & EC Sensor

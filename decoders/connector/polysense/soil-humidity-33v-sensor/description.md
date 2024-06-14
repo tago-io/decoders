@@ -1,0 +1,1 @@
+WxS 880-054 Soil Humidity 3.3V Sensor over LoRaWAN™

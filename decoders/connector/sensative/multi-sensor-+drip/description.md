@@ -1,0 +1,1 @@
+Temperature, water leak, magnetic contact and LUX sensors over LoRaWAN™

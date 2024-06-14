@@ -1,0 +1,1 @@
+Wireless Window Sensor over LoRaWAN™ 

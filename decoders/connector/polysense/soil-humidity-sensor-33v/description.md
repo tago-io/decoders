@@ -1,0 +1,1 @@
+WxS Ext-054 Soil Humidity Sensor 3.3V over LoRaWAN™

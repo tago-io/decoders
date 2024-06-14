@@ -1,0 +1,1 @@
+WxS 880-0M3  GPS Beidou Positioning Sensor over LoRaWAN™

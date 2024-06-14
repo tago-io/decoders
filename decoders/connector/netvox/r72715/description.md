@@ -1,0 +1,1 @@
+Wireless Outdoor CO2/Temperature/Humidity Sensor over LoRaWAN™

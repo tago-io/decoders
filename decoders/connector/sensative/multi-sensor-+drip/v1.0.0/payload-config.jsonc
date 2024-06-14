@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Strips MS +Drip is an innovative ultra-thin (3mm/0.12in) and wireless multi-sensor for LoRaWAN with water leak detection, developed for smart IoT applications such as building monitoring and operations. MS +Drip is excellent at detecting any water leakage and its slim and sturdy design makes it perfect for mounting concealed in small spaces. With a battery life of up to 10 years, you can set it and forget it. \n\nApart from water leakage, MS +Drip provides temperature, ambient light (LUX) measuring, as well as magnetic open/close detection (suitable for applications such as windows and doors). This multi-functionality means that the more you realize your own specific needs, the more value our sensors will bring to your company and its operations.\n\nBasic applications for MS +Drip is to alert in case of a water leak, and the temperature sensor can be used to alert if there is a risk of freezing pipes. Integrated to a smart building system and other IoT devices, MS +Drip can automatically turn on/off water flow or sound an alarm to alert the user about the water leak.\n\n**Specifications**\n* Features: Flooding alert. Temperature +/- 0.24°C accuracy.  Magnet Sensor. Light 1-64000 LUX. LED indication.\n* Reporting: Temperature  light reporting based on deviation to save battery.\n* Regions: Europe (863-870 MHz), North America (902-928 MHz)\n* Range: Up to + 14 dBm output power. Rx sensitivity -137 dBm. Up to 10 km range (free line of sight).\n* Dimensions: Sensor: 195 x 15 x 2.98 mm. Magnet: 12 x 2 mm. Mounting plate: 195 x 15 x 3 mm.\n* Operating conditions: -30 to +60 °C. Indoor usage.\n* Power supply: Built-in battery (LiMnO2). 10 years battery life.\n* Device type: Type A\n* Supports: LoRaWAN v1.0.3\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

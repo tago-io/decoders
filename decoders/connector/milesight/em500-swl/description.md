@@ -1,0 +1,1 @@
+Outdoor environment monitoring sensor mainly used to measure liquid level data over LoRaWAN™ (Ursalink)

@@ -1,0 +1,1 @@
+Measures the ambient temperature

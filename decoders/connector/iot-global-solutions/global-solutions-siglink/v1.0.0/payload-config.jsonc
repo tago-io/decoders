@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Siglink is a temperature and humidity sensor working on the Sigfox network. Low energy comsumption is one of its notable qualities. This device will last for several years on a single battery. It is suitable for applications where long-term monitoring of temperature and humidity is required, such as greenhouses, server rooms, children’s rooms, wine cellars, etc. Thanks to the Sigfox network, there is no need for WiFi or GSM coverage. The sensor can be connected to the IoTpool platform, where data can be clearly displayed, alarms set, the transmission period changed and much more.\n\n**Technical Details**\n* Dimensions: 71 x 71 x 27 mm\n* Weight: 80 g (including battery)\n* Installation: Vertical\n* IP rating: IP40\n* Power Supply:  Replaceable Li-SOCI2 AA battery 3.6 V, 2200 mAh\n* Battery life: 2 - 5 years depending on trasmission period\n* Temperature accuracy: ±0.2 °C\n* Humidity accuracy: ±2 % RH\n* Operating temperature: -30 / +80 °C\n* Network: SIGFOX, zone RC1\n* Frequency: 868.13 MHz",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}

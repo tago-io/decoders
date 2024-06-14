@@ -1,0 +1,1 @@
+Wireless Emergency Push Button over LoRaWAN™ 

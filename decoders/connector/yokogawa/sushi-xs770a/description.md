@@ -1,0 +1,1 @@
+Industrial IoT wireless vibration and temperature sensor using LoRaWAN

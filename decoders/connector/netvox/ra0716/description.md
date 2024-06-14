@@ -1,0 +1,1 @@
+Wireless PM2.5/Temperature/Humidity Sensor (DC-Powered) over LoRaWAN™

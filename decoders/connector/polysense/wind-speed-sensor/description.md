@@ -1,0 +1,1 @@
+WxS Ext-050 Wind Speed Sensor over LoRaWAN™

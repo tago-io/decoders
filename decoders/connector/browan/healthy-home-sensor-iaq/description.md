@@ -1,0 +1,1 @@
+Temperature, Relative Humidity and Volatile Organic Compound level over LoRaWAN™

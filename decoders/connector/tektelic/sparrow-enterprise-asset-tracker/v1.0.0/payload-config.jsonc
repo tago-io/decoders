@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The TEKTELIC SPARROW is a highly versatile asset tracker that combines the long-range, low-power capabilities of LoRaWAN® with the widespread availability and reliability of Bluetooth Low Energy (BLE). This dual functionality allows the SPARROW to serve as both a tracker and a BLE beacon, making it suitable for a wide range of asset tracking applications in various environments like offices, retail spaces, and manufacturing facilities.\n\nKey features of the SPARROW include:\n * 5 Year Battery Life - Tracker Mode\n * 16 Month Battery Life - Beacon Mode\n * Accelerometer\n * Bluetooth Low Energy Functionality\n * Data Transmission via LoRaWAN™ and BLE\n * All Global ISM Bands\n * Small Form Factor for Diverse Deployments\n * Easily Integrated into LoRaWAN™ Networks\n * Internal Antenna.\n\nThe SPARROW can be configured to increase its reporting frequency when the tracked asset is in motion, which is particularly useful for dynamic asset management. Additionally, it integrates seamlessly with TEKTELIC's Locus application for asset visualization, and it offers an API for integration with third-party real-time location tracking applications. This level of flexibility makes SPARROW an ideal solution for enhancing operational efficiency, reducing asset loss, and improving inventory management across multiple sectors.\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [
+    {
+      "default": "",
+      "group": "main",
+      "label": "Beacon decoder type",
+      "name": "beacon_decoder",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": false,
+          "label": "One variable with all beacons",
+          "value": "simple"
+        },
+        {
+          "is_default": true,
+          "label": "Split beacon in different variables",
+          "value": "splitted"
+        }
+      ]
+    },
+    {
+      "default": "2.5",
+      "group": "main",
+      "label": "Battery offset",
+      "name": "battery_offset",
+      "type": "number"
+    }
+  ],
+  "networks": [
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js"
+  ]
+}

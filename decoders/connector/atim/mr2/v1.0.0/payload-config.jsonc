@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The ACW-MR2 is a sensor used for remote metering monitoring (gas, water, electricity, pluviometer meters…) or for remote bang-bang equipment control (eg: starting up/shutting down, opening/closing...). This sensor can be connected up to 2 independent equipment when they are close enough, allowing devices and network plans savings.\n\n\n**Technical Data**\n* Dimesions: 177 x 55 x 55 mm\n* Antenna: Integrated (¼ wave)\n* Temperature: -20°C to +55°C (operation), -40°C to +70°C (storage)\n* Mounts to: Wall, Mast, DIN-rail\n* Casing: IP65\n* Power supply: 2 packs of 2 batteries equivalent to 14.4 Ah\n* Weight: 160g\n* Frequency: 865-870 MHz\n* Power: 25mW (14 dBm) \n* Transfer rate: Sigfox: 100 bit/s, LoRaWAN: 300 bit/s to 10 kbit/s",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/sigfox/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

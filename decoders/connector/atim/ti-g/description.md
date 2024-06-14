@@ -1,0 +1,1 @@
+Indoor Temperature + GPS sensor over LoRaWAN

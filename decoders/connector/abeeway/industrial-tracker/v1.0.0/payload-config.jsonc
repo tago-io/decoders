@@ -4,7 +4,25 @@
   "install_text": "**Industrial tracker**\n\nMulti-mode tracker with a large battery and embedded sensors combining GPS, Low-power GPS, Wi-Fi Sniffer, and LoRaWAN TDoA geolocation technologies, supporting accurate outdoor and indoor geolocation. \n\nLarge battery, hardened casing, high-precision tracking.\nDesigned to last IP65, 19Ah type D battery.\nUp to 3 years battery life in motion tracking mode at 120 position per day.",
   "install_end_text": "",
   "device_annotation": "",
-  "device_parameters": [],
+  "device_parameters": [
+    {
+      "name": "beacon_decoder",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": false,
+          "label": "One variable with all beacon",
+          "value": "simple"
+        },
+        {
+          "is_default": true,
+          "label": "Split beacon in different variables",
+          "value": "splitted"
+        }
+      ],
+      "label": "Beacon decoder type"
+    }
+  ],
   "networks": [
     "../../../../network/lorawan-actility/v1.0.0/payload.js",
     "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",

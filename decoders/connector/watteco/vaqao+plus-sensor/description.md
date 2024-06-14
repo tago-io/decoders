@@ -1,0 +1,1 @@
+The Vaqa'O+Plus sensor measures the temperature, relative humidity, atmospheric pressure, the concentration of Volatile Organic Compounds (VOC) and Carbon Dioxide (CO2) in the ambient air

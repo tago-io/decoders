@@ -1,0 +1,1 @@
+Outdoor IP64 Temperature and Humidity sensor from RisingHF

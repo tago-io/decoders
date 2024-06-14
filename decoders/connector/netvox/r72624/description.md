@@ -1,0 +1,1 @@
+ Wireless Outdoor Noise/Temperature/Humidity Sensor With Solar Panel over LoRaWAN™

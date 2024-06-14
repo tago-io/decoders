@@ -1,0 +1,1 @@
+The RAK2171 is a GPS tracking device over LoRaWAN 

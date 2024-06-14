@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "zCar is a GPS tracker which uses the LoRaWan network. The device’s main purpose is to monitor vehicle’s movement or for fleet tracking. Charging is very simple using a USB cable, optimal to use the car’s cigarette lighter.\n\nThe accelerometer chip is able to detect if the unit moves. First of all, if there is no movement, the tracker sends keepalive packets to the gateway every 60 minutes by default (we can set this from 5 minutes to 1 day). When movement occurs, the tracker activates itself to start the GPS. If the GPS is able to locate the device, the coordinates will be reported to a LoRaWAN network. In addition, if the GPS receives no coordinates within a specified time, then the module will only send a short message that motion happened.\n\nNot only you can see the battery level of the device in the data, but also the temperature. You can turn off the zCar via downlink messages or with the zTrack setup application for Windows.\nzCar GPS Tracker can show the real long range of the LoRaWAN system. We tested this device for more than a year around Debrecen. If the device has magnetic base external antenna and a gateway in the near is able to see the tracker, it can receive ABP SF12 messages from more than 40km in the suburb.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

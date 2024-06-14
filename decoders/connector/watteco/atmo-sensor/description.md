@@ -1,0 +1,1 @@
+The WATTECO Atm’O has sensors for measuring temperature, relative humidity, and atmospheric pressure in outdoors and industrial environments, and transmits the data over a public or private LoRaWAN® radio network.

@@ -1,0 +1,1 @@
+Outdoor Temperature and Humidity sensor over LoRaWAN or Sigfox

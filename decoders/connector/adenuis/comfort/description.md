@@ -1,0 +1,1 @@
+Smart Building sensor for temperature humidity button and dry contact input over LoRaWAN™

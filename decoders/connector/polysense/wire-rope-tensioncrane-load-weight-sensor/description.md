@@ -1,0 +1,1 @@
+WxS 8800 Wire Rope Tension/Crane Load Weight Sensor over LoRaWAN™

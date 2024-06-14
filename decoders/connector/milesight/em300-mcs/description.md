@@ -1,0 +1,1 @@
+Temperature, humidity and magnet switch sensors over LoRaWAN™

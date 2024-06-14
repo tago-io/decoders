@@ -1,0 +1,1 @@
+The WS101 is a Smart Button for wireless controls over LoRaWAN® 

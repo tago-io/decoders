@@ -1,0 +1,1 @@
+Outdoor environment monitoring sensor mainly used to measure distance without object interface contact over LoRaWAN™ (Ursalink)

@@ -1,0 +1,1 @@
+Wireless Soil Moisture Sensor over LoRaWAN™

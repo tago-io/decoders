@@ -1,0 +1,1 @@
+BoB Assistant is a low power LoRaWAN compatible vibration sensor for indoor and outdoor predictive maintenance industrial applications, coupled with a temperature sensor for environmental conditions, a push buttonand an RGB Led for User Interface.

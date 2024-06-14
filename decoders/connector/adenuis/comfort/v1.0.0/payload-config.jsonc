@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nSmart Building sensor for temperature humidity button and dry contact input\n##\nHighlights\n* 4 built-in functions: temperature, humidity, alert\n* button, dry contact input\n* A design for a product adaptable to any type of environment\n* Data logging to optimize the number of mailings\n* Compatible with KARE© services\nTechnical specifications\n* Periodic and / or event mode\n* Interchangeable battery\n* Dimensions: 111 x 61 x 40 mm  Case: IP20 (indoor use)\n* Integrated fixing system: wall or laid\n* LoRaWAN EU863-870\n* Operating Temperature Range: -20°C /+60°C\n* Local and remote configuration\n* Weight: 102g\n* Standard: Directive 2014/53/UE (RED)\n* Product error alert, configuration error, low battery\n* 1 digital input / 1 connected button\n* ##\nMore information about this device can be found [here.](https://www.adeunis.com/en/produit/comfort-temperature-humidity/) \n\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/adeunis/adeunis_comfort.png)",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [
+    {
+      "name": "parse_type",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": true,
+          "label": "Comfort ",
+          "value": "comfort"
+        },
+        {
+          "label": "Comfort 2",
+          "value": "comfort2"
+        },
+        {
+          "label": "Comfort CO2",
+          "value": "comfortCo2"
+        }
+      ],
+      "label": "Device Type"
+    }
+  ],
+  "networks": [
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/sigfox/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

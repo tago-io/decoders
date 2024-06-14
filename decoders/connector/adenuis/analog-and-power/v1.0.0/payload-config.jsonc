@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nANALOG & ANALOG PWR\n##\n\nTechnical specifications:\n* Periodic or event mode\n* Replaceable battery/external power supply (PWR version)\n* Dimensions: 105 x 50 x 27 mm\n* Box: IP67 (IP68 on request)\n* Integrated fastening system: DIN rail, tube, wall mount, flange\n* Zone: Sigfox: RC1 / LoRaWAN™: EU863-870 / WM-Bus: 868\n* Operating temperature range: -25°C to + 70°C\n* Weight: 70 g\n* Standards: Directive 2014/53/EU (RED)\n* Alert concerning product error, configuration error, low battery\n\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}

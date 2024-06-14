@@ -1,0 +1,1 @@
+Siren sensor over LoRaWAN™ 

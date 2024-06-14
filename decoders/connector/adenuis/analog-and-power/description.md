@@ -1,0 +1,1 @@
+Local and Remote monitoring through inputs 0-10V or 4-20mA over Sigfox

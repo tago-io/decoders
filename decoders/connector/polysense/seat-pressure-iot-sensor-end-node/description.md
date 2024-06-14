@@ -1,0 +1,1 @@
+WxS 880-021PS Seat Pressure IoT Sensor End Node over LoRaWAN™

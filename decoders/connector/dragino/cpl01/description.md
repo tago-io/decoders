@@ -1,0 +1,1 @@
+Outdoor LoRaWAN Open/Close Dry Contact Sensor

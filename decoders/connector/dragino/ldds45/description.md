@@ -1,0 +1,1 @@
+The Dragino LDDS45 is a LoRaWAN Distance Detection Sensor for Internet of Things solution. It is used to measure the distance between the sensor and a flat object. The distance detection sensor is a module that uses ultrasonic sensing technology for distance measurement, and temperature compensation is performed internally to improve the reliability of data.

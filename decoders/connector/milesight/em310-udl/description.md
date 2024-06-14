@@ -1,0 +1,1 @@
+The EM310-UDL is a ultrasonic distance/level sensor over LoRaWAN™

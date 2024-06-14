@@ -1,0 +1,1 @@
+Contact Tracing Badge over LoRaWAN™

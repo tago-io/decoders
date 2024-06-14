@@ -1,0 +1,1 @@
+ Supports MODBUS® or CAN bus via serial (RS232, RS422, RS485) over LoRaWAN™

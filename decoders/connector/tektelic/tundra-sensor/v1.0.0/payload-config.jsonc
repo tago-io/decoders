@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Tektelic’s Tundra Sensor is the Lorawan solution for maintaining optimal and consistent temperatures within cold rooms and refrigerated areas. Applications include food and pharmaceutical storage, where safeguarding the integrity, quality, and safety of products is vital. The device can be implemented within cold storage such as fridges, coolers, cold rooms and even freezers with minimal impact on battery life or radio signal strength.\n\nFeatures:\n* 15 Year Battery Life\n* Ability to store up to 3000 data entries for 125 days\n* Restaurant and Food Service Cold Chain\n* Medical and Pharmaceutical Storage\n* Vaccine Storage\n* All Global ISM Bands\n* Small Form Factor for Diverse Deployments\n* Internal Antenna\n* -40° to +85°C operability\n* Temperature and Humidity Monitoring",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+  ]
+}

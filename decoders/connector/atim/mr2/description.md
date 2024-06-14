@@ -1,0 +1,1 @@
+Metering index of water, gas or electricity, or for remote bang-bang equipment control over LoRaWAN or Sigfox

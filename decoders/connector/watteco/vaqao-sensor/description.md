@@ -1,0 +1,1 @@
+The Vaqa'O sensor measures the temperature, relative humidity, concentration of Volatile Organic Compounds (VOC) and Carbon Dioxide (CO2) in the ambiant air

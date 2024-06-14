@@ -1,0 +1,1 @@
+NDDS75 NB-IoT Distance Detection Sensor
