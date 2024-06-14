@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Use this quick setup to create an integration between WiTTRA and TagoIO if you didn't find your specific device in the list.\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/wittra/v1.0.0/payload.js"
+  ]
+}

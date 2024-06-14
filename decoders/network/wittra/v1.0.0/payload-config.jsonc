@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "EUI",
+    "case": "upper"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "wittra.middleware.tago.io",
+  "documentation_url": "help.tago.io/portal/en/community/topic/how-to-integrate-with-wittra"
+}
