@@ -8,5 +8,5 @@
   },
   "device_parameters": [],
   "middleware_endpoint": "wittra.middleware.tago.io",
-  "documentation_url": "help.tago.io/portal/en/community/topic/how-to-integrate-with-wittra"
+  "documentation_url": "https://help.tago.io/portal/en/community/topic/how-to-integrate-with-wittra"
 }
