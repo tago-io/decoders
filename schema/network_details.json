@@ -31,7 +31,8 @@
     },
     "documentation_url": {
       "type": "string",
-      "description": "URL to the documentation."
+      "description": "URL to the documentation.",
+      "format": "uri"
     },
     "description": {
       "type": "string",
