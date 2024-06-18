@@ -33,7 +33,18 @@ function validateVersions(versionsObj: Versions, filePath: string, validateType:
       throw `${validateType} manifest version file not found in ${filePath}`;
     }
 
+    if (!fs.existsSync(path.join(filePath, versionsObj[version].src))) {
+      throw `${validateType} payload src version file not found in ${filePath}`;
+    }
+
     const detailsData = JSON.parse(fs.readFileSync(detailsPath, "utf8"));
+
+    if (detailsData?.networks && Array.isArray(detailsData?.networks)) {
+      const networksOk = detailsData.networks.every((n: string) => fs.existsSync(path.join("decoders", n.replaceAll("../", ""))));
+      if (!networksOk) {
+        throw `Networks not found in ${detailsPath}`;
+      }
+    }
 
     const validator = validateType === "network" ? validateNetworkDetails : validateConnectorDetails;
 

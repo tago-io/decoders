@@ -7,7 +7,7 @@
   "device_parameters": [],
   "networks": [
     "../../../../network/lorawan-everynet/v1.0.0/payload.js",
-    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
     "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
     "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
     "../../../../network/lorawan-machineq/v1.0.0/payload.js",
@@ -20,6 +20,6 @@
     "../../../../network/lorawan-helium/v1.0.0/payload.js",
     "../../../../network/lorawan-senet/v1.0.0/payload.js",
     "../../../../network/lorawan-senra/v1.0.0/payload.js",
-    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
   ]
 }
