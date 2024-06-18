@@ -44,12 +44,6 @@ function validateVersions(versionsObj: Versions, filePath: string, validateType:
     const detailsData = JSON.parse(fs.readFileSync(detailsPath, "utf8"));
 
     if (detailsData?.networks && Array.isArray(detailsData?.networks)) {
-      for (const n of detailsData.networks) {
-        const a = fs.existsSync(path.join("decoders", n.replaceAll("../", "")));
-        if (!a) {
-          console.log(path.join("decoders", n.replaceAll("../", "")));
-        }
-      }
       const networksOk = detailsData.networks.every((n: string) => fs.existsSync(path.join("decoders", n.replaceAll("../", ""))));
       if (!networksOk) {
         throw `Networks not found in ${detailsPath}`;
