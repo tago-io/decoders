@@ -33,6 +33,10 @@ function validateVersions(versionsObj: Versions, filePath: string, validateType:
       throw `${validateType} manifest version file not found in ${filePath}`;
     }
 
+    if (!fs.existsSync(path.join(filePath, versionsObj[version].src))) {
+      throw `${validateType} payload src version file not found in ${filePath}`;
+    }
+
     const detailsData = JSON.parse(fs.readFileSync(detailsPath, "utf8"));
 
     const validator = validateType === "network" ? validateNetworkDetails : validateConnectorDetails;
