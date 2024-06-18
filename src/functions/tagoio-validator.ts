@@ -1,5 +1,6 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
+import * as nodeUrl from "node:url";
 import Ajv, { JSONSchemaType } from "ajv";
 import addFormats from "ajv-formats";
 import networkSchema from "../../schema/network.json" assert { type: "json" };
@@ -7,6 +8,9 @@ import networkDetailsSchema from "../../schema/network_details.json" assert { ty
 import connectorSchema from "../../schema/connector.json" assert { type: "json" };
 import connectorDetailsSchema from "../../schema/connector_details.json" assert { type: "json" };
 import type { Connector, Network, Versions } from "../../schema/types";
+
+const __filename = nodeUrl.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const isVerbose = process.argv[2] === "--verbose";
 
@@ -38,6 +42,19 @@ function validateVersions(versionsObj: Versions, filePath: string, validateType:
     }
 
     const detailsData = JSON.parse(fs.readFileSync(detailsPath, "utf8"));
+
+    if (detailsData?.networks && Array.isArray(detailsData?.networks)) {
+      for (const n of detailsData.networks) {
+        const a = fs.existsSync(path.join("decoders", n.replaceAll("../", "")));
+        if (!a) {
+          console.log(path.join("decoders", n.replaceAll("../", "")));
+        }
+      }
+      const networksOk = detailsData.networks.every((n: string) => fs.existsSync(path.join("decoders", n.replaceAll("../", ""))));
+      if (!networksOk) {
+        throw `Networks not found in ${detailsPath}`;
+      }
+    }
 
     const validator = validateType === "network" ? validateNetworkDetails : validateConnectorDetails;
 

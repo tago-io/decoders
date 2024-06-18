@@ -11,8 +11,8 @@
     "../../../../network/lorawan-actility/v1.0.0/payload.js",
     "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
     "../../../../network/lorawan-everynet/v1.0.0/payload.js",
-    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
     "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
-    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
   ]
 }

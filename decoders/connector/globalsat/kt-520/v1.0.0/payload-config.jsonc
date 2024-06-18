@@ -6,6 +6,6 @@
   "device_annotation": "",
   "device_parameters": [],
   "networks": [
-    "../../../../network/kinis/v1.0.0/payload.js"
+    "../../../../network/kineis/v1.0.0/payload.js"
   ]
 }

@@ -11,7 +11,7 @@
     "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
     "../../../../network/lorawan-everynet/v1.0.0/payload.js",
     "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
-    "../../../../network/lorawan-loriot-/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
     "../../../../network/lorawan-machineq/v1.0.0/payload.js",
     "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
     "../../../../network/lorawan-senet/v1.0.0/payload.js",
@@ -21,6 +21,6 @@
     "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
     "../../../../network/sigfox/v1.0.0/payload.js",
     "../../../../network/lorawan-helium/v1.0.0/payload.js",
-    "../../../../network/lorawan-brdot-/v1.0.0/payload.js"
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
   ]
 }
