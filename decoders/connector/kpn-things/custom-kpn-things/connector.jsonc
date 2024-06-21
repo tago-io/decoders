@@ -2,7 +2,7 @@
   "$schema": "../../../../schema/connector.json",
   "name": "Custom KPN Things",
   "images": {
-    "logo": "./assets/logo.webp"
+    "logo": "./assets/logo.png"
   },
   "versions": {
     "v1.0.0": {
