@@ -6,6 +6,6 @@
   "device_annotation": "",
   "device_parameters": [],
   "networks": [
-    "../../../../network/kpn-things/v1.0.0/payload.js"
+    "../../../../network/kpn-things/v1.0.0/payload.ts"
   ]
 }
