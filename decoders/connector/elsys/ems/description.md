@@ -1,0 +1,1 @@
+EMS sensor for measuring indoor temperature, humidity, acceleration, and a water leak detector over LoRAWAN®

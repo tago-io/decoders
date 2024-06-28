@@ -1,0 +1,1 @@
+ERS CO2 sensors for measuring indoor temperature, humidity, light, motion and of course, CO2 levels over LoRAWAN®

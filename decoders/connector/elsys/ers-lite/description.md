@@ -1,0 +1,1 @@
+ERS Lite sensor for measuring indoor temperature and humidity over LoRAWAN®
