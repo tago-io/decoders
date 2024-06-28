@@ -1,0 +1,1 @@
+ERS Sound sensor for measuring indoor temperature, humidity, light, motion and of course, sound levels over LoRaWAN®

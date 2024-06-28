@@ -1,0 +1,1 @@
+ERS Eye room sensor for measuring indoor environment and occupancy over LoRAWAN®
