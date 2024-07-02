@@ -27,7 +27,7 @@ const TYPE_EXT_DIGITAL2 = 0x1A;  // 1bytes value 1 or 0
 const TYPE_EXT_ANALOG_UV = 0x1B; // 4 bytes signed int (uV)
 const TYPE_DEBUG        = 0x3D;  // 4bytes debug
 
-function toTagoFormat(object_item, serie, prefix = '', location_var) {
+function toTagoFormat(object_item, group, prefix = '', location_var) {
   const result = [];
   for (const key in object_item) {
     // if (ignore_vars.includes(key)) continue;
@@ -36,7 +36,7 @@ function toTagoFormat(object_item, serie, prefix = '', location_var) {
       result.push({
         variable: object_item[key].variable || `${prefix}${key}`,
         value: object_item[key].value,
-        serie: object_item[key].serie || serie,
+        group: object_item[key].group || group,
         metadata: object_item[key].metadata,
         location: object_item[key].location || location_var,
         unit: object_item[key].unit,
@@ -46,7 +46,7 @@ function toTagoFormat(object_item, serie, prefix = '', location_var) {
         variable: `${prefix}${key}`,
         value: object_item[key],
         location: location_var,
-        serie,
+        group,
       });
     }
   }
@@ -221,57 +221,57 @@ function Decoder(bytes, port) {
 //   {
 //       "variable": "cmd",
 //       "value": "rx",
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   },
 //   {
 //       "variable": "seqno",
 //       "value": 355,
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   },
 //   {
 //       "variable": "fcnt",
 //       "value": 295,
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   },
 //   {
 //       "variable": "port",
 //       "value": 5,
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   },
 //   {
 //       "variable": "rssi",
 //       "value": -39,
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   },
 //   {
 //       "variable": "snr",
 //       "value": 9,
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   },
 //   {
 //       "variable": "bat",
 //       "value": 247,
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   },
 //   {
 //       "variable": "payload",
 //       "value": "0d01",
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   },
 //   {
 //       "variable": "digital",
 //       "value": 1,
-//       "serie": "1611239359137"
+//       "group": "1611239359137"
 //   }
 // ];
 
 
 const data = payload.find(x => x.variable === 'data' || x.variable === 'payload');
 if (data) {
-  const serie = data.serie || new Date().getTime();
+  const group = data.group || new Date().getTime();
   const vars_to_tago = Decoder(Buffer.from(data.value, 'hex'));
 
-  payload = [...payload, ...toTagoFormat(vars_to_tago, serie, '', vars_to_tago.location)];
+  payload = [...payload, ...toTagoFormat(vars_to_tago, group, '', vars_to_tago.location)];
   // payload = payload.filter(x => !ignore_vars.includes(x.variable));
 }
 

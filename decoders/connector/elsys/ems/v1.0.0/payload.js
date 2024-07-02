@@ -27,7 +27,7 @@ const TYPE_EXT_DIGITAL2 = 0x1A;  // 1bytes value 1 or 0
 const TYPE_EXT_ANALOG_UV = 0x1B; // 4 bytes signed int (uV)
 const TYPE_DEBUG        = 0x3D;  // 4bytes debug
 
-function toTagoFormat(object_item, serie, prefix = '', location_var) {
+function toTagoFormat(object_item, group, prefix = '', location_var) {
   const result = [];
   for (const key in object_item) {
     // if (ignore_vars.includes(key)) continue;
@@ -36,7 +36,7 @@ function toTagoFormat(object_item, serie, prefix = '', location_var) {
       result.push({
         variable: object_item[key].variable || `${prefix}${key}`,
         value: object_item[key].value,
-        serie: object_item[key].serie || serie,
+        group: object_item[key].group || group,
         metadata: object_item[key].metadata,
         location: object_item[key].location || location_var,
         unit: object_item[key].unit,
@@ -46,7 +46,7 @@ function toTagoFormat(object_item, serie, prefix = '', location_var) {
         variable: `${prefix}${key}`,
         value: object_item[key],
         location: location_var,
-        serie,
+        group,
       });
     }
   }
@@ -218,13 +218,13 @@ function Decoder(bytes, port) {
 }
 
 
-// payload = [{ variable: 'payload', value: '0100e202290400270506060308070d62', serie: '122a' }];
+// payload = [{ variable: 'payload', value: '0100e202290400270506060308070d62', group: '122a' }];
 
 const data = payload.find(x => x.variable === 'data' || x.variable === 'payload');
 if (data) {
-  const serie = data.serie || new Date().getTime();
+  const group = data.group || new Date().getTime();
   const vars_to_tago = Decoder(Buffer.from(data.value, 'hex'));
 
-  payload = [...payload, ...toTagoFormat(vars_to_tago, serie, '', vars_to_tago.location)];
+  payload = [...payload, ...toTagoFormat(vars_to_tago, group, '', vars_to_tago.location)];
   // payload = payload.filter(x => !ignore_vars.includes(x.variable));
 }
