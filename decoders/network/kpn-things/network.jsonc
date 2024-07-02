@@ -2,9 +2,9 @@
   "$schema": "../../../schema/network.json",
   "name": "KPN Things",
   "images": {
-    "logo": "",
+    "logo": "./assets/logo.png",
     "icon": "./assets/icon.png",
-    "banner": ""
+    "banner": "./assets/banner.png"
   },
   "versions": {
     "v1.0.0": {
