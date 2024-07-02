@@ -1,1 +1,1 @@
-Bluetooth Gateway over LoRaWAN™
+Indoor Bluetooth Gateway over LoRaWAN™
