@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "This gateway receives nearby Bluetooth beacons, sensors, or controllers’data, restructure, and forward it to a server via NB-IoT or LTE-M. It supports iBeacon, Eddystone, private protocols, and the scan and response feature. The solar panel and low-temperature rechargeable battery make it maintenance-free even in harsh enviroment.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Lansitec badge tracker is designed based on GNSS, Bluetooth5.0, NB-IoT and LTE-M technology. It supports indoor and outdoor tracking. The badge is mainly used for personnel and asset management. The build-in 3-axis accelerator could be used for determining the motion status of the terminal to help save battery life and enhance user experience.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}
