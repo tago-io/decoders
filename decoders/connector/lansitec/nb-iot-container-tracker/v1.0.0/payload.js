@@ -340,7 +340,7 @@ function timestampToTime(timestamp) {
 // payload
 var ignore_vars = [];
 
-function toTagoFormat(object_item, serie, prefix = "") {
+function toTagoFormat(object_item, group, prefix = "") {
   const result = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
@@ -349,7 +349,7 @@ function toTagoFormat(object_item, serie, prefix = "") {
       result.push({
         variable: object_item[key].variable || `${prefix}${key}`,
         value: object_item[key].value,
-        serie: object_item[key].serie || serie,
+        group: object_item[key].group || group,
         metadata: object_item[key].metadata,
         location: object_item[key].location,
         unit: object_item[key].unit,
@@ -358,7 +358,7 @@ function toTagoFormat(object_item, serie, prefix = "") {
       result.push({
         variable: `${prefix}${key}`,
         value: object_item[key],
-        serie,
+        group,
       });
     }
   }
@@ -377,6 +377,6 @@ const port = payload.find(
 );
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
-  const serie = new Date().getTime();
-  payload = payload.concat(toTagoFormat(decodeUplink(buffer), serie));
+  const group = payload[0].group || String(new Date().getTime());
+  payload = payload.concat(toTagoFormat(decodeUplink(buffer), group));
 }
