@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Use this quick setup to create an integration between AWS IoT and TagoIO if your specific device isn't listed. \n\nBy default, it won't include a payload parser because there's no device-specific information available. You have the liberty to design your own custom payload parser for this device",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/aws-iot/v1.0.0/payload.js"
+  ]
+}
