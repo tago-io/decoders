@@ -1,0 +1,1 @@
+Connect any device using HTTPS protocol directly to send/get data 

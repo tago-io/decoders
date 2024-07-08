@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Use this quick setup to create a generic integration with TagoIO if you didn't find your specific device in the list.\n##\nBy default, it will not add a payload parser, as there is no specific information about this device.\n\nYou can build your own payload parser for this device. Check out the 'Payload Parser' tab inside the device information later.",
+  "install_end_text": "After you add support to your sensor by creating an payload parser, we do recommend you to create your own private connector https://docs.tago.io/en/articles/466-connector-overview",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/generic-endpoint/v1.0.0/payload.js"
+  ]
+}
