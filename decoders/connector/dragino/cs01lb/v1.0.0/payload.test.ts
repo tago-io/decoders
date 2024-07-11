@@ -6,7 +6,7 @@ import { decoderRun } from "../../../../../src/functions/decoder-run";
 const file_path =
   "decoders/connector/dragino/cs01lb/v1.0.0/payload.ts" as const;
 
-function preparePayload(payloadHex, port) {
+function preparePayload(payloadHex: Buffer, port: number) {
   let payload = [
     { variable: "payload", value: payloadHex },
     { variable: "fport", value: port },
