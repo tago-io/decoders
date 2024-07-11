@@ -10,7 +10,7 @@
 // Add ignorable variables in this array.
 const ignore_vars = [] as any;
 
-function toTagoFormat(object_item, group, prefix = "") {
+function toTagoFormat(object_item: {}, group: number, prefix = "") {
   const result = [] as any;
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
@@ -36,15 +36,15 @@ function toTagoFormat(object_item, group, prefix = "") {
   return result;
 }
 
-function getzf(c_num) {
+function getzf(c_num: string) {
   if (parseInt(c_num) < 10) c_num = `0${c_num}`;
 
   return c_num;
 }
 
-function getMyDate(str) {
+function getMyDate(str: string) {
   let c_Date;
-  if (str > 9999999999) c_Date = new Date(parseInt(str));
+  if (Number(str) > 9999999999) c_Date = new Date(parseInt(str));
   else c_Date = new Date(parseInt(str) * 1000);
 
   const c_Year = c_Date.getFullYear();
@@ -60,7 +60,7 @@ function getMyDate(str) {
   return c_Time;
 }
 
-function datalog(i, bytes) {
+function datalog(i: number, bytes: Buffer) {
   const aa = bytes[0 + i] & 0x08 ? "CPL03" : "CPL01";
   const bb = bytes[0 + i] & 0x20 ? "PART" : "SUM";
   const cc = bytes[0 + i] & 0x10 ? "YES" : "NO";
@@ -94,7 +94,7 @@ function datalog(i, bytes) {
   return string;
 }
 
-function Decoder(bytes, port) {
+function Decoder(bytes: Buffer, port: number) {
   if (port === 0x03) {
     let data_sum;
     for (let i = 0; i < bytes.length; i += 11) {
