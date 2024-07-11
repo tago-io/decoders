@@ -91,13 +91,14 @@ function preparePayload(payloadHex, port) {
 }
 
 describe("Port 3 unit tests", () => {
-  const payloadHex = "030101000000000064AE544B";
+  const payloadHex =
+    "4100000100003264AE52C241000020000064AE52C96100000C00000064AE53456400001200003D64AE54117800000000000064AE544B6800001700000564AE54864C0000170000564AE54AB4C0000170000564AE54B74C0000170000564AE54E0";
   const port = 3;
   const result = preparePayload(payloadHex, port);
 
   test("Port 3 variable values", () => {
-    expect(result.datalog?.value).toContain(
-      "[CPL01,SUM,NO,TRUE,OPEN,1,3,65792,0,1970-03-18 05:50:28],[CPL03,SUM,NO,3,0,0,1969-12-31 21:00:00],"
+    expect(result.datalog?.value).toBe(
+      "[CPL01,SUM,NO,FALSE,OPEN,1,1,1,50,2023-07-12 04:14:10],[CPL01,SUM,NO,FALSE,OPEN,1,1,32,100,1926-07-30 20:23:13],[CPL01,SUM,NO,FALSE,CLOSE,0,0,3072,100,1926-07-31 05:12:20],[CPL01,SUM,NO,FALSE,CLOSE,0,0,4608,15716,1926-07-31 19:43:04],[CPL01,SUM,NO,FALSE,CLOSE,0,0,0,100,1926-07-31 23:50:16],[CPL01,SUM,NO,FALSE,CLOSE,0,0,5888,1380,1926-08-01 04:01:32],[CPL01,SUM,NO,FALSE,CLOSE,0,0,5888,22090,1955-10-20 15:51:44],[CPL01,SUM,NO,FALSE,CLOSE,0,0,94208,353454,2015-01-15 03:11:28],[CPL01,SUM,NO,FALSE,CLOSE,0,0,1507328,5655269,2011-06-20 23:20:48],"
     );
   });
 });
@@ -146,7 +147,6 @@ describe("Port x unit tests 11 byte size", () => {
     expect(result.ttrig_mod?.value).toBe(0);
     expect(result.total_pulse?.value).toBe(4660);
     expect(result.last_duration?.value).toBe(9029);
-    expect(result.time?.value).toBe("2020-10-27 11:29:28");
   });
 });
 

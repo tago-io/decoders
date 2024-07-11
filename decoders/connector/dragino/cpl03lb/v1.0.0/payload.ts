@@ -99,7 +99,7 @@ function Decoder(bytes, port) {
     let data_sum;
     for (let i = 0; i < bytes.length; i += 11) {
       const data = datalog(i, bytes);
-      if (i === "0") data_sum = data;
+      if (i == 0) data_sum = data;
       else data_sum += data;
     }
     return {
