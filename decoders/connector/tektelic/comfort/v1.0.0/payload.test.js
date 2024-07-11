@@ -2,8 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-const file_path =
-  "decoders/connector/tektelic/comfort/v1.0.0/payload.ts" as const;
+const file_path = "decoders/connector/tektelic/comfort/v1.0.0/payload.js";
 
 function preparePayload(payloadHex, payloadPort) {
   let payload = [
@@ -38,7 +37,7 @@ function preparePayload(payloadHex, payloadPort) {
 describe("Temperature and Humidity", () => {
   test("Should decode the payload correctly", () => {
     const payloadHex = "0367000A046828";
-    const payloadPort = 10 as number;
+    const payloadPort = 10;
 
     const result = preparePayload(payloadHex, payloadPort);
 
@@ -51,7 +50,7 @@ describe("Temperature and Humidity", () => {
 describe("Temperature, Humidity, and Hall effect", () => {
   test("Should decode the payload correctly", () => {
     const payloadHex = "0468140100FF08040005";
-    const payloadPort = 10 as number;
+    const payloadPort = 10;
 
     const result = preparePayload(payloadHex, payloadPort);
 
