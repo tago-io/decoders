@@ -26,7 +26,7 @@ function decodeUplink(bytes) {
 
 // type: 0x01 Registration
 function decodeRegistration(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Registration";
   data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
   data.power = ((bytes[2] >> 3) & 0x1f) + "dBm";
@@ -58,7 +58,7 @@ function decodeRegistration(bytes) {
 
 // type: 0x02 Heartbeat
 function decodeHeartbeat(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Heartbeat";
   data.battery = bytes[1] + "%";
   data.rssi = bytes[2] * -1 + "dBm";
@@ -89,7 +89,7 @@ function decodeHeartbeat(bytes) {
 
 // type: 0x03 GNSSPosition
 function decodeGNSSPosition(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "GNSSPosition";
   // longitude
   let longitude =
@@ -137,7 +137,7 @@ function decodeBeacon(bytes) {
 
 // type: 0x08 Alarm
 function decodeAlarm(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Alarm";
 
   var alarmValue = bytes[1] & 0xff;
@@ -170,11 +170,10 @@ function timestampToTime(timestamp) {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
-// payload
-var ignore_vars = [];
+var ignore_vars: any = [];
 
 function toTagoFormat(object_item, group, prefix = "") {
-  const result = [];
+  const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 

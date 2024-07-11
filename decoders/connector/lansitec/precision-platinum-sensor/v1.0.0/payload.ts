@@ -20,7 +20,7 @@ function decodeUplink(bytes) {
 
 // type: 0x1 Registration
 function decodeRegistration(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Registration";
   // adr
   data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
@@ -89,7 +89,7 @@ function decodeRegistration(bytes) {
 
 // type: 0x3 Temperature
 function decodeTemperature(bytes) {
-  var data = {};
+  var data: any = {};
   // type
   data.type = "Temperature";
   // number
@@ -115,7 +115,7 @@ function decodeTemperature(bytes) {
 
 // type: 0xf Acknowledgment
 function decodeAcknowledgment(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Acknowledgment";
   data.result = (bytes[0] & 0x0f) == 0 ? "Success" : "Failure";
   data.msgId = (bytes[1] & 0xff).toString(16).toUpperCase();
@@ -123,11 +123,10 @@ function decodeAcknowledgment(bytes) {
   return data;
 }
 
-// payload
-var ignore_vars = [];
+var ignore_vars: any = [];
 
 function toTagoFormat(object_item, group, prefix = "") {
-  const result = [];
+  const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 

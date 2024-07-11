@@ -1,4 +1,4 @@
-// nb-iot container tracker
+// nb-iot badge tracker
 function decodeUplink(bytes) {
   // type
   var uplinkType = (bytes[0] >> 4) & 0x0f;
@@ -27,9 +27,9 @@ function decodeUplink(bytes) {
   }
 }
 
-// type: 0x01 Registration
+// type: 0x1 Registration
 function decodeRegistration(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "RegistrationMessage";
   data.bleEnable = (bytes[1] >> 7) & 0x01;
   data.gnssEnable = (bytes[1] >> 6) & 0x01;
@@ -38,93 +38,112 @@ function decodeRegistration(bytes) {
   data.assetBeaconSortEnable = (bytes[1] >> 1) & 0x01;
   data.gnssFailureReportEnable = bytes[1] & 0x01;
   data.assetManagementEnable = (bytes[2] >> 7) & 0x01;
-  data.positionReportMode = (bytes[3] << 6) & 0x0f;
-  data.sosAlarmEnable = (bytes[3] >> 5) & 0x01;
-  data.fallDetectionAlarmEnable = (bytes[3] >> 4) & 0x01;
-  data.specialBeaconnable = (bytes[3] >> 3) & 0x01;
-  data.searchAlarmEnable = (bytes[3] >> 1) & 0x01;
 
-  data.fallDetectionThreshold = bytes[5] & 0xff;
-  data.heartbeatPeriod = ((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff);
+  var positionReportMode = (bytes[3] >> 6) & 0x0f;
+  if (positionReportMode == 0) {
+    data.positionReportMode = "Period";
+  } else if (positionReportMode == 1) {
+    data.positionReportMode = "Autonomous";
+  } else if (positionReportMode == 2) {
+    data.positionReportMode = "On-demand";
+  }
+  data.tamperDetectionEnable = (bytes[3] >> 3) & 0x01;
+
+  data.heartbeatPeriod =
+    (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 30 + "s";
+
   data.blePositionReportInterval =
-    ((bytes[8] << 8) & 0xff00) | (bytes[9] & 0xff);
+    (((bytes[8] << 8) & 0xff00) | (bytes[9] & 0xff)) * 5 + "s";
+
   data.blePositionBeaconReceivingDuration = bytes[10] & 0xff;
+
   data.gnssPositionReportInterval =
-    ((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff);
-  data.gnssReceivingDuration = bytes[13] & 0xff;
+    (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5 + "s";
+
+  data.gnssReceivingDuration = (bytes[13] & 0xff) * 5 + "s";
+
   data.assetBeaconReportInterval =
-    ((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff);
+    (((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff)) * 5 + "s";
+
   data.assetBeaconReceivingDuration = bytes[16] & 0xff;
-  data.softwareVersion = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
+
+  data.version = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
+
   var imsi = "";
   for (let i = 0; i < 8; i++) {
-    imsi = imsi + bytes[19 + i].toString(16).toUpperCase().padStart(2, "0");
+    imsi += bytes[19 + i].toString(16).toUpperCase().padStart(2, "0");
   }
   data.imsi = imsi.substring(0, 15);
   data.messageId = ((bytes[27] << 8) & 0xff00) | (bytes[28] & 0xff);
   return data;
 }
 
-// type: 0x02 Heartbeat
+// type: 0x2 Heartbeat
 function decodeHeartbeat(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "HeartbeatMessage";
-  var stateBitField = {};
+  var stateBitField: any = {};
   stateBitField.bleEnable = (bytes[1] >> 7) & 0x01;
   stateBitField.gnssEnable = (bytes[1] >> 6) & 0x01;
-  stateBitField.networkStatusCheck = (bytes[1] >> 5) & 0x01;
+  stateBitField.networkStatusCheckEnable = (bytes[1] >> 5) & 0x01;
   stateBitField.powerSwitchEnable = (bytes[1] >> 4) & 0x01;
   stateBitField.assetBeaconSortEnable = (bytes[1] >> 1) & 0x01;
   stateBitField.gnssFailureReportEnable = bytes[1] & 0x01;
   stateBitField.assetManagementEnable = (bytes[2] >> 7) & 0x01;
-  stateBitField.posMode = (bytes[3] << 6) & 0x0f;
-  stateBitField.sosAlarmEnable = (bytes[3] >> 5) & 0x01;
-  stateBitField.fallDetectionAlarmEnable = (bytes[3] >> 4) & 0x01;
-  stateBitField.specialBeaconnable = (bytes[3] >> 3) & 0x01;
-  stateBitField.searchAlarmEnable = (bytes[3] >> 1) & 0x01;
+  var positionReportMode = (bytes[3] >> 6) & 0x0f;
+  if (positionReportMode == 0) {
+    stateBitField.positionReportMode = "Period";
+  } else if (positionReportMode == 1) {
+    stateBitField.positionReportMode = "Autonomous";
+  } else if (positionReportMode == 2) {
+    stateBitField.positionReportMode = "On-demand";
+  }
+  stateBitField.tamperDetectionEnable = (bytes[3] >> 3) & 0x01;
   data.stateBitField = stateBitField;
 
-  data.batteryVoltage = (bytes[5] & 0xff) / 10 + "V";
+  data.batteryVoltage = (bytes[5] & 0xff) * 0.1 + "V";
   data.batteryLevel = (bytes[6] & 0xff) + "%";
   data.bleReceivingCount = bytes[7] & 0xff;
   data.gnssOnCount = bytes[8] & 0xff;
-  data.temperature =
-    (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) / 100 + "°C";
-  data.movement = ((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff);
+  // temperature
+  if (0 == ((bytes[9] >> 7) & 0x01)) {
+    data.temperature = (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) + "°C";
+  } else {
+    data.temperature =
+      (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) * -1 + "°C";
+  }
+  data.movementDuration =
+    (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5 + "s";
   data.chargeDuration = ((bytes[15] << 8) & 0xff00) | (bytes[16] & 0xff);
   data.messageId = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
   return data;
 }
 
-// type: 0x03 GNSS Position
+// type: 0x03 GNSSPosition
 function decodeGNSSPosition(bytes) {
-  var data = {};
-  data.type = "GNSSPositionMessage";
-  data.gnssStatus = bytes[0] & 0x01;
+  var data: any = {};
+  data.type = "GNSSPosition";
   // longitude
-  var longitude = (bytes[1] << 24) & 0xff000000;
-  longitude |= (bytes[2] << 16) & 0xff0000;
-  longitude |= (bytes[3] << 8) & 0xff00;
-  longitude |= bytes[4] & 0xff;
+  let longitude =
+    (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
   data.longitude = hex2float(longitude);
+
   // latitude
-  var latitude = (bytes[5] << 24) & 0xff000000;
-  latitude |= (bytes[6] << 16) & 0xff0000;
-  latitude |= (bytes[7] << 8) & 0xff00;
-  latitude |= bytes[8] & 0xff;
+  let latitude =
+    (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
   data.latitude = hex2float(latitude);
+
   // time
-  var time = (bytes[9] << 24) & 0xff000000;
-  time |= (bytes[10] << 16) & 0xff0000;
-  time |= (bytes[11] << 8) & 0xff00;
-  time |= bytes[12] & 0xff;
+  let time =
+    (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
   data.time = timestampToTime((time + 8 * 60 * 60) * 1000);
+
   return data;
 }
 
-// type: 0x04 Beacon
+// type: 0x4 Beacon
 function decodeBeacon(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "BeaconMessage";
   data.beaconType =
     (bytes[0] & 0x01) == 0 ? "PositioningBeacon" : "AssetBeacon";
@@ -148,26 +167,28 @@ function decodeBeacon(bytes) {
   return data;
 }
 
-// type: 0x05 Alarm
+// type: 0x5 Alarm
 function decodeAlarm(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "AlarmMessage";
   var alarmValue = bytes[1] & 0x0f;
-  if (alarmValue == 5) {
-    data.alarm = "TamperDetection";
+  if (alarmValue == 1) {
+    data.alarm = "SOS";
+  } else if (alarmValue == 2) {
+    data.alarm = "Fall";
   }
   return data;
 }
 
-// type: 0x06 Configuration Parameter Response
+// type: 0x6 Configuration Parameter Response
 function decodeConfigParameterResponse(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "ConfigurationParameterResponse";
-  var parameter = [];
+  var parameter: any = [];
   let byteLength = bytes.length;
   var index = 0;
   while (index + 1 < byteLength) {
-    var commandBitField = {};
+    var commandBitField: any = {};
     var parameterType = bytes[index + 1] & 0xff;
     commandBitField.parameterType = parameterType;
     var commandBitFieldLength = getCommandBitFieldLength(parameterType);
@@ -206,10 +227,12 @@ function getCommandBitFieldLength(parameterType) {
     0x05: 2,
     0x06: 2,
     0x07: 2,
+    0x08: 2,
     0x0a: 17,
     0x0b: 17,
     0x0e: 9,
-    0x1c: 2,
+    0x1e: 2,
+    0x1f: 2,
     0x20: 2,
     0x29: 2,
     0x2a: 2,
@@ -233,11 +256,13 @@ function getParameterName(parameterType) {
     0x05: "BlePositionReceivingDuration",
     0x06: "GNSSPositionReceivingDuration",
     0x07: "AssetBleReceivingDuration",
+    0x08: "FallThreshold",
     0x0a: "PosBeaconUUID",
     0x0b: "AssetBeaconUUID",
     0x0e: "ISMI",
-    0x1c: "TamperDetectionEnable",
-    0x20: "PositionReportMode",
+    0x1e: "FallDetectionAlarmEnable",
+    0x1f: "SOSAlarmEnable",
+    0x20: "PosMode",
     0x29: "AssetManagementEnable",
     0x2a: "GNSSFailureReportEnable",
     0x2b: "AssetBeaconSortEnable",
@@ -262,10 +287,14 @@ function getParameterDefinition(parameterType, parameterValue) {
       val * 1 + "s, The duration of BLE position beacon receiving, unit: 1s",
     0x06: val * 5 + "s, The duration of GNSS position receiving, unit: 5s",
     0x07: val * 1 + "s, The duration of asset beacon receiving, unit 1s",
+    0x08:
+      val / 2 +
+      "s, The threshold of the fall detection, the unit is 0.5 meters",
     0x0a: "PosBeaconUUIDFilter",
     0x0b: "AssetBeaconUUIDFilter",
     0x0e: "ISMI",
-    0x1c: val == 0 ? "Disable" : "Enable",
+    0x1e: val == 0 ? "Disable" : "Enable",
+    0x1f: val == 0 ? "Disable" : "Enable",
     0x20:
       val == 0
         ? "Period Mode"
@@ -281,24 +310,6 @@ function getParameterDefinition(parameterType, parameterValue) {
     0x31: val == 0 ? "Disable" : "Enable",
   };
   return name[parameterType] ?? "No matching parameter names";
-}
-
-function getDeviceState(val) {
-  var byteArray = hexStringToByteArray(val);
-  var data = {};
-  data.bleEnable = (byteArray[0] >> 7) & 0x01;
-  data.gnssEnable = (byteArray[0] >> 6) & 0x01;
-  data.networkStatusCheck = (byteArray[0] >> 5) & 0x01;
-  data.powerSwitchEnable = (byteArray[0] >> 4) & 0x01;
-  data.assetBeaconSortEnable = (byteArray[0] >> 1) & 0x01;
-  data.gnssFailureReportEnable = byteArray[0] & 0x01;
-  data.assetManagementEnable = (byteArray[1] >> 7) & 0x01;
-  data.posMode = (byteArray[2] << 6) & 0x0f;
-  data.sosAlarmEnable = (byteArray[2] >> 5) & 0x01;
-  data.fallDetectionAlarmEnable = (byteArray[2] >> 4) & 0x01;
-  data.specialBeaconnable = (byteArray[2] >> 3) & 0x01;
-  data.searchAlarmEnable = (byteArray[2] >> 1) & 0x01;
-  return data;
 }
 
 // Floating point conversion
@@ -318,14 +329,6 @@ function asciiToHex(str) {
   return hexString;
 }
 
-function hexStringToByteArray(hexString) {
-  var byteArray = [];
-  for (let i = 0; i < hexString.length; i += 2) {
-    byteArray.push(parseInt(hexString.substr(i, 2), 16));
-  }
-  return new Uint8Array(byteArray);
-}
-
 function timestampToTime(timestamp) {
   const date = new Date(timestamp);
   const year = date.getFullYear();
@@ -337,11 +340,10 @@ function timestampToTime(timestamp) {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
-// payload
-var ignore_vars = [];
+var ignore_vars: any = [];
 
 function toTagoFormat(object_item, group, prefix = "") {
-  const result = [];
+  const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 

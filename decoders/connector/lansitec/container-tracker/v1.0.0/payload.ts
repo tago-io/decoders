@@ -34,7 +34,7 @@ function decodeUplink(bytes) {
 }
 // type: 0x1 Registration
 function decodeRegistration(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Registration";
   data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
   // mode
@@ -144,7 +144,7 @@ function decodeRegistration(bytes) {
 
 // type: 0x2 Heartbeat
 function decodeHeartbeat(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Heartbeat";
   // snrEnable
   data.snrEnable = (bytes[0] & 0x0f) == 0 ? "No SNR field" : "SNR field Enable";
@@ -180,7 +180,7 @@ function decodeHeartbeat(bytes) {
 
 // type: 0x03 GNSSPosition
 function decodeGNSSPosition(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "GNSSPosition";
   // longitude
   let longitude =
@@ -202,7 +202,7 @@ function decodeGNSSPosition(bytes) {
 
 // type: 0x07 PositionBeacon
 function decodePositionBeacon(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "PositionBeacon";
   data.length = bytes[0] & 0x0f;
   for (let i = 0; i < data.length; i++) {
@@ -225,7 +225,7 @@ function decodePositionBeacon(bytes) {
 
 // type: 0x08 AssetBeacon
 function decodeAssetBeacon(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "AssetBeacon";
   data.qty = bytes[1] & 0xff;
   for (let i = 0; i < data.qty; i++) {
@@ -248,7 +248,7 @@ function decodeAssetBeacon(bytes) {
 
 // type: 0x09 Alarm
 function decodeAlarm(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Alarm";
   var alarmValue = bytes[1] & 0xff;
   if (alarmValue == 1) {
@@ -259,7 +259,7 @@ function decodeAlarm(bytes) {
 
 // type: 0x0B OfflineCachePosition
 function decodeOfflineCachePosition(bytes) {
-  var data = {};
+  var data: any = {};
   // type
   data.type = "OfflineCachePosition";
   // length
@@ -290,7 +290,7 @@ function decodeOfflineCachePosition(bytes) {
       beaconIndex = beaconIndex + 1;
       index = index + 5;
     } else if (flag == 1) {
-      var gnss = {};
+      var gnss: any = {};
       // longitude
       var longitude =
         (bytes[index] << 24) |
@@ -327,7 +327,7 @@ function decodeOfflineCachePosition(bytes) {
 
 // type: 0x0A VibrationShockDetectionReport
 function decodeVibrationShockDetectionReport(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "VibrationShockDetectionReport";
   data.vibrationShockCount = ((bytes[1] << 8) & 0xff00) | (bytes[2] & 0xff);
   return data;
@@ -351,11 +351,10 @@ function timestampToTime(timestamp) {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
-// payload
-var ignore_vars = [];
+var ignore_vars: any = [];
 
 function toTagoFormat(object_item, group, prefix = "") {
-  const result = [];
+  const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 

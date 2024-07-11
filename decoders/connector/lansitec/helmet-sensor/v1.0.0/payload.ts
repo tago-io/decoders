@@ -28,7 +28,7 @@ function decodeUplink(bytes) {
 
 // type: 0x1 Registration
 function decodeRegistration(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Registration";
   // adr
   data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
@@ -74,7 +74,7 @@ function decodeRegistration(bytes) {
 
 // type: 0x2 Heartbeat
 function decodeHeartbeat(bytes) {
-  var data = {};
+  var data: any = {};
   // type
   data.type = "Heartbeat";
   // battery
@@ -101,7 +101,7 @@ function decodeHeartbeat(bytes) {
 
 // type: 0x3 GNSSPosition
 function decodeGNSSPosition(bytes) {
-  var data = {};
+  var data: any = {};
   // type
   data.type = "GNSSPosition";
   // gnssState
@@ -130,21 +130,22 @@ function decodeGNSSPosition(bytes) {
 
 // type: 0x5 UUIDReport
 function decodeUUIDReport(bytes) {
-  var data = {};
+  var data: any = {};
   // type
   data.type = "UUIDReport";
   // number
   data.number = Math.floor((bytes.length - 1) / 17);
-  var beaconUUIDList = [];
+  var beaconUUIDList: any = [];
   for (let i = 0; i < data.number; i++) {
-    var beaconTypeId = bytes[1 + 17 * i] & 0x03;
-    if (beaconTypeId == 0x00) {
+    var beaconTypeIdVal = bytes[1 + 17 * i] & 0x03;
+    var beaconTypeId = "";
+    if (beaconTypeIdVal == 0x00) {
       beaconTypeId = "PositionBeaconUUID";
-    } else if (beaconTypeId == 0x01) {
+    } else if (beaconTypeIdVal == 0x01) {
       beaconTypeId = "AssetBeaconUUID";
-    } else if (beaconTypeId == 0x02) {
+    } else if (beaconTypeIdVal == 0x02) {
       beaconTypeId = "SpecialBeaconUUID";
-    } else if (beaconTypeId == 0x03) {
+    } else if (beaconTypeIdVal == 0x03) {
       beaconTypeId = "SearchBeaconUUID";
     }
 
@@ -164,7 +165,7 @@ function decodeUUIDReport(bytes) {
 
 // type: 0x7 Beacon
 function decodeBeacon(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Beacon";
   // wearState
   data.wearState = (bytes[0] & 0x01) == 0 ? "Not wearing" : "Wearing";
@@ -195,7 +196,7 @@ function decodeBeacon(bytes) {
 
 // type: 0x8 Alarm
 function decodeAlarm(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Alarm";
   var alarmValue = bytes[1] & 0xff;
   if (alarmValue == 1) {
@@ -228,11 +229,10 @@ function timestampToTime(timestamp) {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
-// payload
-var ignore_vars = [];
+var ignore_vars: any = [];
 
 function toTagoFormat(object_item, group, prefix = "") {
-  const result = [];
+  const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 

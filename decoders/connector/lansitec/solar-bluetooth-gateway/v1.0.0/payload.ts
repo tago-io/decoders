@@ -1,4 +1,4 @@
-// NB-IoT Bluetooth Gateway
+// BluetoothGateway
 function decodeUplink(bytes) {
   // type
   var uplinkType = (bytes[0] >> 4) & 0x0f;
@@ -35,7 +35,7 @@ function decodeUplink(bytes) {
 
 // type: 0x1 Registration
 function decodeRegistration(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Registration";
   // adr
   data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
@@ -79,7 +79,7 @@ function decodeRegistration(bytes) {
 
 // type: 0x2 Heartbeat
 function decodeHeartbeat(bytes) {
-  var data = {};
+  var data: any = {};
   // type
   data.type = "Heartbeat";
   // battery
@@ -109,20 +109,20 @@ function decodeHeartbeat(bytes) {
 
 // type: 0x3 DeviceReportRule
 function decodeDeviceReportRule(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "DeviceReportRule";
   data.deviceTypeQuantity = bytes[1] & 0xff;
   data.deviceTypeId = (bytes[2] >> 4) & 0x0f;
   data.filterAndDataBlockQuantity = bytes[2] & 0x0f;
-  var filterBlock = [];
-  var dataBlock = [];
-  var macBlock = [];
+  var filterBlock: any = [];
+  var dataBlock: any = [];
+  var macBlock: any = [];
   var index = 3;
   for (let i = 0; i < data.filterAndDataBlockQuantity; i++) {
     var ruleType = bytes[index++] & 0xff;
     var startAddress = bytes[index++] & 0xff;
     var endAddress = bytes[index++] & 0xff;
-    var filter = {};
+    var filter: any = {};
     var payload =
       "0201061AFF4C000215F2A52D43E0AB489CB64C4A8300146720AABBCCCCB3";
     if (ruleType == 1) {
@@ -258,7 +258,7 @@ function decodeMultiDeviceTypeMessage(bytes) {
 
 // type: 0xf Acknowledgment
 function decodeAcknowledgment(bytes) {
-  var data = {};
+  var data: any = {};
   data.type = "Acknowledgment";
   data.result = (bytes[0] & 0x0f) == 0 ? "Success" : "Failure";
   data.msgId = (bytes[1] & 0xff).toString(16).toUpperCase();
@@ -270,11 +270,10 @@ function byteToHex(str) {
   return str.toString(16).toUpperCase().padStart(2, "0");
 }
 
-// payload
-var ignore_vars = [];
+var ignore_vars: any = [];
 
 function toTagoFormat(object_item, group, prefix = "") {
-  const result = [];
+  const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 
