@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "This is quick setup to create new devices that can be used for any applications and functions to access the TagoIO MQTT broker.\n##\nYour device will only need to use the device-token to send data to your account. Don't use the Authorization feature when working directly our broker.\n##\nMore information can be found in the *documentation link* shown above.\n\n\n![](https://api.beta.tago.io/file/5bbcb03b667d7a002e56664b/banners/Basic_MQTT-D2c.png)",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [
+    {
+      "name": "payload_type",
+      "default": "auto",
+      "label": "Payload Type",
+      "type": "dropdown",
+      "options": [
+        {
+          "label": "Auto Parser (JSON or TEXT)",
+          "value": "auto",
+          "is_default": true
+        },
+        {
+          "label": "Hex (string with hex code)",
+          "value": "hex",
+          "is_default": false
+        }
+      ]
+    }
+  ],
+  "networks": [
+    "../../../../network/mqtt/v1.0.0/payload.js"
+  ]
+}

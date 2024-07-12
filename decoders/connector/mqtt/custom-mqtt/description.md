@@ -1,0 +1,1 @@
+Connect any device using the MQTT protocol to send/get data

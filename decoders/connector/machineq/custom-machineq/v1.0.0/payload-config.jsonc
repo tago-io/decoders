@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Use this quick setup to create an integration between machineQ and TagoIO if you didn't find your specific device in the list.\n##\nBy default, it will **not** add a payload parser in this device, as there is no specific information about it.\n##\nYou can build your own payload parser for this device. Check out the 'Payload Parser' tab inside the device information later.\n##\n![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/machineq/machineQ_TagoIO.png)",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js"
+  ]
+}

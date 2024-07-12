@@ -1,0 +1,1 @@
+Give a name for this device and learn about this network here. Define the type of bucket to be used to store data for this device.

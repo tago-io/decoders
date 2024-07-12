@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "This is quick setup to create new devices that can be used for any applications and functions to access the TagoIO API directly.\n##\nYour device will only need to use the device-token to send data to your account. Don't use the Authorization feature when working directly with API methods.\n##\nMore information can be found in the *document link* shown above.\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/https/v1.0.0/payload.js"
+  ]
+}

@@ -1,0 +1,1 @@
+Use this custom connector if your device connected through TTN/TTI doesn’t show up in the list. No payload parser is added.
