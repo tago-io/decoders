@@ -1,0 +1,1 @@
+EMK5 measures indoor temperature, humidity, light, and acceleration over LoRAWAN®

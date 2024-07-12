@@ -1,0 +1,1 @@
+ERS Smart Building Sensor for indoor environment monitoring over LoRAWAN®

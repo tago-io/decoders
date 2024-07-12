@@ -1,0 +1,1 @@
+ELT is an easy but powerful LoRAWAN® device for measuring analog or digital signals

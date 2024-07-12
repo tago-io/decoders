@@ -1,0 +1,1 @@
+ERS sensor for indoor environment and occupancy monitoring over LoRAWAN®

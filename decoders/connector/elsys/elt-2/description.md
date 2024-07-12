@@ -1,0 +1,1 @@
+ELT-2 measures analog or digital signals and can handle up to two external sensors simultaneously over LoRAWAN®
