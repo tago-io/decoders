@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "Lansitec Indoor Bluetooth gateway is based on Bluetooth 5.0 technology and LoRaWAN. It receives nearby Bluetooth beacon messages and transmits them to the server through LoRaWAN. With LoRaWAN technology, there is no network usage fee for long-distance transmission.",
+  "install_text": "Lansitec Indoor Bluetooth gateway is based on Bluetooth 5.0 technology and LoRaWAN. It receives nearby Bluetooth beacon messages and transmits them to the server through LoRa.With LoRaWAN technology, there is no network usage fee for long-distance transmission. Therefore, it is especially suitable for the following use cases:\n* Asset management in schools\n* Office buildings and hospitals\n* Cars and keys tracking in the parking lots\n* People tracking\n\n**Specifications**\n* Bluetooth Protocol: 5.0\n* LoRaWAN Protocol: 1.0.2B, US915, AU915, EU868, EU433, AS920-923, AS923-925, RU864, ID920, KR920, IN865, KZ865, CLAA, CN470, CN470-Ali\n* Indoor tracking: 5m accuracy\n* Geo-fence: Supported\n* LoRa Fastest Communication Frequency: 5 Seconds\n* LoRa Sensitivity: -139dBm @SF12, BW125kHz, 434MHz/470MHz. -137dBm @SF12, BW125kHz, 868MHz/915MHz.\n* Power Supply Mode: 5V/1A\n* Encryption: AES128\n* Operating Temperature: -40°C~+70°C\n* Storage Temperature: -50°C~+85°C\n* Operating Humidity: 5%~95%\n* Dimension: 120 x 120 x 31mm\n* Transmission Capacity: 100 beacon messages can be received within 1s. Maximum of 15 beacon messages can be sent in one package.\n* Certifications: CE, FCC, RCM\n",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],

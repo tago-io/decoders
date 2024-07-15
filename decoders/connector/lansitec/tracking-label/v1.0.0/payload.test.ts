@@ -5,9 +5,12 @@ const file_path =
   "decoders/connector/lansitec/tracking-label/v1.0.0/payload.ts" as const;
 
 function preparePayload(payloadHex: string) {
-  let payload = [
-    { variable: "payload", value: payloadHex, unit: "", metadata: {} },
-  ];
+  let payload: {
+    variable: string;
+    value: string;
+    unit: string;
+    metadata: {};
+  }[] = [{ variable: "payload", value: payloadHex, unit: "", metadata: {} }];
   payload = decoderRun(file_path, { payload });
   // decodeUplink variables
   const type = payload.find((item) => item.variable === "type");
@@ -45,7 +48,10 @@ describe("Tracking label heartbeat unit tests", () => {
 });
 
 describe("Shall not be parsed", () => {
-  let payload = [{ variable: "shallnotpass", value: "04096113950292" }];
+  let payload: {
+    variable: string;
+    value: string;
+  }[] = [{ variable: "shallnotpass", value: "04096113950292" }];
   payload = decoderRun(file_path, { payload });
   test("Output Result", () => {
     expect(Array.isArray(payload)).toBe(true);

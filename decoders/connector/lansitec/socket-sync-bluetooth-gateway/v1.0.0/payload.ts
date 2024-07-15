@@ -1,5 +1,5 @@
 //  SocketSync Bluetooth Gateway
-function decodeUplink(bytes) {
+function decodeUplink(bytes: Buffer) {
   // type
   var uplinkType = (bytes[0] >> 4) & 0x0f;
 
@@ -25,7 +25,7 @@ function decodeUplink(bytes) {
 }
 
 // type: 0x4 Registration
-function decodeRegistration(bytes) {
+function decodeRegistration(bytes: Buffer) {
   var data: any = {};
   data.type = "Registration";
   // adr
@@ -97,7 +97,7 @@ function decodeRegistration(bytes) {
 }
 
 // type: 0x2 Heartbeat
-function decodeHeartbeat(bytes) {
+function decodeHeartbeat(bytes: Buffer) {
   var data: any = {};
   // type
   data.type = "Heartbeat";
@@ -125,7 +125,7 @@ function decodeHeartbeat(bytes) {
 }
 
 // type: 0x6 Beacon
-function decodeBeacon(bytes) {
+function decodeBeacon(bytes: Buffer) {
   var data: any = {};
   data.type = "Beacon";
   data.length = bytes[0] & 0x0f;
@@ -151,7 +151,7 @@ function decodeBeacon(bytes) {
 }
 
 // type: 0xe AlarmBeaconList
-function decodeAlarmBeaconList(bytes) {
+function decodeAlarmBeaconList(bytes: Buffer) {
   var data: any = {};
   data.type = "AlarmBeaconList";
   data.length = bytes[0] & 0x0f;
@@ -177,7 +177,7 @@ function decodeAlarmBeaconList(bytes) {
 }
 
 // type: 0xf Acknowledgment
-function decodeAcknowledgment(bytes) {
+function decodeAcknowledgment(bytes: Buffer) {
   var data: any = {};
   data.type = "Acknowledgment";
   data.result = (bytes[0] & 0x0f) == 0 ? "Success" : "Failure";
@@ -188,7 +188,7 @@ function decodeAcknowledgment(bytes) {
 
 var ignore_vars: any = [];
 
-function toTagoFormat(object_item, group, prefix = "") {
+function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;

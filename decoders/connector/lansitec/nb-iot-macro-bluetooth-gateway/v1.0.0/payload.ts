@@ -1,5 +1,5 @@
 // NB-IoT Bluetooth Gateway
-function decodeUplink(bytes) {
+function decodeUplink(bytes: Buffer) {
   // type
   var uplinkType = (bytes[0] >> 4) & 0x0f;
 
@@ -22,7 +22,7 @@ function decodeUplink(bytes) {
 }
 
 // type: 0x1 Registration
-function decodeRegistration(bytes) {
+function decodeRegistration(bytes: Buffer) {
   var data: any = {};
   data.type = "Registration";
 
@@ -49,7 +49,7 @@ function decodeRegistration(bytes) {
   return data;
 }
 // type: 0x2 Heartbeat
-function decodeHeartbeat(bytes) {
+function decodeHeartbeat(bytes: Buffer) {
   var data: any = {};
   data.type = "HeartbeatMessage";
   var stateBitField: any = {};
@@ -76,7 +76,7 @@ function decodeHeartbeat(bytes) {
 }
 
 // type: 0x6 Configuration Parameter Response
-function decodeConfigParameterResponse(bytes) {
+function decodeConfigParameterResponse(bytes: Buffer) {
   var data: any = {};
   data.type = "ConfigurationParameterResponse";
   var parameter: any = [];
@@ -115,7 +115,7 @@ function decodeConfigParameterResponse(bytes) {
 }
 
 // type: 0x7 BleDeviceMessage
-function decodeBleDeviceMessage(bytes) {
+function decodeBleDeviceMessage(bytes: Buffer) {
   var data: any = {};
   data.type = "BleDeviceMessage";
   data.ruleType = bytes[0] & 0x0f;
@@ -140,7 +140,7 @@ function decodeBleDeviceMessage(bytes) {
 }
 
 // decodeDeviceReportRule
-function decodeDeviceReportRule(bytes, reportIndex) {
+function decodeDeviceReportRule(bytes: Buffer, reportIndex: number) {
   var data: any = {};
   var index = reportIndex + 2;
   data.type = "DeviceReportRule";
@@ -187,7 +187,7 @@ function decodeDeviceReportRule(bytes, reportIndex) {
 }
 
 // getParameterValue hexString
-function getParameterValue(bytes, index, length) {
+function getParameterValue(bytes: Buffer, index: number, length: number) {
   var hexString = "";
   for (var i = 2; i <= length; i++) {
     var hex = (bytes[index + i] & 0xff).toString(16).toUpperCase();
@@ -197,7 +197,7 @@ function getParameterValue(bytes, index, length) {
 }
 
 // getCommandBitFieldLength
-function getCommandBitFieldLength(parameterType) {
+function getCommandBitFieldLength(parameterType: number) {
   let lengths = {
     0x00: 3,
     0x01: 3,
@@ -212,7 +212,7 @@ function getCommandBitFieldLength(parameterType) {
 }
 
 // Parameter Name
-function getParameterName(parameterType) {
+function getParameterName(parameterType: number) {
   let name = {
     0x00: "SoftwareVersion",
     0x01: "HBPeriod",
@@ -226,7 +226,7 @@ function getParameterName(parameterType) {
 }
 
 // Parameter Definition
-function getParameterDefinition(parameterType, parameterValue) {
+function getParameterDefinition(parameterType: any, parameterValue: any) {
   var val = parseInt(parameterValue, 16);
   let name = {
     0x00: "SoftwareVersion",
@@ -240,14 +240,14 @@ function getParameterDefinition(parameterType, parameterValue) {
 }
 
 // Floating point conversion
-function hex2float(num) {
+function hex2float(num: number) {
   var sign = num & 0x80000000 ? -1 : 1;
   var exponent = ((num >> 23) & 0xff) - 127;
   var mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
   return sign * mantissa * Math.pow(2, exponent);
 }
 
-function asciiToHex(str) {
+function asciiToHex(str: any) {
   var hexString = "";
   for (let i = 0; i < str.length; i++) {
     var hex = str.charCodeAt(i).toString(16);
@@ -256,7 +256,7 @@ function asciiToHex(str) {
   return hexString;
 }
 
-function byteToHex(str) {
+function byteToHex(str: any) {
   return str.toString(16).toUpperCase().padStart(2, "0");
 }
 

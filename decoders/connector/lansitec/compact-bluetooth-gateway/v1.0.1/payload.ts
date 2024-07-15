@@ -1,5 +1,5 @@
 // BluetoothGateway
-function decodeUplink(bytes) {
+function decodeUplink(bytes: Buffer) {
   // type
   var uplinkType = (bytes[0] >> 4) & 0x0f;
 
@@ -34,7 +34,7 @@ function decodeUplink(bytes) {
 }
 
 // type: 0x1 Registration
-function decodeRegistration(bytes) {
+function decodeRegistration(bytes: Buffer) {
   var data: any = {};
   data.type = "Registration";
   // adr
@@ -78,7 +78,7 @@ function decodeRegistration(bytes) {
 }
 
 // type: 0x2 Heartbeat
-function decodeHeartbeat(bytes) {
+function decodeHeartbeat(bytes: Buffer) {
   var data: any = {};
   // type
   data.type = "Heartbeat";
@@ -108,7 +108,7 @@ function decodeHeartbeat(bytes) {
 }
 
 // type: 0x3 DeviceReportRule
-function decodeDeviceReportRule(bytes) {
+function decodeDeviceReportRule(bytes: Buffer) {
   var data: any = {};
   data.type = "DeviceReportRule";
   data.deviceTypeQuantity = bytes[1] & 0xff;
@@ -151,7 +151,7 @@ function decodeDeviceReportRule(bytes) {
 }
 
 // type: 0x8 DeviceType1
-function decodeDeviceType1(bytes) {
+function decodeDeviceType1(bytes: Buffer) {
   var data = {
     type: "DeviceType1",
     number: bytes[0] & 0x0f,
@@ -177,7 +177,7 @@ function decodeDeviceType1(bytes) {
 }
 
 // type: 0x9 DeviceType2
-function decodeDeviceType2(bytes) {
+function decodeDeviceType2(bytes: Buffer) {
   var data = {
     type: "DeviceType2",
     number: bytes[0] & 0x0f,
@@ -203,7 +203,7 @@ function decodeDeviceType2(bytes) {
 }
 
 // type: 0xa DeviceType3
-function decodeDeviceType3(bytes) {
+function decodeDeviceType3(bytes: Buffer) {
   var data = {
     type: "DeviceType3",
     number: bytes[0] & 0x0f,
@@ -229,7 +229,7 @@ function decodeDeviceType3(bytes) {
 }
 
 // type: 0xe MultiDeviceTypeMessage
-function decodeMultiDeviceTypeMessage(bytes) {
+function decodeMultiDeviceTypeMessage(bytes: Buffer) {
   var data = {
     type: "MultiDeviceTypeMessage",
     number: bytes[0] & 0x0f,
@@ -257,7 +257,7 @@ function decodeMultiDeviceTypeMessage(bytes) {
 }
 
 // type: 0xf Acknowledgment
-function decodeAcknowledgment(bytes) {
+function decodeAcknowledgment(bytes: Buffer) {
   var data: any = {};
   data.type = "Acknowledgment";
   data.result = (bytes[0] & 0x0f) == 0 ? "Success" : "Failure";
@@ -266,14 +266,14 @@ function decodeAcknowledgment(bytes) {
   return data;
 }
 
-function byteToHex(str) {
+function byteToHex(str: any) {
   return str.toString(16).toUpperCase().padStart(2, "0");
 }
 
 // payload
 var ignore_vars: any = [];
 
-function toTagoFormat(object_item, group, prefix = "") {
+function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;

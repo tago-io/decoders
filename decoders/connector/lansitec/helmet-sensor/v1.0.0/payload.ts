@@ -1,5 +1,5 @@
 // HelmetTracker
-function decodeUplink(bytes) {
+function decodeUplink(bytes: Buffer) {
   // type
   var uplinkType = (bytes[0] >> 4) & 0x0f;
   switch (uplinkType) {
@@ -27,7 +27,7 @@ function decodeUplink(bytes) {
 }
 
 // type: 0x1 Registration
-function decodeRegistration(bytes) {
+function decodeRegistration(bytes: Buffer) {
   var data: any = {};
   data.type = "Registration";
   // adr
@@ -73,7 +73,7 @@ function decodeRegistration(bytes) {
 }
 
 // type: 0x2 Heartbeat
-function decodeHeartbeat(bytes) {
+function decodeHeartbeat(bytes: Buffer) {
   var data: any = {};
   // type
   data.type = "Heartbeat";
@@ -100,7 +100,7 @@ function decodeHeartbeat(bytes) {
 }
 
 // type: 0x3 GNSSPosition
-function decodeGNSSPosition(bytes) {
+function decodeGNSSPosition(bytes: Buffer) {
   var data: any = {};
   // type
   data.type = "GNSSPosition";
@@ -129,7 +129,7 @@ function decodeGNSSPosition(bytes) {
 }
 
 // type: 0x5 UUIDReport
-function decodeUUIDReport(bytes) {
+function decodeUUIDReport(bytes: Buffer) {
   var data: any = {};
   // type
   data.type = "UUIDReport";
@@ -164,7 +164,7 @@ function decodeUUIDReport(bytes) {
 }
 
 // type: 0x7 Beacon
-function decodeBeacon(bytes) {
+function decodeBeacon(bytes: Buffer) {
   var data: any = {};
   data.type = "Beacon";
   // wearState
@@ -195,7 +195,7 @@ function decodeBeacon(bytes) {
 }
 
 // type: 0x8 Alarm
-function decodeAlarm(bytes) {
+function decodeAlarm(bytes: Buffer) {
   var data: any = {};
   data.type = "Alarm";
   var alarmValue = bytes[1] & 0xff;
@@ -211,14 +211,14 @@ function decodeAlarm(bytes) {
   return data;
 }
 
-function hex2float(num) {
+function hex2float(num: number) {
   var sign = num & 0x80000000 ? -1 : 1;
   var exponent = ((num >> 23) & 0xff) - 127;
   var mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
   return sign * mantissa * Math.pow(2, exponent);
 }
 
-function timestampToTime(timestamp) {
+function timestampToTime(timestamp: number) {
   const date = new Date(timestamp);
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -231,7 +231,7 @@ function timestampToTime(timestamp) {
 
 var ignore_vars: any = [];
 
-function toTagoFormat(object_item, group, prefix = "") {
+function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;

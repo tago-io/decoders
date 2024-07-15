@@ -3,7 +3,7 @@
 //  - bytes is an array of bytes, e.g. [225, 230, 255, 0]
 //  - variables contains the device variables e.g. {"calibration": "3.5"} (both the key / value are of type string)
 // The function must return an object, e.g. {"temperature": 22.5}
-function Decode(fPort, bytes, variables) {
+function Decode(fPort: any, bytes: Buffer) {
   console.log("Decode");
   //获取uplink消息类型
   var uplink_type = (bytes[0] >> 4) & 0x0f;
@@ -48,7 +48,7 @@ function Decode(fPort, bytes, variables) {
 }
 
 //Message type: Register  0x1
-function Register_proc(bytes) {
+function Register_proc(bytes: Buffer) {
   var Register_Msg: any = {
     type: 0,
     adr: 0,
@@ -259,7 +259,7 @@ function Register_proc(bytes) {
 }
 
 //Message type: Heartbeat  0x2
-function Heartbeat_proc(bytes) {
+function Heartbeat_proc(bytes: Buffer) {
   var Heartbeat_Msg: any = {
     type: 0,
     ver: 0,
@@ -577,7 +577,7 @@ function Heartbeat_proc(bytes) {
 }
 
 //Message type: TenSecInstantReportMode  0x8
-function TenSecInstantReportMode_proc(bytes) {
+function TenSecInstantReportMode_proc(bytes: Buffer) {
   var TenSecInstantReportMode_Msg: any = {
     type: 0,
     length: 0,
@@ -633,7 +633,7 @@ function TenSecInstantReportMode_proc(bytes) {
 }
 
 //Message type: EightySecPeriodicReportMode  0xC
-function EightySecPeriodicReportMode_proc(bytes) {
+function EightySecPeriodicReportMode_proc(bytes: Buffer) {
   var EightySecPeriodicReportMode_Msg: any = {
     type: 0,
     length: 0,
@@ -701,7 +701,7 @@ function EightySecPeriodicReportMode_proc(bytes) {
 }
 
 //Message type: Acknowledge  0xF
-function Acknowledge_proc(bytes) {
+function Acknowledge_proc(bytes: Buffer) {
   var Acknowledge_Msg: any = {
     type: 0,
     result: 0,
@@ -727,7 +727,7 @@ function Acknowledge_proc(bytes) {
 
 var ignore_vars: any = [];
 
-function toTagoFormat(object_item, group, prefix = "") {
+function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;

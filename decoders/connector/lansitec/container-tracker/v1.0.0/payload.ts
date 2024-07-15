@@ -1,5 +1,5 @@
 // ContainerTracker
-function decodeUplink(bytes) {
+function decodeUplink(bytes: Buffer) {
   // type
   var uplinkType = (bytes[0] >> 4) & 0x0f;
 
@@ -33,7 +33,7 @@ function decodeUplink(bytes) {
   }
 }
 // type: 0x1 Registration
-function decodeRegistration(bytes) {
+function decodeRegistration(bytes: Buffer) {
   var data: any = {};
   data.type = "Registration";
   data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
@@ -143,7 +143,7 @@ function decodeRegistration(bytes) {
 }
 
 // type: 0x2 Heartbeat
-function decodeHeartbeat(bytes) {
+function decodeHeartbeat(bytes: Buffer) {
   var data: any = {};
   data.type = "Heartbeat";
   // snrEnable
@@ -179,7 +179,7 @@ function decodeHeartbeat(bytes) {
 }
 
 // type: 0x03 GNSSPosition
-function decodeGNSSPosition(bytes) {
+function decodeGNSSPosition(bytes: Buffer) {
   var data: any = {};
   data.type = "GNSSPosition";
   // longitude
@@ -201,7 +201,7 @@ function decodeGNSSPosition(bytes) {
 }
 
 // type: 0x07 PositionBeacon
-function decodePositionBeacon(bytes) {
+function decodePositionBeacon(bytes: Buffer) {
   var data: any = {};
   data.type = "PositionBeacon";
   data.length = bytes[0] & 0x0f;
@@ -224,7 +224,7 @@ function decodePositionBeacon(bytes) {
 }
 
 // type: 0x08 AssetBeacon
-function decodeAssetBeacon(bytes) {
+function decodeAssetBeacon(bytes: Buffer) {
   var data: any = {};
   data.type = "AssetBeacon";
   data.qty = bytes[1] & 0xff;
@@ -247,7 +247,7 @@ function decodeAssetBeacon(bytes) {
 }
 
 // type: 0x09 Alarm
-function decodeAlarm(bytes) {
+function decodeAlarm(bytes: Buffer) {
   var data: any = {};
   data.type = "Alarm";
   var alarmValue = bytes[1] & 0xff;
@@ -258,7 +258,7 @@ function decodeAlarm(bytes) {
 }
 
 // type: 0x0B OfflineCachePosition
-function decodeOfflineCachePosition(bytes) {
+function decodeOfflineCachePosition(bytes: Buffer) {
   var data: any = {};
   // type
   data.type = "OfflineCachePosition";
@@ -326,21 +326,21 @@ function decodeOfflineCachePosition(bytes) {
 }
 
 // type: 0x0A VibrationShockDetectionReport
-function decodeVibrationShockDetectionReport(bytes) {
+function decodeVibrationShockDetectionReport(bytes: Buffer) {
   var data: any = {};
   data.type = "VibrationShockDetectionReport";
   data.vibrationShockCount = ((bytes[1] << 8) & 0xff00) | (bytes[2] & 0xff);
   return data;
 }
 
-function hex2float(num) {
+function hex2float(num: number) {
   var sign = num & 0x80000000 ? -1 : 1;
   var exponent = ((num >> 23) & 0xff) - 127;
   var mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
   return sign * mantissa * Math.pow(2, exponent);
 }
 
-function timestampToTime(timestamp) {
+function timestampToTime(timestamp: number) {
   const date = new Date(timestamp);
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -353,7 +353,7 @@ function timestampToTime(timestamp) {
 
 var ignore_vars: any = [];
 
-function toTagoFormat(object_item, group, prefix = "") {
+function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
