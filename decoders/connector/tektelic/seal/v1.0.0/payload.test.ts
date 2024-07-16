@@ -4,7 +4,7 @@ import { decoderRun } from "../../../../../src/functions/decoder-run";
 
 const file_path = "decoders/connector/tektelic/seal/v1.0.0/payload.js";
 
-function preparePayload(payloadHex, payloadPort) {
+function preparePayload(payloadHex: string, payloadPort: number) {
   let payload = [
     { variable: "payload", value: payloadHex },
     { variable: "port", value: payloadPort },
