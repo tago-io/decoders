@@ -13,7 +13,6 @@ Explain the functionality of your decoder or any other relevant information.
 - [ ] Documentation of the hardware or protocol:
 - [ ] Payload of example the test the decoder:
 
-
 ## Checklist for Adding a New Decoder
 
 - [ ] Created a new folder under `./decoders/network/` or `./decoders/connector/` with the name of your decoder.
@@ -24,5 +23,4 @@ Explain the functionality of your decoder or any other relevant information.
 
 ## Additional Notes
 
-Please add any other information that you think is important.
-
+Please add any other information that you think is important
