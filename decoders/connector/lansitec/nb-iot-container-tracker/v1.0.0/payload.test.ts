@@ -46,12 +46,12 @@ describe("Nb-iot container tracker heartbeat unit tests", () => {
 
   test("Check variable values", () => {
     expect(result.type?.value).toBe("HeartbeatMessage");
-    expect(result.batteryVoltage?.value).toBe("3.2V");
-    expect(result.batteryLevel?.value).toBe("11%");
+    expect(result.batteryVoltage?.value).toBe(3.2);
+    expect(result.batteryLevel?.value).toBe(11);
     expect(result.bleReceivingCount?.value).toBe(1);
     expect(result.gnssOnCount?.value).toBe(0);
     expect(result.temperature?.value).toBe("35°C");
-    expect(result.movementDuration?.value).toBe("20s");
+    expect(result.movementDuration?.value).toBe(20);
     expect(result.messageId?.value).toBe(1);
   });
 });

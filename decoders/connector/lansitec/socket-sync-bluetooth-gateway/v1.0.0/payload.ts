@@ -1,7 +1,7 @@
 //  SocketSync Bluetooth Gateway
 function decodeUplink(bytes: Buffer) {
   // type
-  var uplinkType = (bytes[0] >> 4) & 0x0f;
+  const uplinkType = (bytes[0] >> 4) & 0x0f;
 
   switch (uplinkType) {
     case 0x04:
@@ -26,71 +26,71 @@ function decodeUplink(bytes: Buffer) {
 
 // type: 0x4 Registration
 function decodeRegistration(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Registration";
   // adr
-  data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
+  data.adr = ((bytes[0] >> 3) & 0x1) === 0 ? "OFF" : "ON";
   // mode
-  var modeValue = bytes[0] & 0x07;
-  if (modeValue == 0x01) {
+  const modeValue = bytes[0] & 0x07;
+  if (modeValue === 0x01) {
     data.mode = "AU915";
-  } else if (modeValue == 0x03) {
+  } else if (modeValue === 0x03) {
     data.mode = "CN470";
-  } else if (modeValue == 0x04) {
+  } else if (modeValue === 0x04) {
     data.mode = "AS923";
-  } else if (modeValue == 0x05) {
+  } else if (modeValue === 0x05) {
     data.mode = "EU433";
-  } else if (modeValue == 0x06) {
+  } else if (modeValue === 0x06) {
     data.mode = "EU868";
-  } else if (modeValue == 0x07) {
+  } else if (modeValue === 0x07) {
     data.mode = "US915";
   }
   // smode
-  var smodeValue = bytes[1];
-  if (smodeValue == 0x01) {
+  const smodeValue = bytes[1];
+  if (smodeValue === 0x01) {
     data.smode = "AU915";
-  } else if (smodeValue == 0x04) {
+  } else if (smodeValue === 0x04) {
     data.smode = "CN470";
-  } else if (smodeValue == 0x08) {
+  } else if (smodeValue === 0x08) {
     data.smode = "AS923";
-  } else if (smodeValue == 0x10) {
+  } else if (smodeValue === 0x10) {
     data.smode = "EU433";
-  } else if (smodeValue == 0x20) {
+  } else if (smodeValue === 0x20) {
     data.smode = "EU868";
-  } else if (smodeValue == 0x40) {
+  } else if (smodeValue === 0x40) {
     data.smode = "US915";
   }
   // power
-  data.power = ((bytes[2] >> 3) & 0x1f) + "dBm";
+  data.power = (bytes[2] >> 3) & 0x1f;
   // continuousBleReceiveEnable
   data.continuousBleReceiveEnable =
-    ((bytes[2] >> 1) & 0x1) == 0 ? "Disable" : "Enable";
+    ((bytes[2] >> 1) & 0x1) === 0 ? "Disable" : "Enable";
   // powerDownFlag
   data.powerDownFlag =
-    (bytes[2] & 0x1) == 0 ? "Normal status" : "Automatic shutdown status";
+    (bytes[2] & 0x1) === 0 ? "Normal status" : "Automatic shutdown status";
   // dr
   data.dr = (bytes[3] >> 4) & 0x0f;
   // deviceType
-  var deviceType = (bytes[3] >> 1) & 0x02;
-  if (deviceType == 0) {
+  const deviceType = (bytes[3] >> 1) & 0x02;
+  if (deviceType === 0) {
     data.deviceType = "OutdoorGateway";
-  } else if (deviceType == 1) {
+  } else if (deviceType === 1) {
     data.deviceType = "IndoorGateway";
-  } else if (deviceType == 2) {
+  } else if (deviceType === 2) {
     data.deviceType = "PlugGateway";
   }
   // rssiSortMethod
   data.rssiSortMethod =
-    (bytes[3] & 0x01) == 0 ? "SortByAverage" : "SortByTheMaximumValue";
+    (bytes[3] & 0x01) === 0 ? "SortByAverage" : "SortByTheMaximumValue";
   // positionReportInterval
   data.positionReportInterval =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5 + "s";
+    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
   // bleReceivingDuration
-  data.bleReceivingDuration = bytes[6] * 30 + "s";
+  data.bleReceivingDuration = bytes[6] * 30;
   // heartbeatInterval
-  data.heartbeatInterval = bytes[7] * 30 + "s";
+  data.heartbeatInterval = bytes[7] * 30;
   // beaconQTY
-  data.beaconQTY = (bytes[8] & 0xff) + "s";
+  data.beaconQTY = bytes[8] & 0xff;
   // crc
   data.crc = ((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff);
   return data;
@@ -98,24 +98,24 @@ function decodeRegistration(bytes: Buffer) {
 
 // type: 0x2 Heartbeat
 function decodeHeartbeat(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   // type
   data.type = "Heartbeat";
   // battery
-  data.battery = bytes[1] + "%";
+  data.battery = bytes[1];
   // rssi
-  data.rssi = bytes[2] * -1 + "dBm";
+  data.rssi = bytes[2] * -1;
   // snr
-  data.snr = (((bytes[3] << 8) & 0xff00) | (bytes[4] & 0xff)) / 100 + "dB";
+  data.snr = (((bytes[3] << 8) & 0xff00) | (bytes[4] & 0xff)) / 100;
   // version
   data.version = bytes[5] & 0xff;
   // chargeState
-  var chargeState = bytes[6] & 0xff;
-  if (chargeState == 0x00) {
+  const chargeState = bytes[6] & 0xff;
+  if (chargeState === 0x00) {
     data.chargeState = "Not charging";
-  } else if (chargeState == 0x50) {
+  } else if (chargeState === 0x50) {
     data.chargeState = "Charging";
-  } else if (chargeState == 0x60) {
+  } else if (chargeState === 0x60) {
     data.chargeState = "Charging completed";
   }
   // crc
@@ -126,25 +126,25 @@ function decodeHeartbeat(bytes: Buffer) {
 
 // type: 0x6 Beacon
 function decodeBeacon(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Beacon";
   data.length = bytes[0] & 0x0f;
   for (let i = 0; i < data.length; i++) {
-    var index = 1 + 6 * i;
-    var uuidTailNumber = bytes[index];
-    var major = ((bytes[index + 1] << 8) | bytes[index + 2])
+    const index = 1 + 6 * i;
+    const uuidTailNumber = bytes[index];
+    const major = ((bytes[index + 1] << 8) | bytes[index + 2])
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var minor = ((bytes[index + 3] << 8) | bytes[index + 4])
+    const minor = ((bytes[index + 3] << 8) | bytes[index + 4])
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var rssi = bytes[index + 5] - 256 + "dBm";
+    const rssi = bytes[index + 5] - 256;
 
     data["uuidTailNumber" + (i + 1)] = uuidTailNumber;
-    data["beacon" + (i + 1)] = major + minor;
-    data["rssi" + (i + 1)] = rssi;
+    data[`beacon${i + 1}`] = major + minor;
+    data[`rssi${i + 1}`] = rssi;
   }
 
   return data;
@@ -152,25 +152,25 @@ function decodeBeacon(bytes: Buffer) {
 
 // type: 0xe AlarmBeaconList
 function decodeAlarmBeaconList(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "AlarmBeaconList";
   data.length = bytes[0] & 0x0f;
   for (let i = 0; i < data.length; i++) {
-    var index = 1 + 6 * i;
-    var uuidTailNumber = bytes[index];
-    var major = ((bytes[index + 1] << 8) | bytes[index + 2])
+    const index = 1 + 6 * i;
+    const uuidTailNumber = bytes[index];
+    const major = ((bytes[index + 1] << 8) | bytes[index + 2])
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var minor = ((bytes[index + 3] << 8) | bytes[index + 4])
+    const minor = ((bytes[index + 3] << 8) | bytes[index + 4])
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var rssi = bytes[index + 5] - 256 + "dBm";
+    const rssi = bytes[index + 5] - 256;
 
     data["uuidTailNumber" + (i + 1)] = uuidTailNumber;
-    data["beacon" + (i + 1)] = major + minor;
-    data["rssi" + (i + 1)] = rssi;
+    data[`beacon${i + 1}`] = major + minor;
+    data[`rssi${i + 1}`] = rssi;
   }
 
   return data;
@@ -178,20 +178,22 @@ function decodeAlarmBeaconList(bytes: Buffer) {
 
 // type: 0xf Acknowledgment
 function decodeAcknowledgment(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Acknowledgment";
-  data.result = (bytes[0] & 0x0f) == 0 ? "Success" : "Failure";
+  data.result = (bytes[0] & 0x0f) === 0 ? "Success" : "Failure";
   data.msgId = (bytes[1] & 0xff).toString(16).toUpperCase();
 
   return data;
 }
 
-var ignore_vars: any = [];
+const ignore_vars: any = [];
 
 function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
-    if (ignore_vars.includes(key)) continue;
+    if (ignore_vars.includes(key)) {
+      continue;
+    }
 
     if (typeof object_item[key] === "object") {
       result.push({
@@ -220,9 +222,7 @@ const data = payload.find(
     x.variable === "payload" ||
     x.variable === "data"
 );
-const port = payload.find(
-  (x) => x.variable === "fport" || x.variable === "port"
-);
+
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
   const group = payload[0].group || String(new Date().getTime());

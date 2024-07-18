@@ -41,11 +41,11 @@ describe("Temperature and humidity unit tests", () => {
   test("Check variable values", () => {
     expect(result.type?.value).toBe("Heartbeat");
     expect(result.version?.value).toBe(1);
-    expect(result.battery?.value).toBe("100%");
-    expect(result.rssi?.value).toBe("-80dBm");
+    expect(result.battery?.value).toBe(100);
+    expect(result.rssi?.value).toBe(-80);
     expect(result.snr?.value).toBe(30);
     expect(result.temperature?.value).toBe("22.16℃");
-    expect(result.humidity?.value).toBe("34%");
+    expect(result.humidity?.value).toBe(34);
     expect(result.crc?.value).toBe(0);
   });
 });

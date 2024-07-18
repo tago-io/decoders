@@ -48,13 +48,13 @@ describe("Helmet sensor heartbeat unit tests", () => {
 
   test("Check variable values", () => {
     expect(result.type?.value).toBe("Heartbeat");
-    expect(result.battery?.value).toBe("100%");
-    expect(result.rssi?.value).toBe("-62dBm");
-    expect(result.snr?.value).toBe("8.3dB");
+    expect(result.battery?.value).toBe(100);
+    expect(result.rssi?.value).toBe(-62);
+    expect(result.snr?.value).toBe(8.3);
     expect(result.bleReceivingNumber?.value).toBe(0);
     expect(result.gnssSearchingNumber?.value).toBe(108);
-    expect(result.chargeTime?.value).toBe("0s");
-    expect(result.wearTime?.value).toBe("0s");
+    expect(result.chargeTime?.value).toBe(0);
+    expect(result.wearTime?.value).toBe(0);
     expect(result.moveState?.value).toBe(0);
     expect(result.temperature?.value).toBe(0);
   });

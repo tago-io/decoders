@@ -43,13 +43,13 @@ describe("Container tracker heartbeat unit tests", () => {
   test("Check variable values", () => {
     expect(result.type?.value).toBe("Heartbeat");
     expect(result.snrEnable?.value).toBe("No SNR field");
-    expect(result.voltage?.value).toBe("2.5V");
-    expect(result.rssi?.value).toBe("-62dBm");
-    expect(result.snr?.value).toBe("8.3dB");
+    expect(result.voltage?.value).toBe(2.5);
+    expect(result.rssi?.value).toBe(-62);
+    expect(result.snr?.value).toBe(8.3);
     expect(result.gnssState?.value).toBe("Off");
     expect(result.moveState?.value).toBe(0);
     expect(result.temperature?.value).toBe("29℃");
-    expect(result.movement?.value).toBe("360s");
+    expect(result.movement?.value).toBe(360);
   });
 });
 

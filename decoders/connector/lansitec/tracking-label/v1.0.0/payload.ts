@@ -1,7 +1,7 @@
 // Tracking Label
 function decodeUplink(bytes: Buffer) {
   // type
-  var uplinkType = (bytes[0] >> 4) & 0x0f;
+  const uplinkType = (bytes[0] >> 4) & 0x0f;
 
   switch (uplinkType) {
     case 0x01:
@@ -26,26 +26,26 @@ function decodeUplink(bytes: Buffer) {
 
 // type: 0x01 Registration
 function decodeRegistration(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Registration";
-  data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
-  data.power = ((bytes[2] >> 3) & 0x1f) + "dBm";
+  data.adr = ((bytes[0] >> 3) & 0x1) === 0 ? "OFF" : "ON";
+  data.power = (bytes[2] >> 3) & 0x1f;
   data.dr = (bytes[3] >> 4) & 0x0f;
-  data.gnssEnable = ((bytes[3] >> 3) & 0x01) == 0 ? "Disable" : "Enable";
-  var positionModeValue = (bytes[3] >> 1) & 0x03;
-  if (positionModeValue == 0) {
+  data.gnssEnable = ((bytes[3] >> 3) & 0x01) === 0 ? "Disable" : "Enable";
+  const positionModeValue = (bytes[3] >> 1) & 0x03;
+  if (positionModeValue === 0) {
     data.positionMode = "Period";
-  } else if (positionModeValue == 1) {
+  } else if (positionModeValue === 1) {
     data.positionMode = "Autonomous";
-  } else if (positionModeValue == 2) {
+  } else if (positionModeValue === 2) {
     data.positionMode = "Demand";
   }
-  data.bleEnable = (bytes[3] & 0x01) == 0 ? "Disable" : "Enable";
+  data.bleEnable = (bytes[3] & 0x01) === 0 ? "Disable" : "Enable";
   data.blePositionReportInterval =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5 + "s";
+    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
   data.gnssPositionReportInterval =
-    (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5 + "s";
-  data.heartbeatReportInterval = (bytes[8] & 0xff) * 30 + "s";
+    (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5;
+  data.heartbeatReportInterval = (bytes[8] & 0xff) * 30;
   data.version =
     (bytes[9] & 0xff).toString(16).toUpperCase() +
     "." +
@@ -58,30 +58,30 @@ function decodeRegistration(bytes: Buffer) {
 
 // type: 0x02 Heartbeat
 function decodeHeartbeat(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Heartbeat";
-  data.battery = bytes[1] + "%";
-  data.rssi = bytes[2] * -1 + "dBm";
-  data.snr = (((bytes[3] << 8) & 0xff00) | (bytes[4] & 0xff)) / 100 + "dB";
-  var gnssStateValue = (bytes[5] >> 4) & 0x0f;
-  if (gnssStateValue == 0) {
+  data.battery = bytes[1];
+  data.rssi = bytes[2] * -1;
+  data.snr = (((bytes[3] << 8) & 0xff00) | (bytes[4] & 0xff)) / 100;
+  const gnssStateValue = (bytes[5] >> 4) & 0x0f;
+  if (gnssStateValue === 0) {
     data.gnssState = "Off";
-  } else if (gnssStateValue == 1) {
+  } else if (gnssStateValue === 1) {
     data.gnssState = "Boot GNSS";
-  } else if (gnssStateValue == 2) {
+  } else if (gnssStateValue === 2) {
     data.gnssState = "Locating";
-  } else if (gnssStateValue == 3) {
+  } else if (gnssStateValue === 3) {
     data.gnssState = "Located";
-  } else if (gnssStateValue == 9) {
+  } else if (gnssStateValue === 9) {
     data.gnssState = "No signal";
   }
   data.moveState = bytes[5] & 0x0f;
-  var chargeStateValue = (bytes[6] >> 4) & 0x0f;
-  if (chargeStateValue == 0) {
+  const chargeStateValue = (bytes[6] >> 4) & 0x0f;
+  if (chargeStateValue === 0) {
     data.chargeState = "Power cable disconnected";
-  } else if (chargeStateValue == 5) {
+  } else if (chargeStateValue === 5) {
     data.chargeState = "Charging";
-  } else if (chargeStateValue == 6) {
+  } else if (chargeStateValue === 6) {
     data.chargeState = "Charge complete";
   }
   return data;
@@ -89,20 +89,20 @@ function decodeHeartbeat(bytes: Buffer) {
 
 // type: 0x03 GNSSPosition
 function decodeGNSSPosition(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "GNSSPosition";
   // longitude
-  let longitude =
+  const longitude =
     (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
   data.longitude = hex2float(longitude);
 
   // latitude
-  let latitude =
+  const latitude =
     (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
   data.latitude = hex2float(latitude);
 
   // time
-  let time =
+  const time =
     (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
   data.time = timestampToTime((time + 8 * 60 * 60) * 1000);
 
@@ -126,10 +126,10 @@ function decodeBeacon(bytes: Buffer) {
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    const rssi = bytes[index + 4] - 256 + "dBm";
+    const rssi = bytes[index + 4] - 256;
 
-    data["beacon" + (i + 1)] = major + minor;
-    data["rssi" + (i + 1)] = rssi;
+    data[`beacon${i + 1}`] = major + minor;
+    data[`rssi${i + 1}`] = rssi;
   }
 
   return data;
@@ -137,10 +137,10 @@ function decodeBeacon(bytes: Buffer) {
 
 // type: 0x08 Alarm
 function decodeAlarm(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Alarm";
 
-  var alarmValue = bytes[1] & 0xff;
+  const alarmValue = bytes[1] & 0xff;
   if (alarmValue === 1) {
     data.alarm = "SOS";
   } else if (alarmValue === 2) {
@@ -153,10 +153,10 @@ function decodeAlarm(bytes: Buffer) {
 }
 
 function hex2float(num: number) {
-  var sign = num & 0x80000000 ? -1 : 1;
-  var exponent = ((num >> 23) & 0xff) - 127;
-  var mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
-  return sign * mantissa * Math.pow(2, exponent);
+  const sign = num & 0x80000000 ? -1 : 1;
+  const exponent = ((num >> 23) & 0xff) - 127;
+  const mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
+  return sign * mantissa * 2 ** exponent;
 }
 
 function timestampToTime(timestamp: number) {
@@ -170,12 +170,14 @@ function timestampToTime(timestamp: number) {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
-var ignore_vars: any = [];
+const ignore_vars: any = [];
 
 function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
-    if (ignore_vars.includes(key)) continue;
+    if (ignore_vars.includes(key)) {
+      continue;
+    }
 
     if (typeof object_item[key] === "object") {
       result.push({
@@ -204,9 +206,7 @@ const data = payload.find(
     x.variable === "payload" ||
     x.variable === "data"
 );
-const port = payload.find(
-  (x) => x.variable === "fport" || x.variable === "port"
-);
+
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
   const group = payload[0].group || String(new Date().getTime());

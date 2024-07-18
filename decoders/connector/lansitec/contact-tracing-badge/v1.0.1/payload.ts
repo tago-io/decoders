@@ -3,53 +3,36 @@
 //  - bytes is an array of bytes, e.g. [225, 230, 255, 0]
 //  - variables contains the device variables e.g. {"calibration": "3.5"} (both the key / value are of type string)
 // The function must return an object, e.g. {"temperature": 22.5}
-function Decode(fPort: any, bytes: Buffer) {
+function Decode(bytes: Buffer) {
   console.log("Decode");
   //获取uplink消息类型
-  var uplink_type = (bytes[0] >> 4) & 0x0f;
+  const uplink_type = (bytes[0] >> 4) & 0x0f;
 
   switch (uplink_type) {
     case 0x01:
       //proc
-      var Register_Msg = Register_proc(bytes);
-      return Register_Msg;
-      break;
+      return Register_proc(bytes);
 
     case 0x02:
-      var Heartbeat_Msg = Heartbeat_proc(bytes);
-      return Heartbeat_Msg;
-      break;
+      return Heartbeat_proc(bytes);
 
     case 0x08:
-      var TenSecInstantReportMode_Msg = TenSecInstantReportMode_proc(bytes);
-      return TenSecInstantReportMode_Msg;
-      break;
+      return TenSecInstantReportMode_proc(bytes);
 
     case 0x0c:
-      var EightySecPeriodicReportMode_Msg =
-        EightySecPeriodicReportMode_proc(bytes);
-      return EightySecPeriodicReportMode_Msg;
-      break;
+      return EightySecPeriodicReportMode_proc(bytes);
 
     case 0x0f:
-      var Acknowledge_Msg = Acknowledge_proc(bytes);
-      return Acknowledge_Msg;
-      break;
+      return Acknowledge_proc(bytes);
 
     default:
-      return [
-        {
-          variable: "parser_error",
-          value: "Parser_error: operation does not exist",
-        },
-      ];
-      break;
+      return null;
   }
 }
 
 //Message type: Register  0x1
 function Register_proc(bytes: Buffer) {
-  var Register_Msg: any = {
+  const Register_Msg: any = {
     type: 0,
     adr: 0,
     mode: 0,
@@ -154,7 +137,7 @@ function Register_proc(bytes: Buffer) {
     unit: "dBm",
   };
   //dr
-  Register_Msg.dr = "DR" + ((bytes[3] >> 4) & 0x0f);
+  Register_Msg.dr = (bytes[3] >> 4) & 0x0f;
   //pos
   Register_Msg.pos = {
     value: (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5,
@@ -168,14 +151,14 @@ function Register_proc(bytes: Buffer) {
   //rfu
   // Register_Msg["rfu"] = ((bytes[7] >> 4) & 0x0F);
   //buzzer and vibrator
-  Register_Msg["buzzerAndvibrator"] = (bytes[7] >> 3) & 0x01;
-  switch (Register_Msg["buzzerAndvibrator"]) {
+  const buzzerAndvibrator = (bytes[7] >> 3) & 0x01;
+  switch (buzzerAndvibrator) {
     case 0x00:
-      Register_Msg["buzzerAndvibrator"] = "OFF";
+      Register_Msg.buzzerAndvibrator = "OFF";
       break;
 
     case 0x01:
-      Register_Msg["buzzerAndvibrator"] = "ON";
+      Register_Msg.buzzerAndvibrator = "ON";
       break;
 
     default:
@@ -237,14 +220,14 @@ function Register_proc(bytes: Buffer) {
       break;
   }
   //BT function and proximity detection
-  Register_Msg["proximitydetection"] = (bytes[8] >> 7) & 0x01;
-  switch (Register_Msg["proximitydetection"]) {
+  const proximitydetection = (bytes[8] >> 7) & 0x01;
+  switch (proximitydetection) {
     case 0x00:
-      Register_Msg["proximitydetection"] = "OFF";
+      Register_Msg.proximitydetection = "OFF";
       break;
 
     case 0x01:
-      Register_Msg["proximitydetection"] = "ON";
+      Register_Msg.proximitydetection = "ON";
       break;
 
     default:
@@ -260,7 +243,7 @@ function Register_proc(bytes: Buffer) {
 
 //Message type: Heartbeat  0x2
 function Heartbeat_proc(bytes: Buffer) {
-  var Heartbeat_Msg: any = {
+  const Heartbeat_Msg: any = {
     type: 0,
     ver: 0,
     vol: 0,
@@ -330,42 +313,42 @@ function Heartbeat_proc(bytes: Buffer) {
       break;
   }
   //Vibrator and buzzer
-  Heartbeat_Msg["buzzerAndvibrator"] = bytes[9] & 0x0f;
-  switch (Heartbeat_Msg["buzzerAndvibrator"]) {
+  const buzzerAndvibrator = bytes[9] & 0x0f;
+  switch (buzzerAndvibrator) {
     case 0x00:
-      Heartbeat_Msg["buzzerAndvibrator"] = "No action";
+      Heartbeat_Msg.buzzerAndvibrator = "No action";
       break;
 
     case 0x01:
-      Heartbeat_Msg["buzzerAndvibrator"] = "vibrator disable and buzzer mute";
+      Heartbeat_Msg.buzzerAndvibrator = "vibrator disable and buzzer mute";
       break;
 
     case 0x02:
-      Heartbeat_Msg["buzzerAndvibrator"] = "vibrator disable and buzzer half";
+      Heartbeat_Msg.buzzerAndvibrator = "vibrator disable and buzzer half";
       break;
 
     case 0x03:
-      Heartbeat_Msg["buzzerAndvibrator"] = "vibrator disable and buzzer full";
+      Heartbeat_Msg.buzzerAndvibrator = "vibrator disable and buzzer full";
       break;
 
     case 0x04:
-      Heartbeat_Msg["buzzerAndvibrator"] = "vibrator enable and buzzer mute";
+      Heartbeat_Msg.buzzerAndvibrator = "vibrator enable and buzzer mute";
       break;
 
     case 0x05:
-      Heartbeat_Msg["buzzerAndvibrator"] = "vibrator enable and buzzer half";
+      Heartbeat_Msg.buzzerAndvibrator = "vibrator enable and buzzer half";
       break;
 
     case 0x06:
-      Heartbeat_Msg["buzzerAndvibrator"] = "vibrator enable and buzzer full";
+      Heartbeat_Msg.buzzerAndvibrator = "vibrator enable and buzzer full";
       break;
 
     case 0x07:
-      Heartbeat_Msg["buzzerAndvibrator"] = "vibrator disable and buzzer mute";
+      Heartbeat_Msg.buzzerAndvibrator = "vibrator disable and buzzer mute";
       break;
 
     case 0x08:
-      Heartbeat_Msg["buzzerAndvibrator"] =
+      Heartbeat_Msg.buzzerAndvibrator =
         "disable beacon-in-tracker and proximity detection";
       break;
 
@@ -561,16 +544,16 @@ function Heartbeat_proc(bytes: Buffer) {
       break;
   }
   // FRIEND FIELD
-  var type = (bytes[11] >> 4) & 0x0f;
-  if (0x0c != type) {
+  const type = (bytes[11] >> 4) & 0x0f;
+  if (0x0c !== type) {
     return Heartbeat_Msg;
   }
   Heartbeat_Msg.friendnum = bytes[11] & 0x0f;
-  for (var i = 0; i < Heartbeat_Msg.friendnum; i++) {
-    var tmp = i + 1;
-    Heartbeat_Msg["dev" + tmp + "major"] =
+  for (let i = 0; i < Heartbeat_Msg.friendnum; i++) {
+    const tmp = i + 1;
+    Heartbeat_Msg[`dev${tmp}major`] =
       ((bytes[12 + 4 * i] << 8) & 0xff00) | (bytes[13 + 4 * i] & 0xff);
-    Heartbeat_Msg["dev" + tmp + "minor"] =
+    Heartbeat_Msg[`dev${tmp}minor`] =
       ((bytes[14 + 4 * i] << 8) & 0xff00) | (bytes[15 + 4 * i] & 0xff);
   }
   return Heartbeat_Msg;
@@ -578,7 +561,7 @@ function Heartbeat_proc(bytes: Buffer) {
 
 //Message type: TenSecInstantReportMode  0x8
 function TenSecInstantReportMode_proc(bytes: Buffer) {
-  var TenSecInstantReportMode_Msg: any = {
+  const TenSecInstantReportMode_Msg: any = {
     type: 0,
     length: 0,
   };
@@ -587,43 +570,42 @@ function TenSecInstantReportMode_proc(bytes: Buffer) {
   if (0 === TenSecInstantReportMode_Msg.length) {
     return TenSecInstantReportMode_Msg;
   }
-  for (var i = 0; i < TenSecInstantReportMode_Msg.length; i++) {
-    var tmp = i + 1;
-    TenSecInstantReportMode_Msg["dev" + tmp + "major"] =
+  for (let i = 0; i < TenSecInstantReportMode_Msg.length; i++) {
+    const tmp = i + 1;
+    TenSecInstantReportMode_Msg[`dev${tmp}major`] =
       ((bytes[1 + 5 * i] << 8) & 0xff00) | (bytes[2 + 5 * i] & 0xff);
-    TenSecInstantReportMode_Msg["dev" + tmp + "minor"] =
+    TenSecInstantReportMode_Msg[`dev${tmp}minor`] =
       ((bytes[3 + 5 * i] << 8) & 0xff00) | (bytes[4 + 5 * i] & 0xff);
-    TenSecInstantReportMode_Msg["dev" + tmp + "beacontype"] =
+    TenSecInstantReportMode_Msg[`dev${tmp}beacontype`] =
       (bytes[5 + 5 * i] >> 7) & 0x01;
-    switch (TenSecInstantReportMode_Msg["dev" + tmp + "beacontype"]) {
+    switch (TenSecInstantReportMode_Msg[`dev${tmp}beacontype`]) {
       case 0x00:
-        TenSecInstantReportMode_Msg["dev" + tmp + "beacontype"] =
+        TenSecInstantReportMode_Msg[`dev${tmp}beacontype`] =
           "beacon-in-tracker";
         break;
 
       case 0x01:
-        TenSecInstantReportMode_Msg["dev" + tmp + "beacontype"] =
-          "bluetooth beacon";
+        TenSecInstantReportMode_Msg[`dev${tmp}beacontype`] = "bluetooth beacon";
         break;
 
       default:
         break;
     }
-    TenSecInstantReportMode_Msg["dev" + tmp + "rssi"] = {
+    TenSecInstantReportMode_Msg[`dev${tmp}rssi`] = {
       value: ((bytes[5 + 5 * i] & 0x7f) - 0x80) * -1,
       unit: "-dBm",
     };
   }
   const begin = 6 + 5 * (TenSecInstantReportMode_Msg.length - 1);
   const n = Math.floor((TenSecInstantReportMode_Msg.length + 1) / 2);
-  for (var i = 0; i < n; ++i) {
-    var tmp = i + 1;
-    TenSecInstantReportMode_Msg["dev" + tmp + "tmoff"] = {
+  for (let i = 0; i < n; ++i) {
+    const tmp = i + 1;
+    TenSecInstantReportMode_Msg[`dev${tmp}tmoff`] = {
       value: (bytes[begin + i] >> 4) & 0x0f,
       unit: "sec",
     };
     if (tmp + 1 <= TenSecInstantReportMode_Msg.length) {
-      TenSecInstantReportMode_Msg["dev" + (tmp + 1) + "tmoff"] = {
+      TenSecInstantReportMode_Msg[`dev${tmp}tmoff`] = {
         value: bytes[begin + i] & 0x0f,
         unit: "sec",
       };
@@ -634,67 +616,59 @@ function TenSecInstantReportMode_proc(bytes: Buffer) {
 
 //Message type: EightySecPeriodicReportMode  0xC
 function EightySecPeriodicReportMode_proc(bytes: Buffer) {
-  var EightySecPeriodicReportMode_Msg: any = {
+  const EightySecPeriodicReportMode_Msg: any = {
     type: 0,
     length: 0,
   };
   EightySecPeriodicReportMode_Msg.type = "EightySecPeriodicReportMode";
   EightySecPeriodicReportMode_Msg.length = bytes[0] & 0x0f;
   for (let i = 1, k = 1; i < bytes.length; k++) {
-    if (bytes[i] == 0xff && bytes[i + 1] == 0xff) {
+    if (bytes[i] === 0xff && bytes[i + 1] === 0xff) {
       i += 2;
-      for (var j = 1; j <= EightySecPeriodicReportMode_Msg.length; j++) {
-        EightySecPeriodicReportMode_Msg["beacon" + j + "minor"] =
+      for (let j = 1; j <= EightySecPeriodicReportMode_Msg.length; j++) {
+        EightySecPeriodicReportMode_Msg[`beacon${j}minor`] =
           ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
-        EightySecPeriodicReportMode_Msg["beacon" + j + "timemark_beacon"] =
-          bytes[i];
-        EightySecPeriodicReportMode_Msg["beacon" + j + "timemark_beacon_0_9"] =
-          bytes[i] & 0x01 ? true : false;
-        EightySecPeriodicReportMode_Msg[
-          "beacon" + j + "timemark_beacon_10_19"
-        ] = (bytes[i] >> 1) & 0x01 ? true : false;
-        EightySecPeriodicReportMode_Msg[
-          "beacon" + j + "timemark_beacon_20_29"
-        ] = (bytes[i] >> 2) & 0x01 ? true : false;
-        EightySecPeriodicReportMode_Msg[
-          "beacon" + j + "timemark_beacon_30_39"
-        ] = (bytes[i] >> 3) & 0x01 ? true : false;
-        EightySecPeriodicReportMode_Msg[
-          "beacon" + j + "timemark_beacon_40_49"
-        ] = (bytes[i] >> 4) & 0x01 ? true : false;
-        EightySecPeriodicReportMode_Msg[
-          "beacon" + j + "timemark_beacon_50_59"
-        ] = (bytes[i] >> 5) & 0x01 ? true : false;
-        EightySecPeriodicReportMode_Msg[
-          "beacon" + j + "timemark_beacon_60_69"
-        ] = (bytes[i] >> 6) & 0x01 ? true : false;
-        EightySecPeriodicReportMode_Msg[
-          "beacon" + j + "timemark_beacon_70_79"
-        ] = (bytes[i++] >> 7) & 0x01 ? true : false;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon`] = bytes[i];
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_0_9`] =
+          bytes[i] & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_10_19`] =
+          (bytes[i] >> 1) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_20_19`] =
+          (bytes[i] >> 2) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_30_19`] =
+          (bytes[i] >> 3) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_40_19`] =
+          (bytes[i] >> 4) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_50_19`] =
+          (bytes[i] >> 5) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_60_19`] =
+          (bytes[i] >> 6) & 0x01;
+        EightySecPeriodicReportMode_Msg[`beacon${j}timemark_beacon_70_19`] =
+          (bytes[i++] >> 7) & 0x01;
       }
       return EightySecPeriodicReportMode_Msg;
     }
-    EightySecPeriodicReportMode_Msg["badge" + k + "major"] =
+    EightySecPeriodicReportMode_Msg[`badge${k}major`] =
       ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
-    EightySecPeriodicReportMode_Msg["badge" + k + "minor"] =
+    EightySecPeriodicReportMode_Msg[`badge${k}minor`] =
       ((bytes[i++] << 8) & 0xff00) | (bytes[i++] & 0xff);
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge"] = bytes[i];
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge_0_9"] =
-      bytes[i] & 0x01 ? true : false;
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge_10_19"] =
-      (bytes[i] >> 1) & 0x01 ? true : false;
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge_20_29"] =
-      (bytes[i] >> 2) & 0x01 ? true : false;
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge_30_39"] =
-      (bytes[i] >> 3) & 0x01 ? true : false;
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge_40_49"] =
-      (bytes[i] >> 4) & 0x01 ? true : false;
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge_50_59"] =
-      (bytes[i] >> 5) & 0x01 ? true : false;
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge_60_69"] =
-      (bytes[i] >> 6) & 0x01 ? true : false;
-    EightySecPeriodicReportMode_Msg["badge" + k + "timemark_badge_70_79"] =
-      (bytes[i++] >> 7) & 0x01 ? true : false;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge`] = bytes[i];
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_0_9`] =
+      bytes[i] & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_10_19`] =
+      (bytes[i] >> 1) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_20_29`] =
+      (bytes[i] >> 2) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_30_39`] =
+      (bytes[i] >> 3) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_40_49`] =
+      (bytes[i] >> 4) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_50_59`] =
+      (bytes[i] >> 5) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_60_69`] =
+      (bytes[i] >> 6) & 0x01;
+    EightySecPeriodicReportMode_Msg[`badge${k}timemark_badge_70_79`] =
+      (bytes[i++] >> 7) & 0x01;
   }
 
   return EightySecPeriodicReportMode_Msg;
@@ -702,7 +676,7 @@ function EightySecPeriodicReportMode_proc(bytes: Buffer) {
 
 //Message type: Acknowledge  0xF
 function Acknowledge_proc(bytes: Buffer) {
-  var Acknowledge_Msg: any = {
+  const Acknowledge_Msg: any = {
     type: 0,
     result: 0,
     msgid: 0,
@@ -725,12 +699,14 @@ function Acknowledge_proc(bytes: Buffer) {
   return Acknowledge_Msg;
 }
 
-var ignore_vars: any = [];
+const ignore_vars: any = [];
 
 function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
-    if (ignore_vars.includes(key)) continue;
+    if (ignore_vars.includes(key)) {
+      continue;
+    }
 
     if (typeof object_item[key] === "object") {
       result.push({
@@ -753,12 +729,12 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-// let payload = [{ variable: "payload", value: "1901702000020a0c810000"}];
-//let payload = [{ variable: "payload", value: "215f0409c4010600000695"}];
-// let payload = [{ variable: "payload", value: "820005000382000900072b21" }];
-// let payload = [{ variable: "payload", value: "c2d011002ef9d011002d8f" }];
-// let payload = [{ variable: "payload", value: "c2d011002ef9d011002d8fffff019bdf00f020" }];
-// let payload = [{ variable: "payload", value: "d101 "}];
+// const payload = [{ variable: "payload", value: "1901702000020a0c810000"}];
+//const payload = [{ variable: "payload", value: "215f0409c4010600000695"}];
+// const payload = [{ variable: "payload", value: "820005000382000900072b21" }];
+// const payload = [{ variable: "payload", value: "c2d011002ef9d011002d8f" }];
+// const payload = [{ variable: "payload", value: "c2d011002ef9d011002d8fffff019bdf00f020" }];
+// const payload = [{ variable: "payload", value: "d101 "}];
 //console.log(payload);
 
 const data = payload.find(
@@ -767,15 +743,13 @@ const data = payload.find(
     x.variable === "payload" ||
     x.variable === "data"
 );
-const port = payload.find(
-  (x) => x.variable === "fport" || x.variable === "port"
-);
+
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
   // console.log(buffer);
   const group = payload[0].group || String(new Date().getTime());
   payload = payload.map((x) => ({ ...x, group }));
-  payload = payload.concat(toTagoFormat(Decode(port, buffer), group));
+  payload = payload.concat(toTagoFormat(Decode(buffer), group));
   //payload = payload.map((x) => ({ ...x, group }));
 }
 //console.log(payload);

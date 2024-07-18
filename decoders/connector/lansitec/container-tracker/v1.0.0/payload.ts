@@ -1,7 +1,7 @@
 // ContainerTracker
 function decodeUplink(bytes: Buffer) {
   // type
-  var uplinkType = (bytes[0] >> 4) & 0x0f;
+  const uplinkType = (bytes[0] >> 4) & 0x0f;
 
   switch (uplinkType) {
     case 0x01:
@@ -34,60 +34,60 @@ function decodeUplink(bytes: Buffer) {
 }
 // type: 0x1 Registration
 function decodeRegistration(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Registration";
-  data.adr = ((bytes[0] >> 3) & 0x1) == 0 ? "OFF" : "ON";
+  data.adr = ((bytes[0] >> 3) & 0x1) === 0 ? "OFF" : "ON";
   // mode
   data.mode = 0x00;
   // smode
   data.smode = 0x00;
   // power
-  data.power = ((bytes[2] >> 3) & 0x1f) + "dBm";
+  data.power = (bytes[2] >> 3) & 0x1f;
   // offlineCacheEnable
   data.offlineCacheEnable =
-    ((bytes[2] >> 2) & 0x01) == 0 ? "Disable" : "Enable";
+    ((bytes[2] >> 2) & 0x01) === 0 ? "Disable" : "Enable";
   // alarmEnable
-  data.alarmEnable = ((bytes[2] >> 1) & 0x01) == 0 ? "Disable" : "Enable";
+  data.alarmEnable = ((bytes[2] >> 1) & 0x01) === 0 ? "Disable" : "Enable";
   // singleKeyEnable
-  data.singleKeyEnable = (bytes[2] & 0x01) == 0 ? "Disable" : "Enable";
+  data.singleKeyEnable = (bytes[2] & 0x01) === 0 ? "Disable" : "Enable";
   // dr
   data.dr = (bytes[3] >> 4) & 0x0f;
   // gnssEnable
-  data.gnssEnable = ((bytes[3] >> 3) & 0x01) == 0 ? "Disable" : "Enable";
+  data.gnssEnable = ((bytes[3] >> 3) & 0x01) === 0 ? "Disable" : "Enable";
   // positionReportMode
-  var positionReportModeValue = (bytes[3] >> 1) & 0x03;
-  if (positionReportModeValue == 0) {
+  const positionReportModeValue = (bytes[3] >> 1) & 0x03;
+  if (positionReportModeValue === 0) {
     data.positionReportMode = "Period";
-  } else if (positionReportModeValue == 1) {
+  } else if (positionReportModeValue === 1) {
     data.positionReportMode = "Autonomous";
-  } else if (positionReportModeValue == 2) {
+  } else if (positionReportModeValue === 2) {
     data.positionReportMode = "On-Demand";
   }
   // switchEnable
-  data.switchEnable = (bytes[3] & 0x01) == 0 ? "Disable" : "Enable";
+  data.switchEnable = (bytes[3] & 0x01) === 0 ? "Disable" : "Enable";
   // heartbeatReportInterval
   data.heartbeatReportInterval =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 30 + "s";
+    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 30;
   // blePositionReportInterval
   data.blePositionReportInterval =
-    (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5 + "s";
+    (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5;
   // div
   data.div = bytes[8] & 0xff;
   // bleEnable
-  data.bleEnable = (bytes[9] & 0x01) == 0 ? "Disable" : "Enable";
+  data.bleEnable = (bytes[9] & 0x01) === 0 ? "Disable" : "Enable";
   // positioningUUID
-  var positioningUUID = "";
+  let positioningUUID = "";
   for (let i = 0; i < 4; i++) {
-    var byte1 = bytes[10 + 4 * i];
-    var byte2 = bytes[11 + 4 * i];
-    var byte3 = bytes[12 + 4 * i];
-    var byte4 = bytes[13 + 4 * i];
+    const byte1 = bytes[10 + 4 * i];
+    const byte2 = bytes[11 + 4 * i];
+    const byte3 = bytes[12 + 4 * i];
+    const byte4 = bytes[13 + 4 * i];
 
-    var part1 = ((byte1 << 8) | byte2)
+    const part1 = ((byte1 << 8) | byte2)
       .toString(16)
       .padStart(4, "0")
       .toUpperCase();
-    var part2 = ((byte3 << 8) | byte4)
+    const part2 = ((byte3 << 8) | byte4)
       .toString(16)
       .padStart(4, "0")
       .toUpperCase();
@@ -106,24 +106,24 @@ function decodeRegistration(bytes: Buffer) {
   // hbCount
   data.hbCount = bytes[30];
   // assetBeaconReportPeriod
-  data.assetBeaconReportPeriod = bytes[31] + "min";
+  data.assetBeaconReportPeriod = bytes[31];
   // bluetoothReceivingDuration
-  data.bluetoothReceivingDuration = bytes[32] + "s";
+  data.bluetoothReceivingDuration = bytes[32];
   // extraAssetBeaconReportInterval
-  data.extraAssetBeaconReportInterval = bytes[33] + "s";
+  data.extraAssetBeaconReportInterval = bytes[33];
   // assetBeaconUUID
-  var assetBeaconUUID = "";
+  let assetBeaconUUID = "";
   for (let i = 0; i < 4; i++) {
-    var byte1 = bytes[34 + 4 * i];
-    var byte2 = bytes[35 + 4 * i];
-    var byte3 = bytes[36 + 4 * i];
-    var byte4 = bytes[37 + 4 * i];
+    const byte1 = bytes[34 + 4 * i];
+    const byte2 = bytes[35 + 4 * i];
+    const byte3 = bytes[36 + 4 * i];
+    const byte4 = bytes[37 + 4 * i];
 
-    var part1 = ((byte1 << 8) | byte2)
+    const part1 = ((byte1 << 8) | byte2)
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var part2 = ((byte3 << 8) | byte4)
+    const part2 = ((byte3 << 8) | byte4)
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
@@ -134,38 +134,39 @@ function decodeRegistration(bytes: Buffer) {
   // vibrationShockDetectionThreshold
   data.vibrationShockDetectionThreshold = (50 + bytes[50] * 5) * 0.001 + "g";
   // vibrationShockDetectionReportPeriod
-  data.vibrationShockDetectionReportPeriod = bytes[51] * 30 + "s";
+  data.vibrationShockDetectionReportPeriod = bytes[51] * 30;
   // gnssPositionReportInterval
   data.gnssPositionReportInterval =
-    (((bytes[52] << 8) & 0xff00) | (bytes[53] & 0xff)) * 5 + "s";
+    (((bytes[52] << 8) & 0xff00) | (bytes[53] & 0xff)) * 5;
 
   return data;
 }
 
 // type: 0x2 Heartbeat
 function decodeHeartbeat(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Heartbeat";
   // snrEnable
-  data.snrEnable = (bytes[0] & 0x0f) == 0 ? "No SNR field" : "SNR field Enable";
+  data.snrEnable =
+    (bytes[0] & 0x0f) === 0 ? "No SNR field" : "SNR field Enable";
   // voltage
-  data.voltage = bytes[1] / 100 + 1.5 + "V";
+  data.voltage = bytes[1] / 100 + 1.5;
   // rssi
-  data.rssi = bytes[2] * -1 + "dBm";
+  data.rssi = bytes[2] * -1;
   // snr
-  data.snr = (((bytes[3] << 8) & 0xff00) | (bytes[4] & 0xff)) / 100 + "dB";
+  data.snr = (((bytes[3] << 8) & 0xff00) | (bytes[4] & 0xff)) / 100;
 
   // gnssState
-  var gnssStateValue = (bytes[5] >> 4) & 0x0f;
-  if (gnssStateValue == 0) {
+  const gnssStateValue = (bytes[5] >> 4) & 0x0f;
+  if (gnssStateValue === 0) {
     data.gnssState = "Off";
-  } else if (gnssStateValue == 1) {
+  } else if (gnssStateValue === 1) {
     data.gnssState = "Boot GNSS";
-  } else if (gnssStateValue == 2) {
+  } else if (gnssStateValue === 2) {
     data.gnssState = "Locating";
-  } else if (gnssStateValue == 3) {
+  } else if (gnssStateValue === 3) {
     data.gnssState = "Located";
-  } else if (gnssStateValue == 9) {
+  } else if (gnssStateValue === 9) {
     data.gnssState = "No signal";
   }
   // moveState
@@ -173,27 +174,27 @@ function decodeHeartbeat(bytes: Buffer) {
   // temperature
   data.temperature = (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) + "℃";
   // movement
-  data.movement = (((bytes[8] << 8) & 0xff00) | (bytes[9] & 0xff)) * 5 + "s";
+  data.movement = (((bytes[8] << 8) & 0xff00) | (bytes[9] & 0xff)) * 5;
 
   return data;
 }
 
 // type: 0x03 GNSSPosition
 function decodeGNSSPosition(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "GNSSPosition";
   // longitude
-  let longitude =
+  const longitude =
     (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
   data.longitude = hex2float(longitude);
 
   // latitude
-  let latitude =
+  const latitude =
     (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
   data.latitude = hex2float(latitude);
 
   // time
-  let time =
+  const time =
     (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
   data.time = timestampToTime((time + 8 * 60 * 60) * 1000);
 
@@ -202,22 +203,28 @@ function decodeGNSSPosition(bytes: Buffer) {
 
 // type: 0x07 PositionBeacon
 function decodePositionBeacon(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "PositionBeacon";
   data.length = bytes[0] & 0x0f;
   for (let i = 0; i < data.length; i++) {
-    var major = (((bytes[6 + 5 * i] << 8) & 0xff00) | (bytes[7 + 5 * i] & 0xff))
+    const major = (
+      ((bytes[6 + 5 * i] << 8) & 0xff00) |
+      (bytes[7 + 5 * i] & 0xff)
+    )
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var minor = (((bytes[8 + 5 * i] << 8) & 0xff00) | (bytes[9 + 5 * i] & 0xff))
+    const minor = (
+      ((bytes[8 + 5 * i] << 8) & 0xff00) |
+      (bytes[9 + 5 * i] & 0xff)
+    )
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var rssi = bytes[10 + 5 * i] - 256 + "dBm";
+    const rssi = bytes[10 + 5 * i] - 256;
 
-    data["beacon" + (i + 1)] = major + minor;
-    data["rssi" + (i + 1)] = rssi;
+    data[`beacon${i + 1}`] = major + minor;
+    data[`rssi${i + 1}`] = rssi;
   }
 
   return data;
@@ -225,22 +232,28 @@ function decodePositionBeacon(bytes: Buffer) {
 
 // type: 0x08 AssetBeacon
 function decodeAssetBeacon(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "AssetBeacon";
   data.qty = bytes[1] & 0xff;
   for (let i = 0; i < data.qty; i++) {
-    var major = (((bytes[2 + 5 * i] << 8) & 0xff00) | (bytes[3 + 5 * i] & 0xff))
+    const major = (
+      ((bytes[2 + 5 * i] << 8) & 0xff00) |
+      (bytes[3 + 5 * i] & 0xff)
+    )
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var minor = (((bytes[4 + 5 * i] << 8) & 0xff00) | (bytes[5 + 5 * i] & 0xff))
+    const minor = (
+      ((bytes[4 + 5 * i] << 8) & 0xff00) |
+      (bytes[5 + 5 * i] & 0xff)
+    )
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var rssi = bytes[6 + 5 * i] - 256 + "dBm";
+    const rssi = bytes[6 + 5 * i] - 256;
 
-    data["beacon" + (i + 1)] = major + minor;
-    data["rssi" + (i + 1)] = rssi;
+    data[`beacon${i + 1}`] = major + minor;
+    data[`rssi${i + 1}`] = rssi;
   }
 
   return data;
@@ -248,10 +261,10 @@ function decodeAssetBeacon(bytes: Buffer) {
 
 // type: 0x09 Alarm
 function decodeAlarm(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "Alarm";
-  var alarmValue = bytes[1] & 0xff;
-  if (alarmValue == 1) {
+  const alarmValue = bytes[1] & 0xff;
+  if (alarmValue === 1) {
     data.alarm = "Alarm";
   }
   return data;
@@ -259,54 +272,54 @@ function decodeAlarm(bytes: Buffer) {
 
 // type: 0x0B OfflineCachePosition
 function decodeOfflineCachePosition(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   // type
   data.type = "OfflineCachePosition";
   // length
   data.length = bytes[0] & 0x0f;
   // cacheDataType
   data.cacheDataType = bytes[1] & 0xff;
-  var beaconIndex = 1;
-  var gnssIndex = 1;
-  var index = 2;
+  let beaconIndex = 1;
+  let gnssIndex = 1;
+  let index = 2;
   for (let i = 0; i < data.length; i++) {
-    var flag = (data.cacheDataType >> (7 - i)) & 0x01;
-    if (flag == 0) {
-      var major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff))
+    const flag = (data.cacheDataType >> (7 - i)) & 0x01;
+    if (flag === 0) {
+      const major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff))
         .toString(16)
         .toUpperCase()
         .padStart(4, "0");
-      var minor = (
+      const minor = (
         ((bytes[index + 2] << 8) & 0xff00) |
         (bytes[index + 3] & 0xff)
       )
         .toString(16)
         .toUpperCase()
         .padStart(4, "0");
-      var rssi = bytes[index + 4] - 256 + "dBm";
+      const rssi = bytes[index + 4] - 256;
 
       data["beacon" + beaconIndex] = major + minor;
       data["rssi" + beaconIndex] = rssi;
       beaconIndex = beaconIndex + 1;
       index = index + 5;
-    } else if (flag == 1) {
-      var gnss: any = {};
+    } else if (flag === 1) {
+      const gnss: any = {};
       // longitude
-      var longitude =
+      const longitude =
         (bytes[index] << 24) |
         (bytes[index + 1] << 16) |
         (bytes[index + 2] << 8) |
         bytes[index + 3];
       gnss.longitude = hex2float(longitude);
       // latitude
-      var latitude =
+      const latitude =
         (bytes[index + 4] << 24) |
         (bytes[index + 5] << 16) |
         (bytes[index + 6] << 8) |
         bytes[index + 7];
       gnss.latitude = hex2float(latitude);
       // time
-      var time =
+      const time =
         (bytes[index + 8] << 24) |
         (bytes[index + 9] << 16) |
         (bytes[index + 10] << 8) |
@@ -327,17 +340,17 @@ function decodeOfflineCachePosition(bytes: Buffer) {
 
 // type: 0x0A VibrationShockDetectionReport
 function decodeVibrationShockDetectionReport(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "VibrationShockDetectionReport";
   data.vibrationShockCount = ((bytes[1] << 8) & 0xff00) | (bytes[2] & 0xff);
   return data;
 }
 
 function hex2float(num: number) {
-  var sign = num & 0x80000000 ? -1 : 1;
-  var exponent = ((num >> 23) & 0xff) - 127;
-  var mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
-  return sign * mantissa * Math.pow(2, exponent);
+  const sign = num & 0x80000000 ? -1 : 1;
+  const exponent = ((num >> 23) & 0xff) - 127;
+  const mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
+  return sign * mantissa * 2 ** exponent;
 }
 
 function timestampToTime(timestamp: number) {
@@ -351,12 +364,14 @@ function timestampToTime(timestamp: number) {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
-var ignore_vars: any = [];
+const ignore_vars: any = [];
 
 function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
-    if (ignore_vars.includes(key)) continue;
+    if (ignore_vars.includes(key)) {
+      continue;
+    }
 
     if (typeof object_item[key] === "object") {
       result.push({
@@ -385,9 +400,7 @@ const data = payload.find(
     x.variable === "payload" ||
     x.variable === "data"
 );
-const port = payload.find(
-  (x) => x.variable === "fport" || x.variable === "port"
-);
+
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
   const group = payload[0].group || String(new Date().getTime());

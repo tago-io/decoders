@@ -38,9 +38,9 @@ describe("Tracking label heartbeat unit tests", () => {
 
   test("Check variable values", () => {
     expect(result.type?.value).toBe("Heartbeat");
-    expect(result.battery?.value).toBe("100%");
-    expect(result.rssi?.value).toBe("-62dBm");
-    expect(result.snr?.value).toBe("8.3dB");
+    expect(result.battery?.value).toBe(100);
+    expect(result.rssi?.value).toBe(-62);
+    expect(result.snr?.value).toBe(8.3);
     expect(result.gnssState?.value).toBe("Off");
     expect(result.moveState?.value).toBe(0);
     expect(result.chargeState?.value).toBe("Charge complete");

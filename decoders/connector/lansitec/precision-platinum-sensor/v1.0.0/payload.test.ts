@@ -37,8 +37,8 @@ describe("Periodical temperature and humidity unit tests", () => {
   test("Check variable values", () => {
     expect(result.type?.value).toBe("Temperature");
     expect(result.number?.value).toBe(1);
-    expect(result.battery?.value).toBe("100%");
-    expect(result.rssi?.value).toBe("-80dBm");
+    expect(result.battery?.value).toBe(100);
+    expect(result.rssi?.value).toBe(-80);
     expect(result.temp1?.value).toBe("20℃");
     expect(result.crc?.value).toBe(0);
   });

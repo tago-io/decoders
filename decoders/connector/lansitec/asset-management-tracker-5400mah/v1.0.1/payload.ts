@@ -7,11 +7,11 @@ function float16(bytes: Buffer) {
 
   if (exponent === 0x00) {
     return sign * 2 ** -14 * (0 + fraction / 1024);
-  } else if (exponent === 0xff) {
-    return null; //infinity
-  } else {
-    return sign * 2 ** (exponent - bias) * (1 + fraction / 1024);
   }
+  if (exponent === 0xff) {
+    return 0; //infinity
+  }
+  return sign * 2 ** (exponent - bias) * (1 + fraction / 1024);
 }
 
 // Decode decodes an array of bytes into an object.
@@ -19,93 +19,76 @@ function float16(bytes: Buffer) {
 //  - bytes is an array of bytes, e.g. [225, 230, 255, 0]
 //  - variables contains the device variables e.g. {"calibration": "3.5"} (both the key / value are of type string)
 // The function must return an object, e.g. {"temperature": 22.5}
-function Decode(fPort: string, bytes: Buffer) {
+function Decode(bytes: Buffer) {
   //获取uplink消息类型
-  var uplink_type = (bytes[0] >> 4) & 0x0f;
+  const uplink_type = (bytes[0] >> 4) & 0x0f;
   switch (uplink_type) {
     case 0x01:
-      var Register_Msg = Register_proc(bytes);
-      return Register_Msg;
-      break;
+      return Register_proc(bytes);
 
     case 0x02:
-      var Heartbeat_Msg = Heartbeat_proc(bytes);
-      return Heartbeat_Msg;
-      break;
+      return Heartbeat_proc(bytes);
 
     case 0x03:
-      var PeriodicalPposition_Msg = PeriodicalPosition_proc(bytes);
-      return PeriodicalPposition_Msg;
-      break;
+      return PeriodicalPosition_proc(bytes);
 
     case 0x04:
-      var OnDemandPosition_Msg = OnDemandPosition_proc(bytes);
-      return OnDemandPosition_Msg;
-      break;
+      return OnDemandPosition_proc(bytes);
 
     case 0x05:
-      var HistoryPositon_Msg = HistoryPosition_proc(bytes);
-      return HistoryPositon_Msg;
-      break;
+      return HistoryPosition_proc(bytes);
 
     case 0x06:
-      var Alarm_Msg = Alarm_proc(bytes);
-      return Alarm_Msg;
-      break;
+      return Alarm_proc(bytes);
 
     case 0x07:
-      var BleCoordinate_Msg = BleCoordinate_proc(bytes);
-      return BleCoordinate_Msg;
-      break;
+      return BleCoordinate_proc(bytes);
 
     case 0x08:
-      var Acknowledge_Msg = Acknowledge_proc(bytes);
-      return Acknowledge_Msg;
-      break;
+      return Acknowledge_proc(bytes);
 
     default:
       return null;
-      break;
   }
 }
 
 //Message type: Register  0x1
 function Register_proc(bytes: Buffer) {
-  var Register_Msg: {
+  const Register_Msg: {
     type: string;
     adr: string;
     mode: string;
     smode: string;
-    BleTxPower: string;
+    BleTxPower: number;
     frequencysweepmode: string;
     dr: string;
     breakpoint: string;
     selfadapt: string;
     oneoff: string;
     alreport: string;
-    pos: string;
-    hb: string;
+    pos: number;
+    hb: number;
     crc: number;
   } = {
     type: "",
     adr: "",
     mode: "",
     smode: "",
-    BleTxPower: "",
+    BleTxPower: 0,
     frequencysweepmode: "",
     dr: "",
     breakpoint: "",
     selfadapt: "",
     oneoff: "",
     alreport: "",
-    pos: "",
-    hb: "",
+    pos: 0,
+    hb: 0,
     crc: 0,
   };
   //type
   Register_Msg.type = "Register";
   //adr
-  var adr = (bytes[0] >> 3) & 0x01;
+  const adr = (bytes[0] >> 3) & 0x01;
   switch (adr) {
     case 0x00:
       Register_Msg.adr = "OFF";
@@ -119,7 +102,7 @@ function Register_proc(bytes: Buffer) {
       break;
   }
   //mode
-  var mode = bytes[0] & 0x07;
+  const mode = bytes[0] & 0x07;
   switch (mode) {
     case 0x01:
       Register_Msg.mode = "AU920";
@@ -153,7 +136,7 @@ function Register_proc(bytes: Buffer) {
       break;
   }
   //smode
-  var smode = bytes[1];
+  const smode = bytes[1];
   switch (smode) {
     case 0x01:
       Register_Msg.smode = "AU920";
@@ -187,13 +170,13 @@ function Register_proc(bytes: Buffer) {
       break;
   }
   //BleTxPower
-  var BleTxPower = {
+  Register_Msg.BleTxPower = {
     value: (bytes[2] >> 3) & 0x1f,
     unit: "dBm",
   };
   //Register_Msg.rfu1 = (bytes[2] & 0x07);
   if (Register_Msg.mode === "CLAA") {
-    var frequencysweepmode = bytes[2] & 0x07;
+    const frequencysweepmode = bytes[2] & 0x07;
     if (frequencysweepmode === 0x01) {
       Register_Msg.frequencysweepmode = "A mode";
     } else if (frequencysweepmode === 0x02) {
@@ -211,7 +194,7 @@ function Register_proc(bytes: Buffer) {
   //DR
   Register_Msg.dr = `DR${(bytes[3] >> 4) & 0x0f}`;
   //breakpoint
-  var breakpoint = (bytes[3] >> 3) & 0x01;
+  const breakpoint = (bytes[3] >> 3) & 0x01;
   switch (breakpoint) {
     case 0x00:
       Register_Msg.breakpoint = "Disable";
@@ -225,7 +208,7 @@ function Register_proc(bytes: Buffer) {
       break;
   }
   //selfadapt
-  var selfadapt = (bytes[3] >> 2) & 0x01;
+  const selfadapt = (bytes[3] >> 2) & 0x01;
   switch (selfadapt) {
     case 0x00:
       Register_Msg.selfadapt = "Disable";
@@ -239,7 +222,7 @@ function Register_proc(bytes: Buffer) {
       break;
   }
   //oneoff
-  var oneoff = (bytes[3] >> 1) & 0x01;
+  const oneoff = (bytes[3] >> 1) & 0x01;
   switch (oneoff) {
     case 0x00:
       Register_Msg.oneoff = "Disable";
@@ -253,7 +236,7 @@ function Register_proc(bytes: Buffer) {
       break;
   }
   //alreport
-  var alreport = bytes[3] & 0x01;
+  const alreport = bytes[3] & 0x01;
   switch (alreport) {
     case 0x00:
       Register_Msg.alreport = "Disable";
@@ -267,9 +250,9 @@ function Register_proc(bytes: Buffer) {
       break;
   }
   //pos
-  Register_Msg.pos = (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5 + "s";
+  Register_Msg.pos = (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
   //HB
-  Register_Msg.hb = bytes[6] * 30 + "s";
+  Register_Msg.hb = bytes[6] * 30;
   //crc
   Register_Msg.crc = ((bytes[7] << 8) & 0xff00) | (bytes[8] & 0xff);
   return Register_Msg;
@@ -277,7 +260,7 @@ function Register_proc(bytes: Buffer) {
 
 //Message type: Heartbeat  0x2
 function Heartbeat_proc(bytes: Buffer) {
-  var Heartbeat_Msg: {
+  const Heartbeat_Msg: {
     type: string;
     ver: number;
     vol: number;
@@ -312,7 +295,7 @@ function Heartbeat_proc(bytes: Buffer) {
 
   Heartbeat_Msg.snr = snr * 0.01;
   //GPSSTATE
-  var gpsstate = (bytes[5] >> 4) & 0x0f;
+  const gpsstate = (bytes[5] >> 4) & 0x0f;
   switch (gpsstate) {
     case 0x00:
       Heartbeat_Msg.gpsstate = "off";
@@ -341,7 +324,7 @@ function Heartbeat_proc(bytes: Buffer) {
   Heartbeat_Msg.vibstate = bytes[5] & 0x0f;
 
   //chgstate
-  var chgstate = (bytes[6] >> 4) & 0x0f;
+  const chgstate = (bytes[6] >> 4) & 0x0f;
   switch (chgstate) {
     case 0x00:
       Heartbeat_Msg.chgstate = "power cable disconnected";
@@ -365,7 +348,7 @@ function Heartbeat_proc(bytes: Buffer) {
 
 //Message type: PeriodicalPosition  0x03
 function PeriodicalPosition_proc(bytes: Buffer) {
-  var PeriodicalPposition_Msg: any = {
+  const PeriodicalPposition_Msg: any = {
     type: 0,
     longitude: 0,
     latitude: 0,
@@ -375,14 +358,14 @@ function PeriodicalPosition_proc(bytes: Buffer) {
   //type
   PeriodicalPposition_Msg.type = "PeriodicalPosition";
   //longitude
-  let lng = bytes.readFloatBE(1); //(((bytes[1] << 24) & 0xFF000000) | ((bytes[2] << 16) & 0xFF0000) | ((bytes[3] << 8) & 0xFF00) | (bytes[4] & 0xFF));
+  const lng = bytes.readFloatBE(1); //(((bytes[1] << 24) & 0xFF000000) | ((bytes[2] << 16) & 0xFF0000) | ((bytes[3] << 8) & 0xFF00) | (bytes[4] & 0xFF));
   // lng = lng > 0x7fffffff ? lng - 0x100000000 : lng; // 0x94B62E00 (-180) to 0x6B49D200 (180)
   PeriodicalPposition_Msg.longitude = {
     value: lng, //bytes.readFloatBE(1),
     unit: "°",
   };
   //latitude
-  let lat = bytes.readFloatBE(5); //(((bytes[5] << 24) & 0xFF000000) | ((bytes[6] << 16) & 0xFF0000) | ((bytes[7] << 8) & 0xFF00) | (bytes[8] & 0xFF));
+  const lat = bytes.readFloatBE(5); //(((bytes[5] << 24) & 0xFF000000) | ((bytes[6] << 16) & 0xFF0000) | ((bytes[7] << 8) & 0xFF00) | (bytes[8] & 0xFF));
   // lat = lat > 0x7fffffff ? lat - 0x100000000 : lat; // 0xCA5B1700 (-90) to 0x35A4E900 (90)
   PeriodicalPposition_Msg.latitude = {
     value: lat, //bytes.readFloatBE(5), //lat / 10000000,
@@ -409,7 +392,7 @@ function PeriodicalPosition_proc(bytes: Buffer) {
 
 //Message type: OnDemandPosition  0x04
 function OnDemandPosition_proc(bytes: Buffer) {
-  var OnDemandPosition_Msg: {
+  const OnDemandPosition_Msg: {
     type: string;
     msgid: number;
     longitude: number;
@@ -429,11 +412,11 @@ function OnDemandPosition_proc(bytes: Buffer) {
   //magid
   OnDemandPosition_Msg.msgid = bytes[1];
   //longitude
-  let lng = bytes.readFloatBE(2); //(((bytes[2] <<24) & 0xFF000000) | ((bytes[3] << 16) & 0xFF0000) | ((bytes[4] << 8) & 0xFF00) | (bytes[5] & 0xFF));
+  const lng = bytes.readFloatBE(2); //(((bytes[2] <<24) & 0xFF000000) | ((bytes[3] << 16) & 0xFF0000) | ((bytes[4] << 8) & 0xFF00) | (bytes[5] & 0xFF));
   //lng = lng > 0x7fffffff ? lng - 0x100000000 : lng; // 0x94B62E00 (-180) to 0x6B49D200 (180)
   OnDemandPosition_Msg.longitude = lng;
   //latitude
-  let lat = bytes.readFloatBE(6); //(((bytes[6] <<24) & 0xFF000000) | ((bytes[7] << 16) & 0xFF0000) | ((bytes[8] << 8) & 0xFF00) | (bytes[9] & 0xFF));
+  const lat = bytes.readFloatBE(6); //(((bytes[6] <<24) & 0xFF000000) | ((bytes[7] << 16) & 0xFF0000) | ((bytes[8] << 8) & 0xFF00) | (bytes[9] & 0xFF));
   //lat = lat > 0x7fffffff ? lat - 0x100000000 : lat; // 0xCA5B1700 (-90) to 0x35A4E900 (90)
   OnDemandPosition_Msg.latitude = lat;
   //time
@@ -448,7 +431,7 @@ function OnDemandPosition_proc(bytes: Buffer) {
 
 //Message type: HistoryPosition  0x05
 function HistoryPosition_proc(bytes: Buffer) {
-  var HistoryPositon_Msg: {
+  const HistoryPositon_Msg: {
     type: string;
     length: number;
     longitude: number;
@@ -468,12 +451,12 @@ function HistoryPosition_proc(bytes: Buffer) {
   //length
   HistoryPositon_Msg.length = bytes[0] & 0x0f;
   //longitude
-  let lng = bytes.readFloatBE(1); //(((bytes[1] <<24) & 0xFF000000) | ((bytes[2] << 16) & 0xFF0000) | ((bytes[3] << 8) & 0xFF00) | (bytes[4] & 0xFF));
+  const lng = bytes.readFloatBE(1); //(((bytes[1] <<24) & 0xFF000000) | ((bytes[2] << 16) & 0xFF0000) | ((bytes[3] << 8) & 0xFF00) | (bytes[4] & 0xFF));
   // lng = lng > 0x7fffffff ? lng - 0x100000000 : lng; // 0x94B62E00 (-180) to 0x6B49D200 (180)
 
   HistoryPositon_Msg.longitude = lng;
   //latitude
-  let lat = bytes.readFloatBE(5); //(((bytes[5] <<24) & 0xFF000000) | ((bytes[6] << 16) & 0xFF0000) | ((bytes[7] << 8) & 0xFF00) | (bytes[8] & 0xFF));
+  const lat = bytes.readFloatBE(5); //(((bytes[5] <<24) & 0xFF000000) | ((bytes[6] << 16) & 0xFF0000) | ((bytes[7] << 8) & 0xFF00) | (bytes[8] & 0xFF));
   //lat = lat > 0x7fffffff ? lat - 0x100000000 : lat;
   HistoryPositon_Msg.latitude = lat;
   //location
@@ -487,38 +470,37 @@ function HistoryPosition_proc(bytes: Buffer) {
   //It's P2P message, need to calcuate the real length.
   if (HistoryPositon_Msg.length === 0x0f) {
     return null;
-  } else {
-    //Maximum 6 groups of history position
-    if (HistoryPositon_Msg.length > 6) {
-      return null;
-    }
-    for (var i = 0; i < HistoryPositon_Msg.length; i++) {
-      var tmp = i + 2;
-      //console.log(bytes.slice(15+6*i,17+6*i),bytes.slice(13+6*i,15+6*i));
-      let lngoff = float16(bytes.slice(13 + 6 * i, 15 + 6 * i)); //float16(((bytes[13+6*i] << 8) & 0xFF00) | (bytes[14+6*i] & 0xFF));
-      //lngoff = lngoff > 0x7fff ? lngoff - 0x10000 : lngoff;
-      HistoryPositon_Msg["pos" + tmp + "lngoff"] = {
-        value: lngoff, // / 10000000,
-        unit: "°",
-      };
-      let latoff = float16(bytes.slice(15 + 6 * i, 17 + 6 * i)); //float16(((bytes[15+6*i] << 8) & 0xFF00) | (bytes[16+6*i] & 0xFF));
-      // latoff = latoff > 0x7fff ? latoff - 0x10000 : latoff;
-      HistoryPositon_Msg["pos" + tmp + "latoff"] = {
-        value: latoff, // / 10000000,
-        unit: "°",
-      };
-      HistoryPositon_Msg["pos" + tmp + "toff"] = {
-        value: ((bytes[17 + 6 * i] << 8) & 0xff00) | (bytes[18 + 6 * i] & 0xff),
-        unit: "sec",
-      };
-    }
-    return HistoryPositon_Msg;
   }
+  //Maximum 6 groups of history position
+  if (HistoryPositon_Msg.length > 6) {
+    return null;
+  }
+  for (let i = 0; i < HistoryPositon_Msg.length; i++) {
+    const tmp = i + 2;
+    //console.log(bytes.slice(15+6*i,17+6*i),bytes.slice(13+6*i,15+6*i));
+    const lngoff = float16(bytes.slice(13 + 6 * i, 15 + 6 * i)); //float16(((bytes[13+6*i] << 8) & 0xFF00) | (bytes[14+6*i] & 0xFF));
+    //lngoff = lngoff > 0x7fff ? lngoff - 0x10000 : lngoff;
+    HistoryPositon_Msg[`pos${tmp}lngoff`] = {
+      value: lngoff, // / 10000000,
+      unit: "°",
+    };
+    const latoff = float16(bytes.slice(15 + 6 * i, 17 + 6 * i)); //float16(((bytes[15+6*i] << 8) & 0xFF00) | (bytes[16+6*i] & 0xFF));
+    // latoff = latoff > 0x7fff ? latoff - 0x10000 : latoff;
+    HistoryPositon_Msg[`pos${tmp}latoff`] = {
+      value: latoff, // / 10000000,
+      unit: "°",
+    };
+    HistoryPositon_Msg[`pos${tmp}toff`] = {
+      value: ((bytes[17 + 6 * i] << 8) & 0xff00) | (bytes[18 + 6 * i] & 0xff),
+      unit: "sec",
+    };
+  }
+  return HistoryPositon_Msg;
 }
 
 //Message type: Alarm  0x06
 function Alarm_proc(bytes: Buffer) {
-  var Alarm_Msg: {
+  const Alarm_Msg: {
     type: string;
     alarm: string;
     msgid: number;
@@ -530,7 +512,7 @@ function Alarm_proc(bytes: Buffer) {
   //type
   Alarm_Msg.type = "Alarm";
   //alarm
-  var alarm = bytes[0] & 0x0f;
+  const alarm = bytes[0] & 0x0f;
   switch (alarm) {
     case 0x1:
       Alarm_Msg.alarm = "sos";
@@ -546,7 +528,7 @@ function Alarm_proc(bytes: Buffer) {
 
 //Message type: BleCoordinate   0x07
 function BleCoordinate_proc(bytes: Buffer) {
-  var BleCoordinate_Msg: {
+  const BleCoordinate_Msg: {
     type: string;
     length: number;
     move: number;
@@ -560,7 +542,7 @@ function BleCoordinate_proc(bytes: Buffer) {
   BleCoordinate_Msg.length = bytes[0] & 0x0f;
   BleCoordinate_Msg.move = bytes[1];
   // BleCoordinate_Msg.rfu = ((bytes[2] << 24) & 0xFF000000) | ((bytes[3] << 16) & 0x00FF0000) | ((bytes[4] << 8) & 0x0000FF00) | (bytes[5] & 0x000000FF);
-  for (var i = 0; i < BleCoordinate_Msg.length; i++) {
+  for (let i = 0; i < BleCoordinate_Msg.length; i++) {
     BleCoordinate_Msg[`dev${i + 1}major`] =
       ((bytes[6 + 5 * i] << 8) & 0xff00) | (bytes[7 + 5 * i] & 0xff);
     BleCoordinate_Msg[`dev${i + 1}minor`] =
@@ -575,7 +557,7 @@ function BleCoordinate_proc(bytes: Buffer) {
 
 //Message type: Acknowledge   0x08
 function Acknowledge_proc(bytes: Buffer) {
-  var Acknowledge_Msg: {
+  const Acknowledge_Msg: {
     type: string;
     result: string;
     msgid: number;
@@ -585,7 +567,7 @@ function Acknowledge_proc(bytes: Buffer) {
     msgid: 0,
   };
   Acknowledge_Msg.type = "Acknowledge";
-  var result = bytes[0] & 0x0f;
+  const result = bytes[0] & 0x0f;
   switch (result) {
     case 0x00:
       Acknowledge_Msg.result = "success";
@@ -602,12 +584,14 @@ function Acknowledge_proc(bytes: Buffer) {
   return Acknowledge_Msg;
 }
 
-var ignore_vars: any = [];
+const ignore_vars: any = [];
 
 function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
-    if (ignore_vars.includes(key)) continue;
+    if (ignore_vars.includes(key)) {
+      continue;
+    }
 
     if (typeof object_item[key] === "object") {
       result.push({
@@ -630,14 +614,14 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-// let payload = [{ variable: "payload", value: "3042ed8a9c41ffce2f60742681" }]; //this is for type 1
-// let payload = [{ variable: "payload", value: "1101702f00030a0000" }]; //this is for type 1
-//let payload = [{ variable: "payload", value: "215f5ff44810500000" }]; // snr -30 for type 2
-//let payload = [{ variable: "payload", value: "215f5f0bb810500000" }]; // snr 30 for type 2
-// let payload = [{ variable: "payload", value: "3094b62e0035a4e900605b92a7" }]; // negative lng positive lat for type 3
-// let payload = [{ variable: "payload", value: "40016b49d200ca5b1700605b92a7" }]; // positive lng negative lat for type 4
-// let payload = [{ variable: "payload", value: "5142ed8a9c41ffce2f605b92a7000103ff000f" }]; // positive lng negative lat for type 5
-// let payload = [{ variable: "payload", value: "7100000000000005000348" }]; // type 7
+// const payload = [{ variable: "payload", value: "3042ed8a9c41ffce2f60742681" }]; //this is for type 1
+// const payload = [{ variable: "payload", value: "1101702f00030a0000" }]; //this is for type 1
+//const payload = [{ variable: "payload", value: "215f5ff44810500000" }]; // snr -30 for type 2
+//const payload = [{ variable: "payload", value: "215f5f0bb810500000" }]; // snr 30 for type 2
+// const payload = [{ variable: "payload", value: "3094b62e0035a4e900605b92a7" }]; // negative lng positive lat for type 3
+// const payload = [{ variable: "payload", value: "40016b49d200ca5b1700605b92a7" }]; // positive lng negative lat for type 4
+// const payload = [{ variable: "payload", value: "5142ed8a9c41ffce2f605b92a7000103ff000f" }]; // positive lng negative lat for type 5
+// const payload = [{ variable: "payload", value: "7100000000000005000348" }]; // type 7
 
 const data = payload.find(
   (x) =>
@@ -645,14 +629,12 @@ const data = payload.find(
     x.variable === "payload" ||
     x.variable === "data"
 );
-const port = payload.find(
-  (x) => x.variable === "fport" || x.variable === "port"
-);
+
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
   // console.log(buffer);
   const group = payload[0].group || String(new Date().getTime());
-  payload = payload.concat(toTagoFormat(Decode(port, buffer), group));
+  payload = payload.concat(toTagoFormat(Decode(buffer), group));
   //payload = payload.map((x) => ({ ...x, group }));
 }
 

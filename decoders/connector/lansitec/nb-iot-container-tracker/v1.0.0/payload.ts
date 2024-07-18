@@ -1,7 +1,7 @@
 // nb-iot container tracker
 function decodeUplink(bytes: Buffer) {
   // type
-  var uplinkType = (bytes[0] >> 4) & 0x0f;
+  const uplinkType = (bytes[0] >> 4) & 0x0f;
 
   switch (uplinkType) {
     case 0x01:
@@ -29,7 +29,7 @@ function decodeUplink(bytes: Buffer) {
 
 // type: 0x01 Registration
 function decodeRegistration(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "RegistrationMessage";
   data.bleEnable = (bytes[1] >> 7) & 0x01;
   data.gnssEnable = (bytes[1] >> 6) & 0x01;
@@ -56,7 +56,7 @@ function decodeRegistration(bytes: Buffer) {
     ((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff);
   data.assetBeaconReceivingDuration = bytes[16] & 0xff;
   data.softwareVersion = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
-  var imsi = "";
+  let imsi = "";
   for (let i = 0; i < 8; i++) {
     imsi = imsi + bytes[19 + i].toString(16).toUpperCase().padStart(2, "0");
   }
@@ -67,9 +67,9 @@ function decodeRegistration(bytes: Buffer) {
 
 // type: 0x02 Heartbeat
 function decodeHeartbeat(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "HeartbeatMessage";
-  var stateBitField: any = {};
+  let stateBitField: any = {};
   stateBitField.bleEnable = (bytes[1] >> 7) & 0x01;
   stateBitField.gnssEnable = (bytes[1] >> 6) & 0x01;
   stateBitField.networkStatusCheck = (bytes[1] >> 5) & 0x01;
@@ -84,36 +84,36 @@ function decodeHeartbeat(bytes: Buffer) {
   stateBitField.searchAlarmEnable = (bytes[3] >> 1) & 0x01;
   data.stateBitField = stateBitField;
 
-  data.batteryVoltage = (bytes[5] & 0xff) / 10 + "V";
-  data.batteryLevel = (bytes[6] & 0xff) + "%";
+  data.batteryVoltage = (bytes[5] & 0xff) / 10;
+  data.batteryLevel = bytes[6] & 0xff;
   data.bleReceivingCount = bytes[7] & 0xff;
   data.gnssOnCount = bytes[8] & 0xff;
   data.temperature = (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) + "°C";
   data.movementDuration =
-    (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5 + "s";
+    (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
   data.messageId = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
   return data;
 }
 
 // type: 0x03 GNSS Position
 function decodeGNSSPosition(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "GNSSPositionMessage";
   data.gnssStatus = bytes[0] & 0x01;
   // longitude
-  var longitude = (bytes[1] << 24) & 0xff000000;
+  let longitude = (bytes[1] << 24) & 0xff000000;
   longitude |= (bytes[2] << 16) & 0xff0000;
   longitude |= (bytes[3] << 8) & 0xff00;
   longitude |= bytes[4] & 0xff;
   data.longitude = hex2float(longitude);
   // latitude
-  var latitude = (bytes[5] << 24) & 0xff000000;
+  let latitude = (bytes[5] << 24) & 0xff000000;
   latitude |= (bytes[6] << 16) & 0xff0000;
   latitude |= (bytes[7] << 8) & 0xff00;
   latitude |= bytes[8] & 0xff;
   data.latitude = hex2float(latitude);
   // time
-  var time = (bytes[9] << 24) & 0xff000000;
+  let time = (bytes[9] << 24) & 0xff000000;
   time |= (bytes[10] << 16) & 0xff0000;
   time |= (bytes[11] << 8) & 0xff00;
   time |= bytes[12] & 0xff;
@@ -123,25 +123,25 @@ function decodeGNSSPosition(bytes: Buffer) {
 
 // type: 0x04 Beacon
 function decodeBeacon(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "BeaconMessage";
   data.beaconType =
-    (bytes[0] & 0x01) == 0 ? "PositioningBeacon" : "AssetBeacon";
+    (bytes[0] & 0x01) === 0 ? "PositioningBeacon" : "AssetBeacon";
   data.beaconCount = bytes[1] & 0x0f;
   for (let i = 0; i < data.beaconCount; i++) {
-    var index = 2 + 5 * i;
-    var major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff))
+    const index = 2 + 5 * i;
+    let major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff))
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var minor = (((bytes[index + 2] << 8) & 0xff00) | (bytes[index + 3] & 0xff))
+    let minor = (((bytes[index + 2] << 8) & 0xff00) | (bytes[index + 3] & 0xff))
       .toString(16)
       .toUpperCase()
       .padStart(4, "0");
-    var rssi = bytes[index + 4] - 256 + "dBm";
+    let rssi = bytes[index + 4] - 256;
 
-    data["beacon" + (i + 1)] = major + minor;
-    data["rssi" + (i + 1)] = rssi;
+    data[`beacon${i + 1}`] = major + minor;
+    data[`rssi${i + 1}`] = rssi;
   }
 
   return data;
@@ -149,10 +149,10 @@ function decodeBeacon(bytes: Buffer) {
 
 // type: 0x05 Alarm
 function decodeAlarm(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "AlarmMessage";
-  var alarmValue = bytes[1] & 0x0f;
-  if (alarmValue == 5) {
+  let alarmValue = bytes[1] & 0x0f;
+  if (alarmValue === 5) {
     data.alarm = "TamperDetection";
   }
   return data;
@@ -160,17 +160,17 @@ function decodeAlarm(bytes: Buffer) {
 
 // type: 0x06 Configuration Parameter Response
 function decodeConfigParameterResponse(bytes: Buffer) {
-  var data: any = {};
+  const data: any = {};
   data.type = "ConfigurationParameterResponse";
-  var parameter: any = [];
+  let parameter: any = [];
   let byteLength = bytes.length;
-  var index = 0;
+  let index = 0;
   while (index + 1 < byteLength) {
-    var commandBitField: any = {};
-    var parameterType = bytes[index + 1] & 0xff;
+    let commandBitField: any = {};
+    let parameterType = bytes[index + 1] & 0xff;
     commandBitField.parameterType = parameterType;
-    var commandBitFieldLength = getCommandBitFieldLength(parameterType);
-    var parameterValue = getParameterValue(bytes, index, commandBitFieldLength);
+    let commandBitFieldLength = getCommandBitFieldLength(parameterType);
+    let parameterValue = getParameterValue(bytes, index, commandBitFieldLength);
     commandBitField.parameterValue = parameterValue;
     commandBitField.name = getParameterName(parameterType);
     commandBitField.parameterDefinition = getParameterDefinition(
@@ -186,9 +186,9 @@ function decodeConfigParameterResponse(bytes: Buffer) {
 
 // getParameterValue hexString
 function getParameterValue(bytes: Buffer, index: number, length: number) {
-  var hexString = "";
-  for (var i = 2; i <= length; i++) {
-    var hex = (bytes[index + i] & 0xff).toString(16).toUpperCase();
+  let hexString = "";
+  for (let i = 2; i <= length; i++) {
+    let hex = (bytes[index + i] & 0xff).toString(16).toUpperCase();
     hexString += hex.padStart(2, "0");
   }
   return hexString;
@@ -250,7 +250,7 @@ function getParameterName(parameterType: number) {
 
 // Parameter Definition
 function getParameterDefinition(parameterType: any, parameterValue: any) {
-  var val = parseInt(parameterValue, 16);
+  let val = parseInt(parameterValue, 16);
   let name = {
     0x00: "SoftwareVersion",
     0x01: val * 30 + "s, The interval of the heartbeat message, unit: 30s",
@@ -264,27 +264,27 @@ function getParameterDefinition(parameterType: any, parameterValue: any) {
     0x0a: "PosBeaconUUIDFilter",
     0x0b: "AssetBeaconUUIDFilter",
     0x0e: "ISMI",
-    0x1c: val == 0 ? "Disable" : "Enable",
+    0x1c: val === 0 ? "Disable" : "Enable",
     0x20:
-      val == 0
+      val === 0
         ? "Period Mode"
-        : val == 1
+        : val === 1
         ? " Autonomous Mode"
         : "On-demand Mode",
-    0x29: val == 0 ? "Disable" : "Enable",
-    0x2a: val == 0 ? "Disable" : "Enable",
-    0x2b: val == 0 ? "Disable" : "Enable",
-    0x2e: val == 0 ? "Disable" : "Enable",
-    0x2f: val == 0 ? "Disable" : "Enable",
-    0x30: val == 0 ? "Disable" : "Enable",
-    0x31: val == 0 ? "Disable" : "Enable",
+    0x29: val === 0 ? "Disable" : "Enable",
+    0x2a: val === 0 ? "Disable" : "Enable",
+    0x2b: val === 0 ? "Disable" : "Enable",
+    0x2e: val === 0 ? "Disable" : "Enable",
+    0x2f: val === 0 ? "Disable" : "Enable",
+    0x30: val === 0 ? "Disable" : "Enable",
+    0x31: val === 0 ? "Disable" : "Enable",
   };
   return name[parameterType] ?? "No matching parameter names";
 }
 
 function getDeviceState(val: any) {
-  var byteArray = hexStringToByteArray(val);
-  var data: any = {};
+  let byteArray = hexStringToByteArray(val);
+  const data: any = {};
   data.bleEnable = (byteArray[0] >> 7) & 0x01;
   data.gnssEnable = (byteArray[0] >> 6) & 0x01;
   data.networkStatusCheck = (byteArray[0] >> 5) & 0x01;
@@ -302,23 +302,23 @@ function getDeviceState(val: any) {
 
 // Floating point conversion
 function hex2float(num: number) {
-  var sign = num & 0x80000000 ? -1 : 1;
-  var exponent = ((num >> 23) & 0xff) - 127;
-  var mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
-  return sign * mantissa * Math.pow(2, exponent);
+  let sign = num & 0x80000000 ? -1 : 1;
+  let exponent = ((num >> 23) & 0xff) - 127;
+  let mantissa = 1 + (num & 0x7fffff) / 0x7fffff;
+  return sign * mantissa * 2 ** exponent;
 }
 
 function asciiToHex(str: any) {
-  var hexString = "";
+  let hexString = "";
   for (let i = 0; i < str.length; i++) {
-    var hex = str.charCodeAt(i).toString(16);
+    let hex = str.charCodeAt(i).toString(16);
     hexString += hex.padStart(2, "0");
   }
   return hexString;
 }
 
 function hexStringToByteArray(hexString: any) {
-  var byteArray = [];
+  let byteArray: any = [];
   for (let i = 0; i < hexString.length; i += 2) {
     byteArray.push(parseInt(hexString.substr(i, 2), 16));
   }
@@ -336,12 +336,14 @@ function timestampToTime(timestamp) {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
-var ignore_vars: any = [];
+let ignore_vars: any = [];
 
 function toTagoFormat(object_item: any, group: any, prefix = "") {
   const result: any = [];
   for (const key in object_item) {
-    if (ignore_vars.includes(key)) continue;
+    if (ignore_vars.includes(key)) {
+      continue;
+    }
 
     if (typeof object_item[key] === "object") {
       result.push({
@@ -370,9 +372,7 @@ const data = payload.find(
     x.variable === "payload" ||
     x.variable === "data"
 );
-const port = payload.find(
-  (x) => x.variable === "fport" || x.variable === "port"
-);
+
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
   const group = payload[0].group || String(new Date().getTime());
