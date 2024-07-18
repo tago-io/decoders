@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "This design of this Bluetooth badge is based on Bluetooth and LoRa technology. With the advanced LoRa technology and built-in Bluetooth module, the Bluetooth badge receives the Bluetooth beacon signal and reports it to the LoRa badge. The parameter settings, such as the heartbeat period, LoRa work modesare adjustableasper customers' requirements.This badge supports the proximity detection function. It beeps and vibrates when the distance between it and other badges is less than 2 meters. The distance can be adjusted by setting Bluetooth fortransmitting power and receiving threshold.The badge supports a 'friend'feature. It does not beep orvibrate when it recognizesother friend badges.The badge supports two kinds of report interval: 10s instant report mode and 80s periodic report mode.\n\n**Specifications**\n* Positioning Mode: Bluetooth5.0\n* Maximum Range: 30m\n* Protocol: LoRaWAN 1.0.2B\n* Frequency: US915, AU915, EU868, EU433, AS920-923, AS923-925, RU864, ID920, KR920, IN865, KZ865, CN470\n* LoRa Sensitivity: 139dBm @SF12, BW125kHz, 434MHz/470MHz. 137dBm @SF12, BW125kHz, 868MHz/915MHz\n* Operating Current: 8mAh@Bluetooth receiving. Max. 140mA@19dBm\n* Buzzer Decibel: 75dB\n* Vibrator: Rated speed: 12000±3000rpm. Displacement:1.5mm. Frequency: 10-54Hz. Acceleration: 22m/s. Period: 10min(10-55-10Hz), 10 Minutes log sweep(10-55-10Hz). This motion shall be applied for a period of 10 minutes in each of 3 mutually perpend axis. Vibrator mechanical noise: <50dB\n* Battery: Rechargeable 600mAh polymer lithium battery\n* Operating Temperature: -10~+60°C\n* Storage Temperature: -20~+85°C\n* Operating Humidity: 5%~95%\n* Power Mode: Micro-USB, DC 5V\n* Communication Distance: >1.5km in the urban area\n* Application Context: Contact tracing, Personnel tracking, proximity detection and report",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "This tracker is designed based on GPS,BLE and LoRa technology. With the advanced LoRa technology and build-in G-sensor, the tracker employs ultra-long standby time compared with the traditional GPRS-based solution. Indoor tracking with BLE and outdoor tracking with GNSS technology is supported. The position acquisition period, heartbeat period and LoRa work mode are adjustable according to your use case. \n\n**Specifications**\n* Positioning Mode: BLE/GPS\n* Positioning Precision: 3m/2.5m\n* Protocol: LoRaWAN\n* Frequency: CN433/EU433/CN470/EU868/US915/AS923/CLAA/CN470-Ali\n* Sensitivity: -142.5dBm\n* Operating Current: 20uA@sleep mode. Max 139mA@19dBm\n* Storage Temperature: -40°C～+85°C\n* Operating Humidity: 5%～95%\n* LoRa Communication Distance: >1.5km in urban area\n* Bluetooth Communication Distance: Bluetooth4.0,max. 30m sight distance\n* Application Context: Personnel and vehicle tracking, asset management",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}
