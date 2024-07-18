@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The TEKTELIC SEAL Wearable GPS Tracker is a robust device designed specifically for the safety and tracking of personnel working remotely in the field. This device leverages advanced GPS, BLE, and Wi-Fi technologies to provide precise and near real-time location tracking, making it ideal for monitoring workers at any jobsite or in transit.\n\nKey Features of the SEAL Wearable GPS Tracker:\n\n* Rugged Design: IP67 rating ensures durability and reliable operation in diverse environmental conditions, with an operable temperature range of -20°C to +60°C.\n * Extended Battery Life: Offers up to 15 months of service on a single charge, minimizing maintenance and downtime.\n * Advanced Positioning Systems: Includes GPS for outdoor tracking and GNSS datalogging, alongside indoor positioning capabilities through BLE and Wi-Fi sniffing.\n * Enhanced Worker Safety Features: Equipped with fall and impact detection sensors to enhance safety protocols.\n * Geofencing Capabilities: Allows for the creation of virtual boundaries, triggering alerts when assets enter or leave designated areas.\n * Event-Based Startup: Configurable to activate or increase reporting frequency based on movement, optimizing battery usage.\n * Audio and Visual Alarms: Provides immediate feedback and alerts in critical situations.\n * Seamless Integration: Easily integrates with TEKTELIC’s end-to-end IoT solutions for comprehensive asset management.\n\nThe SEAL tracker is designed not only to withstand the rigors of outdoor and industrial environments but also to provide critical data and connectivity to ensure the safety and efficiency of field operations.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js"
+  ]
+}
