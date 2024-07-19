@@ -222,7 +222,7 @@ function Decoder(bytes, port) {
 
 const data = payload.find(x => x.variable === 'data' || x.variable === 'payload');
 if (data) {
-  const group = data.group || new Date().getTime();
+  const group = String(data.group || Date.now());
   const vars_to_tago = Decoder(Buffer.from(data.value, 'hex'));
 
   payload = [...payload, ...toTagoFormat(vars_to_tago, group, '', vars_to_tago.location)];
