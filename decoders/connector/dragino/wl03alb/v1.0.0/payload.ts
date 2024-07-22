@@ -34,7 +34,7 @@ function toTagoFormat(object_item: {}, group: number, prefix = "") {
   return result;
 }
 
-function datalog(i, bytes) {
+function datalog(i: number, bytes: Buffer) {
   var aa = bytes[0 + i] & 0x08 ? "PART" : "SUM";
   var bb = bytes[0 + i] & 0x04 ? "YES" : "NO";
   var cc = bytes[0 + i] & 0x02 ? "TRUE" : "FALSE";
@@ -47,16 +47,19 @@ function datalog(i, bytes) {
   return string;
 }
 
-function getzf(c_num) {
+function getzf(c_num: string) {
   if (parseInt(c_num) < 10) c_num = "0" + c_num;
 
   return c_num;
 }
 
-function getMyDate(str) {
+function getMyDate(str: string) {
   var c_Date;
-  if (str > 9999999999) c_Date = new Date(parseInt(str));
-  else c_Date = new Date(parseInt(str) * 1000);
+  if (parseInt(str) > 9999999999) {
+    c_Date = new Date(parseInt(str));
+  } else {
+    c_Date = new Date(parseInt(str) * 1000);
+  }
 
   var c_Year = c_Date.getFullYear(),
     c_Month = c_Date.getMonth() + 1,
@@ -69,7 +72,7 @@ function getMyDate(str) {
   return c_Time;
 }
 
-function Decoder(bytes, port) {
+function Decoder(bytes: Buffer, port: number) {
   if (port == 0x03) {
     var pnack = (bytes[0] >> 7) & 0x01 ? "True" : "False";
     let data_sum: any = "";
