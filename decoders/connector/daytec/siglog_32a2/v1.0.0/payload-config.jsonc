@@ -6,6 +6,6 @@
   "device_annotation": "Siglog 32A2 Connector.\n\nParser version: 1.0.0.0",
   "device_parameters": [],
   "networks": [
-    "../../../../network/mqtt/v1.0.0/payload.js",
+    "../../../../network/mqtt/v1.0.0/payload.js"
   ]
 }
