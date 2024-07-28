@@ -1,0 +1,1 @@
+Compact indoor ambience monitoring sensor including humidity, temperature and CO2 over LoRaWAN™
