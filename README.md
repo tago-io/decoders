@@ -70,7 +70,7 @@ Here's an example of a `connector.jsonc` file for a connector decoder:
 ```jsonc
 {
   "$schema": "../../../schema/connector.json",
-  "name": "Abeeway Compact Tracker",
+  "name": "Abeeway Compact Tracker", // Searchable Field on the TagoIO platform.
   "images": {
     "logo": "./assets/logo.png"
   },
@@ -90,7 +90,7 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 ```jsonc
 {
   "$schema": "../../../schema/connector_details.json",
-  "description": "./description.md",
+  "description": "./description.md", // Searchable Field on the TagoIO platform.
   "install_text": "**Compact tracker**\n\nMulti-mode tracker with embedded sensors combining GPS, Low-power GPS, Wi-Fi Sniffer, BLE",
   "device_annotation": "",
   "device_parameters": [
