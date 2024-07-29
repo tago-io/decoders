@@ -214,6 +214,23 @@ function parse_port12_data(bytes) {
     addPayloadArray("pdop", bytesToInt(bytes, 10, 1));
 }
 
+function parse_position_data(bytes, type) {
+    // if ((type == 0) || (type == 2)) {
+    const number = (bytes.length / 7);
+    const mac_data = [];
+    for (let i = 0; i < number; i++) {
+        const sub_bytes = bytes.slice((i * 7), (i * 7 + 8));
+        const mac_address = bytesToHexString(sub_bytes, 0, 6);
+        const rssi = bytesToInt(sub_bytes, 6, 1) - 256 + 'dBm';
+        const data_dic = {
+            'mac': mac_address,
+            'rssi': rssi
+        };
+        mac_data.push(data_dic);
+    }
+    return mac_data;
+}
+
 function bytesToHexString(bytes, start, len) {
     const char = [];
     for (let i = 0; i < len; i++) {
@@ -233,8 +250,8 @@ function bytesToString(bytes, start, len) {
 }
 
 function bytesToInt(bytes, start, len) {
-    const value = 0;
-    for (const i = 0; i < len; i++) {
+    let value = 0;
+    for (let i = 0; i < len; i++) {
         const m = ((len - 1) - i) * 8;
         value = value | bytes[start + i] << m;
     }
