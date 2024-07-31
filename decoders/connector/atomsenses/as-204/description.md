@@ -1,0 +1,1 @@
+The Atomsenses AS-204 is a 4-in-1 LoRaWAN® bathroomodor detector todetectammonia (NH3) and hydrogen sulfide (H2S) gas, AS-204 is also able to detect temperature and humidity to fully aware of the environment of bathrooms 
