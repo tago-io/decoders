@@ -1,0 +1,1 @@
+DL-ZN2 is a dual dendrometer over LoRaWAN®

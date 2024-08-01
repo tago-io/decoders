@@ -1,0 +1,1 @@
+DL-LWS is a leaf wetness sensor over LoRaWAN®

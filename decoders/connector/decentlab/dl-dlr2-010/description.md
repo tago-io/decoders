@@ -1,0 +1,1 @@
+DL-DLR2-010 is a dual pulse counter dry contact transmitter over LoRaWAN®

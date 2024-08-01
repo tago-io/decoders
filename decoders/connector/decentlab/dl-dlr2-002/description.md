@@ -1,0 +1,1 @@
+DL-DLR2-002 is a pulse counter dry contact transmitter over LoRaWAN®

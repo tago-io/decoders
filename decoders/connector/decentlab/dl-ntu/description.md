@@ -1,0 +1,1 @@
+DL-NTU is an optical turbidity and temperature sensor over LoRaWAN®

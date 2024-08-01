@@ -1,0 +1,1 @@
+DL-ZN1 is a dendrometer over LoRaWAN®

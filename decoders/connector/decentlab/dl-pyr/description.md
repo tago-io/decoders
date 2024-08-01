@@ -1,0 +1,1 @@
+DL-PYR is a total solar radiation sensor over LoRaWAN®

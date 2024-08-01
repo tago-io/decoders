@@ -1,0 +1,1 @@
+DL-LPW is a linear position/way over LoRaWAN®

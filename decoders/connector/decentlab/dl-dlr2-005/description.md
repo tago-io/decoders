@@ -1,0 +1,1 @@
+DL-DLR2-005 is an analog 0 … 3 v sensor transmitter over LoRaWAN®

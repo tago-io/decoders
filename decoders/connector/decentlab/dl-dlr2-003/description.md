@@ -1,0 +1,1 @@
+DL-DLR2-003 is a digital input dry contact transmitter over LoRaWAN®

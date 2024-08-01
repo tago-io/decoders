@@ -1,0 +1,1 @@
+DL-KL66 is a strain/weight sensor over LoRaWAN®

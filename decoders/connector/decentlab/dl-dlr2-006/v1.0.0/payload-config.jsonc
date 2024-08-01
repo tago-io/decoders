@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "DL-DLR2-006 IS AN ANALOG POTENTIOMETER SENSOR TRANSMITTER OVER LoRaWAN®\n\n**FEATURES:**\n* LoRaWAN®-enabled multi-purpose wireless sensor transmitter.\n* Available for a broad range of industrial sensors.\n* Includes various analog and digital interfaces: Voltage, current, RS-485, I2C, UART, SDI-12, one wire, pulse counter, dry contact, etc.\n* Device can supply power to an external sensor.\n* Compatible with LoRaWAN® networks of any provider.\n* Place and measure: no setup required.\n* Configurable via command line interface and downlink command interface.\n* Unattended real-time monitoring for several years without replacing batteries.\n* Robust polycarbonate enclosure: weatherproof, impact-, UV-resistant (IP67).\n* Standard alkaline (C-type) batteries.\n* CE compliant, Radio Equipment Directive (RED) 2014/53/EU.\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js"
+  ]
+}

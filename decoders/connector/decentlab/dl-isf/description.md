@@ -1,0 +1,1 @@
+DL-ISF is a sapflow sensor over LoRaWAN®

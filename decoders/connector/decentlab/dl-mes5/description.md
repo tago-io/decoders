@@ -1,0 +1,1 @@
+DL-MES5 is a large-range optical turbidity and temperature sensor for lorawan over LoRaWAN®
