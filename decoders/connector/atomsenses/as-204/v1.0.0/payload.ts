@@ -1,105 +1,78 @@
-/* eslint-disable no-plusplus */
 /**
  * Payload Decoder for The Things Network
  *
  * Copyright 2024 Atomsenses
  *
- * @product AS-204
+ * @product as204
  */
 
-function readUInt16LE(bytes) {
-  const value = (bytes[1] << 8) + bytes[0];
+function readdUInt16LE(bytes) {
+  const value = (bytes[1] << 8) + Number(bytes[0]);
   return value & 0xffff;
 }
 
-function readInt16LE(bytes) {
-  const ref = readUInt16LE(bytes);
+function readdInt16LE(bytes) {
+  const ref = readdUInt16LE(bytes);
   return ref > 0x7fff ? ref - 0x10000 : ref;
 }
-function Decoder(bytes) {
-  const decoded = {};
 
-  for (var i = 0; i < bytes.length;) {
-    var channel_id = bytes[i++];
-    var channel_type = bytes[i++];
+// Main decoder function that decodes the payload
+function as204decoder(bytes) {
+  const decoded = [] as any;
+
+  for (let i = 0; i < bytes.length; ) {
+    const channel_id = bytes[i++];
+    const channel_type = bytes[i++];
     // BATTERY
     if (channel_id === 0x01 && channel_type === 0x75) {
-      decoded.battery = bytes[i];
+      decoded.push({ variable: "battery", value: bytes[i], unit: "%" });
       i += 1;
     }
     // TEMPERATURE
-    else if (channel_id === 0x02 && channel_type === 0x67) {
+    else if (channel_id === 0x03 && channel_type === 0x67) {
       // ℃
-      decoded.temperature = readInt16LE(bytes.slice(i, i + 2)) / 10;
+      decoded.push({ variable: "temperature", value: readdInt16LE(bytes.slice(i, i + 2)) / 10, unit: "°C" });
       i += 2;
-
-      // ℉
-      // decoded.temperature = readInt16LE(bytes.slice(i, i + 2)) / 10 * 1.8 + 32;
-      // i +=2;
     }
     // HUMIDITY
-    else if (channel_id === 0x03 && channel_type === 0x68) {
-      decoded.humidity = bytes[i] / 2;
+    else if (channel_id === 0x04 && channel_type === 0x68) {
+      decoded.push({ variable: "humidity", value: bytes[i] / 2, unit: "%RH" });
       i += 1;
     }
+    // CO2
+    else if (channel_id === 0x07 && channel_type === 0x7d) {
+      decoded.push({ variable: "co2", value: readdInt16LE(bytes.slice(i, i + 2)), unit: "ppm" });
+      i += 2;
+    }
     // NH3
-    else if (channel_id === 0x04 && channel_type === 0x7d) {
-      decoded.nh3 = readUInt16LE(bytes.slice(i, i + 2)) / 100;
+    else if (channel_id === 0x08 && channel_type === 0x7d) {
+      decoded.push({ variable: "nh3", value: readdInt16LE(bytes.slice(i, i + 2)) / 100, unit: "ppm" });
       i += 2;
     }
     // H2S
-    else if (channel_id === 0x05 && channel_type === 0x7d) {
-      decoded.h2s = readUInt16LE(bytes.slice(i, i + 2)) / 100;
+    else if (channel_id === 0x09 && channel_type === 0x7d) {
+      decoded.push({ variable: "h2s", value: readdUInt16LE(bytes.slice(i, i + 2)) / 100, unit: "ppm" });
       i += 2;
     } else {
       break;
     }
   }
-
   return decoded;
 }
 
-const ignore_vars = ["metadata", "downlink_url", "fcnt", "port", "raw_packet"];
+const as204PayloadData = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
-function toTagoFormat(object_item, serie, prefix = "") {
-  const result = [];
-  for (const key in object_item) {
-    if (ignore_vars.includes(key)) continue;
-
-    if (typeof object_item[key] === "object") {
-      result.push({
-        variable: object_item[key].variable || `${prefix}${key}`,
-        value: object_item[key].value,
-        serie: object_item[key].serie || serie,
-        metadata: object_item[key].metadata,
-        location: object_item[key].location,
-        unit: object_item[key].unit,
-      });
-    } else {
-      result.push({
-        variable: `${prefix}${key}`,
-        value: object_item[key],
-        serie,
-      });
-    }
-  }
-
-  return result;
-}
-const payload_raw = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data" || x.variable === "payload_hex");
-
-if (payload_raw) {
+if (as204PayloadData) {
   try {
     // Convert the data from Hex to Javascript Buffer.
-    const buffer = Buffer.from(payload_raw.value, "hex");
-    const serie = new Date().getTime();
-    let payload_aux = Decoder(buffer);
-    payload_aux = toTagoFormat(payload_aux, serie);
-    payload = payload.concat(payload_aux.map((x) => ({ ...x, serie })));
-  } catch (e) {
+    const buffer = Buffer.from(as204PayloadData?.value, "hex");
+    const time = Date.now();
+    const decodedas204Payload = as204decoder(buffer);
+    payload = decodedas204Payload?.map((x) => ({ ...x, time })) ?? [];
+  } catch (error: any) {
     // Print the error to the Live Inspector.
-    console.error(e);
+    console.error(error);
     // Return the variable parse_error for debugging.
-    payload = [{ variable: "parse_error", value: e.message }];
+    payload = [{ variable: "parse_error", value: error.message }];
   }
 }
