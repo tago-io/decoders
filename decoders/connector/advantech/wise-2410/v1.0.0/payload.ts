@@ -1138,7 +1138,9 @@ function checkPayloadLengthAndSetStorage(hexArr, sequence) {
   }
 }
 
-const WISE2410Payloadd = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data" || x.variable === "payload_hex");
+const WISE2410Payloadd = payload.find(
+  (x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "frm_payload" || x.variable === "data" || x.variable === "payload_hex"
+);
 
 ////////////////////////////////////////////
 // Main
