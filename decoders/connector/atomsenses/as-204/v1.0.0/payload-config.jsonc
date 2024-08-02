@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "AS-204 is a compact indoor ambience monitoring sensor for measurement of temperature, humidity, CO2 concentration, NH3, H2S. Sensor data is transmitted using LoRaWAN® technology.\n\n**Features**\n*  Support batteries or DC power supply\n* Compliant with standard LoRaWAN® gateways and network servers \n\n**Datasheet**\n* https://www.atomsenses.com/wp-content/uploads/2024/07/AS-204.pdf\n",
+  "install_text": "AS-204 is a compact indoor ambience monitoring sensor for measurement of temperature, humidity, CO2 concentration, NH3, H2S. Sensor data is transmitted using LoRaWAN® technology.\n\n**Features**\n*  Support batteries or DC power supply\n* Compliant with standard LoRaWAN® gateways and network servers ",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],

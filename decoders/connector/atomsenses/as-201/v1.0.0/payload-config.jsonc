@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "AS-201 is a compact indoor ambience monitoring sensor including humidity, temperature, CO2 for wireless LoRa network.\n\n**LoRaWan**\n* Frequency: CN470/ EU868/ US915/ AU915/ AS923\n* Tx Power: 16dBm(868)/ 20dBm(915)/ 19dBm(470)\n* Sensitivity: -147dBm @300bps\n* Mode: OTAA/ABP Class A\n* Antenna: Embedded Ceramic Antenna\n\n**Physical Characteristics**\n* Power Supply:  2×AA ER14505 battery\n* Operating Temperature: 0°C to +45°C\n* Relative Humidity: 0% to 100% (non-condensing)\n* Ingress Protection: IP30\n* Dimension: 77 × 34 × 26 mm \n* Mounting: Wall\n* Warranty: 1 Year \n\n**Datasheet**\n* https://www.atomsenses.com/wp-content/uploads/2024/07/AS-201.pdf\n",
+  "install_text": "AS-201 is a compact indoor ambience monitoring sensor including humidity, temperature, CO2 for wireless LoRa network.\n\n**LoRaWan**\n* Frequency: CN470/ EU868/ US915/ AU915/ AS923\n* Tx Power: 16dBm(868)/ 20dBm(915)/ 19dBm(470)\n* Sensitivity: -147dBm @300bps\n* Mode: OTAA/ABP Class A\n* Antenna: Embedded Ceramic Antenna\n\n**Physical Characteristics**\n* Power Supply:  2×AA ER14505 battery\n* Operating Temperature: 0°C to +45°C\n* Relative Humidity: 0% to 100% (non-condensing)\n* Ingress Protection: IP30\n* Dimension: 77 × 34 × 26 mm \n* Mounting: Wall\n* Warranty: 1 Year ",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],
