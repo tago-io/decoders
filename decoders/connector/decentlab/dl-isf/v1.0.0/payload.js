@@ -186,7 +186,7 @@ if (payload_raw) {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(payload_raw.value, "hex");
     const serie = new Date().getTime();
-    if (decentlab_decoder.PARAMETERS) {
+    if (decentlab_decoder.PARAMETERS && typeof device !== 'undefined' && device.params) {
       device.params.forEach((p) => {
         if (p.key in decentlab_decoder.PARAMETERS) {
           decentlab_decoder.PARAMETERS[p.key] = p.value;
