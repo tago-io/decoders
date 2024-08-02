@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../schema/connector.json",
+  "name": "Atomsenses AS-204",
+  "images": {
+    "logo": "./assets/logo.png"
+  },
+  "versions": {
+    "v1.0.0": {
+      "src": "./v1.0.0/payload.ts",
+      "manifest": "./v1.0.0/payload-config.jsonc"
+    }
+  }
+}

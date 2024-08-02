@@ -1,0 +1,1 @@
+The compact 4-in-1 ambience indoor air quality monitoring sensor including humidity, temperature, CO2 over LoRaWAN
