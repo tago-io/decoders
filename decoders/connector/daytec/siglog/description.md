@@ -1,0 +1,1 @@
+Siglog 32A2 is a wireless transmitter from the IoT Endpoints, used to monitor 32 digital inputs and 2 analog inputs with local event logging.

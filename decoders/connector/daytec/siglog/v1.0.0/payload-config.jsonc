@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Connect your Siglog 32A2 through your network.**\n\nThe Siglog 32A2 is a wireless transmitter, used to monitor 32 digital inputs and 2 analog inputs\n\n\n>",
+  "install_end_text": "",
+  "device_annotation": "Siglog 32A2 Connector.\n\nParser version: 1.0.0.0",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/mqtt/v1.0.0/payload.js"
+  ]
+}
