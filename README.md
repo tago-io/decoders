@@ -2,6 +2,8 @@
 
 This repository contains the necessary tools and guidelines for creating and managing decoders for the TagoIO platform. Decoders are scripts that interpret the payload data from an IoT Device or protocol and convert it into a TagoIO data format.
 
+To help you get started, we've included a comprehensive video tutorial on how to add a new decoder: [Watch the tutorial](https://www.youtube.com/watch?v=7ejN2q0YWo0).
+
 ## Table of Contents
 
 - [Useful Commands](#useful-commands)
@@ -15,11 +17,13 @@ This repository contains the necessary tools and guidelines for creating and man
 ## Useful Commands
 
 - **Validating your decoder manifest:**
+
   ```bash
   npm start validator
   ```
 
 - **Running Unit Tests:**
+
   ```bash
   npm test
   ```
@@ -45,11 +49,17 @@ Manifests are JSONC files that describe the details of each version of a decoder
 
 ### Network Decoders
 
+- **Images**
+  - **Banner**: Expected dimension `1500x375`
+  - **Icon**: Expected dimension `64x64`
+  - **Logo**: Expected dimension `443x160`
 - **Manifest File:** `network.jsonc`
 - **Details File:** `network_details.jsonc`
 
 ### Connector Decoders
 
+- **Images**
+  - **Logo**: Expected dimension `443x625` or `443x443`
 - **Manifest File:** `connector.jsonc`
 - **Details File:** `connector_details.jsonc`
 
@@ -60,7 +70,7 @@ Here's an example of a `connector.jsonc` file for a connector decoder:
 ```jsonc
 {
   "$schema": "../../../schema/connector.json",
-  "name": "Abeeway Compact Tracker",
+  "name": "Abeeway Compact Tracker", // Searchable Field on the TagoIO platform.
   "images": {
     "logo": "./assets/logo.png"
   },
@@ -80,7 +90,7 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 ```jsonc
 {
   "$schema": "../../../schema/connector_details.json",
-  "description": "./description.md",
+  "description": "./description.md", // Searchable Field on the TagoIO platform.
   "install_text": "**Compact tracker**\n\nMulti-mode tracker with embedded sensors combining GPS, Low-power GPS, Wi-Fi Sniffer, BLE",
   "device_annotation": "",
   "device_parameters": [
@@ -127,12 +137,15 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 ### Network Decoder
 
 1. **Create a new folder:**
+
    - Navigate to [`./decoders/network/`](./decoders/network/) and create a new folder named after your network decoder.
 
 2. **Create the manifest file:**
+
    - Inside this folder, create a `network.jsonc` file. Follow the structure defined in [`network.json`](./schema/network.json).
 
 3. **Create version folders:**
+
    - For each version of your network decoder, create a new folder inside your network decoder's folder. Name the folder with the version number.
    - The pattern utilized for versioning is the [SemVer](https://semver.org/)
 
@@ -142,12 +155,15 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 ### Connector Decoder
 
 1. **Create a new folder:**
+
    - Navigate to [`./decoders/connector/`](./decoders/connector/) and create a new folder named after the manufacturer and the name of your connector decoder.
 
 2. **Create the manifest file:**
+
    - Inside this folder, create a `connector.jsonc` file. Follow the structure defined in [`connector.json`](./schema/connector.json).
 
 3. **Create version folders:**
+
    - For each version of your connector decoder, create a new folder inside your connector decoder's folder. Name the folder with the version number.
    - The pattern utilized for versioning is the [SemVer](https://semver.org/)
 
@@ -157,18 +173,23 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 ## Submitting a Decoder Pull Request
 
 1. **Create a new branch:**
+
    - Create a new branch for your decoder.
 
 2. **Add your decoder:**
+
    - Follow the instructions above to add your decoder.
 
 3. **Validate your manifest:**
+
    - Run the command `npm start validator` to check if all data in the manifest file is correct.
 
 4. **Commit your changes:**
+
    - Commit your changes and open a pull request for review.
 
 5. **Review and feedback:**
+
    - Wait for the Pull Request to be reviewed. You may need to make some changes based on the feedback you receive.
 
 6. **Merge your changes:**
