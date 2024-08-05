@@ -1,0 +1,1 @@
+DL-TRS21 is a soil water potential and temperature sensor over LoRaWAN®

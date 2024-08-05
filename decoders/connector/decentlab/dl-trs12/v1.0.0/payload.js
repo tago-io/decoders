@@ -1,11 +1,11 @@
 /*
-* FILENAME : dl-trs12.js 
+* FILENAME : dl-trs12.js
 *
 * DESCRIPTION : Decentlab DL-TRS12
-*     
+*
 *
 * FUNCTIONS : read_int, decode, ToTagoFormat, adjustObjectFormat
-*       
+*
 *
 * NOTES :
 *
@@ -15,45 +15,46 @@
 *
 * REF NO  VERSION DATE    WHO           DETAIL
 * 1.0     09/20/2022      Mat Cercena   implementing DL-TRS12
-* 
+* 1.0     08/01/2024      Decentlab     unifying DL-TRS12
+*
 *
 */
 
-/* eslint-disable no-restricted-properties */
+/* https://www.decentlab.com/products/soil-moisture-temperature-and-electrical-conductivity-sensor-for-lorawan */
 
-const decentlab_decoder = {
+var decentlab_decoder = {
   PROTOCOL_VERSION: 2,
   SENSORS: [
     {length: 3,
      values: [{name: 'dielectric_permittivity',
                displayName: 'Dielectric permittivity',
-               convert (x) { return Math.pow(0.000000002887 * Math.pow(x[0]/10, 3) - 0.0000208 * Math.pow(x[0]/10, 2) + 0.05276 * (x[0]/10) - 43.39, 2); }},
+               convert: function (x) { return Math.pow(0.000000002887 * Math.pow(x[0]/10, 3) - 0.0000208 * Math.pow(x[0]/10, 2) + 0.05276 * (x[0]/10) - 43.39, 2); }},
               {name: 'volumetric_water_content',
                displayName: 'Volumetric water content',
-               convert (x) { return x[0]/10 * 0.0003879 - 0.6956; },
+               convert: function (x) { return x[0]/10 * 0.0003879 - 0.6956; },
                unit: 'm³⋅m⁻³'},
               {name: 'soil_temperature',
                displayName: 'Soil temperature',
-               convert (x) { return (x[1] - 32768) / 10; },
+               convert: function (x) { return (x[1] - 32768) / 10; },
                unit: '°C'},
               {name: 'electrical_conductivity',
                displayName: 'Electrical conductivity',
-               convert (x) { return x[2]; },
+               convert: function (x) { return x[2]; },
                unit: 'µS⋅cm⁻¹'}]},
     {length: 1,
      values: [{name: 'battery_voltage',
                displayName: 'Battery voltage',
-               convert (x) { return x[0] / 1000; },
+               convert: function (x) { return x[0] / 1000; },
                unit: 'V'}]}
   ],
 
-  read_int (bytes, pos) {
+  read_int: function (bytes, pos) {
     return (bytes[pos] << 8) + bytes[pos + 1];
   },
 
-  decode (msg) {
-    let bytes = msg;
-    let i; let j;
+  decode: function (msg) {
+    var bytes = msg;
+    var i, j;
     if (typeof msg === 'string') {
       bytes = [];
       for (i = 0; i < msg.length; i += 2) {
@@ -61,36 +62,36 @@ const decentlab_decoder = {
       }
     }
 
-    const version = bytes[0];
-    if (version !== this.PROTOCOL_VERSION) {
-      return {error: `protocol version ${  version  } doesn't match v2`};
+    var version = bytes[0];
+    if (version != this.PROTOCOL_VERSION) {
+      return {error: "protocol version " + version + " doesn't match v2"};
     }
 
-    const deviceId = this.read_int(bytes, 1);
-    let flags = this.read_int(bytes, 3);
-    const result = {'protocol_version': version, 'device_id': deviceId};
+    var deviceId = this.read_int(bytes, 1);
+    var flags = this.read_int(bytes, 3);
+    var result = {'protocol_version': version, 'device_id': deviceId};
     // decode payload
-    let pos = 5;
-    for (i = 0; i < this.SENSORS.length; i+=1, flags >>= 1) {
+    var pos = 5;
+    for (i = 0; i < this.SENSORS.length; i++, flags >>= 1) {
       if ((flags & 1) !== 1)
         continue;
 
-      const sensor = this.SENSORS[i];
-      const x = [];
+      var sensor = this.SENSORS[i];
+      var x = [];
       // convert data to 16-bit integer array
-      for (j = 0; j < sensor.length; j+=1) {
+      for (j = 0; j < sensor.length; j++) {
         x.push(this.read_int(bytes, pos));
         pos += 2;
       }
 
       // decode sensor values
-      for (j = 0; j < sensor.values.length; j+=1) {
-        const value = sensor.values[j];
+      for (j = 0; j < sensor.values.length; j++) {
+        var value = sensor.values[j];
         if ('convert' in value) {
           result[value.name] = {displayName: value.displayName,
                                 value: value.convert.bind(this)(x)};
           if ('unit' in value)
-            result[value.name].unit = value.unit;
+            result[value.name]['unit'] = value.unit;
         }
       }
     }
@@ -108,7 +109,7 @@ function adjustObjectFormat (result){
       delete key_aux.value;
     }
     // limit value to 2 decimal places
-    if (typeof key_aux.value === 'number' ){
+    if (typeof key_aux.value === 'number'){
       key_aux.value = Number(key_aux.value.toFixed(2));
     }
   }
@@ -146,6 +147,13 @@ if (payload_raw) {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(payload_raw.value, "hex");
     const serie = new Date().getTime();
+    if (decentlab_decoder.PARAMETERS && typeof device !== 'undefined' && device.params) {
+      device.params.forEach((p) => {
+        if (p.key in decentlab_decoder.PARAMETERS) {
+          decentlab_decoder.PARAMETERS[p.key] = p.value;
+        }
+      });
+    }
     const payload_aux = ToTagoFormat(decentlab_decoder.decode(buffer));
     payload = payload.concat(payload_aux.map((x) => ({ ...x, serie })));
   } catch (e) {
@@ -155,11 +163,3 @@ if (payload_raw) {
     payload = [{ variable: "parse_error", value: e.message }];
   }
 }
-
-/*
-function main() {
-  console.log(decentlab_decoder.decode("0210d3000346be813d00000c80"));
-  console.log(decentlab_decoder.decode("0210d300020c80"));
-}
-main();
-*/

@@ -1,0 +1,1 @@
+DL-DLR2-012 is an analog strain gauge sensor transmitter over LoRaWAN®

@@ -1,11 +1,11 @@
 /*
-* FILENAME : dl-smtp.js 
+* FILENAME : dl-smtp.js
 *
 * DESCRIPTION : Decentlab DL-SMTP
-*     
+*
 *
 * FUNCTIONS : read_int, decode, ToTagoFormat, adjustObjectFormat
-*       
+*
 *
 * NOTES :
 *
@@ -15,84 +15,87 @@
 *
 * REF NO  VERSION DATE    WHO           DETAIL
 * 1.0     09/19/2022      Mat Cercena   implementing DL-SMTP
-* 
+* 1.0     08/01/2024      Decentlab     unifying DL-SMTP
+*
 *
 */
 
-const decentlab_decoder = {
+/* https://www.decentlab.com/products/soil-moisture-and-temperature-profile-for-lorawan */
+
+var decentlab_decoder = {
   PROTOCOL_VERSION: 2,
   SENSORS: [
     {length: 16,
      values: [{name: 'soil_moisture_at_depth_0',
                displayName: 'Soil moisture at depth 0',
-               convert (x) { return (x[0] - 2500) / 500; }},
+               convert: function (x) { return (x[0] - 2500) / 500; }},
               {name: 'soil_temperature_at_depth_0',
                displayName: 'Soil temperature at depth 0',
-               convert (x) { return (x[1] - 32768) / 100; },
+               convert: function (x) { return (x[1] - 32768) / 100; },
                unit: '°C'},
               {name: 'soil_moisture_at_depth_1',
                displayName: 'Soil moisture at depth 1',
-               convert (x) { return (x[2] - 2500) / 500; }},
+               convert: function (x) { return (x[2] - 2500) / 500; }},
               {name: 'soil_temperature_at_depth_1',
                displayName: 'Soil temperature at depth 1',
-               convert (x) { return (x[3] - 32768) / 100; },
+               convert: function (x) { return (x[3] - 32768) / 100; },
                unit: '°C'},
               {name: 'soil_moisture_at_depth_2',
                displayName: 'Soil moisture at depth 2',
-               convert (x) { return (x[4] - 2500) / 500; }},
+               convert: function (x) { return (x[4] - 2500) / 500; }},
               {name: 'soil_temperature_at_depth_2',
                displayName: 'Soil temperature at depth 2',
-               convert (x) { return (x[5] - 32768) / 100; },
+               convert: function (x) { return (x[5] - 32768) / 100; },
                unit: '°C'},
               {name: 'soil_moisture_at_depth_3',
                displayName: 'Soil moisture at depth 3',
-               convert (x) { return (x[6] - 2500) / 500; }},
+               convert: function (x) { return (x[6] - 2500) / 500; }},
               {name: 'soil_temperature_at_depth_3',
                displayName: 'Soil temperature at depth 3',
-               convert (x) { return (x[7] - 32768) / 100; },
+               convert: function (x) { return (x[7] - 32768) / 100; },
                unit: '°C'},
               {name: 'soil_moisture_at_depth_4',
                displayName: 'Soil moisture at depth 4',
-               convert (x) { return (x[8] - 2500) / 500; }},
+               convert: function (x) { return (x[8] - 2500) / 500; }},
               {name: 'soil_temperature_at_depth_4',
                displayName: 'Soil temperature at depth 4',
-               convert (x) { return (x[9] - 32768) / 100; },
+               convert: function (x) { return (x[9] - 32768) / 100; },
                unit: '°C'},
               {name: 'soil_moisture_at_depth_5',
                displayName: 'Soil moisture at depth 5',
-               convert (x) { return (x[10] - 2500) / 500; }},
+               convert: function (x) { return (x[10] - 2500) / 500; }},
               {name: 'soil_temperature_at_depth_5',
                displayName: 'Soil temperature at depth 5',
-               convert (x) { return (x[11] - 32768) / 100; },
+               convert: function (x) { return (x[11] - 32768) / 100; },
                unit: '°C'},
               {name: 'soil_moisture_at_depth_6',
                displayName: 'Soil moisture at depth 6',
-               convert (x) { return (x[12] - 2500) / 500; }},
+               convert: function (x) { return (x[12] - 2500) / 500; }},
               {name: 'soil_temperature_at_depth_6',
                displayName: 'Soil temperature at depth 6',
-               convert (x) { return (x[13] - 32768) / 100; },
+               convert: function (x) { return (x[13] - 32768) / 100; },
                unit: '°C'},
               {name: 'soil_moisture_at_depth_7',
                displayName: 'Soil moisture at depth 7',
-               convert (x) { return (x[14] - 2500) / 500; }},
+               convert: function (x) { return (x[14] - 2500) / 500; }},
               {name: 'soil_temperature_at_depth_7',
                displayName: 'Soil temperature at depth 7',
-               convert (x) { return (x[15] - 32768) / 100; },
+               convert: function (x) { return (x[15] - 32768) / 100; },
                unit: '°C'}]},
     {length: 1,
      values: [{name: 'battery_voltage',
                displayName: 'Battery voltage',
-               convert (x) { return x[0] / 1000; },
+               convert: function (x) { return x[0] / 1000; },
                unit: 'V'}]}
   ],
 
-  read_int (bytes, pos) {
+  read_int: function (bytes, pos) {
     return (bytes[pos] << 8) + bytes[pos + 1];
   },
 
-  decode (msg) {
-    let bytes = msg;
-    let i; let j;
+  decode: function (msg) {
+    var bytes = msg;
+    var i, j;
     if (typeof msg === 'string') {
       bytes = [];
       for (i = 0; i < msg.length; i += 2) {
@@ -100,36 +103,36 @@ const decentlab_decoder = {
       }
     }
 
-    const version = bytes[0];
-    if (version !== this.PROTOCOL_VERSION) {
-      return {error: `protocol version ${  version  } doesn't match v2`};
+    var version = bytes[0];
+    if (version != this.PROTOCOL_VERSION) {
+      return {error: "protocol version " + version + " doesn't match v2"};
     }
 
-    const deviceId = this.read_int(bytes, 1);
-    let flags = this.read_int(bytes, 3);
-    const result = {'protocol_version': version, 'device_id': deviceId};
+    var deviceId = this.read_int(bytes, 1);
+    var flags = this.read_int(bytes, 3);
+    var result = {'protocol_version': version, 'device_id': deviceId};
     // decode payload
-    let pos = 5;
-    for (i = 0; i < this.SENSORS.length; i+=1, flags >>= 1) {
+    var pos = 5;
+    for (i = 0; i < this.SENSORS.length; i++, flags >>= 1) {
       if ((flags & 1) !== 1)
         continue;
 
-      const sensor = this.SENSORS[i];
-      const x = [];
+      var sensor = this.SENSORS[i];
+      var x = [];
       // convert data to 16-bit integer array
-      for (j = 0; j < sensor.length; j+=1) {
+      for (j = 0; j < sensor.length; j++) {
         x.push(this.read_int(bytes, pos));
         pos += 2;
       }
 
       // decode sensor values
-      for (j = 0; j < sensor.values.length; j+=1) {
-        const value = sensor.values[j];
+      for (j = 0; j < sensor.values.length; j++) {
+        var value = sensor.values[j];
         if ('convert' in value) {
           result[value.name] = {displayName: value.displayName,
                                 value: value.convert.bind(this)(x)};
           if ('unit' in value)
-            result[value.name].unit = value.unit;
+            result[value.name]['unit'] = value.unit;
         }
       }
     }
@@ -147,7 +150,7 @@ function adjustObjectFormat (result){
       delete key_aux.value;
     }
     // limit value to 2 decimal places
-    if (typeof key_aux.value === 'number' ){
+    if (typeof key_aux.value === 'number'){
       key_aux.value = Number(key_aux.value.toFixed(2));
     }
   }
@@ -185,6 +188,13 @@ if (payload_raw) {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(payload_raw.value, "hex");
     const serie = new Date().getTime();
+    if (decentlab_decoder.PARAMETERS && typeof device !== 'undefined' && device.params) {
+      device.params.forEach((p) => {
+        if (p.key in decentlab_decoder.PARAMETERS) {
+          decentlab_decoder.PARAMETERS[p.key] = p.value;
+        }
+      });
+    }
     const payload_aux = ToTagoFormat(decentlab_decoder.decode(buffer));
     payload = payload.concat(payload_aux.map((x) => ({ ...x, serie })));
   } catch (e) {
@@ -194,11 +204,3 @@ if (payload_raw) {
     payload = [{ variable: "parse_error", value: e.message }];
   }
 }
-
-/*
-function main() {
-  console.log(decentlab_decoder.decode("020b50000309018a8c09438a9809278a920b3c8aa50c9c8a8c11e08aa500000000000000000b3b"));
-  console.log(decentlab_decoder.decode("020b5000020b3b"));
-}
-main();
-*/

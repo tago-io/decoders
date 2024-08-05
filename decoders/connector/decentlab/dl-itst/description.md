@@ -1,0 +1,1 @@
+DL-ITST is an infrared thermometer/surface temperature sensor over LoRaWAN®

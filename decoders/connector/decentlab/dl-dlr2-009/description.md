@@ -1,0 +1,1 @@
+DL-DLR2-009 is an analog pt1000 sensor transmitter over LoRaWAN®

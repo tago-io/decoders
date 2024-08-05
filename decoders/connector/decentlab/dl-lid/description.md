@@ -1,0 +1,1 @@
+DL-LID is a laser distance/level sensor over LoRaWAN®

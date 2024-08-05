@@ -1,0 +1,1 @@
+DL-ATM22 is a wind speed, wind direction and temperature sensor over LoRaWAN®

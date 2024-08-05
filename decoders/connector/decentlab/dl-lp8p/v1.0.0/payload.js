@@ -1,11 +1,11 @@
 /*
-* FILENAME : dl-lp8p.js 
+* FILENAME : dl-lp8p.js
 *
-* DESCRIPTION : Decentlab LP8P
-*     
+* DESCRIPTION : Decentlab DL-LP8P
+*
 *
 * FUNCTIONS : read_int, decode, ToTagoFormat, adjustObjectFormat
-*       
+*
 *
 * NOTES :
 *
@@ -14,79 +14,79 @@
 * CHANGES :
 *
 * REF NO  VERSION DATE    WHO           DETAIL
-* 1.0     09/16/2022      Mat Cercena   implementing LP8P
-* 
+* 1.0     09/16/2022      Mat Cercena   implementing DL-LP8P
+* 1.0     08/01/2024      Decentlab     unifying DL-LP8P
+*
 *
 */
 
-/* eslint-disable no-plusplus */
-/* eslint-disable eqeqeq */
+/* https://www.decentlab.com/products/co2-temperature-humidity-and-barometric-pressure-sensor-for-lorawan */
 
-const decentlab_decoder = {
+var decentlab_decoder = {
   PROTOCOL_VERSION: 2,
   SENSORS: [
     {length: 2,
      values: [{name: 'air_temperature',
                displayName: 'Air temperature',
-               convert (x) { return 175.72 * x[0] / 65536 - 46.85; },
+               convert: function (x) { return 175.72 * x[0] / 65536 - 46.85; },
                unit: '°C'},
               {name: 'air_humidity',
                displayName: 'Air humidity',
-               convert (x) { return 125 * x[1] / 65536 - 6; },
+               convert: function (x) { return 125 * x[1] / 65536 - 6; },
                unit: '%'}]},
     {length: 2,
      values: [{name: 'barometer_temperature',
                displayName: 'Barometer temperature',
-               convert (x) { return (x[0] - 5000) / 100; },
+               convert: function (x) { return (x[0] - 5000) / 100; },
                unit: '°C'},
               {name: 'barometric_pressure',
                displayName: 'Barometric pressure',
-               convert (x) { return x[1] * 2; },
+               convert: function (x) { return x[1] * 2; },
                unit: 'Pa'}]},
     {length: 8,
      values: [{name: 'co2_concentration',
                displayName: 'CO2 concentration',
-               convert (x) { return x[0] - 32768; },
+               convert: function (x) { return x[0] - 32768; },
                unit: 'ppm'},
               {name: 'co2_concentration_lpf',
                displayName: 'CO2 concentration LPF',
-               convert (x) { return x[1] - 32768; },
+               convert: function (x) { return x[1] - 32768; },
                unit: 'ppm'},
               {name: 'co2_sensor_temperature',
                displayName: 'CO2 sensor temperature',
-               convert (x) { return (x[2] - 32768) / 100; },
+               convert: function (x) { return (x[2] - 32768) / 100; },
                unit: '°C'},
               {name: 'capacitor_voltage_1',
                displayName: 'Capacitor voltage 1',
-               convert (x) { return x[3] / 1000; },
+               convert: function (x) { return x[3] / 1000; },
                unit: 'V'},
               {name: 'capacitor_voltage_2',
                displayName: 'Capacitor voltage 2',
-               convert (x) { return x[4] / 1000; },
+               convert: function (x) { return x[4] / 1000; },
                unit: 'V'},
               {name: 'co2_sensor_status',
                displayName: 'CO2 sensor status',
-               convert (x) { return x[5]; }},
+               convert: function (x) { return x[5]; }},
               {name: 'raw_ir_reading',
                displayName: 'Raw IR reading',
-               convert (x) { return x[6]; }},
+               convert: function (x) { return x[6]; }},
               {name: 'raw_ir_reading_lpf',
                displayName: 'Raw IR reading LPF',
-               convert (x) { return x[7]; }}]},
+               convert: function (x) { return x[7]; }}]},
     {length: 1,
      values: [{name: 'battery_voltage',
                displayName: 'Battery voltage',
-               convert (x) { return x[0] / 1000; },
+               convert: function (x) { return x[0] / 1000; },
                unit: 'V'}]}
   ],
 
-  read_int (bytes, pos) {
+  read_int: function (bytes, pos) {
     return (bytes[pos] << 8) + bytes[pos + 1];
   },
 
-  decode (msg) {
-    let bytes = msg;
-    let i; let j;
+  decode: function (msg) {
+    var bytes = msg;
+    var i, j;
     if (typeof msg === 'string') {
       bytes = [];
       for (i = 0; i < msg.length; i += 2) {
@@ -94,22 +94,22 @@ const decentlab_decoder = {
       }
     }
 
-    const version = bytes[0];
+    var version = bytes[0];
     if (version != this.PROTOCOL_VERSION) {
-      return {error: `protocol version ${  version  } doesn't match v2`};
+      return {error: "protocol version " + version + " doesn't match v2"};
     }
 
-    const deviceId = this.read_int(bytes, 1);
-    let flags = this.read_int(bytes, 3);
-    const result = {'protocol_version': version, 'device_id': deviceId};
+    var deviceId = this.read_int(bytes, 1);
+    var flags = this.read_int(bytes, 3);
+    var result = {'protocol_version': version, 'device_id': deviceId};
     // decode payload
-    let pos = 5;
+    var pos = 5;
     for (i = 0; i < this.SENSORS.length; i++, flags >>= 1) {
       if ((flags & 1) !== 1)
         continue;
 
-      const sensor = this.SENSORS[i];
-      const x = [];
+      var sensor = this.SENSORS[i];
+      var x = [];
       // convert data to 16-bit integer array
       for (j = 0; j < sensor.length; j++) {
         x.push(this.read_int(bytes, pos));
@@ -118,12 +118,12 @@ const decentlab_decoder = {
 
       // decode sensor values
       for (j = 0; j < sensor.values.length; j++) {
-        const value = sensor.values[j];
+        var value = sensor.values[j];
         if ('convert' in value) {
           result[value.name] = {displayName: value.displayName,
                                 value: value.convert.bind(this)(x)};
           if ('unit' in value)
-            result[value.name].unit = value.unit;
+            result[value.name]['unit'] = value.unit;
         }
       }
     }
@@ -141,7 +141,7 @@ function adjustObjectFormat (result){
       delete key_aux.value;
     }
     // limit value to 2 decimal places
-    if (typeof key_aux.value === 'number' ){
+    if (typeof key_aux.value === 'number'){
       key_aux.value = Number(key_aux.value.toFixed(2));
     }
   }
@@ -179,6 +179,13 @@ if (payload_raw) {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(payload_raw.value, "hex");
     const serie = new Date().getTime();
+    if (decentlab_decoder.PARAMETERS && typeof device !== 'undefined' && device.params) {
+      device.params.forEach((p) => {
+        if (p.key in decentlab_decoder.PARAMETERS) {
+          decentlab_decoder.PARAMETERS[p.key] = p.value;
+        }
+      });
+    }
     const payload_aux = ToTagoFormat(decentlab_decoder.decode(buffer));
     payload = payload.concat(payload_aux.map((x) => ({ ...x, serie })));
   } catch (e) {
@@ -188,12 +195,3 @@ if (payload_raw) {
     payload = [{ variable: "parse_error", value: e.message }];
   }
 }
-
-/*
-function main() {
-  console.log(decentlab_decoder.decode("020578000f67bd618d1cedbd1081d981f4895b0bd80bb50000959895390c25"));
-  console.log(decentlab_decoder.decode("020578000b67bd618d1cedbd100c25"));
-  console.log(decentlab_decoder.decode("02057800080c25"));
-}
-main();
-*/

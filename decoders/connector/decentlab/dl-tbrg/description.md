@@ -1,0 +1,1 @@
+DL-TBRG is a tipping bucket rain gauge over LoRaWAN®

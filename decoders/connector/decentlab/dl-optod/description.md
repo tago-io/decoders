@@ -1,0 +1,1 @@
+DL-OPTOD is an optical dissolved oxygen and temperature sensor over LoRaWAN®

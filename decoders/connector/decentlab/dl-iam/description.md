@@ -1,1 +1,1 @@
-DL-IAM is a Indoor ambiance monitor including co2, tvoc and motion sensor over LoRaWAN®
+DL-IAM is an indoor ambiance monitor including co₂, tvoc and motion sensor over LoRaWAN®

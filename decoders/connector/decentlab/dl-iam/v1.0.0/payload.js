@@ -1,11 +1,11 @@
 /*
-* FILENAME : dl-iam.js 
+* FILENAME : dl-iam.js
 *
 * DESCRIPTION : Decentlab DL-IAM
-*     
+*
 *
 * FUNCTIONS : read_int, decode, ToTagoFormat, adjustObjectFormat
-*       
+*
 *
 * NOTES :
 *
@@ -15,11 +15,14 @@
 *
 * REF NO  VERSION DATE    WHO           DETAIL
 * 1.0     09/16/2022      Mat Cercena   implementing DL-IAM
-* 
+* 1.0     08/01/2024      Decentlab     unifying DL-IAM
+*
 *
 */
 
-let decentlab_decoder = {
+/* https://www.decentlab.com/products/indoor-ambiance-monitor-including-co2-tvoc-and-motion-sensor-for-lorawan */
+
+var decentlab_decoder = {
   PROTOCOL_VERSION: 2,
   SENSORS: [
     {length: 1,
@@ -79,8 +82,8 @@ let decentlab_decoder = {
   },
 
   decode: function (msg) {
-    let bytes = msg;
-    let i, j;
+    var bytes = msg;
+    var i, j;
     if (typeof msg === 'string') {
       bytes = [];
       for (i = 0; i < msg.length; i += 2) {
@@ -88,22 +91,22 @@ let decentlab_decoder = {
       }
     }
 
-    let version = bytes[0];
+    var version = bytes[0];
     if (version != this.PROTOCOL_VERSION) {
       return {error: "protocol version " + version + " doesn't match v2"};
     }
 
-    let deviceId = this.read_int(bytes, 1);
-    let flags = this.read_int(bytes, 3);
-    let result = {'protocol_version': version, 'device_id': deviceId};
+    var deviceId = this.read_int(bytes, 1);
+    var flags = this.read_int(bytes, 3);
+    var result = {'protocol_version': version, 'device_id': deviceId};
     // decode payload
-    let pos = 5;
+    var pos = 5;
     for (i = 0; i < this.SENSORS.length; i++, flags >>= 1) {
       if ((flags & 1) !== 1)
         continue;
 
-      let sensor = this.SENSORS[i];
-      let x = [];
+      var sensor = this.SENSORS[i];
+      var x = [];
       // convert data to 16-bit integer array
       for (j = 0; j < sensor.length; j++) {
         x.push(this.read_int(bytes, pos));
@@ -112,7 +115,7 @@ let decentlab_decoder = {
 
       // decode sensor values
       for (j = 0; j < sensor.values.length; j++) {
-        let value = sensor.values[j];
+        var value = sensor.values[j];
         if ('convert' in value) {
           result[value.name] = {displayName: value.displayName,
                                 value: value.convert.bind(this)(x)};
@@ -125,6 +128,23 @@ let decentlab_decoder = {
   }
 };
 
+function adjustObjectFormat (result){
+  for (const key_aux of result){
+    // drop undefined fields
+    if (typeof key_aux.unit === 'undefined'){
+      delete key_aux.unit;
+    }
+    if (typeof key_aux.value === 'undefined'){
+      delete key_aux.value;
+    }
+    // limit value to 2 decimal places
+    if (typeof key_aux.value === 'number'){
+      key_aux.value = Number(key_aux.value.toFixed(2));
+    }
+  }
+  return result;
+}
+
 function ToTagoFormat(object_item, serie, prefix = "") {
   let result = [];
   for (const key in object_item) {
@@ -133,9 +153,9 @@ function ToTagoFormat(object_item, serie, prefix = "") {
         variable: (object_item[key].MessageType || `${prefix}${key}`).toLowerCase(),
         value: object_item[key].value || object_item[key].Value,
         serie: object_item[key].serie || serie,
-        //metadata: object_item[key].metadata,
+        // metadata: object_item[key].metadata,
         unit: object_item[key].unit,
-        //location: object_item.location,
+        // location: object_item.location,
       });
     } else {
       result.push({
@@ -150,26 +170,19 @@ function ToTagoFormat(object_item, serie, prefix = "") {
   return result;
 }
 
-function adjustObjectFormat (result){
-  for (const key_aux of result){
-    // drop undefined fields
-    if (typeof key_aux.unit === 'undefined'){
-      delete key_aux.unit;
-    }
-    // limit value to 2 decimal places
-    if (typeof key_aux.value === 'number' ){
-      key_aux.value = Number(key_aux.value.toFixed(2));
-    }
-  }
-  return result;
-}
-
 const payload_raw = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 if (payload_raw) {
   try {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(payload_raw.value, "hex");
     const serie = new Date().getTime();
+    if (decentlab_decoder.PARAMETERS && typeof device !== 'undefined' && device.params) {
+      device.params.forEach((p) => {
+        if (p.key in decentlab_decoder.PARAMETERS) {
+          decentlab_decoder.PARAMETERS[p.key] = p.value;
+        }
+      });
+    }
     const payload_aux = ToTagoFormat(decentlab_decoder.decode(buffer));
     payload = payload.concat(payload_aux.map((x) => ({ ...x, serie })));
   } catch (e) {
@@ -179,12 +192,3 @@ if (payload_raw) {
     payload = [{ variable: "parse_error", value: e.message }];
   }
 }
-
-/*
-function main() {
-  console.log(decentlab_decoder.decode("020bbd007f0b926a515d48bc4e0262006981c7000093d4000b0111"));
-  console.log(decentlab_decoder.decode("020bbd006f0b926a515d48bc4e02620069000b0111"));
-  console.log(decentlab_decoder.decode("020bbd00010b92"));
-}
-main();
-*/

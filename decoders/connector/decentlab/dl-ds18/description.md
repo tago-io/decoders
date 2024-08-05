@@ -1,0 +1,1 @@
+DL-DS18 is a temperature sensor over LoRaWAN®

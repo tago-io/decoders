@@ -1,0 +1,1 @@
+DL-DLR2-011 is a dual digital input dry contact transmitter over LoRaWAN®

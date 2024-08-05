@@ -1,0 +1,1 @@
+DL-PHEHT is a ph, orp and temperature sensor over LoRaWAN®

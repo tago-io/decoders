@@ -1,0 +1,1 @@
+DL-BLG is a black globe temperature sensor over LoRaWAN®

@@ -1,0 +1,1 @@
+DL-DLR2-008 is an analog pt100 sensor transmitter over LoRaWAN®

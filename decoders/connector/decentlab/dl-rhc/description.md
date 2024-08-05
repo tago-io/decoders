@@ -1,0 +1,1 @@
+DL-RHC is a high-precision air temperature and humidity sensor with radiation shield over LoRaWAN®
