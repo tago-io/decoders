@@ -1,1 +1,1 @@
-LW006 Smart Badge, the smart badge that combines LoRaWAN network transmission with BLE,WIFI, and GPS positioning technologies. This combination allows for reliable indoor and outdoor positioning, making it ideal for ensuring staff safety, emergency alarm capabilities, and effective personnel management.
+Indoor and outdoor smart badge over LoRaWAN™
