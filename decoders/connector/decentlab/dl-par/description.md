@@ -1,0 +1,1 @@
+DL-PAR is a photosynthetically active radiation sensor over LoRaWAN®

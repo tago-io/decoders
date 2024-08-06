@@ -1,0 +1,1 @@
+DL-MBX is an ultrasonic distance/level sensor over LoRaWAN®

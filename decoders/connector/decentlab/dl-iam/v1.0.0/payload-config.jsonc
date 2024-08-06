@@ -1,25 +1,25 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "DL-IAM IS A INDOOR AMBIANCE MONITOR FOR LORAWAN ®\r\n\r\n**FEATURES** :\r\n\r\n* State-of-the-art CO2 and VOC (volatile organic compounds) sensors.\r\n\r\n* Industry standard humidity and temperature sensor.\r\n\r\n* High accuracy barometric pressure sensor.\r\n\r\n* Ambient light sensor.\r\n\r\n* Motion / presence detector.\r\n\r\n* Place and measure: no setup required.\r\n\r\n* Unattended real-time monitoring for more than a year without replacing batteries.\r\n\r\n* Standard alkaline (AA-type) batteries.\r\n\r\n* CE compliant, Radio Equipment Directive (RED) 2014/53/EU.\r\n\r\n",
+  "install_text": "DL-IAM IS AN INDOOR AMBIANCE MONITOR INCLUDING CO₂, TVOC AND MOTION SENSOR OVER LoRaWAN®\n\n**FEATURES:**\n* State-of-the-art CO2 and VOC (volatile organic compounds) sensors.\n* Industry standard humidity and temperature sensor.\n* High accuracy barometric pressure sensor.\n* Ambient light sensor.\n* Motion / presence detector.\n* Place and measure: no setup required.\n* Unattended real-time monitoring for more than a year without replacing batteries.\n* Compatible with LoRaWAN® networks of any provider.\n* Standard alkaline (AA-type) batteries.\n* CE compliant, Radio Equipment Directive (RED) 2014/53/EU.\n",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],
   "networks": [
     "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js",
     "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
     "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
     "../../../../network/lorawan-everynet/v1.0.0/payload.js",
     "../../../../network/lorawan-helium/v1.0.0/payload.js",
     "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
-    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
-    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
-    "../../../../network/lorawan-senra/v1.0.0/payload.js",
-    "../../../../network/lorawan-senet/v1.0.0/payload.js",
-    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
-    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
     "../../../../network/lorawan-loriot/v1.0.0/payload.js",
-    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
-    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js"
   ]
 }

@@ -1,0 +1,1 @@
+DL-PM is a particulate matter, temperature, humidity and barometric pressure sensor over LoRaWAN®

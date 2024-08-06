@@ -1,0 +1,1 @@
+DL-DLR2-006 is an analog potentiometer sensor transmitter over LoRaWAN®

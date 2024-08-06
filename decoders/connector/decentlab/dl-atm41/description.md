@@ -1,0 +1,1 @@
+DL-ATM41 is an eleven parameter weather station over LoRaWAN®
