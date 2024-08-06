@@ -1,0 +1,1 @@
+Compact trackers for indoor and outdoor positioning over LoRaWAN™
