@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nThe Oyster is a compact, rugged GPS tracking device that has been designed for locating and tracking non-powered assets such as containers, trailers, skip bins, and other assets where super-long battery life is required without sacrificing the frequency of updates and performance.\n * IP67 Rugged weather-proof housing.\n * Powered by 3 x AA Batteries with up to 5 years battery life.\n * High-precision GPS/GLONASS tracking device tracks assets when they're on the move and enters sleep mode when stationary to save power.\n * Small, Compact and easy to install and conceal.\n * Configure by USB cable \n",
+  "install_end_text": "",
+  "device_annotation": "Install the dashboard template: http://admin.tago.io/template/5d2cd07d8a146c002105bdf6",
+  "device_parameters": [],
+  "networks":  [
+    "../../../../network/sigfox/v1.0.0/payload.js"
+  ]
+}
