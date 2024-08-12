@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../schema/connector.json",
-  "name": "Oyster GPS",
+  "name": "Oyster Lora GPS",
   "images": {
     "logo": "./assets/logo.png"
   },
