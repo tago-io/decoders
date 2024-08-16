@@ -1,0 +1,1 @@
+The Milesight CT101 LoRaWAN Sensor is a unique current monitoring solution designed for seamless integration into existing electrical systems. This self-powered sensor eliminates the need for batteries, offering long-term operation and reduced maintenance.

@@ -11,10 +11,11 @@ let payload: DataToSend[] = [];
 
 describe("WS302 Payload Validation", () => {
   beforeEach(() => {
-    payload = [{ variable: "payload", value: "017564055B053F02DA016A02", unit: "", metadata: {} }];
+    payload = [];
   });
 
-  test("Check all output variables for acceleration", () => {
+  test("Check all output variables", () => {
+    payload = [{ variable: "payload", value: "017564055B053F02DA016A02", unit: "", metadata: {} }];
     const result = eval(transpiledCode);
 
     expect(result).toEqual(
@@ -27,27 +28,18 @@ describe("WS302 Payload Validation", () => {
       ])
     );
   });
-});
 
-describe("Shall not be parsed", () => {
-  beforeEach(() => {
+  test("Shall not be parsed", () => {
     payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
-  });
-
-  test("Output Result", () => {
     const result = eval(transpiledCode);
+
     expect(result).toEqual(undefined);
   });
-});
 
-describe("Invalid payload", () => {
-  beforeEach(() => {
+  test("Invalid Payload", () => {
     payload = [{ variable: "payload", value: "invalid_payload", unit: "", metadata: {} }];
-  });
-
-  // console.info(payload);
-  test("Output Result", () => {
     const result = eval(transpiledCode);
+
     expect(result).toEqual([{ variable: "parse_error", value: "Invalid payload size" }]);
   });
 });
