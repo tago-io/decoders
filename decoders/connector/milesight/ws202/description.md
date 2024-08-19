@@ -1,1 +1,1 @@
-Milesight WS202: LoRa PIR sensor, 6-8m range, motion/light detection, battery-powered.
+Battery-powered motion and light detector with a 6-8 meter detection range over LoRaWAN.
