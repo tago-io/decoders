@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**WS558** is a LoRaWAN® Smart Light Controller designed for monitoring and controlling lights locally or remotely. With 2 circuit types and 8 switches, it fits different rooms without the need for re-wiring, thereby reducing renovation costs. Compliant with the Milesight LoRaWAN® gateway and Milesight IoT Cloud solution, the WS558 can be monitored and controlled remotely via a webpage or mobile app and triggered by other Milesight sensors. \n\nAdditionally, the WS558 supports the Milesight D2D communication protocol, which enables quick setup and control without a gateway. The WS558 can be widely used for wireless control of indoor lights, fans, heaters, machines, and more.\n\n**Features**\n* LN type or switch type optional, capable of controlling up to 8 circuits of lights, adopts different indoor wiring\n* Supports local switch button control, able to test the lamp status without networking after the wiring is completed\n* Collects data of current, voltage, power, electrical consumption for smart management\n* Ultra-wide-distance wireless transmission up to line of sight of 15 km\n* Equipped with NFC for one-touch configuration, supports card emulation mode\n* Compliant with standard LoRaWAN® gateways and network servers\n* Compliant with Milesight IoT Cloud\n* Supports Milesight D2D protocol to enable ultra-low latency control without gateway\n* Supports multicast for control in bulk",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}
