@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**VS330** is a LoRaWAN® bathroom occupancy sensor providing a cost-effective solution for monitoring the occupancy status of bathrooms and the cubicles in a public toilet across various scenarios. The VS330 combines dual technologies, Time-of-Flight (ToF) technology and a Passive Infrared (PIR) sensor, to identify the human body and motion with smart logic and industry-leading accuracy exceeding 99.5%. \n\nThe VS330 can easily adjust to different scenarios with 100% anonymity and low power consumption. It can be managed by integrated systems, allowing users to monitor occupancy and trigger linkages to control other devices remotely via a web browser or mobile app. The damp-proof coating inside ensures reliable operation under various conditions.\n\n**Features**\n* High detecting accuracy based on Time-of-Flight (ToF) technology and Passive Infrared(PIR) detection with maximal possibility and industry-leading accuracy of over 99%\n* 100% anonymity and GDPR-compliant to detect space occupancy and human detection\n* Real-time update and ultra-low power consumption\n* Effective in static or motional applications with low mistaken rate\n* Effective in low-light or completely dark environments\n* Damp-proof coating inside the device to ensure the device works well in various conditions of bathrooms and other scenarios\n* Adjustable sensor angle enables multi-mounting methods for various applications\n* Built-in NFC for easy configuration\n* Compatible with standard LoRaWAN® gateways and network servers\n* Quick and easy management with Milesight IoT Cloud solution",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}
