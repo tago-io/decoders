@@ -35,8 +35,6 @@ function decodePayload(bytes: number[]) {
   payload.data_length = buffer.readUInt16BE();
   payload.data = decodeSensorData(buffer.slice(payload.data_length));
 
-  console.info(payload);
-
   return payload;
 }
 

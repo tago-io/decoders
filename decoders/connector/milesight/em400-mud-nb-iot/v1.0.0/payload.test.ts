@@ -25,7 +25,6 @@ describe("EM400-MUD Payload Validation", () => {
       },
     ];
     const result = eval(transpiledCode);
-    console.info(result);
 
     expect(result).toEqual(
       expect.arrayContaining([
@@ -57,22 +56,6 @@ describe("EM400-MUD Payload Validation", () => {
       ])
     );
   });
-
-  // test("Check all output variables - location", () => {
-  //   payload = [{ variable: "payload", value: "068836bf7701f000090722", unit: "", metadata: {} }];
-  //   const result = eval(transpiledCode);
-  //   console.info(result);
-
-  //   expect(result).toEqual(
-  //     expect.arrayContaining([
-  //       expect.objectContaining({ variable: "payload", value: "068836bf7701f000090722", unit: "", metadata: {} }),
-  //       expect.objectContaining({ variable: "longitude", value: 24.62495 }),
-  //       expect.objectContaining({ variable: "latitude", value: 118.030576 }),
-  //       expect.objectContaining({ variable: "motion_status", value: "moving" }),
-  //       expect.objectContaining({ variable: "geofence_status", value: "unset" }),
-  //     ])
-  //   );
-  // });
 
   test("Shall not be parsed", () => {
     payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
