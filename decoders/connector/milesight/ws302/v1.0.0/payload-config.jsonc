@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "WS302 is an advanced LoRaWAN® Sensor for monitoring noise/sound level in decibels (dB) with ease.\n\n* 30 to 120 dBA Measurement Range\n* ± 3 dB Accuracy; 0.1 dB Resolution\n* Weighting, C-Weighting & Fast-Time Weighting\n* Measurement Unit: SPL Actual, Leq, and Lmax\n* 2700 mAh 4 Years Battery Life ",
+  "install_text": "Milesight **WS302** is a LoRa sound level sensor with an integrated microphone, capable of measuring a wide range of noise levels. It supports multiple weighting measurements and transmits data via the LoRaWAN® network. The sensor is compatible with Milesight LoRaWAN® gateway and Milesight IoT Cloud solution for remote management and integration with other sensors or appliances.",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],

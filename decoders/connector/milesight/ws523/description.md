@@ -1,1 +1,1 @@
-The Milesight WS523 is a LoRaWAN® smart portable socket for the monitoring and control of electrical appliances. Adopting most of international socket types, WS523 can be used for turning on or off the electrical devices locally or remotely and measuring power consumption data plugged on it and even sending over current alarms.
+LoRaWAN smart socket for remote control, power monitoring, and overcurrent alerts.

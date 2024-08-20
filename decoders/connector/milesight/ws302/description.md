@@ -1,1 +1,1 @@
-WS302 is a LoRaWAN®-enabled sound level sensor that is designed to measure and monitor sound levels in various environments.
+LoRa sound level sensor with microphone, supports multiple weighting measurements, LoRaWAN® network.
