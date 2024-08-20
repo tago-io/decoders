@@ -1017,7 +1017,6 @@ if (payload_raw) {
   try {
     const buffer = Buffer.from(payload_raw.value as string, "hex");
     const decoded = mileSightDeviceDecode(buffer);
-    console.info(decoded);
 
     const time = payload_raw.time || new Date().toISOString();
     const group = payload_raw.group || `${new Date().getTime()}-${Math.random().toString(36).substring(2, 5)}`;

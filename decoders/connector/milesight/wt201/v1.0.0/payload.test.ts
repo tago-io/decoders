@@ -48,7 +48,6 @@ describe("WT201 Payload Validation", () => {
   test("Check all output variables - history", () => {
     payload = [{ variable: "payload", value: "20CE5C470A65D09EC091", unit: "", metadata: {} }];
     const result = eval(transpiledCode);
-    console.info(result);
 
     expect(result).toEqual(
       expect.arrayContaining([
