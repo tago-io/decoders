@@ -107,13 +107,12 @@ if (payload_raw) {
       parsedTagoObj.push({ variable: "temperature_abnormal", value: decoded.temperature_abnormal, group, time: new Date(time) });
     }
     if (decoded.history !== undefined) {
-      console.info("History data found", decoded.history);
-      parsedTagoObj.push({
-        variable: "history",
-        value: JSON.stringify(decoded.history),
-        group,
-        time: new Date(time),
-        metadata: decoded.history,
+      decoded.history.forEach((history) => {
+        const dateTime = new Date(history.timestamp * 1000);
+        parsedTagoObj.push({ variable: "humidity", value: history.humidity, group, unit: "%RH", time: dateTime });
+        parsedTagoObj.push({ variable: "occupancy", value: history.occupancy, group, time: dateTime });
+        parsedTagoObj.push({ variable: "report_type", value: history.report_type, group, time: dateTime });
+        parsedTagoObj.push({ variable: "temperature", value: history.temperature, group, unit: "°C", time: dateTime });
       });
     }
 

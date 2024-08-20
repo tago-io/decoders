@@ -49,27 +49,16 @@ describe("WS203 Payload Validation", () => {
     expect(result).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ variable: "payload", value: "20CEAE5BA664040024016520CE5C5CA6640301340165", unit: "", metadata: {} }),
-        expect.objectContaining({
-          variable: "history",
-          value:
-            '[{"timestamp":1688624046,"report_type":"period","occupancy":"vacant","temperature":29.2,"humidity":50.5},{"timestamp":1688624220,"report_type":"pir occupancy","occupancy":"occupied","temperature":30.8,"humidity":50.5}]',
-          metadata: [
-            {
-              humidity: 50.5,
-              occupancy: "vacant",
-              report_type: "period",
-              temperature: 29.2,
-              timestamp: 1688624046,
-            },
-            {
-              humidity: 50.5,
-              occupancy: "occupied",
-              report_type: "pir occupancy",
-              temperature: 30.8,
-              timestamp: 1688624220,
-            },
-          ],
-        }),
+
+        expect.objectContaining({ variable: "humidity", value: 50.5, unit: "%RH", time: new Date(1688624046 * 1000) }),
+        expect.objectContaining({ variable: "occupancy", value: "vacant", time: new Date(1688624046 * 1000) }),
+        expect.objectContaining({ variable: "report_type", value: "period", time: new Date(1688624046 * 1000) }),
+        expect.objectContaining({ variable: "temperature", value: 29.2, unit: "°C", time: new Date(1688624046 * 1000) }),
+
+        expect.objectContaining({ variable: "humidity", value: 50.5, unit: "%RH", time: new Date(1688624220 * 1000) }),
+        expect.objectContaining({ variable: "occupancy", value: "occupied", time: new Date(1688624220 * 1000) }),
+        expect.objectContaining({ variable: "report_type", value: "pir occupancy", time: new Date(1688624220 * 1000) }),
+        expect.objectContaining({ variable: "temperature", value: 30.8, unit: "°C", time: new Date(1688624220 * 1000) }),
       ])
     );
   });
