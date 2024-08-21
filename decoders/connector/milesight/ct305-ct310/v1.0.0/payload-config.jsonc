@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The **CT305/CT310** is a LoRaWAN® Smart Current Transformer designed for monitoring energy consumption and analyzing usage remotely. It reports RMS current and accumulated current data by minutes with a high measuring accuracy and a sampling frequency of up to 3.3 kHz. The device is self-powered and features a non-invasive clamp design for easy installation without de-energizing facilities. It supports a sampling rate of up to 1s for real-time monitoring and quick alarm response.\n The CT305/CT310 can detect three phases with a detection range of either 500A or 1000A. It includes an LED indicator for status and alarms and supports an external wire temperature sensor. The device is compliant with standard LoRaWAN® gateways.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}
