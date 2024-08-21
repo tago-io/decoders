@@ -1,1 +1,1 @@
-Ultrasonic distance sensor with 3-axis accelerometer, temperature sensor, NB-IoT
+Ultrasonic distance sensor with 3-axis accelerometer, temperature sensor, over NB-IoT

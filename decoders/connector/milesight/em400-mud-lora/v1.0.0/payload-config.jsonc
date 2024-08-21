@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "**EM400-MUD** is a multifunctional ultrasonic distance sensor designed for small-range detection and minimal blind spots. It includes a 3-axis accelerometer and a temperature sensor for device status monitoring. The sensor features a high IP rating and a waterproof enclosure, capable of operating in harsh environments for up to 10 years with two 9000 mAh batteries. Available in LoRaWAN®  versions, it supports various communication needs. The LoRaWAN® version integrates with Milesight LoRaWAN® gateway and IoT Cloud.",
+  "install_text": "**EM400-MUD** is a multifunctional ultrasonic distance sensor designed for small-range detection and minimal blind spots. It includes a 3-axis accelerometer and a temperature sensor for device status monitoring. The sensor features a high IP rating and a waterproof enclosure, capable of operating in harsh environments for up to 10 years with two 9000 mAh batteries. Available in LoRaWAN®  versions, it supports various communication needs.",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],

@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "Milesight **VS341** is an occupancy sensor designed to detect desk or seat occupancy in workspaces. It uses a high-precision PIR sensor and Thermopile IR technology to achieve up to 98% accuracy. The sensor supports the Milesight D2D protocol for ultra-low latency communication and is compatible with standard LoRaWAN® gateways and network servers. It features NFC for one-touch configuration and is made from V0 grade flame retardant material for enhanced safety. The sensor is also compatible with Milesight IoT Cloud",
+  "install_text": "Milesight **VS341** is an occupancy sensor designed to detect desk or seat occupancy in workspaces. It uses a high-precision PIR sensor and Thermopile IR technology to achieve up to 98% accuracy. The sensor supports the Milesight D2D protocol for ultra-low latency communication and is compatible with standard LoRaWAN® gateways and network servers. It features NFC for one-touch configuration and is made from V0 grade flame retardant material for enhanced safety.",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],

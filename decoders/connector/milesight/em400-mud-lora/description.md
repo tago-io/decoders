@@ -1,1 +1,1 @@
-Ultrasonic distance sensor with 3-axis accelerometer, temperature sensor, LoRaWAN
+Ultrasonic distance sensor with a 3-axis accelerometer, temperature sensor, over LoRaWAN
