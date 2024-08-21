@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**SmartOne C** is a GPS tracking device for mobile assets such as trailers, cargo containers, heavy construction equipment, generators, and boats/barges. It features two dry contact inputs for monitoring engine run times and alarm inputs, and a serial port for connecting passive and smart sensors. The device processes GPS satellite signals to determine location (longitude and latitude) and transmits data via the Globalstar Satellite Network. It also sends messages including battery status, input alarm status, and diagnostic details. Configuration is done using a computer and USB configuration cable, with messages communicated at specific times or under certain conditions.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/globalstar/v1.0.0/payload.ts"
+  ]
+}
