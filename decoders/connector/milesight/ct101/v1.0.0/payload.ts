@@ -1,7 +1,3 @@
-import { Data, DataToSend } from "@tago-io/sdk/lib/types";
-
-declare let payload: DataToSend[];
-
 // Helper functions to read different data types from the payload
 function readUInt16LE(bytes: Buffer): number {
   const value = (bytes[1] << 8) + bytes[0];
