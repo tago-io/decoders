@@ -1,7 +1,3 @@
-import { Data, DataToSend } from "@tago-io/sdk/lib/types";
-
-declare let payload: DataToSend[];
-
 interface DecodedData extends Pick<Data, "variable" | "value" | "time" | "unit" | "group"> {}
 
 function mileSightDeviceDecode(bytes: Buffer): DecodedData[] {

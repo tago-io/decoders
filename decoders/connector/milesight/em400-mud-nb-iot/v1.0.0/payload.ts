@@ -1,7 +1,3 @@
-import { Data, DataToSend } from "@tago-io/sdk/lib/types";
-
-declare let payload: DataToSend[];
-
 /**
  * Payload Decoder for Milesight IoT EM400-MUD
  *

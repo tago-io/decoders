@@ -1,8 +1,3 @@
-import { Data, DataToSend } from "@tago-io/sdk/lib/types";
-import { parse } from "path";
-
-declare let payload: DataToSend[];
-
 function handle_downlink_response(channel_type: number, bytes: Buffer, offset: number): { data: { [key: string]: any }; offset: number } {
   var decoded: { [key: string]: any } = {};
 

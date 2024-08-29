@@ -1,7 +1,3 @@
-import { DataToSend } from "@tago-io/sdk/lib/types";
-
-declare let payload: DataToSend[];
-
 interface DecodedData {
   [key: string]: number | string;
 }
