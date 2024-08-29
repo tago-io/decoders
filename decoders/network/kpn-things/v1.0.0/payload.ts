@@ -1,7 +1,3 @@
-import { Data, DataToSend } from "@tago-io/sdk/lib/types";
-
-declare let payload: DataToSend[];
-
 /**
  * @description SenML is a simple format for representing sensor measurements.
  * Documentation https://datatracker.ietf.org/doc/html/rfc8428#section-5
@@ -62,7 +58,7 @@ function parseVariable(variableName: string): string {
  * @param {SenML[]} senMLObj - SenML object
  */
 function decoder(senMLObj: SenML[]) {
-  const toTagoJSON: Pick<Data, "variable" | "value" | "time" | "unit" | "group" | "serie">[] = [];
+  const toTagoJSON: any[] = [];
   const serie = String(new Date().getTime());
 
   let currTime = Date.now();
