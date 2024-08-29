@@ -15,6 +15,7 @@ describe('buildTS function', () => {
     `;
 
     const expectedCode = `
+      "usestrict";
       function add(a, b) {
         return a + b;
       }
@@ -28,6 +29,7 @@ describe('buildTS function', () => {
 
   it('should throw an error for invalid TypeScript code', () => {
     const invalidCode = `
+      "usestrict";
       function add(a: number, b: number) {
         return new.Date(); // wrong code
       }
