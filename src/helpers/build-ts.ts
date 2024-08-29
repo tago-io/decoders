@@ -19,6 +19,10 @@ function buildTS(fileContent: string) {
       //   },
       // },
     },
+    module: {
+      type: "commonjs",
+      noInterop: true, // This line to prevent empty export
+    },
   });
 
   return code;
