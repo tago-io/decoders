@@ -53,9 +53,7 @@ function getMyDate(str: string) {
   const c_Hour = c_Date.getHours();
   const c_Min = c_Date.getMinutes();
   const c_Sen = c_Date.getSeconds();
-  const c_Time = `${c_Year}-${getzf(c_Month)}-${getzf(c_Day)} ${getzf(
-    c_Hour
-  )}:${getzf(c_Min)}:${getzf(c_Sen)}`;
+  const c_Time = `${c_Year}-${getzf(c_Month)}-${getzf(c_Day)} ${getzf(c_Hour)}:${getzf(c_Min)}:${getzf(c_Sen)}`;
 
   return c_Time;
 }
@@ -66,14 +64,7 @@ function datalog(i: number, bytes: Buffer) {
   const cc = parseFloat(((bytes[5 + i] << 8) | bytes[6 + i]) / 100).toFixed(2);
   const dd = bytes[0 + i] & 0x02 ? "High" : "Low";
   const ee = bytes[0 + i] & 0x01 ? "True" : "FALSE";
-  const ff = getMyDate(
-    (
-      (bytes[7 + i] << 24) |
-      (bytes[8 + i] << 16) |
-      (bytes[9 + i] << 8) |
-      bytes[10 + i]
-    ).toString(10)
-  );
+  const ff = getMyDate(((bytes[7 + i] << 24) | (bytes[8 + i] << 16) | (bytes[9 + i] << 8) | bytes[10 + i]).toString(10));
   let string = `[${aa},${bb},${cc},${ff},${dd},${ee}]`;
   string = string.concat(",");
 
@@ -167,9 +158,7 @@ function Decoder(bytes: Buffer, port: number) {
     else if (bytes[3] === 0x0d) freq_band = "KR920";
     else if (bytes[3] === 0x0e) freq_band = "MA869";
 
-    const firm_ver = `${bytes[1] & 0x0f}.${(bytes[2] >> 4) & 0x0f}.${
-      bytes[2] & 0x0f
-    }`;
+    const firm_ver = `${bytes[1] & 0x0f}.${(bytes[2] >> 4) & 0x0f}.${bytes[2] & 0x0f}`;
     const bat = ((bytes[5] << 8) | bytes[6]) / 1000;
 
     return {
@@ -182,16 +171,9 @@ function Decoder(bytes: Buffer, port: number) {
   }
 }
 
-const cs01lb_payload = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const cs01lb_payload = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
-const port = payload.find(
-  (x) => x.variable === "port" || x.variable === "fport"
-);
+const port = payload.find((x) => x.variable === "port" || x.variable === "fport" || x.variable === "fPort");
 
 if (cs01lb_payload) {
   try {
