@@ -1,1 +1,0 @@
-Tracker (LTE Cat-M) from ThingsMatrix over Cellular

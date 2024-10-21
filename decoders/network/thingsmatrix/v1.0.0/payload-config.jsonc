@@ -1,9 +1,0 @@
-{
-  "$schema": "../../../../schema/network_details.json",
-  "description": "../description.md",
-  "serial_number_config": {
-    "required": true,
-    "label": "Serial Number"
-  },
-  "device_parameters": []
-}
