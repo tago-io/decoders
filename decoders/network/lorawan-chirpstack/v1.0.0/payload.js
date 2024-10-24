@@ -253,6 +253,15 @@ if (chirpstack_payload) {
     vars_to_tago = vars_to_tago.concat(toTagoFormat(chirpstack_payload.tags, serie));
     delete chirpstack_payload.tags;
   }
+
+  // Decoded Codec
+  if (chirpstack_payload.object) {
+    vars_to_tago = vars_to_tago.concat(
+      toTagoFormat(chirpstack_payload.object, serie)
+    );
+    delete chirpstack_payload.object;
+  }
+
   vars_to_tago = vars_to_tago.concat(toTagoFormat(chirpstack_payload, serie));
 
   // Change the payload to the new formated variables.
