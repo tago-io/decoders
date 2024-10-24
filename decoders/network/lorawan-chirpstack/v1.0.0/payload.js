@@ -254,12 +254,12 @@ if (chirpstack_payload) {
     delete chirpstack_payload.tags;
   }
 
-  // make sure that the variable with the name "object" does not have an empty value, this has been added since we do not support more complex decoded object structures
-  const objectIndex = vars_to_tago.findIndex(
-    (item) => item.variable === "object"
-  );
-  if (objectIndex !== -1 && !vars_to_tago[objectIndex].value) {
-    vars_to_tago.splice(objectIndex, 1);
+  // Decoded Codec
+  if (chirpstack_payload.object) {
+    vars_to_tago = vars_to_tago.concat(
+      toTagoFormat(chirpstack_payload.object, serie)
+    );
+    delete chirpstack_payload.object;
   }
 
   vars_to_tago = vars_to_tago.concat(toTagoFormat(chirpstack_payload, serie));
