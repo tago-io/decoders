@@ -1,4 +1,5 @@
 /* eslint-disable no-plusplus */
+
 /* What this snipped does?
  ** It simples convert a raw JSON to a formated TagoIO JSON.
  ** So if you send { "temperature": 10 }
@@ -17,11 +18,11 @@ const ignore_vars = ["deviceInfo"];
  * toTagoFormat({ myvariable: { value: myvalue, unit: 'C', metadata: { color: 'green' }} , anothervariable: anothervalue... })
  *
  * @param {Object} object_item Object containing key and value.
- * @param {String} serie Serie for the variables
+ * @param {String} group group for the variables
  * @param {String} prefix Add a prefix to the variables name
  */
-function toTagoFormat(object_item, serie, prefix = "") {
-  const result = [];
+function toTagoFormat(object_item: Object, group: string, prefix = "") {
+  const result: any = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 
@@ -30,16 +31,16 @@ function toTagoFormat(object_item, serie, prefix = "") {
       result.push({
         variable: value.variable || `${prefix}${key}`,
         value: value.value,
-        serie: value.serie || serie,
+        group: value.group || group,
         metadata: value.metadata,
         location: value.location,
         unit: value.unit,
       });
-    } else {
+    } else if (value !== null) {
       result.push({
         variable: `${prefix}${key}`,
         value: value,
-        serie,
+        group,
       });
     }
   }
@@ -47,9 +48,8 @@ function toTagoFormat(object_item, serie, prefix = "") {
   return result;
 }
 
-
 /** Function that convert the string hex to Base64 */
-function convertBase64toHex(str) {
+function convertBase64toHex(str: string) {
   const base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
   const hexRegex = /^([0-9A-Fa-f]{2})+$/;
   if (base64regex.test(str) && !hexRegex.test(str)) {
@@ -58,73 +58,74 @@ function convertBase64toHex(str) {
   return str;
 }
 
-function parseRxInfo(data, serie) {
-  const result = [];
+function parseRxInfo(data: any, group: string) {
+  const result: any = [];
   for (let i = 0; i < data.length; ++i) {
     // gatewayID (base64)
-    if (data[i].gatewayID || data[i].gatewayId )result.push({ variable: `rx_${i}_gateway_id`, value: convertBase64toHex(data[i].gatewayID) || convertBase64toHex(data[i].gatewayId), serie });
+    if (data[i].gatewayID || data[i].gatewayId)
+      result.push({ variable: `rx_${i}_gateway_id`, value: convertBase64toHex(data[i].gatewayID) || convertBase64toHex(data[i].gatewayId), group });
     // time (string)
-    if (data[i].time) result.push({ variable: `rx_${i}_time`, value: data[i].time, serie });
+    if (data[i].time) result.push({ variable: `rx_${i}_time`, value: data[i].time, group });
     // time since gps epoch
-    if (data[i].timeSinceGPSEpoch) result.push({ variable: `rx_${i}_time_since_gps_epoch`, value: data[i].timeSinceGPSEpoch, serie });
+    if (data[i].timeSinceGPSEpoch) result.push({ variable: `rx_${i}_time_since_gps_epoch`, value: data[i].timeSinceGPSEpoch, group });
     // rssi (integer)
-    if (data[i].rssi) result.push({ variable: `rx_${i}_rssi`, value: data[i].rssi, serie });
+    if (data[i].rssi) result.push({ variable: `rx_${i}_rssi`, value: data[i].rssi, group });
     // loRaSNR (integer)
-    if (data[i].loRaSNR || data[i].snr) result.push({ variable: `rx_${i}_lorasnr`, value: data[i].loRaSNR || data[i].snr, serie });
+    if (data[i].loRaSNR || data[i].snr) result.push({ variable: `rx_${i}_lorasnr`, value: data[i].loRaSNR || data[i].snr, group });
     // channel (integer)
-    if (data[i].channel) result.push({ variable: `rx_${i}_channel`, value: data[i].channel, serie });
+    if (data[i].channel) result.push({ variable: `rx_${i}_channel`, value: data[i].channel, group });
     // rfChain (integer)
-    if (data[i].rfChain) result.push({ variable: `rx_${i}_rf_chain`, value: data[i].rfChain, serie });
+    if (data[i].rfChain) result.push({ variable: `rx_${i}_rf_chain`, value: data[i].rfChain, group });
     // board (integer)
-    if (data[i].board) result.push({ variable: `rx_${i}_board`, value: data[i].board, serie });
+    if (data[i].board) result.push({ variable: `rx_${i}_board`, value: data[i].board, group });
     // antenna (integer)
-    if (data[i].antenna) result.push({ variable: `rx_${i}_antenna`, value: data[i].antenna, serie });
+    if (data[i].antenna) result.push({ variable: `rx_${i}_antenna`, value: data[i].antenna, group });
     // location latitude (double)
     if (data[i].location && data[i].location.latitude && data[i].location.longitude) {
       result.push({
         variable: `rx_${i}_location`,
         value: `${data[i].location.latitude},${data[i].location.longitude}`,
         location: { lat: data[i].location.latitude, lng: data[i].location.longitude },
-        serie,
+        group,
       });
     }
-    // result.push({ variable: `rx_${i}_location_altitude`, value: data[i].location.altitude, serie: serie });
+    // result.push({ variable: `rx_${i}_location_altitude`, value: data[i].location.altitude, group: group });
     // // fine timestamp type (string)
-    if (data[i].fineTimestampType) result.push({ variable: `rx_${i}_fine_timestamp_type`, value: data[i].fineTimestampType, serie });
+    if (data[i].fineTimestampType) result.push({ variable: `rx_${i}_fine_timestamp_type`, value: data[i].fineTimestampType, group });
     // context (base64)
-    if (data[i].context) result.push({ variable: `rx_${i}_context`, value: convertBase64toHex(data[i].context), serie });
+    if (data[i].context) result.push({ variable: `rx_${i}_context`, value: convertBase64toHex(data[i].context), group });
     // // // uplink id (base64)
-    // // result.push({ variable: `rx_${i}_uplink_id`, value: Buffer.from(data[i].uplinkID, "base64").toString("hex"), serie: serie });
+    // // result.push({ variable: `rx_${i}_uplink_id`, value: Buffer.from(data[i].uplinkID, "base64").toString("hex"), group: group });
   }
   return result;
 }
 
-function parseTxInfo(data, serie) {
-  const result = [];
+function parseTxInfo(data: any, group: string) {
+  const result: any = [];
 
   // frequency (integer)
-  if (data.frequency) result.push({ variable: "frequency", value: data.frequency, serie });
+  if (data.frequency) result.push({ variable: "frequency", value: data.frequency, group });
 
   // for chirpstack v4
-  if (data?.modulation?.lora){
-    result.push({ variable: "bandwidth", value: data.modulation.lora.bandwidth, serie });
+  if (data?.modulation?.lora) {
+    result.push({ variable: "bandwidth", value: data.modulation.lora.bandwidth, group });
     // spreading factor (integer)
-    result.push({ variable: "spreading_factor", value: data.modulation.lora.spreadingFactor, serie });
+    result.push({ variable: "spreading_factor", value: data.modulation.lora.spreadingFactor, group });
     // code rate (string)
-    result.push({ variable: "code_rate", value: data.modulation.lora.codeRate, serie });
+    result.push({ variable: "code_rate", value: data.modulation.lora.codeRate, group });
   }
 
   // lora modulation info (integer) for chirpstack v3
   if (data?.loRaModulationInfo) {
     // modulation (string) for chirpstack v3
-    if (data.modulation) result.push({ variable: "modulation", value: data.modulation, serie });
-    result.push({ variable: "bandwidth", value: data.loRaModulationInfo.bandwidth, serie });
+    if (data.modulation) result.push({ variable: "modulation", value: data.modulation, group });
+    result.push({ variable: "bandwidth", value: data.loRaModulationInfo.bandwidth, group });
     // spreading factor (integer)
-    result.push({ variable: "spreading_factor", value: data.loRaModulationInfo.spreadingFactor, serie });
+    result.push({ variable: "spreading_factor", value: data.loRaModulationInfo.spreadingFactor, group });
     // code rate (string)
-    result.push({ variable: "code_rate", value: data.loRaModulationInfo.codeRate, serie });
+    result.push({ variable: "code_rate", value: data.loRaModulationInfo.codeRate, group });
     // polarization inversion (boolean)
-    result.push({ variable: "polarization_inversion", value: data.loRaModulationInfo.polarizationInversion, serie });
+    result.push({ variable: "polarization_inversion", value: data.loRaModulationInfo.polarizationInversion, group });
   }
   return result;
 }
@@ -180,7 +181,7 @@ function parseTxInfo(data, serie) {
 let chirpstack_payload = payload.find((item) => item.variable === "chirpstack_payload");
 
 if (chirpstack_payload) {
-  const serie = chirpstack_payload.serie || new Date().getTime(); // Get a unique serie for the incoming data.
+  const group = chirpstack_payload.group || new Date().getTime(); // Get a unique group for the incoming data.
 
   // Parse the loriot_payload to JSON format (it comes in a String format)
   chirpstack_payload = JSON.parse(chirpstack_payload.value);
@@ -188,15 +189,15 @@ if (chirpstack_payload) {
   let vars_to_tago = [];
 
   // rename for chirstack v4
-  if(chirpstack_payload?.deviceInfo?.applicationId){
+  if (chirpstack_payload?.deviceInfo?.applicationId) {
     chirpstack_payload.application_id = chirpstack_payload.deviceInfo.applicationId;
     delete chirpstack_payload.deviceInfo.applicationId;
   }
-  if(chirpstack_payload?.deviceInfo?.applicationName){
+  if (chirpstack_payload?.deviceInfo?.applicationName) {
     chirpstack_payload.application_name = chirpstack_payload.deviceInfo.applicationName;
     delete chirpstack_payload.deviceInfo.applicationName;
   }
-  if(chirpstack_payload?.deviceInfo?.devEui){
+  if (chirpstack_payload?.deviceInfo?.devEui) {
     chirpstack_payload.device_eui = chirpstack_payload.deviceInfo.devEui;
     delete chirpstack_payload.deviceInfo.devEui;
   }
@@ -242,29 +243,27 @@ if (chirpstack_payload) {
 
   // Parse rx info
   if (chirpstack_payload.rxInfo) {
-    vars_to_tago = vars_to_tago.concat(parseRxInfo(chirpstack_payload.rxInfo, serie));
+    vars_to_tago = vars_to_tago.concat(parseRxInfo(chirpstack_payload.rxInfo, group));
     delete chirpstack_payload.rxInfo;
   }
   // Parse tx info
   if (chirpstack_payload.txInfo) {
-    vars_to_tago = vars_to_tago.concat(parseTxInfo(chirpstack_payload.txInfo, serie));
+    vars_to_tago = vars_to_tago.concat(parseTxInfo(chirpstack_payload.txInfo, group));
     delete chirpstack_payload.txInfo;
   }
   // Tags
   if (chirpstack_payload.tags) {
-    vars_to_tago = vars_to_tago.concat(toTagoFormat(chirpstack_payload.tags, serie));
+    vars_to_tago = vars_to_tago.concat(toTagoFormat(chirpstack_payload.tags, group));
     delete chirpstack_payload.tags;
   }
 
   // Decoded Codec
   if (chirpstack_payload.object) {
-    vars_to_tago = vars_to_tago.concat(
-      toTagoFormat(chirpstack_payload.object, serie)
-    );
+    vars_to_tago = vars_to_tago.concat(toTagoFormat(chirpstack_payload.object, group));
     delete chirpstack_payload.object;
   }
 
-  vars_to_tago = vars_to_tago.concat(toTagoFormat(chirpstack_payload, serie));
+  vars_to_tago = vars_to_tago.concat(toTagoFormat(chirpstack_payload, group));
 
   // Change the payload to the new formated variables.
   payload = vars_to_tago;
