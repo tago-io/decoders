@@ -25,19 +25,20 @@ function toTagoFormat(object_item, serie, prefix = "") {
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 
-    if (typeof object_item[key] === "object") {
+    const value = object_item[key];
+    if (value !== null && typeof value === "object") {
       result.push({
-        variable: object_item[key].variable || `${prefix}${key}`,
-        value: object_item[key].value,
-        serie: object_item[key].serie || serie,
-        metadata: object_item[key].metadata,
-        location: object_item[key].location,
-        unit: object_item[key].unit,
+        variable: value.variable || `${prefix}${key}`,
+        value: value.value,
+        serie: value.serie || serie,
+        metadata: value.metadata,
+        location: value.location,
+        unit: value.unit,
       });
     } else {
       result.push({
         variable: `${prefix}${key}`,
-        value: object_item[key],
+        value: value,
         serie,
       });
     }
@@ -45,6 +46,7 @@ function toTagoFormat(object_item, serie, prefix = "") {
 
   return result;
 }
+
 
 /** Function that convert the string hex to Base64 */
 function convertBase64toHex(str) {
@@ -110,7 +112,7 @@ function parseTxInfo(data, serie) {
     result.push({ variable: "spreading_factor", value: data.modulation.lora.spreadingFactor, serie });
     // code rate (string)
     result.push({ variable: "code_rate", value: data.modulation.lora.codeRate, serie });
-  } 
+  }
 
   // lora modulation info (integer) for chirpstack v3
   if (data?.loRaModulationInfo) {
