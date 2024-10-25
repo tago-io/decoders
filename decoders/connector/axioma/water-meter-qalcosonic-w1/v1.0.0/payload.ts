@@ -58,7 +58,10 @@ function parsePayload(payload_raw: string) {
         time: first_log_datetime,
       };
 
-      for (let i = 0; i < 15; i++) {
+      // Calculate the number of log volume deltas
+      const numLogVolumeDeltas = Math.floor((payloadLength - 17) / 2);
+
+      for (let i = 0; i < numLogVolumeDeltas; i++) {
         const log_volume_delta = bytes.readUInt16LE(17 + i * 2) * 0.001;
         data[`log_volume_delta_${i + 1}`] = {
           value: log_volume_delta,
