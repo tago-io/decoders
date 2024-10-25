@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, test } from "vitest";
 
 import { DataToSend } from "@tago-io/sdk/lib/types";
 
-const file = readFileSync(join(__dirname, "./payload.ts"));
+const file = readFileSync(join(__dirname, "./payload.js"));
 const transpiledCode = ts.transpile(file.toString());
 
 let payload: DataToSend[] = [];

@@ -21,8 +21,8 @@ const ignore_vars = ["deviceInfo"];
  * @param {String} group group for the variables
  * @param {String} prefix Add a prefix to the variables name
  */
-function toTagoFormat(object_item: Object, group: string, prefix = "") {
-  const result: any = [];
+function toTagoFormat(object_item, group, prefix = "") {
+  const result = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue;
 
@@ -49,7 +49,7 @@ function toTagoFormat(object_item: Object, group: string, prefix = "") {
 }
 
 /** Function that convert the string hex to Base64 */
-function convertBase64toHex(str: string) {
+function convertBase64toHex(str) {
   const base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
   const hexRegex = /^([0-9A-Fa-f]{2})+$/;
   if (base64regex.test(str) && !hexRegex.test(str)) {
@@ -58,8 +58,8 @@ function convertBase64toHex(str: string) {
   return str;
 }
 
-function parseRxInfo(data: any, group: string) {
-  const result: any = [];
+function parseRxInfo(data, group) {
+  const result = [];
   for (let i = 0; i < data.length; ++i) {
     // gatewayID (base64)
     if (data[i].gatewayID || data[i].gatewayId)
@@ -100,8 +100,8 @@ function parseRxInfo(data: any, group: string) {
   return result;
 }
 
-function parseTxInfo(data: any, group: string) {
-  const result: any = [];
+function parseTxInfo(data, group) {
+  const result = [];
 
   // frequency (integer)
   if (data.frequency) result.push({ variable: "frequency", value: data.frequency, group });
