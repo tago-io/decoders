@@ -179,7 +179,7 @@ if (cs01lb_payload) {
   try {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(cs01lb_payload.value, "hex");
-    const group = new Date().getTime();
+    const group = new Date().getTime().toString();
     const payload_aux = Decoder(buffer, Number(port.value));
     payload = payload.concat(toTagoFormat(payload_aux, group));
   } catch (e) {
