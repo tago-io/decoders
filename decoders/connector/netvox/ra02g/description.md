@@ -1,0 +1,1 @@
+# Wireless Cigarette Smoke, Vaping, and Bullying Alarm Sensor over LoRaWAN™
