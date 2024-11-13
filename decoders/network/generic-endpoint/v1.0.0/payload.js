@@ -61,7 +61,7 @@ if (Array.isArray(payload)) {
     payload_base64 = payload_base64 && payload_base64.value === "base64" ? true : false;
     
     if (payload_base64) {
-      const raw_payload = payload.find(x => x.variable === 'payload');
+      const raw_payload = new_payload.find(x => x.variable === 'payload');
       if (raw_payload) {
         raw_payload.value = Buffer.from(raw_payload.value, 'base64').toString('hex');
       }
