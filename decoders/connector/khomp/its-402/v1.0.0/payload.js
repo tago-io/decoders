@@ -1,7 +1,7 @@
-/** 
+/**
  * Payload Parser ITS 402 - Tago.io
  * v2.0 28/10/21
- * 
+ *
  * Copyright (C) 2021 Khomp, Inc - All rights Reserved.
  */
 const FIX_COMMAND_TIME = 1;
@@ -232,4 +232,12 @@ if (language_obj) {
 } else {
   console.log("Language not found, using EN as fallback. Set Configuration Parameters 'language' with params: 'EN', 'PT', 'raw'.");
 }
+
+const decodeData = payload.find(
+  (x) =>
+    x.variable === "bn"
+);
+
+if (decodeData) {
 payload = parsePayload(payload);
+}
