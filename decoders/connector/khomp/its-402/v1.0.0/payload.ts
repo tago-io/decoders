@@ -234,7 +234,7 @@ if (language_obj) {
   console.log("Language not found, using EN as fallback. Set Configuration Parameters 'language' with params: 'EN', 'PT', 'raw'.");
 }
 
-const decodeData = payload.find((x) => x.variable === "bn");
+const decodeData = payload.find((x) => x.bn);
 
 if (decodeData) {
   payload = parsePayload(payload);
