@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "It is recommended for you to use this connector with a device of type Managed Data (Mutable), which is set as default for this connector. Managed data allows you to perform delete and edit operations on the data, but does have a maximum amount of different variables it can store. Those are very important operations for data related to application information, user information and other commonly edited data",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/storage/v1.0.0/payload.js"]
+}
