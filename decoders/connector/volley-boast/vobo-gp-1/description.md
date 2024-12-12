@@ -1,0 +1,1 @@
+Sensor agnostic safe area LoRaWAN bridge endpoint.
