@@ -16,7 +16,7 @@
     "@types/validator": "13.11.10",
     "ajv": "8.13.0",
     "ajv-formats": "3.0.1",
-    "better-sqlite3": "11.6.0",
+    "better-sqlite3": "10.0.0",
     "knex": "3.1.0",
     "moment-timezone": "0.5.45",
     "sqlite3": "5.1.7",
@@ -26,9 +26,5 @@
     "vitest": "1.6.0",
     "vm2": "3.9.19",
     "zod": "3.23.8"
-  },
-  "dependencies": {
-    "dotenv": "16.4.7",
-    "tsx": "4.19.2"
   }
 }
