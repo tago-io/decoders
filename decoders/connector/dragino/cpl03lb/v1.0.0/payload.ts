@@ -216,14 +216,17 @@ const cplo03lb_payload = payload.find(
 );
 
 const port = payload.find(
-  (x) => x.variable === "port" || x.variable === "fport"
+  (x) => 
+    x.variable === "port" || 
+    x.variable === "fport" || 
+    x.variable === "fPort"
 );
 
 if (cplo03lb_payload) {
   try {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(cplo03lb_payload.value, "hex");
-    const group = new Date().getTime();
+    const group = new Date().toISOString();
     const payload_aux = Decoder(buffer, Number(port.value));
     payload = payload.concat(toTagoFormat(payload_aux, group));
   } catch (e) {
