@@ -5,22 +5,22 @@ const file_path = "decoders/connector/volley-boast/vobo-xp/v1.0.0/payload.js"
 
 const testPayloads = {
     "data": [
-        { "fport": 22, "bytes": "cc0d3900000c0000000400", "name": "Heartbeat 2.0 Payload" },
-        { "fport": 32, "bytes": "0f2041d30000", "name": "One Analog Input Payload" },
-        { "fport": 42, "bytes": "1227411ffefa3a4022147b", "name": "Two Analog Input Payload" },
-        { "fport": 52, "bytes": "07000600", "name": "Digital Input Payload" },
-        { "fport": 62, "bytes": "681ebd64ffff0000000000", "name": "Event Log Payload" },
-        { "fport": 72, "bytes": "004ae6e23c002405200000", "name": "Configuration Payload" },
-        { "fport": 102, "bytes": "0313020000000000000000", "name": "Modbus Generic Payload - One Register Group" },
-        { "fport": 112, "bytes": "01fe3f80000002fe4000000003fe3f800000003a405810620f2041b60000", "name": "Analog Input Variable Length Payload" },
-        { "fport": 122, "bytes": "0f270f270f270f270f270f270f2701", "name": "Modbus Standard Variable Length Payload" },
+        { "fport": 22, "payload": "cc0d3900000c0000000400", "name": "Heartbeat 2.0 Payload" },
+        { "fport": 32, "payload": "0f2041d30000", "name": "One Analog Input Payload" },
+        { "fport": 42, "payload": "1227411ffefa3a4022147b", "name": "Two Analog Input Payload" },
+        { "fport": 52, "payload": "07000600", "name": "Digital Input Payload" },
+        { "fport": 62, "payload": "681ebd64ffff0000000000", "name": "Event Log Payload" },
+        { "fport": 72, "payload": "004ae6e23c002405200000", "name": "Configuration Payload" },
+        { "fport": 102, "payload": "0313020000000000000000", "name": "Modbus Generic Payload - One Register Group" },
+        { "fport": 112, "payload": "01fe3f80000002fe4000000003fe3f800000003a405810620f2041b60000", "name": "Analog Input Variable Length Payload" },
+        { "fport": 122, "payload": "0f270f270f270f270f270f270f2701", "name": "Modbus Standard Variable Length Payload" },
     ]
 }
 
 
 describe(`fPort: ${testPayloads.data[0].fport} - ${testPayloads.data[0].name}`, () => { // fPort 22
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[0].bytes },
+        { variable: "payload", value: testPayloads.data[0].payload },
         { variable: "fPort", value: testPayloads.data[0].fport }
     ];
 
@@ -52,7 +52,7 @@ describe(`fPort: ${testPayloads.data[0].fport} - ${testPayloads.data[0].name}`, 
 });
 describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, () => { // fPort 32
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[1].bytes },
+        { variable: "payload", value: testPayloads.data[1].payload },
         { variable: "fPort", value: testPayloads.data[1].fport }
     ];
 
@@ -78,7 +78,7 @@ describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, 
 
 describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, () => { // fPort 42
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[2].bytes },
+        { variable: "payload", value: testPayloads.data[2].payload },
         { variable: "fPort", value: testPayloads.data[2].fport }
     ];
 
@@ -110,7 +110,7 @@ describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, 
 
 describe(`fPort: ${testPayloads.data[3].fport} - ${testPayloads.data[3].name}`, () => { // fPort 52 
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[3].bytes },
+        { variable: "payload", value: testPayloads.data[3].payload },
         { variable: "fPort", value: testPayloads.data[3].fport }
     ];
 
@@ -143,7 +143,7 @@ describe(`fPort: ${testPayloads.data[3].fport} - ${testPayloads.data[3].name}`, 
 
 describe(`fPort: ${testPayloads.data[4].fport} - ${testPayloads.data[4].name}`, () => { // fPort 62
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[4].bytes },
+        { variable: "payload", value: testPayloads.data[4].payload },
         { variable: "fPort", value: testPayloads.data[4].fport }
     ];
 
@@ -173,7 +173,7 @@ describe(`fPort: ${testPayloads.data[4].fport} - ${testPayloads.data[4].name}`, 
 
 describe(`fPort: ${testPayloads.data[5].fport} - ${testPayloads.data[5].name}`, () => { // fPort 72
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[5].bytes },
+        { variable: "payload", value: testPayloads.data[5].payload },
         { variable: "fPort", value: testPayloads.data[5].fport }
     ];
 
@@ -213,7 +213,7 @@ describe(`fPort: ${testPayloads.data[5].fport} - ${testPayloads.data[5].name}`, 
 
 describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, () => { // fPort 102
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[6].bytes },
+        { variable: "payload", value: testPayloads.data[6].payload },
         { variable: "fPort", value: testPayloads.data[6].fport }
     ];
 
@@ -236,7 +236,7 @@ describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, 
 
 describe(`fPort: ${testPayloads.data[7].fport} - ${testPayloads.data[7].name}`, () => { // fPort 112
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[7].bytes },
+        { variable: "payload", value: testPayloads.data[7].payload },
         { variable: "fPort", value: testPayloads.data[7].fport }
     ];
 
@@ -295,7 +295,7 @@ describe(`fPort: ${testPayloads.data[7].fport} - ${testPayloads.data[7].name}`, 
 
 describe(`fPort: ${testPayloads.data[8].fport} - ${testPayloads.data[8].name}`, () => { // fPort 122
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[8].bytes },
+        { variable: "payload", value: testPayloads.data[8].payload },
         { variable: "fPort", value: testPayloads.data[8].fport }
     ];
 

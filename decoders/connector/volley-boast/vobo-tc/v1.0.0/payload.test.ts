@@ -5,21 +5,21 @@ const file_path = "decoders/connector/volley-boast/vobo-tc/v1.0.0/payload.js"
 
 const testPayloads = {
     "data": [
-        { "fport": 21, "bytes": "cc0d3900000c0000000400", "name": "Heartbeat 2.0 Payload" },
-        { "fport": 31, "bytes": "0f2041d30000", "name": "One Analog Input Payload" },
-        { "fport": 41, "bytes": "d02041cc20003a405d8566", "name": "Two Analog Input Payload" },
-        { "fport": 51, "bytes": "01000000", "name": "Digial Input Payload" },
-        { "fport": 61, "bytes": "4949b36406800000000000", "name": "Event Log Response Payload" },
-        { "fport": 71, "bytes": "55e8031027e80310270000", "name": "Configuration Response Payload" },
-        { "fport": 111, "bytes": "0d2041b1a000003a40554fdf012044ab7000022044ab7000032044ab7000042044ab7000052044ab7000062044ab7000", "name": "VoBo-TC Analog Input Variable Length Payload - Cold Joint Temperature, Battery Level and Channels 1 - 6" },
-        { "fport": 111, "bytes": "072044ab7000082044ab7000092044ab70000a2044ab70000b2044ab70000c2044ab7000", "name": "VoBo-TC Analog Input Variable Length Payload - Channels 7 - 12" },
+        { "fport": 21, "payload": "cc0d3900000c0000000400", "name": "Heartbeat 2.0 Payload" },
+        { "fport": 31, "payload": "0f2041d30000", "name": "One Analog Input Payload" },
+        { "fport": 41, "payload": "d02041cc20003a405d8566", "name": "Two Analog Input Payload" },
+        { "fport": 51, "payload": "01000000", "name": "Digial Input Payload" },
+        { "fport": 61, "payload": "4949b36406800000000000", "name": "Event Log Response Payload" },
+        { "fport": 71, "payload": "55e8031027e80310270000", "name": "Configuration Response Payload" },
+        { "fport": 111, "payload": "0d2041b1a000003a40554fdf012044ab7000022044ab7000032044ab7000042044ab7000052044ab7000062044ab7000", "name": "VoBo-TC Analog Input Variable Length Payload - Cold Joint Temperature, Battery Level and Channels 1 - 6" },
+        { "fport": 111, "payload": "072044ab7000082044ab7000092044ab70000a2044ab70000b2044ab70000c2044ab7000", "name": "VoBo-TC Analog Input Variable Length Payload - Channels 7 - 12" },
     ]
 }
 
 
 describe(`fPort: ${testPayloads.data[0].fport} - ${testPayloads.data[0].name}`, () => {
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[0].bytes },
+        { variable: "payload", value: testPayloads.data[0].payload },
         { variable: "fPort", value: testPayloads.data[0].fport }
     ];
 
@@ -52,7 +52,7 @@ describe(`fPort: ${testPayloads.data[0].fport} - ${testPayloads.data[0].name}`, 
 
 describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, () => {
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[1].bytes },
+        { variable: "payload", value: testPayloads.data[1].payload },
         { variable: "fPort", value: testPayloads.data[1].fport }
     ];
 
@@ -78,7 +78,7 @@ describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, 
 
 describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, () => {
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[2].bytes },
+        { variable: "payload", value: testPayloads.data[2].payload },
         { variable: "fPort", value: testPayloads.data[2].fport }
     ];
 
@@ -109,7 +109,7 @@ describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, 
 
 describe(`fPort: ${testPayloads.data[3].fport} - ${testPayloads.data[3].name}`, () => {
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[3].bytes },
+        { variable: "payload", value: testPayloads.data[3].payload },
         { variable: "fPort", value: testPayloads.data[3].fport }
     ];
 
@@ -138,7 +138,7 @@ describe(`fPort: ${testPayloads.data[3].fport} - ${testPayloads.data[3].name}`, 
 
 describe(`fPort: ${testPayloads.data[4].fport} - ${testPayloads.data[4].name}`, () => {
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[4].bytes },
+        { variable: "payload", value: testPayloads.data[4].payload },
         { variable: "fPort", value: testPayloads.data[4].fport }
     ];
 
@@ -168,7 +168,7 @@ describe(`fPort: ${testPayloads.data[4].fport} - ${testPayloads.data[4].name}`, 
 
 describe(`fPort: ${testPayloads.data[5].fport} - ${testPayloads.data[5].name}`, () => {
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[5].bytes },
+        { variable: "payload", value: testPayloads.data[5].payload },
         { variable: "fPort", value: testPayloads.data[5].fport }
     ];
 
@@ -200,7 +200,7 @@ describe(`fPort: ${testPayloads.data[5].fport} - ${testPayloads.data[5].name}`, 
 
 describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, () => {
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[6].bytes },
+        { variable: "payload", value: testPayloads.data[6].payload },
         { variable: "fPort", value: testPayloads.data[6].fport }
     ];
 
@@ -280,7 +280,7 @@ describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, 
 
 describe(`fPort: ${testPayloads.data[7].fport} - ${testPayloads.data[7].name}`, () => {
     const raw_payload = [
-        { variable: "bytes", value: testPayloads.data[7].bytes },
+        { variable: "payload", value: testPayloads.data[7].payload },
         { variable: "fPort", value: testPayloads.data[7].fport }
     ];
 

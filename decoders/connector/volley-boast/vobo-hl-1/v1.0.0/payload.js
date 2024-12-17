@@ -1491,12 +1491,12 @@ function printPayload(payload) {
 // exports had to be commented out.
 //===========================================================
 
-const bytes_vb = payload.find((x) => x.variable === "bytes");
+const payload_vb = payload.find((x) => x.variable === "payload");
 const fPort_vb = payload.find((x) => x.variable === "port" || x.variable === "fPort")?.value;
 
-if (bytes_vb) {
+if (payload_vb) {
     try {
-        const buffer = Buffer.from(bytes_vb.value, "hex")
+        const buffer = Buffer.from(payload_vb.value, "hex")
         const decoded = Decoder(buffer, fPort_vb);
         payload = decoded;
     } catch (error: any) {
