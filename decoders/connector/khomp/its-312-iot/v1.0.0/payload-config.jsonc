@@ -6,6 +6,6 @@
   "device_annotation": "",
   "device_parameters": [],
   "networks": [
-    "../../../../network/mqtt/v1.0.0/payload.js"
+    "../../../../network/mqtt/v1.0.0/payload.ts"
   ]
 }
