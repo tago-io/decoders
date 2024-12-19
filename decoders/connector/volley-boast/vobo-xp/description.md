@@ -1,0 +1,1 @@
+Sensor agnostic hazardous area LoRaWAN bridge endpoint (Class A or C, externally powered).
