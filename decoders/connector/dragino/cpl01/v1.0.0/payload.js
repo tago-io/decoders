@@ -185,7 +185,7 @@ const payloader = payload.find(
 );
 
 const port = payload.find(
-  (x) => x.variable === "port" || x.variable === "fport"
+  (x) => x.variable === "port" || x.variable === "fport" || x.variable === "fPort"
 );
 
 if (payloader) {
