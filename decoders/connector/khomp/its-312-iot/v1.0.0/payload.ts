@@ -1,3 +1,4 @@
+//@ts-nocheck
 /* eslint-disable eqeqeq */
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
@@ -21,12 +22,12 @@
 const ignore_vars = [];
 
 // Function to convert an object to TagoIO data format.
-function ToTagoFormat(object_item, serie, prefix = '') {
+function ToTagoFormat(object_item, serie, prefix = "") {
   const result = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key)) continue; // ignore chosen vars
 
-    if (typeof object_item[key] === 'object') {
+    if (typeof object_item[key] === "object") {
       result.push({
         variable: object_item[key].MessageType || `${prefix}${key}`,
         value: object_item[key].value || object_item[key].Value,
@@ -65,21 +66,19 @@ function Decoder(payload) {
     if (data.n) {
       if (data.v || data.vb || data.vs) decodedData.value = data.v || data.vb || data.vs;
       if (data.u) decodedData.unit = data.u;
-      insertData(decoded, data.n.replace(/[?*!<>.-=$]/, ''), decodedData);
+      insertData(decoded, data.n.replace(/[?*!<>.-=$]/, ""), decodedData);
     } else if (data.bn) {
-      insertData(decoded, 'device_number', data.bn);
+      insertData(decoded, "device_number", data.bn);
     }
   });
   return decoded;
 }
 
 const aux = payload;
-payload = eval(payload);
-console.log(typeof(payload));
 
 const serie = Date.now();
 const decodedPayload = Decoder(payload);
 
 // Parse the payload_raw to JSON format (it comes in a String format)
 payload = ToTagoFormat(decodedPayload, serie);
-payload.push({ variable: 'payload', value: aux });
+payload.push({ variable: "payload", value: JSON.stringify(aux) }); // Added stringify since this was causing issues when
