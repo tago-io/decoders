@@ -35,25 +35,21 @@ describe(`fPort: ${testPayloads.data[0].fport} - ${testPayloads.data[0].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "DIN1": 1,
-                "DIN2": 1,
-                "DIN3": 1,
-                "WKUP": 0,
-                "ADC1": 994,
-                "ADC2": 1009,
-                "ADC3": 1603,
-                "Battery": 3528,
-                "Temperature": 25.75,
-                "Modbus0": 0,
-                "fport": 1,
-                "voboType": "VoBoXX",
-                "payloadType": "Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'DIN1', value: 1 },
+            { variable: 'DIN2', value: 1 },
+            { variable: 'DIN3', value: 1 },
+            { variable: 'WKUP', value: 0 },
+            { variable: 'ADC1', value: 994 },
+            { variable: 'ADC2', value: 1009 },
+            { variable: 'ADC3', value: 1603 },
+            { variable: 'Battery', value: 3528 },
+            { variable: 'Temperature', value: 25.75 },
+            { variable: 'Modbus0', value: 0 },
+            { variable: 'fport', value: 1 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Standard' }
+        ]);
     });
 });
 
@@ -66,20 +62,16 @@ describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "Modbus1": 8705,
-                "Modbus2": 8706,
-                "Modbus3": 8707,
-                "Modbus4": 8708,
-                "Modbus5": 8709,
-                "fport": 2,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus1', value: 8705 },
+            { variable: 'Modbus2', value: 8706 },
+            { variable: 'Modbus3', value: 8707 },
+            { variable: 'Modbus4', value: 8708 },
+            { variable: 'Modbus5', value: 8709 },
+            { variable: 'fport', value: 2 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Standard' }
+        ]);
     });
 });
 
@@ -92,20 +84,16 @@ describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "Modbus6": 8705,
-                "Modbus7": 8706,
-                "Modbus8": 8707,
-                "Modbus9": 8708,
-                "Modbus10": 8709,
-                "fport": 3,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus6', value: 8705 },
+            { variable: 'Modbus7', value: 8706 },
+            { variable: 'Modbus8', value: 8707 },
+            { variable: 'Modbus9', value: 8708 },
+            { variable: 'Modbus10', value: 8709 },
+            { variable: 'fport', value: 3 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Standard' }
+        ]);
     });
 });
 
@@ -118,20 +106,16 @@ describe(`fPort: ${testPayloads.data[3].fport} - ${testPayloads.data[3].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "Modbus11": 8705,
-                "Modbus12": 8706,
-                "Modbus13": 8707,
-                "Modbus14": 8708,
-                "Modbus15": 8709,
-                "fport": 4,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus11', value: 8705 },
+            { variable: 'Modbus12', value: 8706 },
+            { variable: 'Modbus13', value: 8707 },
+            { variable: 'Modbus14', value: 8708 },
+            { variable: 'Modbus15', value: 8709 },
+            { variable: 'fport', value: 4 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Standard' }
+        ]);
     });
 });
 
@@ -144,20 +128,16 @@ describe(`fPort: ${testPayloads.data[4].fport} - ${testPayloads.data[4].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "Modbus16": 8705,
-                "Modbus17": 8706,
-                "Modbus18": 8707,
-                "Modbus19": 8708,
-                "Modbus20": 8709,
-                "fport": 5,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus16', value: 8705 },
+            { variable: 'Modbus17', value: 8706 },
+            { variable: 'Modbus18', value: 8707 },
+            { variable: 'Modbus19', value: 8708 },
+            { variable: 'Modbus20', value: 8709 },
+            { variable: 'fport', value: 5 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Standard' }
+        ]);
     });
 });
 
@@ -170,20 +150,16 @@ describe(`fPort: ${testPayloads.data[5].fport} - ${testPayloads.data[5].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "Modbus21": 8705,
-                "Modbus22": 8706,
-                "Modbus23": 8707,
-                "Modbus24": 8708,
-                "Modbus25": 8709,
-                "fport": 6,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus21', value: 8705 },
+            { variable: 'Modbus22', value: 8706 },
+            { variable: 'Modbus23', value: 8707 },
+            { variable: 'Modbus24', value: 8708 },
+            { variable: 'Modbus25', value: 8709 },
+            { variable: 'fport', value: 6 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Standard' }
+        ]);
     });
 });
 
@@ -196,20 +172,16 @@ describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "Modbus26": 8705,
-                "Modbus27": 8706,
-                "Modbus28": 8707,
-                "Modbus29": 8708,
-                "Modbus30": 8709,
-                "fport": 7,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus26', value: 8705 },
+            { variable: 'Modbus27', value: 8706 },
+            { variable: 'Modbus28', value: 8707 },
+            { variable: 'Modbus29', value: 8708 },
+            { variable: 'Modbus30', value: 8709 },
+            { variable: 'fport', value: 7 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Standard' }
+        ]);
     });
 });
 
@@ -222,20 +194,16 @@ describe(`fPort: ${testPayloads.data[7].fport} - ${testPayloads.data[7].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "Modbus31": 8705,
-                "Modbus32": 8706,
-                "Modbus33": 8707,
-                "Modbus34": 8708,
-                "Modbus35": 8709,
-                "fport": 8,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus31', value: 8705 },
+            { variable: 'Modbus32', value: 8706 },
+            { variable: 'Modbus33', value: 8707 },
+            { variable: 'Modbus34', value: 8708 },
+            { variable: 'Modbus35', value: 8709 },
+            { variable: 'fport', value: 8 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Standard' }
+        ]);
     });
 });
 
@@ -248,20 +216,16 @@ describe(`fPort: ${testPayloads.data[8].fport} - ${testPayloads.data[8].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "Modbus36": 8705,
-                "Modbus37": 8706,
-                "Modbus38": 8707,
-                "Modbus39": 8708,
-                "Modbus40": 8709,
-                "fport": 9,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus36', value: 8705 },
+            { variable: 'Modbus37', value: 8706 },
+            { variable: 'Modbus38', value: 8707 },
+            { variable: 'Modbus39', value: 8708 },
+            { variable: 'Modbus40', value: 8709 },
+            { variable: 'fport', value: 9 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Standard' }
+        ]);
     });
 });
 
@@ -274,27 +238,23 @@ describe(`fPort: ${testPayloads.data[9].fport} - ${testPayloads.data[9].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "batteryLevel": 3532,
-                "fatalErrorsTotal": 0,
-                "rssiAvg": 57,
-                "failedJoinAttemptsTotal": 0,
-                "configUpdateOccurred": 0,
-                "firmwareRevision": 0,
-                "rebootsTotal": 3,
-                "failedTransmitsTotal": 0,
-                "errorEventLogsTotal": 0,
-                "warningEventLogsTotal": 0,
-                "infoEventLogsTotal": 0,
-                "measurementPacketsTotal": 4,
-                "fport": 20,
-                "voboType": "VoBoXX",
-                "payloadType": "Heartbeat 2.0"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'batteryLevel', value: 3532 },
+            { variable: 'fatalErrorsTotal', value: 0 },
+            { variable: 'rssiAvg', value: 57 },
+            { variable: 'failedJoinAttemptsTotal', value: 0 },
+            { variable: 'configUpdateOccurred', value: 0 },
+            { variable: 'firmwareRevision', value: 0 },
+            { variable: 'rebootsTotal', value: 3 },
+            { variable: 'failedTransmitsTotal', value: 0 },
+            { variable: 'errorEventLogsTotal', value: 0 },
+            { variable: 'warningEventLogsTotal', value: 0 },
+            { variable: 'infoEventLogsTotal', value: 0 },
+            { variable: 'measurementPacketsTotal', value: 4 },
+            { variable: 'fport', value: 20 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Heartbeat 2.0' }
+        ]);
     });
 });
 describe(`fPort: ${testPayloads.data[10].fport} - ${testPayloads.data[10].name}`, () => { // fPort 30
@@ -306,20 +266,7 @@ describe(`fPort: ${testPayloads.data[10].fport} - ${testPayloads.data[10].name}`
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorNum0": 15,
-                "sensorUnits0": 32,
-                "sensorData0": 26.375,
-                "analogSensorString0": "ADC Temperature",
-                "engUnitsString0": "C",
-                "fport": 30,
-                "voboType": "VoBoXX",
-                "payloadType": "One Analog Input"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual({ variable: 'ADC Temperature', value: 26.375, units: 'C' });
     });
 });
 
@@ -332,29 +279,14 @@ describe(`fPort: ${testPayloads.data[11].fport} - ${testPayloads.data[11].name}`
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorNum0": 1,
-                "sensorUnits0": 39,
-                "sensorData0": 9.999750137329102,
-                "sensorNum1": 2,
-                "sensorUnits1": 58,
-                "sensorData1": 2.5325000286102295,
-                "analogSensorString0": "AIN1",
-                "engUnitsString0": "mA",
-                "analogSensorString1": "AIN2",
-                "engUnitsString1": "V",
-                "fport": 40,
-                "voboType": "VoBoXX",
-                "payloadType": "Two Analog Inputs"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'AIN1', value: 9.999750137329102, units: 'mA' },
+            { variable: 'AIN2', value: 2.5325000286102295, units: 'V' }
+        ]);
     });
 });
 
-describe(`fPort: ${testPayloads.data[12].fport} - ${testPayloads.data[12].name}`, () => { // fPort 50 
+describe(`fPort: ${testPayloads.data[12].fport} - ${testPayloads.data[12].name}`, () => { // fPort 50
     const raw_payload = [
         { variable: "payload", value: testPayloads.data[12].payload },
         { variable: "fPort", value: testPayloads.data[12].fport }
@@ -363,29 +295,15 @@ describe(`fPort: ${testPayloads.data[12].fport} - ${testPayloads.data[12].name}`
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorValid0": 15,
-                "sensorData0": 14,
-                "digitalSensorStrings": [
-                    "WKUP",
-                    "DIN1",
-                    "DIN2",
-                    "DIN3"
-                ],
-                "digitalSensorData": [
-                    0,
-                    1,
-                    1,
-                    1
-                ],
-                "fport": 50,
-                "voboType": "VoBoXX",
-                "payloadType": "Digital Inputs"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'WKUP', value: 0 },
+            { variable: 'DIN1', value: 1 },
+            { variable: 'DIN2', value: 1 },
+            { variable: 'DIN3', value: 1 },
+            { variable: 'fport', value: 50 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Digital Inputs' }
+        ]);
     });
 });
 
@@ -398,24 +316,14 @@ describe(`fPort: ${testPayloads.data[13].fport} - ${testPayloads.data[13].name}`
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "eventTimestamp": 1690115688,
-                "eventCode": 65535,
-                "metadata": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "fport": 60,
-                "voboType": "VoBoXX",
-                "payloadType": "Event Log"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'eventTimestamp', value: 1690115688 },
+            { variable: 'eventCode', value: 65535 },
+            { variable: 'metadata', value: [0, 0, 0, 0, 0] },
+            { variable: 'fport', value: 60 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Event Log' }
+        ]);
     });
 });
 
@@ -428,34 +336,30 @@ describe(`fPort: ${testPayloads.data[14].fport} - ${testPayloads.data[14].name}`
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "subgroupID": 0,
-                "sequenceNumber": 0,
-                "transRejoin": 10,
-                "ackFrequency": 4,
-                "lowBattery": 3.1,
-                "reserved1": 0,
-                "heartbeatAckEnable": true,
-                "operationMode": 1,
-                "cycleSubBands": true,
-                "ackRetries": 2,
-                "reservedLL": 4,
-                "ackEnable": true,
-                "heartbeatEnable": true,
-                "cycleTime": 60,
-                "backOffReset": 9,
-                "reservedRD": 5,
-                "reserved2": 0,
-                "resendAttempts": 0,
-                "freqSubBand": 2,
-                "fport": 70,
-                "voboType": "VoBoXX",
-                "payloadType": "Configuration"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'subgroupID', value: 0 },
+            { variable: 'sequenceNumber', value: 0 },
+            { variable: 'transRejoin', value: 10 },
+            { variable: 'ackFrequency', value: 4 },
+            { variable: 'lowBattery', value: 3.1 },
+            { variable: 'reserved1', value: 0 },
+            { variable: 'heartbeatAckEnable', value: true },
+            { variable: 'operationMode', value: 1 },
+            { variable: 'cycleSubBands', value: true },
+            { variable: 'ackRetries', value: 2 },
+            { variable: 'reservedLL', value: 4 },
+            { variable: 'ackEnable', value: true },
+            { variable: 'heartbeatEnable', value: true },
+            { variable: 'cycleTime', value: 60 },
+            { variable: 'backOffReset', value: 9 },
+            { variable: 'reservedRD', value: 5 },
+            { variable: 'reserved2', value: 0 },
+            { variable: 'resendAttempts', value: 0 },
+            { variable: 'freqSubBand', value: 2 },
+            { variable: 'fport', value: 70 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Configuration' }
+        ]);
     });
 });
 
@@ -468,16 +372,12 @@ describe(`fPort: ${testPayloads.data[15].fport} - ${testPayloads.data[15].name}`
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "group3register1": 531,
-                "fport": 100,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Generic"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'group3register1', value: 531 },
+            { variable: 'fport', value: 100 },
+            { variable: 'voboType', value: 'VoBoXX' },
+            { variable: 'payloadType', value: 'Modbus Generic' }
+        ]);
     });
 });
 
@@ -491,53 +391,13 @@ describe(`fPort: ${testPayloads.data[16].fport} - ${testPayloads.data[16].name}`
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "ainPayloads": [
-                    {
-                        "sensorNum0": 1,
-                        "sensorUnits0": 254,
-                        "sensorData0": 1
-                    },
-                    {
-                        "sensorNum0": 2,
-                        "sensorUnits0": 254,
-                        "sensorData0": 2
-                    },
-                    {
-                        "sensorNum0": 3,
-                        "sensorUnits0": 254,
-                        "sensorData0": 1
-                    },
-                    {
-                        "sensorNum0": 0,
-                        "sensorUnits0": 58,
-                        "sensorData0": 3.375999927520752
-                    },
-                    {
-                        "sensorNum0": 15,
-                        "sensorUnits0": 32,
-                        "sensorData0": 22.75
-                    }
-                ],
-                "numOfAinPayloads": 5,
-                "analogSensorString0": "AIN1",
-                "engUnitsString0": "ADC code",
-                "analogSensorString1": "AIN2",
-                "engUnitsString1": "ADC code",
-                "analogSensorString2": "AIN3",
-                "engUnitsString2": "ADC code",
-                "analogSensorString3": "Battery Voltage",
-                "engUnitsString3": "V",
-                "analogSensorString4": "ADC Temperature",
-                "engUnitsString4": "C",
-                "fport": 110,
-                "voboType": "VoBoXX",
-                "payloadType": "Analog Input Variable Length"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'AIN1', value: 1, units: 'ADC code' },
+            { variable: 'AIN2', value: 2, units: 'ADC code' },
+            { variable: 'AIN3', value: 1, units: 'ADC code' },
+            { variable: 'Battery Voltage', value: 3.375999927520752, units: 'V' },
+            { variable: 'ADC Temperature', value: 22.75, units: 'C' }
+        ]);
     });
 });
 
@@ -550,25 +410,14 @@ describe(`fPort: ${testPayloads.data[17].fport} - ${testPayloads.data[17].name}`
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "modbusSlots": {
-                    "Modbus1": 9999,
-                    "Modbus2": 9999,
-                    "Modbus3": 9999,
-                    "Modbus4": 9999,
-                    "Modbus5": 9999,
-                    "Modbus6": 9999,
-                    "Modbus7": 9999
-                },
-                "firstSlotNum": 1,
-                "numModbusSlots": 7,
-                "fport": 120,
-                "voboType": "VoBoXX",
-                "payloadType": "Modbus Standard Variable Length"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus1', value: 9999 },
+            { variable: 'Modbus2', value: 9999 },
+            { variable: 'Modbus3', value: 9999 },
+            { variable: 'Modbus4', value: 9999 },
+            { variable: 'Modbus5', value: 9999 },
+            { variable: 'Modbus6', value: 9999 },
+            { variable: 'Modbus7', value: 9999 }
+        ]);
     });
 });

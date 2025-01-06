@@ -1,12 +1,60 @@
 /* istanbul ignore next */
+function toTagoFormat(bytes, fport) {
+    return customDecoder(bytes, fport);
+}
+
 function customDecoder(bytes, fport) {
     var decoded = Decoder(bytes, fport);
     //=======================================================
     // Insert your customization here
+    if (fport == 31) {
+        var tagoDecoded = {
+            variable: decoded.data.analogSensorString0,
+            value: decoded.data.sensorData0,
+            units: decoded.data.engUnitsString0
+        }
+    }
+    else if (fport == 41) {
+        var tagoDecoded = [
+            {
+                variable: decoded.data.analogSensorString0,
+                value: decoded.data.sensorData0,
+                units: decoded.data.engUnitsString0
+            },
+            {
+                variable: decoded.data.analogSensorString1,
+                value: decoded.data.sensorData1,
+                units: decoded.data.engUnitsString1
+            }
+        ]
+    }
+    else if (fport == 51) {
+        var tagoDecoded = decoded.data.digitalSensorStrings.map((sensor, index) => ({
+            variable: sensor,
+            value: decoded.data.digitalSensorData[index]
+        }));
 
-
+        tagoDecoded.push(
+            { variable: "fport", value: decoded.data.fport },
+            { variable: "voboType", value: decoded.data.voboType },
+            { variable: "payloadType", value: decoded.data.payloadType }
+        );
+    }
+    else if (fport == 111) {
+        var tagoDecoded = decoded.data.ainPayloads.map((payloadObj, index) => ({
+            variable: decoded.data[`analogSensorString${index}`],
+            value: payloadObj.sensorData0,
+            units: decoded.data[`engUnitsString${index}`]
+        }));
+    }
+    else {
+        var tagoDecoded = Object.entries(decoded.data).map(([key, value]) => ({
+            variable: key,
+            value: value,
+        }));
+    }
     //=======================================================
-    return decoded;
+    return tagoDecoded;
 }
 
 //===========================================================
@@ -1497,7 +1545,7 @@ const fPort_vb = payload.find((x) => x.variable === "port" || x.variable === "fP
 if (payload_vb) {
     try {
         const buffer = Buffer.from(payload_vb.value, "hex")
-        const decoded = Decoder(buffer, fPort_vb);
+        const decoded = toTagoFormat(buffer, fPort_vb);
         payload = decoded;
     } catch (error: any) {
         console.error(error);

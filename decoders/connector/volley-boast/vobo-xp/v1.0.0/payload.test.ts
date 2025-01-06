@@ -27,27 +27,23 @@ describe(`fPort: ${testPayloads.data[0].fport} - ${testPayloads.data[0].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "batteryLevel": 3532,
-                "fatalErrorsTotal": 0,
-                "rssiAvg": 57,
-                "failedJoinAttemptsTotal": 0,
-                "configUpdateOccurred": 0,
-                "firmwareRevision": 0,
-                "rebootsTotal": 3,
-                "failedTransmitsTotal": 0,
-                "errorEventLogsTotal": 0,
-                "warningEventLogsTotal": 0,
-                "infoEventLogsTotal": 0,
-                "measurementPacketsTotal": 4,
-                "fport": 22,
-                "voboType": "VoBoXP",
-                "payloadType": "Heartbeat 2.0"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'batteryLevel', value: 3532 },
+            { variable: 'fatalErrorsTotal', value: 0 },
+            { variable: 'rssiAvg', value: 57 },
+            { variable: 'failedJoinAttemptsTotal', value: 0 },
+            { variable: 'configUpdateOccurred', value: 0 },
+            { variable: 'firmwareRevision', value: 0 },
+            { variable: 'rebootsTotal', value: 3 },
+            { variable: 'failedTransmitsTotal', value: 0 },
+            { variable: 'errorEventLogsTotal', value: 0 },
+            { variable: 'warningEventLogsTotal', value: 0 },
+            { variable: 'infoEventLogsTotal', value: 0 },
+            { variable: 'measurementPacketsTotal', value: 4 },
+            { variable: 'fport', value: 22 },
+            { variable: 'voboType', value: 'VoBoXP' },
+            { variable: 'payloadType', value: 'Heartbeat 2.0' }
+        ]);
     });
 });
 describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, () => { // fPort 32
@@ -59,20 +55,7 @@ describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorNum0": 15,
-                "sensorUnits0": 32,
-                "sensorData0": 26.375,
-                "analogSensorString0": "ADC Temperature ",
-                "engUnitsString0": "C",
-                "fport": 32,
-                "voboType": "VoBoXP",
-                "payloadType": "One Analog Input"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual({ variable: 'ADC Temperature ', value: 26.375, units: 'C' });
     });
 });
 
@@ -85,26 +68,10 @@ describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorNum0": 1,
-                "sensorUnits0": 39,
-                "sensorData0": 9.999750137329102,
-                "sensorNum1": 2,
-                "sensorUnits1": 58,
-                "sensorData1": 2.5325000286102295,
-                "analogSensorString0": "AIN1 ",
-                "engUnitsString0": "mA",
-                "analogSensorString1": "AIN2 ",
-                "engUnitsString1": "V",
-                "fport": 42,
-                "voboType": "VoBoXP",
-                "payloadType": "Two Analog Inputs"
-            },
-            "warnings": [],
-            "errors": []
-        }
-        );
+        expect(payload).toStrictEqual([
+            { variable: 'AIN1 ', value: 9.999750137329102, units: 'mA' },
+            { variable: 'AIN2 ', value: 2.5325000286102295, units: 'V' }
+        ]);
     });
 });
 
@@ -117,27 +84,14 @@ describe(`fPort: ${testPayloads.data[3].fport} - ${testPayloads.data[3].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorValid0": 7,
-                "sensorData0": 6,
-                "digitalSensorStrings": [
-                    "WKUP",
-                    "DIN1",
-                    "DIN2"
-                ],
-                "digitalSensorData": [
-                    0,
-                    1,
-                    1
-                ],
-                "fport": 52,
-                "voboType": "VoBoXP",
-                "payloadType": "Digital Inputs"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'WKUP', value: 0 },
+            { variable: 'DIN1', value: 1 },
+            { variable: 'DIN2', value: 1 },
+            { variable: 'fport', value: 52 },
+            { variable: 'voboType', value: 'VoBoXP' },
+            { variable: 'payloadType', value: 'Digital Inputs' }
+        ]);
     });
 });
 
@@ -150,24 +104,14 @@ describe(`fPort: ${testPayloads.data[4].fport} - ${testPayloads.data[4].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "eventTimestamp": 1690115688,
-                "eventCode": 65535,
-                "metadata": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "fport": 62,
-                "voboType": "VoBoXP",
-                "payloadType": "Event Log"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'eventTimestamp', value: 1690115688 },
+            { variable: 'eventCode', value: 65535 },
+            { variable: 'metadata', value: [0, 0, 0, 0, 0] },
+            { variable: 'fport', value: 62 },
+            { variable: 'voboType', value: 'VoBoXP' },
+            { variable: 'payloadType', value: 'Event Log' }
+        ]);
     });
 });
 
@@ -180,34 +124,30 @@ describe(`fPort: ${testPayloads.data[5].fport} - ${testPayloads.data[5].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "subgroupID": 0,
-                "sequenceNumber": 0,
-                "transRejoin": 10,
-                "ackFrequency": 4,
-                "lowBattery": 3.1,
-                "reserved1": 0,
-                "heartbeatAckEnable": true,
-                "operationMode": 1,
-                "cycleSubBands": true,
-                "ackRetries": 2,
-                "reservedLL": 4,
-                "ackEnable": true,
-                "heartbeatEnable": true,
-                "cycleTime": 60,
-                "backOffReset": 9,
-                "reservedRD": 5,
-                "reserved2": 0,
-                "resendAttempts": 0,
-                "freqSubBand": 2,
-                "fport": 72,
-                "voboType": "VoBoXP",
-                "payloadType": "Configuration"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'subgroupID', value: 0 },
+            { variable: 'sequenceNumber', value: 0 },
+            { variable: 'transRejoin', value: 10 },
+            { variable: 'ackFrequency', value: 4 },
+            { variable: 'lowBattery', value: 3.1 },
+            { variable: 'reserved1', value: 0 },
+            { variable: 'heartbeatAckEnable', value: true },
+            { variable: 'operationMode', value: 1 },
+            { variable: 'cycleSubBands', value: true },
+            { variable: 'ackRetries', value: 2 },
+            { variable: 'reservedLL', value: 4 },
+            { variable: 'ackEnable', value: true },
+            { variable: 'heartbeatEnable', value: true },
+            { variable: 'cycleTime', value: 60 },
+            { variable: 'backOffReset', value: 9 },
+            { variable: 'reservedRD', value: 5 },
+            { variable: 'reserved2', value: 0 },
+            { variable: 'resendAttempts', value: 0 },
+            { variable: 'freqSubBand', value: 2 },
+            { variable: 'fport', value: 72 },
+            { variable: 'voboType', value: 'VoBoXP' },
+            { variable: 'payloadType', value: 'Configuration' }
+        ]);
     });
 });
 
@@ -220,16 +160,12 @@ describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "group3register1": 531,
-                "fport": 102,
-                "voboType": "VoBoXP",
-                "payloadType": "Modbus Generic"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'group3register1', value: 531 },
+            { variable: 'fport', value: 102 },
+            { variable: 'voboType', value: 'VoBoXP' },
+            { variable: 'payloadType', value: 'Modbus Generic' }
+        ]);
     });
 });
 
@@ -243,53 +179,17 @@ describe(`fPort: ${testPayloads.data[7].fport} - ${testPayloads.data[7].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "ainPayloads": [
-                    {
-                        "sensorNum0": 1,
-                        "sensorUnits0": 254,
-                        "sensorData0": 1
-                    },
-                    {
-                        "sensorNum0": 2,
-                        "sensorUnits0": 254,
-                        "sensorData0": 2
-                    },
-                    {
-                        "sensorNum0": 3,
-                        "sensorUnits0": 254,
-                        "sensorData0": 1
-                    },
-                    {
-                        "sensorNum0": 0,
-                        "sensorUnits0": 58,
-                        "sensorData0": 3.375999927520752
-                    },
-                    {
-                        "sensorNum0": 15,
-                        "sensorUnits0": 32,
-                        "sensorData0": 22.75
-                    }
-                ],
-                "numOfAinPayloads": 5,
-                "analogSensorString0": "AIN1 ",
-                "engUnitsString0": "ADC code",
-                "analogSensorString1": "AIN2 ",
-                "engUnitsString1": "ADC code",
-                "analogSensorString2": "AIN3 ",
-                "engUnitsString2": "ADC code",
-                "analogSensorString3": "3.3V Supply Voltage ",
-                "engUnitsString3": "V",
-                "analogSensorString4": "ADC Temperature ",
-                "engUnitsString4": "C",
-                "fport": 112,
-                "voboType": "VoBoXP",
-                "payloadType": "Analog Input Variable Length"
+        expect(payload).toStrictEqual([
+            { variable: 'AIN1 ', value: 1, units: 'ADC code' },
+            { variable: 'AIN2 ', value: 2, units: 'ADC code' },
+            { variable: 'AIN3 ', value: 1, units: 'ADC code' },
+            {
+                variable: '3.3V Supply Voltage ',
+                value: 3.375999927520752,
+                units: 'V'
             },
-            "warnings": [],
-            "errors": []
-        });
+            { variable: 'ADC Temperature ', value: 22.75, units: 'C' }
+        ]);
     });
 });
 
@@ -302,25 +202,14 @@ describe(`fPort: ${testPayloads.data[8].fport} - ${testPayloads.data[8].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "modbusSlots": {
-                    "Modbus1": 9999,
-                    "Modbus2": 9999,
-                    "Modbus3": 9999,
-                    "Modbus4": 9999,
-                    "Modbus5": 9999,
-                    "Modbus6": 9999,
-                    "Modbus7": 9999
-                },
-                "firstSlotNum": 1,
-                "numModbusSlots": 7,
-                "fport": 122,
-                "voboType": "VoBoXP",
-                "payloadType": "Modbus Standard Variable Length"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Modbus1', value: 9999 },
+            { variable: 'Modbus2', value: 9999 },
+            { variable: 'Modbus3', value: 9999 },
+            { variable: 'Modbus4', value: 9999 },
+            { variable: 'Modbus5', value: 9999 },
+            { variable: 'Modbus6', value: 9999 },
+            { variable: 'Modbus7', value: 9999 }
+        ]);
     });
 });

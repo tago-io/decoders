@@ -26,27 +26,23 @@ describe(`fPort: ${testPayloads.data[0].fport} - ${testPayloads.data[0].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "batteryLevel": 3532,
-                "fatalErrorsTotal": 0,
-                "rssiAvg": 57,
-                "failedJoinAttemptsTotal": 0,
-                "configUpdateOccurred": 0,
-                "firmwareRevision": 0,
-                "rebootsTotal": 3,
-                "failedTransmitsTotal": 0,
-                "errorEventLogsTotal": 0,
-                "warningEventLogsTotal": 0,
-                "infoEventLogsTotal": 0,
-                "measurementPacketsTotal": 4,
-                "fport": 21,
-                "voboType": "VoBoTC",
-                "payloadType": "Heartbeat 2.0"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'batteryLevel', value: 3532 },
+            { variable: 'fatalErrorsTotal', value: 0 },
+            { variable: 'rssiAvg', value: 57 },
+            { variable: 'failedJoinAttemptsTotal', value: 0 },
+            { variable: 'configUpdateOccurred', value: 0 },
+            { variable: 'firmwareRevision', value: 0 },
+            { variable: 'rebootsTotal', value: 3 },
+            { variable: 'failedTransmitsTotal', value: 0 },
+            { variable: 'errorEventLogsTotal', value: 0 },
+            { variable: 'warningEventLogsTotal', value: 0 },
+            { variable: 'infoEventLogsTotal', value: 0 },
+            { variable: 'measurementPacketsTotal', value: 4 },
+            { variable: 'fport', value: 21 },
+            { variable: 'voboType', value: 'VoBoTC' },
+            { variable: 'payloadType', value: 'Heartbeat 2.0' }
+        ]);
     });
 });
 
@@ -59,20 +55,7 @@ describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorNum0": 15,
-                "sensorUnits0": 32,
-                "sensorData0": 26.375,
-                "analogSensorString0": "AnalogSensor15",
-                "engUnitsString0": "C",
-                "fport": 31,
-                "voboType": "VoBoTC",
-                "payloadType": "One Analog Input"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual({ variable: 'AnalogSensor15', value: 26.375, units: 'C' });
     });
 });
 
@@ -85,25 +68,14 @@ describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorNum0": 13,
-                "sensorUnits0": 32,
-                "sensorData0": 25.515625,
-                "sensorNum1": 0,
-                "sensorUnits1": 58,
-                "sensorData1": 3.4612669944763184,
-                "analogSensorString0": "Cold Joint Temperature",
-                "engUnitsString0": "C",
-                "analogSensorString1": "Battery Voltage",
-                "engUnitsString1": "V",
-                "fport": 41,
-                "voboType": "VoBoTC",
-                "payloadType": "Two Analog Inputs"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'Cold Joint Temperature', value: 25.515625, units: 'C' },
+            {
+                variable: 'Battery Voltage',
+                value: 3.4612669944763184,
+                units: 'V'
+            }
+        ]);
     });
 });
 
@@ -116,23 +88,12 @@ describe(`fPort: ${testPayloads.data[3].fport} - ${testPayloads.data[3].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "sensorValid0": 1,
-                "sensorData0": 0,
-                "digitalSensorStrings": [
-                    "WKUP"
-                ],
-                "digitalSensorData": [
-                    0
-                ],
-                "fport": 51,
-                "voboType": "VoBoTC",
-                "payloadType": "Digital Inputs"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'WKUP', value: 0 },
+            { variable: 'fport', value: 51 },
+            { variable: 'voboType', value: 'VoBoTC' },
+            { variable: 'payloadType', value: 'Digital Inputs' }
+        ]);
     });
 });
 
@@ -145,24 +106,14 @@ describe(`fPort: ${testPayloads.data[4].fport} - ${testPayloads.data[4].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "eventTimestamp": 1689471305,
-                "eventCode": 32774,
-                "metadata": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "fport": 61,
-                "voboType": "VoBoTC",
-                "payloadType": "Event Log"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'eventTimestamp', value: 1689471305 },
+            { variable: 'eventCode', value: 32774 },
+            { variable: 'metadata', value: [0, 0, 0, 0, 0] },
+            { variable: 'fport', value: 61 },
+            { variable: 'voboType', value: 'VoBoTC' },
+            { variable: 'payloadType', value: 'Event Log' }
+        ]);
     });
 });
 
@@ -175,25 +126,21 @@ describe(`fPort: ${testPayloads.data[5].fport} - ${testPayloads.data[5].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "subgroupID": 5,
-                "sequenceNumber": 5,
-                "gain11": 1,
-                "reserved1": 0,
-                "offset11": 0,
-                "reserved2": 0,
-                "gain12": 1,
-                "reserved3": 0,
-                "offset12": 0,
-                "reserved4": 0,
-                "fport": 71,
-                "voboType": "VoBoTC",
-                "payloadType": "Configuration"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'subgroupID', value: 5 },
+            { variable: 'sequenceNumber', value: 5 },
+            { variable: 'gain11', value: 1 },
+            { variable: 'reserved1', value: 0 },
+            { variable: 'offset11', value: 0 },
+            { variable: 'reserved2', value: 0 },
+            { variable: 'gain12', value: 1 },
+            { variable: 'reserved3', value: 0 },
+            { variable: 'offset12', value: 0 },
+            { variable: 'reserved4', value: 0 },
+            { variable: 'fport', value: 71 },
+            { variable: 'voboType', value: 'VoBoTC' },
+            { variable: 'payloadType', value: 'Configuration' }
+        ]);
     });
 });
 
@@ -207,74 +154,20 @@ describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "ainPayloads": [
-                    {
-                        "sensorNum0": 13,
-                        "sensorUnits0": 32,
-                        "sensorData0": 22.203125
-                    },
-                    {
-                        "sensorNum0": 0,
-                        "sensorUnits0": 58,
-                        "sensorData0": 3.3329999446868896
-                    },
-                    {
-                        "sensorNum0": 1,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 2,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 3,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 4,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 5,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 6,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    }
-                ],
-                "numOfAinPayloads": 8,
-                "analogSensorString0": "Cold Joint Temperature",
-                "engUnitsString0": "C",
-                "analogSensorString1": "Battery Voltage",
-                "engUnitsString1": "V",
-                "analogSensorString2": "TC1",
-                "engUnitsString2": "C",
-                "analogSensorString3": "TC2",
-                "engUnitsString3": "C",
-                "analogSensorString4": "TC3",
-                "engUnitsString4": "C",
-                "analogSensorString5": "TC4",
-                "engUnitsString5": "C",
-                "analogSensorString6": "TC5",
-                "engUnitsString6": "C",
-                "analogSensorString7": "TC6",
-                "engUnitsString7": "C",
-                "fport": 111,
-                "voboType": "VoBoTC",
-                "payloadType": "Analog Input Variable Length"
+        expect(payload).toStrictEqual([
+            { variable: 'Cold Joint Temperature', value: 22.203125, units: 'C' },
+            {
+                variable: 'Battery Voltage',
+                value: 3.3329999446868896,
+                units: 'V'
             },
-            "warnings": [],
-            "errors": []
-        });
+            { variable: 'TC1', value: 1371.5, units: 'C' },
+            { variable: 'TC2', value: 1371.5, units: 'C' },
+            { variable: 'TC3', value: 1371.5, units: 'C' },
+            { variable: 'TC4', value: 1371.5, units: 'C' },
+            { variable: 'TC5', value: 1371.5, units: 'C' },
+            { variable: 'TC6', value: 1371.5, units: 'C' }
+        ]);
     });
 });
 
@@ -287,60 +180,14 @@ describe(`fPort: ${testPayloads.data[7].fport} - ${testPayloads.data[7].name}`, 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({
-            "data": {
-                "ainPayloads": [
-                    {
-                        "sensorNum0": 7,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 8,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 9,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 10,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 11,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    },
-                    {
-                        "sensorNum0": 12,
-                        "sensorUnits0": 32,
-                        "sensorData0": 1371.5
-                    }
-                ],
-                "numOfAinPayloads": 6,
-                "analogSensorString0": "TC7",
-                "engUnitsString0": "C",
-                "analogSensorString1": "TC8",
-                "engUnitsString1": "C",
-                "analogSensorString2": "TC9",
-                "engUnitsString2": "C",
-                "analogSensorString3": "TC10",
-                "engUnitsString3": "C",
-                "analogSensorString4": "TC11",
-                "engUnitsString4": "C",
-                "analogSensorString5": "TC12",
-                "engUnitsString5": "C",
-                "fport": 111,
-                "voboType": "VoBoTC",
-                "payloadType": "Analog Input Variable Length"
-            },
-            "warnings": [],
-            "errors": []
-        });
+        expect(payload).toStrictEqual([
+            { variable: 'TC7', value: 1371.5, units: 'C' },
+            { variable: 'TC8', value: 1371.5, units: 'C' },
+            { variable: 'TC9', value: 1371.5, units: 'C' },
+            { variable: 'TC10', value: 1371.5, units: 'C' },
+            { variable: 'TC11', value: 1371.5, units: 'C' },
+            { variable: 'TC12', value: 1371.5, units: 'C' }
+        ]);
     });
 });
 
