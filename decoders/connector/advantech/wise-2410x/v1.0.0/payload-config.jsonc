@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "WISE-2410 is a Explosion Proof LoRaWAN wireless condition monitoring sensor integrated with an ARM Cortex-M4 processor, LoRa transceiver, 3-axis accelerometer and temperature sensor. It balances the wireless bandwidth between WISE-2410 and the gateway, so it also mitigates the data transmission fail rates between edge-devices and gateways.\n\nFeatures: \n* LoRaWAN wireless connectivity\n* Built-in 3-axis accelerometer and temperature sensor\n* On-board computing. Directly sends VRMS, ARMS, Peak, Displacement, Kurtosis, Crest factor, Skewness and Standard Deviation values to applications\n* Support battery power supply, no wiring installation needed\n* Easy settings with user friendly interfaces on WISE Studio utility\n* ISO 10816-1 compliant\n* Support wide temperature -20 ~ 80 °C (Battery-powered)\n* IP66 enclosure design\n\n \nProduct Website:\n* https://www.advantech.com/pt-br/products/b7e2306f-d561-4ca9-b0e3-33f7057e185f/wise-2410/mod_25018dc7-355c-40b4-bf9b-c93f6c73f1a0",
+  "install_end_text": "# Advantech WISE-2410 Dashboard Template\n\n\n\n![Template Image](https://api.tago.io/file/5bbcb03b667d7a002e56664b/advantech/smallwise2410dashimg.png)\n\n\n\nInstall the dashboard template by clicking [here](https://admin.tago.io/template/660beb6c2bbc8d00091dd697).",
+  "device_annotation": "Install the dashboard template by clicking [here](https://admin.tago.io/template/660beb6c2bbc8d00091dd697).",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js"
+  ]
+}
