@@ -74,3 +74,22 @@ describe("ChirpStack Payload Validation", () => {
     expect(result).not.toEqual(expect.arrayContaining([expect.objectContaining({ variable: "Battery" })]));
   });
 });
+
+describe("ChirpStack Payload Validation", () => {
+  beforeEach(() => {
+    payload = [
+      {
+        variable: "chirpstack_payload",
+        value:
+          '{"deviceInfo":{"tenantId":"71ef031d-29e8-4b75-a506-f2ba4591ac94","tenantName":"1111","applicationId":"cbe9e81d-eac1-4172-8a57-c65ab16e8b5b","applicationName":"CMODV","deviceProfileId":"ce86556b-2796-4ac7-b5c0-68a914d9f368","deviceProfileName":"(EU868) Migration OTAA CMODV01","deviceName":"CMODV01_CPL03_C05i","devEui":"a840412931884ded","tags":{"label":"CMODV01"},"deviceClassEnabled":"CLASS_A"},"devAddr":"48000870","fCnt":150,"fPort":2,"deduplicationId":"0d967086-f6ed-4acb-a1e7-5ec09fbf7dd7","time":"2025-01-07T11:42:02.139+00:00","adr":true,"dr":3,"confirmed":false,"rxInfo":[{"gatewayId":"e537492c7b7d2663","uplinkId":6744,"gwTime":"2025-01-07T11:42:02.139+00:00","nsTime":"2025-01-07T11:42:02.323723589+00:00","rssi":-127,"snr":-8.5,"context":"WiizFw==","metadata":{"gateway_id":"11ZgHGBdUsp2zKPrLUf8S7UWo5nwZ95ZvngD7iSBM9DXvxp4A4E","gateway_long":"-9.246958040378495","gateway_h3index":"8c39336206183ff","gateway_lat":"38.726580853702060","region_config_id":"eu868","regi":"EU868","region_common_name":"EU868","network":"helium_iot","gateway_name":"petite-jetblack-dalmatian"},"crcStatus":"CRC_OK"}],"txInfo":{"frequency":868300000,"modulation":{"lora":{"bandwidth":125000,"spreadingFactor":9,"codeRate":"CR_4_5"}}},"payload":"AQAATwAAAGd9ExA="}',
+        group: "1729859513709",
+      },
+    ];
+  });
+
+  test("Check all output variables for acceleration", () => {
+    const result = eval(transpiledCode);
+    expect(result).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "rx_0_gateway_id", value: "e537492c7b7d2663" })]));
+    expect(result).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "rx_0_gateway_name", value: "petite-jetblack-dalmatian" })]));
+  });
+});
