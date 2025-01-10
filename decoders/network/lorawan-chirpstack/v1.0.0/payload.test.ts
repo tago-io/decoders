@@ -93,3 +93,21 @@ describe("ChirpStack Payload Validation", () => {
     expect(result).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "rx_0_gateway_name", value: "petite-jetblack-dalmatian" })]));
   });
 });
+
+describe("ChirpStack Payload Validation", () => {
+  beforeEach(() => {
+    payload = [
+      {
+        variable: "chirpstack_payload",
+        value:
+          '{"devEUI":"AASjCwD7Kec=","devAddr":"Ad2HtQ==","fCnt":6,"fPort":1,"applicationID":"1","applicationName":"TestApp","deviceName":"SGU-L-0001","rxInfo":[{"gatewayID":"wO5A//8qZwg=","time":null,"timeSinceGPSEpoch":null,"rssi":-79,"loRaSNR":12,"channel":3,"rfChain":0,"board":0,"antenna":0,"location":{"latitude":0,"longitude":0,"altitude":0,"source":"UNKNOWN","accuracy":0},"fineTimestampType":"NONE","context":"IJtr3A==","uplinkID":"mmppWVQqQZ65dteFkZ+msw==","crcStatus":"CRC_OK"}],"txInfo":{"frequency":867100000,"modulation":"LORA","loRaModulationInfo":{"bandwidth":125,"spreadingFactor":9,"codeRate":"4/5","polarizationInversion":false}},"adr":true,"dr":3,"objectJSON":"","tags":{},"confirmedUplink":true,"publishedAt":"2025-01-09T18:36:09.010888358Z","deviceProfileID":"974e8cf8-543c-42ab-9f00-047a5ee5a05b","deviceProfileName":"General Device profile","payload":"AAcAAAAnEAAAAAEAAADAAAAAAQAAA3YAAAACAAAA3P8="}',
+        group: "1736447770020",
+      },
+    ];
+  });
+
+  test("Check all output variables for acceleration", () => {
+    const result = eval(transpiledCode);
+    expect(result).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "rx_0_rssi", value: -79 })]));
+  });
+});

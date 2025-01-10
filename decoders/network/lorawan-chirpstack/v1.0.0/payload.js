@@ -95,7 +95,7 @@ function parseRxInfo(data, group) {
     // context (base64)
     if (data[i].context) result.push({ variable: `rx_${i}_context`, value: convertBase64toHex(data[i].context), group });
     // gateway name from metadata
-    if (data[i].metadata.gateway_name) result.push({ variable: `rx_${i}_gateway_name`, value: data[i].metadata.gateway_name, group: group });
+    if (data[i].metadata?.gateway_name) result.push({ variable: `rx_${i}_gateway_name`, value: data[i].metadata.gateway_name, group: group });
     // // // uplink id (base64)
     // // result.push({ variable: `rx_${i}_uplink_id`, value: Buffer.from(data[i].uplinkID, "base64").toString("hex"), group: group });
   }
