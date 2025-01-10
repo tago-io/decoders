@@ -125,14 +125,14 @@ if (ttn_payload) {
     delete ttn_payload.payload_hex;
   }
 
-  if (ttn_payload.rawPosition.floor_number) {
+  if (ttn_payload.rawPosition?.floor_number) {
     ttn_payload.floor_number = {
       variable: "floor_number",
       value: ttn_payload.rawPosition.floor_number,
     };
   }
 
-  if (ttn_payload.rawPosition.room_name) {
+  if (ttn_payload.rawPosition?.room_name) {
     ttn_payload.room_name = {
       variable: "room_name",
       value: ttn_payload.rawPosition.room_name,
