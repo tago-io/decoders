@@ -229,6 +229,23 @@ if (ttn_payload_v3) {
       };
     }
 
+    const rx_metadata_list = ttn_payload_v3?.rx_metadata;
+    let count = 1;
+
+    for (const item of rx_metadata_list) {
+      to_tago[`gateway_eui_${count}`] = item.gateway_ids.eui;
+      to_tago[`rssi_${count}`]  = item.rssi;
+      to_tago[`snr_${count}`]  = item.snr;
+      if (item.location && item.location.latitude && item.location.longitude) {
+        const lat = item.location.latitude;
+        const lng = item.location.longitude;
+        to_tago[`gateway_location_${count}`] = {
+          value: `${lat},${lng}`,
+          location: { lat, lng },
+        };
+      }
+    }
+
     delete ttn_payload_v3.rx_metadata;
   }
   let decoded = [];
