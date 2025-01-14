@@ -19,6 +19,13 @@ const ignore_vars = [
   "app_id",
   "time",
   "gtw_trusted",
+  "processedFeed",
+  "rawPosition",
+  "coordinates",
+  "resolvedTracker",
+  "resolvedTrackerParameters",
+  "uplinkPayload",
+  "customerData",
 ];
 
 /**
@@ -138,12 +145,12 @@ if (ttn_payload) {
       value: ttn_payload.rawPosition.room_name,
     };
 
-    delete ttn_payload.resolvedTrackerParameters;
-    delete ttn_payload.rawPosition;
-    delete ttn_payload.uplinkPayload;
-    delete ttn_payload.processedFeed;
-    delete ttn_payload.coordinates;
-    delete ttn_payload.resolvedTracker;
+    // delete ttn_payload.resolvedTrackerParameters;
+    // delete ttn_payload.rawPosition;
+    // delete ttn_payload.uplinkPayload;
+    // delete ttn_payload.processedFeed;
+    // delete ttn_payload.coordinates;
+    // delete ttn_payload.resolvedTracker;
   }
 
   if (ttn_payload.DevLAT && ttn_payload.DevLON) {

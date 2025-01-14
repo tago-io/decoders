@@ -1,4 +1,3 @@
-import exp from "constants";
 import { readFileSync } from "fs";
 import { join } from "path";
 import * as ts from "typescript";
@@ -27,7 +26,7 @@ describe("Uplink 2 Actility Payload Validation", () => {
     eval(transpiledCode); // This runs the code and sets the payload variable
 
     expect(payload).toEqual(
-      expect.arrayContaining([expect.objectContaining({ variable: "floor_number", value: 4 }), expect.objectContaining({ variable: "room_name", value: "S.439q" })])
+      expect.arrayContaining([expect.objectContaining({ variable: "floor_number", value: 4 }), expect.objectContaining({ variable: "room_name", value: "S.439" })])
     );
   });
 });
