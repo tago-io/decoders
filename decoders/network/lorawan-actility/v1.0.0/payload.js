@@ -1,18 +1,32 @@
 /* This is an example code for TTN Parser.
-** TTN send several parameters to TagoIO. The job of this parse is to convert all these parameters into a TagoIO format.
-** One of these parameters is the payload of your device. We find it too and apply the appropriate sensor parse.
-**
-** IMPORTANT: In most case, you will only need to edit the parsePayload function.
-**
-** Testing:
-** You can do manual tests to this parse by using the Device Emulator. Copy and Paste the following code:
-** [{ "variable": "ttn_payload", "value": "{ \"payload_raw\": \"0109611395\" }" }]
-**
-** The ignore_vars variable in this code should be used to ignore variables
-** from the device that you don't want.
-*/
+ ** TTN send several parameters to TagoIO. The job of this parse is to convert all these parameters into a TagoIO format.
+ ** One of these parameters is the payload of your device. We find it too and apply the appropriate sensor parse.
+ **
+ ** IMPORTANT: In most case, you will only need to edit the parsePayload function.
+ **
+ ** Testing:
+ ** You can do manual tests to this parse by using the Device Emulator. Copy and Paste the following code:
+ ** [{ "variable": "ttn_payload", "value": "{ \"payload_raw\": \"0109611395\" }" }]
+ **
+ ** The ignore_vars variable in this code should be used to ignore variables
+ ** from the device that you don't want.
+ */
 // Add ignorable variables in this array.
-const ignore_vars = ['rf_chain', 'channel', 'modulation', 'app_id', 'time', 'gtw_trusted'];
+const ignore_vars = [
+  "rf_chain",
+  "channel",
+  "modulation",
+  "app_id",
+  "time",
+  "gtw_trusted",
+  "processedFeed",
+  "rawPosition",
+  "coordinates",
+  "resolvedTracker",
+  "resolvedTrackerParameters",
+  "uplinkPayload",
+  "customerData",
+];
 
 /**
  * Convert an object to TagoIO object format.
@@ -24,12 +38,12 @@ const ignore_vars = ['rf_chain', 'channel', 'modulation', 'app_id', 'time', 'gtw
  * @param {String} serie Serie for the variables
  * @param {String} prefix Add a prefix to the variables name
  */
-function toTagoFormat(object_item, serie, prefix = '') {
+function toTagoFormat(object_item, serie, prefix = "") {
   const result = [];
   for (const key in object_item) {
     if (ignore_vars.includes(key) || object_item[key] === null) continue;
 
-    if (typeof object_item[key] === 'object') {
+    if (typeof object_item[key] === "object") {
       result.push({
         variable: object_item[key].variable || `${prefix}${key}`,
         value: object_item[key].value,
@@ -51,7 +65,7 @@ function toTagoFormat(object_item, serie, prefix = '') {
 }
 
 // Just convert lat and lng, or latitude and longitude to TagoIO format.
-function transformLatLngToLocation(fields, serie, prefix = '') {
+function transformLatLngToLocation(fields, serie, prefix = "") {
   if ((fields.latitude && fields.longitude) || (fields.lat && fields.lng)) {
     const lat = fields.lat || fields.latitude;
     const lng = fields.lng || fields.longitude;
@@ -77,20 +91,22 @@ function transformLatLngToLocation(fields, serie, prefix = '') {
 function inspectFormat(object_item, serie, old_key) {
   let result = [];
   for (const key in object_item) {
-    if (key === 'lng'.toLowerCase() || key.toLowerCase() === 'longitude') continue;
-    else if (key === 'lat'.toLowerCase() || key.toLowerCase() === 'latitude') {
-      const lng = object_item.lng || object_item.longitude || object_item.Longitude;
+    if (key === "lng".toLowerCase() || key.toLowerCase() === "longitude")
+      continue;
+    else if (key === "lat".toLowerCase() || key.toLowerCase() === "latitude") {
+      const lng =
+        object_item.lng || object_item.longitude || object_item.Longitude;
       result.push({
-        variable: old_key ? `${old_key}_location` : 'location',
+        variable: old_key ? `${old_key}_location` : "location",
         value: `${object_item[key]}, ${lng}`,
         location: { lat: Number(object_item[key]), lng: Number(lng) },
         serie,
       });
-    } else if (typeof object_item[key] === 'object') {
+    } else if (typeof object_item[key] === "object") {
       result = result.concat(inspectFormat(object_item[key], serie, key));
     } else {
       result.push({
-        variable: old_key ? `${old_key}_${key}` :`${key}`,
+        variable: old_key ? `${old_key}_${key}` : `${key}`,
         value: object_item[key],
         serie,
       });
@@ -103,7 +119,7 @@ function inspectFormat(object_item, serie, old_key) {
 // Check if what is being stored is the ttn_payload.
 // Payload is an environment variable. Is where what is being inserted to your device comes in.
 // Payload always is an array of objects. [ { variable, value...}, {variable, value...} ...]
-let ttn_payload = payload.find(x => x.variable === 'actility_payload');
+let ttn_payload = payload.find((x) => x.variable === "actility_payload");
 if (ttn_payload) {
   // Get a unique serie for the incoming data.
   const serie = String(ttn_payload.serie || new Date().getTime());
@@ -116,11 +132,32 @@ if (ttn_payload) {
     delete ttn_payload.payload_hex;
   }
 
+  if (ttn_payload.rawPosition?.floor_number) {
+    ttn_payload.floor_number = {
+      variable: "floor_number",
+      value: ttn_payload.rawPosition.floor_number,
+    };
+  }
+
+  if (ttn_payload.rawPosition?.room_name) {
+    ttn_payload.room_name = {
+      variable: "room_name",
+      value: ttn_payload.rawPosition.room_name,
+    };
+
+    // delete ttn_payload.resolvedTrackerParameters;
+    // delete ttn_payload.rawPosition;
+    // delete ttn_payload.uplinkPayload;
+    // delete ttn_payload.processedFeed;
+    // delete ttn_payload.coordinates;
+    // delete ttn_payload.resolvedTracker;
+  }
+
   if (ttn_payload.DevLAT && ttn_payload.DevLON) {
-    ttn_payload.location = { 
-      variable: "location", 
+    ttn_payload.location = {
+      variable: "location",
       value: `${ttn_payload.DevLAT},${ttn_payload.DevLON}`,
-      location: { lat: ttn_payload.DevLAT, lng: ttn_payload.DevLON }
+      location: { lat: ttn_payload.DevLAT, lng: ttn_payload.DevLON },
     };
     delete ttn_payload.DevLAT;
     delete ttn_payload.DevLON;
@@ -134,8 +171,9 @@ if (ttn_payload) {
   delete ttn_payload.DynamicClass;
   delete ttn_payload.InstantPER;
   delete ttn_payload.MeanPER;
+
   payload = toTagoFormat(ttn_payload, serie);
   if (ttn_payload.Time) {
-    payload = payload.map(x => ({ ...x, time: ttn_payload.Time }));
+    payload = payload.map((x) => ({ ...x, time: ttn_payload.Time }));
   }
 }
