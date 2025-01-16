@@ -216,17 +216,29 @@ if (ttn_payload_v3) {
   }
 
   if (ttn_payload_v3.rx_metadata && ttn_payload_v3.rx_metadata.length) {
-    const rx_metadata = ttn_payload_v3.rx_metadata[0];
-    to_tago.gateway_eui = rx_metadata.gateway_ids.eui;
-    to_tago.rssi = rx_metadata.rssi;
-    to_tago.snr = rx_metadata.snr;
-    if (rx_metadata.location && rx_metadata.location.latitude && rx_metadata.location.longitude) {
-      const lat = rx_metadata.location.latitude;
-      const lng = rx_metadata.location.longitude;
-      to_tago.gateway_location = {
-        value: `${lat},${lng}`,
-        location: { lat, lng },
+    const processGatewayMetadata = (metadata, prefix = '') => {
+      const result = {
+        [`gateway_eui${prefix}`]: metadata.gateway_ids.eui,
+        [`rssi${prefix}`]: metadata.rssi,
+        [`snr${prefix}`]: metadata.snr,
       };
+
+      if (metadata.location?.latitude && metadata.location?.longitude) {
+        const { latitude: lat, longitude: lng } = metadata.location;
+        result[`gateway_location${prefix}`] = {
+          value: `${lat},${lng}`,
+          location: { lat, lng },
+        };
+      }
+
+      return result;
+    };
+
+    const [firstGateway, ...otherGateways] = ttn_payload_v3.rx_metadata;
+    Object.assign(to_tago, processGatewayMetadata(firstGateway));
+
+    for (let i = 0; i < otherGateways.length; i++) {
+      Object.assign(to_tago, processGatewayMetadata(otherGateways[i], `_${i + 1}`));
     }
 
     delete ttn_payload_v3.rx_metadata;
