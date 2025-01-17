@@ -244,7 +244,7 @@ if (ttn_payload_v3) {
 
       const locationInfo = getLocationInfo(gateway);
       if (locationInfo) {
-        gateway_location[`gateway_location_${index + 1}`] = { lat: locationInfo.lat, lng: locationInfo.lng };
+        gateway_location[`gateway_location_${index + 1}`] = locationInfo;
       }
     }
 
