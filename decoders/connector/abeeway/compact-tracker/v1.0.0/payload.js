@@ -56,12 +56,12 @@ function Decoder(bytes) {
     }
     const mcu_firmware_major_version = bytes[6];
     const mcu_firmware_minor_version = bytes[7];
-    let mcu_firmware_iteration = bytes[8];
+    let mcu_firmware_iteration = bytes[8].toString();
     mcu_firmware_iteration = mcu_firmware_iteration.concat(mcu_firmware_major_version, mcu_firmware_minor_version);
 
     const ble_firmware_major_version = bytes[9];
     const ble_firmware_minor_version = bytes[10];
-    let ble_firmware_iteration = bytes[11];
+    let ble_firmware_iteration = bytes[11].toString();;
     ble_firmware_iteration = ble_firmware_iteration.concat(ble_firmware_major_version, ble_firmware_minor_version);
 
     return [
