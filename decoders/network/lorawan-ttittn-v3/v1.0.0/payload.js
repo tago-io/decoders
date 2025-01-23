@@ -216,33 +216,70 @@ if (ttn_payload_v3) {
   }
 
   if (ttn_payload_v3.rx_metadata && ttn_payload_v3.rx_metadata.length) {
-    const processGatewayMetadata = (metadata, prefix = '') => {
-      const result = {
-        [`gateway_eui${prefix}`]: metadata.gateway_ids.eui,
-        [`rssi${prefix}`]: metadata.rssi,
-        [`snr${prefix}`]: metadata.snr,
-      };
+    const first_gateway = ttn_payload_v3.rx_metadata[0];
 
-      if (metadata.location?.latitude && metadata.location?.longitude) {
-        const { latitude: lat, longitude: lng } = metadata.location;
-        result[`gateway_location${prefix}`] = {
-          value: `${lat},${lng}`,
-          location: { lat, lng },
+    const getLocationInfo = (gateway) => {
+      if (gateway?.location && gateway.location?.latitude && gateway.location?.longitude) {
+        return {
+          lat: gateway.location.latitude,
+          lng: gateway.location.longitude
         };
       }
-
-      return result;
+      return null;
     };
 
-    const [firstGateway, ...otherGateways] = ttn_payload_v3.rx_metadata;
-    Object.assign(to_tago, processGatewayMetadata(firstGateway));
+    // Initialize metadata objects
+    const rssi_metadata = {};
+    const snr_metadata = {};
+    const gateway_location = {};
+    const other_eui_gateways = [];
 
-    for (let i = 0; i < otherGateways.length; i++) {
-      Object.assign(to_tago, processGatewayMetadata(otherGateways[i], `_${i + 1}`));
+    // Process additional gateways
+    for (let i = 1; i < ttn_payload_v3.rx_metadata.length; i++) {
+      const gateway = ttn_payload_v3.rx_metadata[i];
+      const gateway_eui = gateway?.gateway_ids?.eui;
+
+      if (!gateway_eui) {
+        continue
+      };
+
+      other_eui_gateways.push(gateway_eui);
+      rssi_metadata[gateway_eui] = gateway.rssi;
+      snr_metadata[gateway_eui] = gateway.snr;
+
+      const locationInfo = getLocationInfo(gateway);
+      if (locationInfo) {
+        gateway_location[gateway_eui] = locationInfo;
+      }
+    }
+
+    // Set first gateway values
+    to_tago.gateway_eui = {
+      value: first_gateway.gateway_ids.eui,
+      metadata: other_eui_gateways.length ? { other_eui_gateways } : {}
+    };
+
+    to_tago.rssi = {
+      value: first_gateway.rssi,
+      metadata: rssi_metadata
+    };
+
+    to_tago.snr = {
+      value: first_gateway.snr,
+      metadata: snr_metadata
+    };
+
+    const firstLocation = getLocationInfo(first_gateway);
+    if (firstLocation) {
+      to_tago.gateway_location = {
+        value: `${firstLocation.lat},${firstLocation.lng}`,
+        location: firstLocation,
+        metadata: gateway_location
+      };
     }
 
     delete ttn_payload_v3.rx_metadata;
-  }
+}
   let decoded = [];
   if (ttn_payload_v3.decoded_payload && Object.keys(ttn_payload_v3.decoded_payload).length) {
     decoded = inspectFormat(ttn_payload_v3.decoded_payload, group);
