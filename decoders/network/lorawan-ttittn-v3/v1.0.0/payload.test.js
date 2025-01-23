@@ -54,15 +54,15 @@ describe("Test Suite for 1", () => {
       expect.arrayContaining([
         expect.objectContaining({ variable: "fport", value: 2 }),
         expect.objectContaining({ variable: "fcnt", value: 123 }),
-        expect.objectContaining({ variable: "gateway_eui", value: "EUI_PLACEHOLDER_1", metadata: { gateway_eui_1: "EUI_PLACEHOLDER_2" } }),
-        expect.objectContaining({ variable: "rssi", value: -107, metadata: { rssi_1: -50 } }),
-        expect.objectContaining({ variable: "snr", value: 5.8, metadata: { snr_1: 9.2 } }),
+        expect.objectContaining({ variable: "gateway_eui", value: "EUI_PLACEHOLDER_1", metadata: { other_eui_gateways: ["EUI_PLACEHOLDER_2"] } }),
+        expect.objectContaining({ variable: "rssi", value: -107, metadata: { EUI_PLACEHOLDER_2: -50 } }),
+        expect.objectContaining({ variable: "snr", value: 5.8, metadata: { EUI_PLACEHOLDER_2: 9.2 } }),
         expect.objectContaining({
           variable: "gateway_location",
           value: "LAT_PLACEHOLDER_1,LON_PLACEHOLDER_1",
           location: { lat: "LAT_PLACEHOLDER_1", lng: "LON_PLACEHOLDER_1" },
           metadata: {
-            gateway_location_1: { lat: "LAT_PLACEHOLDER_2", lng: "LON_PLACEHOLDER_2" },
+            EUI_PLACEHOLDER_2: { lat: "LAT_PLACEHOLDER_2", lng: "LON_PLACEHOLDER_2" },
           },
         })
       ])
@@ -76,16 +76,16 @@ describe("Test Suite for 1", () => {
 
     expect(result).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ variable: "gateway_eui", value: "EUI_PLACEHOLDER_1", metadata: { gateway_eui_1: "EUI_PLACEHOLDER_2", gateway_eui_2: "EUI_PLACEHOLDER_3" } }),
-        expect.objectContaining({ variable: "rssi", value: -107, metadata: { rssi_1: -50, rssi_2: -75 } }),
-        expect.objectContaining({ variable: "snr", value: 5.8, metadata: { snr_1: 9.2, snr_2: 7.5 } }),
+        expect.objectContaining({ variable: "gateway_eui", value: "EUI_PLACEHOLDER_1", metadata: { other_eui_gateways: ["EUI_PLACEHOLDER_2", "EUI_PLACEHOLDER_3"] } }),
+        expect.objectContaining({ variable: "rssi", value: -107, metadata: { EUI_PLACEHOLDER_2: -50, EUI_PLACEHOLDER_3: -75 } }),
+        expect.objectContaining({ variable: "snr", value: 5.8, metadata: { EUI_PLACEHOLDER_2: 9.2, EUI_PLACEHOLDER_3: 7.5 } }),
         expect.objectContaining({
           variable: "gateway_location",
           value: "LAT_PLACEHOLDER_1,LON_PLACEHOLDER_1",
           location: { lat: "LAT_PLACEHOLDER_1", lng: "LON_PLACEHOLDER_1" },
           metadata: {
-            gateway_location_1: { lat: "LAT_PLACEHOLDER_2", lng: "LON_PLACEHOLDER_2" },
-            gateway_location_2: { lat: "LAT_PLACEHOLDER_3", lng: "LON_PLACEHOLDER_3" },
+            EUI_PLACEHOLDER_2: { lat: "LAT_PLACEHOLDER_2", lng: "LON_PLACEHOLDER_2" },
+            EUI_PLACEHOLDER_3: { lat: "LAT_PLACEHOLDER_3", lng: "LON_PLACEHOLDER_3" },
           },
         })
       ])

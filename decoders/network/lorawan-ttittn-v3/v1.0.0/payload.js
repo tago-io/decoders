@@ -216,7 +216,7 @@ if (ttn_payload_v3) {
   }
 
   if (ttn_payload_v3.rx_metadata && ttn_payload_v3.rx_metadata.length) {
-    const [first_gateway, ...other_gateways] = ttn_payload_v3.rx_metadata;
+    const first_gateway = ttn_payload_v3.rx_metadata[0];
 
     const getLocationInfo = (gateway) => {
       if (gateway?.location && gateway.location?.latitude && gateway.location?.longitude) {
@@ -228,27 +228,37 @@ if (ttn_payload_v3) {
       return null;
     };
 
-    // Create metadata objects for additional values
-    const gateway_eui_metadata = {};
+    // Initialize metadata objects
     const rssi_metadata = {};
     const snr_metadata = {};
     const gateway_location = {};
+    const other_eui_gateways = [];
 
-    // Loop through all other gateways and add metadata
-    for (let index = 0; index < other_gateways.length; index++) {
-      const gateway = other_gateways[index];
+    // Process additional gateways
+    for (let i = 1; i < ttn_payload_v3.rx_metadata.length; i++) {
+      const gateway = ttn_payload_v3.rx_metadata[i];
+      const gateway_eui = gateway?.gateway_ids?.eui;
 
-      gateway_eui_metadata[`gateway_eui_${index + 1}`] = gateway.gateway_ids.eui;
-      rssi_metadata[`rssi_${index + 1}`] = gateway.rssi;
-      snr_metadata[`snr_${index + 1}`] = gateway.snr;
+      if (!gateway_eui) {
+        continue
+      };
+
+      other_eui_gateways.push(gateway_eui);
+      rssi_metadata[gateway_eui] = gateway.rssi;
+      snr_metadata[gateway_eui] = gateway.snr;
 
       const locationInfo = getLocationInfo(gateway);
       if (locationInfo) {
-        gateway_location[`gateway_location_${index + 1}`] = locationInfo;
+        gateway_location[gateway_eui] = locationInfo;
       }
     }
 
-    // Add metadata to respective variables
+    // Set first gateway values
+    to_tago.gateway_eui = {
+      value: first_gateway.gateway_ids.eui,
+      metadata: other_eui_gateways.length ? { other_eui_gateways } : {}
+    };
+
     to_tago.rssi = {
       value: first_gateway.rssi,
       metadata: rssi_metadata
@@ -257,11 +267,6 @@ if (ttn_payload_v3) {
     to_tago.snr = {
       value: first_gateway.snr,
       metadata: snr_metadata
-    };
-
-    to_tago.gateway_eui = {
-      value: first_gateway.gateway_ids.eui,
-      metadata: gateway_eui_metadata
     };
 
     const firstLocation = getLocationInfo(first_gateway);
@@ -274,7 +279,7 @@ if (ttn_payload_v3) {
     }
 
     delete ttn_payload_v3.rx_metadata;
-  }
+}
   let decoded = [];
   if (ttn_payload_v3.decoded_payload && Object.keys(ttn_payload_v3.decoded_payload).length) {
     decoded = inspectFormat(ttn_payload_v3.decoded_payload, group);
