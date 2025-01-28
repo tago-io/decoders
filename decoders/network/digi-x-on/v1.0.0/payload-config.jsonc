@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "case": "upper",
+    "label": "Device EUI/IMEI"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "digi-xon.middleware.tago.io"
+}
