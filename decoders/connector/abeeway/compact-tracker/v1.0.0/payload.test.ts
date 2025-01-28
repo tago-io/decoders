@@ -27,3 +27,16 @@ describe("Device Payload Validation", () => {
     expect(result).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "ble_firmware_iteration", value: "533" })]));
   });
 });
+
+describe("Device Payload Validation", () => {
+  beforeEach(() => {
+    payload = [{ variable: "payload", value: "0a4c5e95a001" }];
+    device = { params: [{ key: "beacon_decoder", value: "simple" }] };
+  });
+
+  test("Check all output variables for acceleration", () => {
+    const result = eval(transpiledCode);
+
+    expect(result).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "payload", value: "0a4c5e95a001" })]));
+  });
+});
