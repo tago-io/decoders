@@ -1,5 +1,5 @@
 {
-    "$schema": "../../../schema/connector.json",
+    "$schema": "../../../../schema/connector.json",
     "name": "IMST iOKE868 for LoRaWAN®",
     "images": {
         "logo": "./assets/iO881A_logo.jpg"

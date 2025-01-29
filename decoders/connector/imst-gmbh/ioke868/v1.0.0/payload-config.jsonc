@@ -1,5 +1,5 @@
 {
-    "$schema": "../../../schema/connector_details.json",
+    "$schema": "../../../../../schema/connector_details.json",
     "description": "../description.md",
     "install_text": "Optical reading head unit compatible with most modern smart meters",
     "install_end_text": "Example dashborad for meter data and status is available at https://admin.tago.io/template/677cb460c7f4cd00098af38d",
