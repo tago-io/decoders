@@ -10,7 +10,7 @@
   "device_parameters": [],
   "middleware_endpoint": {
     "us-e1": "helium.middleware.tago.io",
-    "eu-w1": "helium.eu-w1.middleware.tago.io"
+    "eu-w1": "helium.middleware.eu-w1.tago.io"
   },
   "documentation_url": "https://docs.helium.com/use-the-network/console/integrations/tago/"
 }

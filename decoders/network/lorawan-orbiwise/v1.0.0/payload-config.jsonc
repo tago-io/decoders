@@ -27,7 +27,7 @@
   ],
   "middleware_endpoint": {
     "us-e1": "orbiwise.middleware.tago.io",
-    "eu-w1": "orbiwise.eu-w1.middleware.tago.io"
+    "eu-w1": "orbiwise.middleware.eu-w1.tago.io"
   },
   "documentation_url": "https://docs.tago.io/articles/160"
 }

@@ -16,7 +16,7 @@
   ],
   "middleware_endpoint": {
     "us-e1": "machineq.middleware.tago.io",
-    "eu-w1": "machineq.eu-w1.middleware.tago.io"
+    "eu-w1": "machineq.middleware.eu-w1.tago.io"
   },
   "documentation_url": "https://docs.tago.io/articles/159"
 }

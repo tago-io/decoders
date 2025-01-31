@@ -17,7 +17,7 @@
   ],
   "middleware_endpoint": {
     "us-e1": "everynet-oauth.middleware.tago.io",
-    "eu-w1": "everynet.eu-w1.middleware.tago.io"
+    "eu-w1": "everynet.middleware.eu-w1.tago.io"
   },
   "documentation_url": "https://docs.tago.io/articles/129"
 }

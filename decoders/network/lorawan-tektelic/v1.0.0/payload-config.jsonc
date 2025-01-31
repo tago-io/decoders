@@ -10,6 +10,6 @@
   "device_parameters": [],
   "middleware_endpoint": {
     "us-e1": "tektelic.middleware.tago.io",
-    "eu-w1": "tektelic.eu-w1.middleware.tago.io"
+    "eu-w1": "tektelic.middleware.eu-w1.tago.io"
   }
 }
