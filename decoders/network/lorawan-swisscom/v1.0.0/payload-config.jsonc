@@ -7,6 +7,9 @@
     "mask": "ff-ff-ff-ff-ff-ff-ff-ff"
   },
   "device_parameters": [],
-  "middleware_endpoint": "swisscom.middleware.tago.io",
+  "middleware_endpoint": {
+    "us-e1": "swisscom.middleware.tago.io",
+    "eu-w1": "swisscom.eu-w1.middleware.tago.io"
+  },
   "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-swisscom-lorawan-ns/440"
 }
