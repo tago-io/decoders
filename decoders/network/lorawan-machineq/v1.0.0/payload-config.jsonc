@@ -14,6 +14,9 @@
       "type": "text"
     }
   ],
-  "middleware_endpoint": "machineq.middleware.tago.io",
+  "middleware_endpoint": {
+    "us-e1": "machineq.middleware.tago.io",
+    "eu-w1": "machineq.eu-w1.middleware.tago.io"
+  },
   "documentation_url": "https://docs.tago.io/articles/159"
 }

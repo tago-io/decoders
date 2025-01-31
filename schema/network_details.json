@@ -8,7 +8,11 @@
       "properties": {
         "case": {
           "type": "string",
-          "enum": ["upper", "lower", ""],
+          "enum": [
+            "upper",
+            "lower",
+            ""
+          ],
           "description": "Defines the case of the serial number."
         },
         "label": {
@@ -26,8 +30,23 @@
       }
     },
     "middleware_endpoint": {
-      "type": "string",
-      "description": "The middleware endpoint URL."
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "us-e1": {
+              "type": "string"
+            },
+            "eu-w1": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
     },
     "documentation_url": {
       "type": "string",
@@ -46,5 +65,7 @@
     }
   },
   "additionalProperties": false,
-  "required": ["description"]
+  "required": [
+    "description"
+  ]
 }

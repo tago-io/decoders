@@ -15,6 +15,9 @@
       "default": "Your downlink data here"
     }
   ],
-  "middleware_endpoint": "everynet-oauth.middleware.tago.io",
+  "middleware_endpoint": {
+    "us-e1": "everynet-oauth.middleware.tago.io",
+    "eu-w1": "everynet.eu-w1.middleware.tago.io"
+  },
   "documentation_url": "https://docs.tago.io/articles/129"
 }

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Simulates a Extrusion machine, sending the following data at a 3 minutes interval.\n\n**Data**\n* temperature_ini\n* temperature_mid\n* temperature_end\n* pressure\n* message_system\n* speed",
+  "install_end_text": "![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/templates/industrial_automation_template.png)\n#**Get the Dashboard's template [here](https://admin.tago.io/template/61085d72f748330011e8f03f)**",
+  "device_annotation": "###**Get the template [here](https://admin.tago.io/template/60f19c8d2889a60012d3416b)**",
+  "device_parameters": [],
+  "networks": ["../../../../network/simulator/v1.0.0/payload.js"]
+}
