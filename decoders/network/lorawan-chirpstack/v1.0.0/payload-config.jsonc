@@ -6,6 +6,9 @@
     "mask": "FF-FF-FF-FF-FF-FF-FF-FF"
   },
   "device_parameters": [],
-  "middleware_endpoint": "chirpstack.middleware.tago.io",
+  "middleware_endpoint": {
+    "us-e1": "chirpstack.middleware.tago.io",
+    "eu-w1": "chirpstack.eu-w1.middleware.tago.io"
+  },
   "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-chirpstack-lorawan/579"
 }

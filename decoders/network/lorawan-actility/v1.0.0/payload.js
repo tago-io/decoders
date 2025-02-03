@@ -20,7 +20,6 @@ const ignore_vars = [
   "time",
   "gtw_trusted",
   "processedFeed",
-  "rawPosition",
   "coordinates",
   "resolvedTracker",
   "resolvedTrackerParameters",
@@ -132,27 +131,6 @@ if (ttn_payload) {
     delete ttn_payload.payload_hex;
   }
 
-  if (ttn_payload.rawPosition?.floor_number) {
-    ttn_payload.floor_number = {
-      variable: "floor_number",
-      value: ttn_payload.rawPosition.floor_number,
-    };
-  }
-
-  if (ttn_payload.rawPosition?.room_name) {
-    ttn_payload.room_name = {
-      variable: "room_name",
-      value: ttn_payload.rawPosition.room_name,
-    };
-
-    // delete ttn_payload.resolvedTrackerParameters;
-    // delete ttn_payload.rawPosition;
-    // delete ttn_payload.uplinkPayload;
-    // delete ttn_payload.processedFeed;
-    // delete ttn_payload.coordinates;
-    // delete ttn_payload.resolvedTracker;
-  }
-
   if (ttn_payload.DevLAT && ttn_payload.DevLON) {
     ttn_payload.location = {
       variable: "location",
@@ -173,6 +151,34 @@ if (ttn_payload) {
   delete ttn_payload.MeanPER;
 
   payload = toTagoFormat(ttn_payload, serie);
+
+  if (ttn_payload?.rawPosition?.floor_number) {
+    const location = {
+      variable: "rawposition_location",
+      value: `${ttn_payload.rawPosition?.coordinates[1]}, ${ttn_payload.rawPosition?.coordinates[0]}`,
+      location: {
+        lat: ttn_payload.rawPosition?.coordinates[1],
+        lng: ttn_payload.rawPosition?.coordinates[0],
+      },
+      metadata: {
+        age: ttn_payload.rawPosition?.age,
+        horizontalAccuracy: ttn_payload.rawPosition?.horizontalAccuracy,
+        bssidCount: ttn_payload.rawPosition?.bssidCount,
+        // make each beacon a key in the metadata
+        ...ttn_payload.rawPosition?.beaconIdData.reduce(
+          (acc, { rssi, beaconId }) => ({ ...acc, [beaconId]: rssi }),
+          {}
+        ),
+        beaconFormat: ttn_payload.rawPosition?.beaconFormat,
+        floor_number: ttn_payload.rawPosition?.floor_number,
+        room_name: ttn_payload.rawPosition?.room_name,
+      },
+    };
+
+    delete ttn_payload.rawPosition;
+    payload.push(location);
+  }
+
   if (ttn_payload.Time) {
     payload = payload.map((x) => ({ ...x, time: ttn_payload.Time }));
   }

@@ -8,6 +8,9 @@
     "mask": "FF-FF-FF-FF-FF-FF-FF-FF"
   },
   "device_parameters": [],
-  "middleware_endpoint": "actility.middleware.tago.io",
+  "middleware_endpoint": {
+    "us-e1": "actility.middleware.tago.io",
+    "eu-w1": "actility.eu-w1.middleware.tago.io"
+  },
   "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-actility-ns/336"
 }

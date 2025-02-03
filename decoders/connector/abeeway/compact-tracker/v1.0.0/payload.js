@@ -789,6 +789,7 @@ function Decoder(bytes) {
       ];
     }
   }
+  return [];
 }
 const payload_raw = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 if (payload_raw) {

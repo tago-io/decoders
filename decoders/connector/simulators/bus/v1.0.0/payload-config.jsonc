@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "##\nThis connector simulates public buses in Chicago,IL by storing GPS location, speed, fuel level and odometer at a pre-determined frequency.\n\n* Frequency time: **3 minutes**\n* Variables:\n  * fuel_level\n  * location\n  * speed\n  * trip_odometer\n\n**Note:** As the data update window is fixed, you may need to **wait some minutes** until data start to arrive in the bucket for the first time.\n##",
+  "install_end_text": "![](https://api.tago.io/file/5bbcb03b667d7a002e56664b/templates/bus_telemetry_template.png)\n### **Get the Dashboard's template [here](http://admin.tago.io/template/60871348b1ec710019b9b061)**",
+  "device_annotation": "### **Get the Dashboard's template [here](http://admin.tago.io/template/60871348b1ec710019b9b061)**",
+  "device_parameters": [
+    {
+      "name": "bus_id",
+      "type": "dropdown",
+      "label": "Select a Bus",
+      "options": [
+        {
+          "is_default": true,
+          "label": "Bus 1",
+          "value": "1"
+        },
+        {
+          "label": "Bus 2",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "speed_type",
+      "type": "dropdown",
+      "options": [
+        {
+          "is_default": true,
+          "label": "mph",
+          "value": "mph"
+        },
+        {
+          "is_default": false,
+          "label": "km/h",
+          "value": "km"
+        }
+      ],
+      "label": "Select the speed unit"
+    }
+  ],
+  "networks": ["../../../../network/simulator/v1.0.0/payload.js"]
+}

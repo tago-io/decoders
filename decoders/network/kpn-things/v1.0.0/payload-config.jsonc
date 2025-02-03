@@ -7,6 +7,9 @@
     "case": "upper"
   },
   "device_parameters": [],
-  "middleware_endpoint": "kpn.middleware.tago.io",
+  "middleware_endpoint": {
+    "us-e1": "kpn.middleware.tago.io",
+    "eu-w1": "kpn.eu-w1.middleware.tago.io"
+  },
   "documentation_url": "https://help.tago.io/portal/en/community/topic/how-to-integrate-with-kpn-things"
 }

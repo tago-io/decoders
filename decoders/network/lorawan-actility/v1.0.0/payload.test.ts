@@ -26,7 +26,25 @@ describe("Uplink 2 Actility Payload Validation", () => {
     eval(transpiledCode); // This runs the code and sets the payload variable
 
     expect(payload).toEqual(
-      expect.arrayContaining([expect.objectContaining({ variable: "floor_number", value: 4 }), expect.objectContaining({ variable: "room_name", value: "S.439" })])
+      expect.arrayContaining([
+        expect.objectContaining({
+          variable: "rawposition_location",
+          value: "1.379114189651386, 103.84844149722993",
+          location: { lat: 1.379114189651386, lng: 103.84844149722993 },
+          metadata: {
+            age: 17,
+            horizontalAccuracy: 8.333181988320284,
+            bssidCount: 4,
+            "00-00-00-00-43-84": -65,
+            "00-00-00-00-43-85": -66,
+            "00-00-00-00-43-88": -68,
+            "00-00-00-00-51-E8": -69,
+            beaconFormat: "BEACON_ID",
+            floor_number: 4,
+            room_name: "S.439",
+          },
+        }),
+      ])
     );
   });
 });
