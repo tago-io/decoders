@@ -14,7 +14,7 @@
   ],
   "middleware_endpoint": {
     "us-e1": "loriot.middleware.tago.io",
-    "eu-w1": "loriot.eu-w1.middleware.tago.io"
+    "eu-w1": "loriot.middleware.eu-w1.tago.io"
   },
   "documentation_url": "https://docs.tago.io/articles/137"
 }

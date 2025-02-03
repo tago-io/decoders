@@ -10,7 +10,7 @@
   "device_parameters": [],
   "middleware_endpoint": {
     "us-e1": "sigfox.middleware.tago.io",
-    "eu-w1": "sigfox.eu-w1.middleware.tago.io"
+    "eu-w1": "sigfox.middleware.eu-w1.tago.io"
   },
   "documentation_url": "https://help.tago.io/portal/en/kb/articles/33-sigfox"
 }

@@ -10,7 +10,7 @@
   "device_parameters": [],
   "middleware_endpoint": {
     "us-e1": "kerlink.middleware.tago.io",
-    "eu-w1": "kerlink.eu-w1.middleware.tago.io"
+    "eu-w1": "kerlink.middleware.eu-w1.tago.io"
   },
   "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-kerlink-lorawan/281"
 }
