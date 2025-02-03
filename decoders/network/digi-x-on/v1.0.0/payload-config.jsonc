@@ -7,5 +7,8 @@
     "label": "Device EUI/IMEI"
   },
   "device_parameters": [],
-  "middleware_endpoint": "digi-xon.middleware.tago.io"
+  "middleware_endpoint": {
+    "us-e1": "digixon.middleware.us-e1.tago.io",
+    "eu-w1": "digixon.middleware.eu-w1.tago.io"
+  }
 }
