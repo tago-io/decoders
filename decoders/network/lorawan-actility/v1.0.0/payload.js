@@ -153,25 +153,31 @@ if (ttn_payload) {
   payload = toTagoFormat(ttn_payload, serie);
 
   if (ttn_payload?.rawPosition?.floor_number) {
+    const rawPosition = ttn_payload.rawPosition;
+    const beaconMetadata = {};
+
+    if (Array.isArray(rawPosition.beaconIdData)) {
+      rawPosition.beaconIdData.forEach(({ rssi, beaconId }, index) => {
+        beaconMetadata[`beaconIdData_rssi${index}`] = rssi;
+        beaconMetadata[`beaconIdData_beaconId${index}`] = beaconId;
+      });
+    }
+
     const location = {
       variable: "rawposition_location",
-      value: `${ttn_payload.rawPosition?.coordinates[1]}, ${ttn_payload.rawPosition?.coordinates[0]}`,
+      value: `${rawPosition.coordinates[1]}, ${rawPosition.coordinates[0]}`,
       location: {
-        lat: ttn_payload.rawPosition?.coordinates[1],
-        lng: ttn_payload.rawPosition?.coordinates[0],
+        lat: rawPosition.coordinates[1],
+        lng: rawPosition.coordinates[0],
       },
       metadata: {
-        age: ttn_payload.rawPosition?.age,
-        horizontalAccuracy: ttn_payload.rawPosition?.horizontalAccuracy,
-        bssidCount: ttn_payload.rawPosition?.bssidCount,
-        // make each beacon a key in the metadata
-        ...ttn_payload.rawPosition?.beaconIdData.reduce(
-          (acc, { rssi, beaconId }) => ({ ...acc, [beaconId]: rssi }),
-          {}
-        ),
-        beaconFormat: ttn_payload.rawPosition?.beaconFormat,
-        floor_number: ttn_payload.rawPosition?.floor_number,
-        room_name: ttn_payload.rawPosition?.room_name,
+        age: rawPosition.age,
+        horizontalAccuracy: rawPosition.horizontalAccuracy,
+        bssidCount: rawPosition.bssidCount,
+        ...beaconMetadata,
+        beaconFormat: rawPosition.beaconFormat,
+        floor_number: rawPosition.floor_number,
+        room_name: rawPosition.room_name,
       },
     };
 
