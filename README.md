@@ -6,32 +6,12 @@ To help you get started, we've included a comprehensive video tutorial on how to
 
 ## Table of Contents
 
-- [Useful Commands](#useful-commands)
 - [Folder Structure](#folder-structure)
 - [Manifests](#manifests)
 - [Adding a New Decoder](#adding-a-new-decoder)
   - [Network Decoder](#network-decoder)
   - [Connector Decoder](#connector-decoder)
 - [Submitting a Decoder Pull Request](#submitting-a-decoder-pull-request)
-
-## Useful Commands
-
-- **Validating your decoder manifest:**
-
-  ```bash
-  npm start validator
-  ```
-
-- **Running Unit Tests:**
-
-  ```bash
-  npm test
-  ```
-
-- **Running Linter:**
-  ```bash
-  npm linter
-  ```
 
 ## Folder Structure
 
@@ -86,6 +66,8 @@ Here's an example of a `connector.jsonc` file for a connector decoder:
 ### Example: Connector Details
 
 Here's an example of a `connector_details.jsonc` file for a connector decoder:
+
+**🚨 IMPORTANT:** The fields `description`, `install_text`, and `device_annotation` must be objective and cannot be subjective, e.g. "Best sensor". They also must not contain external links that are outside the scope of TagoIO.
 
 ```jsonc
 {
@@ -180,9 +162,33 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 
    - Follow the instructions above to add your decoder.
 
-3. **Validate your manifest:**
+3. **Run these commands to validate your changes:**
 
-   - Run the command `npm start validator` to check if all data in the manifest file is correct.
+   - **Run the linter to check code style:**
+
+   ```bash
+   npm run linter
+   ```
+
+   - **Run all unit tests to ensure functionality:**
+
+   ```bash
+   npm test
+   ```
+
+   - **Validate your manifest files:**
+
+   ```bash
+   npm start validator
+   ```
+
+   - **Generate database:**
+
+   ```bash
+   npm start generate
+   ```
+
+   - Make sure all commands execute successfully without errors before submitting your PR. This helps maintain code quality and ensures all documentation is up to date.
 
 4. **Commit your changes:**
 
