@@ -1,0 +1,13 @@
+{
+    "$schema": "../../../../schema/connector.json",
+    "name": "IMST iOKE868 for LoRaWAN®",
+    "images": {
+        "logo": "./assets/iO881A_logo.png"
+    },
+    "versions": {
+        "v1.0.0": {
+            "src": "./v1.0.0/payload.js",
+            "manifest": "./v1.0.0/payload-config.jsonc"
+        }
+    }
+}
