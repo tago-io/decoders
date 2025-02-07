@@ -884,6 +884,22 @@ function Decoder(bytes, port) {
                 stdData.nb_err_frames = bytes[index+3] *256+bytes[index+4];
             }
 
+            // configuration node power desc
+  				  if (   (clusterdID === 0x0050 ) & (attributID === 0x0006)) {
+    				  index2 = index + 3;
+    				  if ((bytes[index+2] &0x01) === 0x01) {
+                tab.push({label:"ExternalPowerVoltage" ,value:(bytes[index2]*256+bytes[index2+1])/1000, date:lDate}) ;
+                index2=index2+2;
+              }
+              if ((bytes[index+2] &0x04) === 0x04) {
+                tab.push({label:"BatteryVoltage" ,value:(bytes[index2]*256+bytes[index2+1])/1000, date:lDate}) ;
+                index2=index2+2;
+              }
+    				  if ((bytes[index+2] &0x02) === 0x02) {decoded.data.rechargeable_battery_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+    				  if ((bytes[index+2] &0x08) === 0x08) {decoded.data.solar_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+    				  if ((bytes[index+2] &0x10) === 0x10) {decoded.data.tic_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+  				  }
+
             decoded.data = tab;
         }
             
