@@ -213,3 +213,21 @@ describe(`fPort: ${testPayloads.data[8].fport} - ${testPayloads.data[8].name}`, 
         ]);
     });
 });
+
+describe("Shall not be parsed", () => {
+    let payload = [
+      { variable: "shallnotpass", value: "04096113950292" },
+      { variable: "fport", value: 9 },
+    ];
+    payload = decoderRun(file_path, { payload });
+    test("Output Result", () => {
+      expect(Array.isArray(payload)).toBe(true);
+    });
+  
+    test("Not parsed Result", () => {
+      expect(payload).toEqual([
+        { variable: "shallnotpass", value: "04096113950292" },
+        { variable: "fport", value: 9 },
+      ]);
+    });
+  });
