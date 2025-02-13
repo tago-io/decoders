@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "case": "upper",
+    "label": "Device EUI/IMEI"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": {
+    "us-e1": "digixon.middleware.us-e1.tago.io",
+    "eu-w1": "digixon.middleware.eu-w1.tago.io"
+  }
+}
