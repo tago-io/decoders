@@ -1,0 +1,1 @@
+Hazardous area thermocouple (12 channels) LoRaWAN bridge endpoint.
