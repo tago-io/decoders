@@ -162,7 +162,40 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 
    - Follow the instructions above to add your decoder.
 
-3. **Run these commands to validate your changes:**
+3. **Include Non-Decoding Test Cases:**
+
+   - Add unit tests to verify that payloads not intended for decoding remain unchanged. This ensures that additional data pass through the decoder without modification. Use the following template:
+
+   ```typescript
+   import { describe, expect, test, beforeEach } from "vitest";
+   import { DataToSend } from "@tago-io/sdk/lib/types";
+
+   import { decoderRun } from "../../../../../src/functions/decoder-run";
+
+   const file_path = "DECODER-FILE-PATH"; // e.g. decoders/connector/your-decoder/v1.0.0/payload.ts
+
+   let payload: DataToSend[] = [];
+
+   describe("Shall not be parsed", () => {
+     let payload = [
+       { variable: "shallnotpass", value: "04096113950292" },
+       { variable: "fport", value: 9 },
+     ];
+     payload = decoderRun(file_path, { payload });
+     test("Output Result", () => {
+       expect(Array.isArray(payload)).toBe(true);
+     });
+
+     test("Not parsed Result", () => {
+       expect(payload).toEqual([
+         { variable: "shallnotpass", value: "04096113950292" },
+         { variable: "fport", value: 9 },
+       ]);
+     });
+   });
+   ```
+
+4. **Run these commands to validate your changes:**
 
    - **Run the linter to check code style:**
 
@@ -190,18 +223,18 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 
    - Make sure all commands execute successfully without errors before submitting your PR. This helps maintain code quality and ensures all documentation is up to date.
 
-4. **Commit your changes:**
+5. **Commit your changes:**
 
    - Commit your changes and open a pull request for review.
 
-5. **Review and feedback:**
+6. **Review and feedback:**
 
    - Wait for the Pull Request to be reviewed. You may need to make some changes based on the feedback you receive.
 
-6. **Merge your changes:**
+7. **Merge your changes:**
    - Once your Pull Request is approved, it will be merged into the main codebase.
 
-### Note: The decoder code should be in TypeScript and have Unit Tests respecting the rules.
+### 📝 Note: The decoder code should be in TypeScript and have Unit Tests respecting the rules.
 
 ---
 
