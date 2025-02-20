@@ -4,6 +4,7 @@
  * Modification History:
  * Date         Version     Modified By     Description
  * 2025-01-17   1.0         MR              Initial creation
+ * 2025-02-19   1.1         MR              Shall not be parsed test added
  */
 
 /* eslint-disable unicorn/numeric-separators-style */
@@ -25,6 +26,27 @@ function preparePayload(payloadHex, port, group) {
         result
     };
 }
+
+
+describe("Shall not be parsed", () => {
+    let payload = [
+        { variable: "shallnotpass", value: "04096113950292" },
+        { variable: "fport", value: 9 },
+    ];
+    payload = decoderRun(file_path, { payload });
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    test("Not parsed Result", () => {
+        expect(payload).toEqual([
+            { variable: "shallnotpass", value: "04096113950292" },
+            { variable: "fport", value: 9 },
+        ]);
+    });
+});
+
+
 
 describe("Meter Data", () => {
     test("Meter Data Object with Unit: OBIS_ID=1-0:1.8.1*255", () => {
