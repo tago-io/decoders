@@ -1,6 +1,6 @@
 {
     "$schema": "../../../../schema/connector.json",
-    "name": "VoBo TC",
+    "name": "Volley Boast - VoBo TC",
     "images": {
         "logo": "./assets/logo.png"
     },
