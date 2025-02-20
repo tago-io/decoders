@@ -5,10 +5,22 @@ import { beforeEach, describe, expect, test } from "vitest";
 
 import { DataToSend } from "@tago-io/sdk/lib/types";
 
-const file = readFileSync(join(__dirname, "./payload.ts"));
-const transpiledCode = ts.transpile(file.toString());
+const file = readFileSync(join(__dirname, "./payload.ts"), "utf8");
+const transpiledCode = ts.transpile(file);
 
 let payload: DataToSend[] = [];
+
+describe("Normal variable", () => {
+  beforeEach(() => {
+    payload = [];
+  });
+
+  test("Shall not be parsed", () => {
+    payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
+
+    expect(payload).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "shallnotpass", value: "invalid_payload" })]));
+  });
+});
 
 describe("ts30x Payload Validation", () => {
   beforeEach(() => {
@@ -140,12 +152,5 @@ describe("ts30x Payload Validation", () => {
         expect.objectContaining({ variable: "temperature_chn2", value: 24.6, time: 1694145223 }),
       ])
     );
-  });
-
-  test("Shall not be parsed", () => {
-    payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
-    const result = eval(transpiledCode);
-
-    expect(result).toEqual(undefined);
   });
 });

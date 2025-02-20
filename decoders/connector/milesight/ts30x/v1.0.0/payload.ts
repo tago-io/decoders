@@ -203,12 +203,12 @@ function toTagoFormat(object_item, serie, prefix = "") {
 // Main code: Process the payload and separate out history records.
 // ----------------------------------------------------------------
 
-const payload_raw = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data" || x.variable === "payload_hex");
+const ts30xpayload = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data" || x.variable === "payload_hex");
 
-if (payload_raw) {
+if (ts30xpayload) {
   try {
     // Convert the data from Hex to a Buffer.
-    const buffer = Buffer.from(payload_raw.value, "hex");
+    const buffer = Buffer.from(ts30xpayload.value, "hex");
     // Use current time for the main 'serie' of non-historical data.
     const serie = new Date().getTime();
     let payload_aux = Decoder(buffer);
