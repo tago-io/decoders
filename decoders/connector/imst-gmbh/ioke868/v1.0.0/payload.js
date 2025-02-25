@@ -25,6 +25,7 @@
  *                                          added error code 'no filtered data' for status field
  *                                          reserved byte added in Status Upload according to firmware version V1.3ff
  *                                          adjustments regarding linter errors / warnings
+ * 2025-02-11   1.17        MR              renamed Reserved_V1.3 to Reserved_V1_3, otherwise decoding error 'Connection refused, invalid payload:'
  */
 
 console.log("use of payload parser V1.16 for 'IMST iO881A for LoRaWAN®' on TagoIO");
@@ -1030,7 +1031,7 @@ var STATUS_OBIS_ID_FILTER_LIST_STATUS_NAME = STATUS_PRE_STRING + "OBIS_ID_Filter
 var STATUS_CORRECT_RECEIVED_METER_FILES_COUNTER_NAME = STATUS_PRE_STRING + "Correct_Received_Meter_Files_Counter";
 var STATUS_INCORRECT_RECEIVED_METER_FILES_COUNTER_NAME = STATUS_PRE_STRING + "Incorrect_Received_Meter_Files_Counter";
 var STATUS_UPLOADED_METER_DATA_MESSAGES_COUNTER_NAME = STATUS_PRE_STRING + "Uploaded_Meter_Data_Messages_Counter";
-var STATUS_RESERVED_1_3_NAME = STATUS_PRE_STRING + "Reserved_V1.3";
+var STATUS_RESERVED_1_3_NAME = STATUS_PRE_STRING + "Reserved_V1_3";
 
 /****
 go through the payload bytes and interpret individual bytes
