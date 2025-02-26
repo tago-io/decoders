@@ -32,7 +32,6 @@ function decodeUplink(input, port) {
     decoderArray.push(messages);
   }
   result.messages = decoderArray;
-  console.log(JSON.stringify(result.messages));
   return { data: result };
 }
 
@@ -372,7 +371,6 @@ function dataIdAndDataValueJudge(dataId, dataValue) {
       ];
       break;
     case "4B":
-      console.log("hi");
       const windDirectionn = dataValue.substring(0, 4);
       const rainfalll = dataValue.substring(4, 12);
       const airPressuree = dataValue.substring(12, 16);
@@ -542,17 +540,14 @@ function bytes2HexString(arrBytes) {
   return str;
 }
 
-function toTagoFormat(result) {
+function toTagoFormat(result, group) {
   if (!result.data.messages.length) {
     return "Payload is not valid";
   }
-  const group = String(new Date().getTime());
   const arrayToTago = [];
-  console.log(result.data);
 
   for (const messages of result.data.messages) {
     for (const x of messages) {
-      console.log(x);
       arrayToTago.push({
         variable: String(x.type).toLowerCase().replace(/\s/g, "_"),
         value: x.measurementValue,
@@ -570,8 +565,7 @@ if (payload_raw) {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(payload_raw.value, "hex");
     const result = decodeUplink(buffer);
-    console.log(result);
-    const payload_aux = toTagoFormat(result);
+    const payload_aux = toTagoFormat(result, payload_raw.group || String(new Date().getTime()));
     payload = payload.concat(payload_aux.map((x) => ({ ...x })));
   } catch (e) {
     // Print the error to the Live Inspector.
@@ -580,6 +574,3 @@ if (payload_raw) {
     payload = [{ variable: "parse_error", value: e.message }];
   }
 }
-
-// console.log(JSON.stringify(payload));
-// console.log(payload);

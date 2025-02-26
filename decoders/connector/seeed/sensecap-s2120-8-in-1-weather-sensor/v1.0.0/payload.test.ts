@@ -55,3 +55,75 @@ describe("Payload Validation", () => {
     );
   });
 });
+
+describe("Payload Validation", () => {
+  beforeEach(() => {
+    payload = [];
+  });
+
+  test("Uplink", () => {
+    payload = [
+      {
+        variable: "metadata",
+        metadata: {
+          adr_allowed: false,
+          cf_list_enabled: false,
+          multi_buy: 1,
+          organization_id: "09c57952-01a4-4c34-b1d8-8d37ebfb05bb",
+          preferred_hotspots: [],
+          rx_delay: 1,
+          rx_delay_actual: 1,
+          rx_delay_state: "rx_delay_established",
+        },
+        group: "1740592361707",
+      },
+      { variable: "dc_balance", value: 874313, group: "1740592361707" },
+      { variable: "dc_nonce", value: 3, group: "1740592361707" },
+      { variable: "hotspot_0_channel", value: 7, group: "1740592361707" },
+      { variable: "hotspot_0_frequency", value: 868.5, group: "1740592361707" },
+      { variable: "hotspot_0_id", value: "112bBU5niCQiadzc5xsHsvMPXxec9e7edLcEEDX6J3JJF1ktc5BC", group: "1740592361707" },
+      { variable: "hotspot_0_location", location: { lat: 51.0981283544156, lng: -4.153831860190878 }, group: "1740592361707" },
+      { variable: "hotspot_0_name", value: "huge-navy-orangutan", group: "1740592361707" },
+      { variable: "hotspot_0_reported_at", value: 1740592361222, group: "1740592361707" },
+      { variable: "hotspot_0_rssi", value: -61, group: "1740592361707" },
+      { variable: "hotspot_0_snr", value: 6.199999809265137, group: "1740592361707" },
+      { variable: "hotspot_0_spreading", value: "SF12BW125", group: "1740592361707" },
+      { variable: "hotspot_0_status", value: "success", group: "1740592361707" },
+      { variable: "hotspot_0_hold_time", value: 0, group: "1740592361707" },
+      { variable: "app_eui", value: "901F4CEC39A3BE76", group: "1740592361707" },
+      { variable: "devaddr", value: "48000048", group: "1740592361707" },
+      {
+        variable: "downlink_url",
+        value: "https://console.helium.com/api/v1/down/ffaaf953-7693-4b47-af32-9d2f171d9734/_iS8NzLlpxZ2G87ydulvLw3mdDWVJeRq/01d9ee1a-e8c9-4112-8653-d14f14b6f43f",
+        group: "1740592361707",
+      },
+      { variable: "fcnt", value: 4, group: "1740592361707" },
+      { variable: "name", value: "Weather station", group: "1740592361707" },
+      { variable: "payload", value: "4a004b510000011c0000184b01020000000027914c001c000005f4", group: "1740592361707" },
+      { variable: "port", value: 3, group: "1740592361707" },
+      { variable: "reported_at", value: 1740592361222, group: "1740592361707" },
+      { variable: "dev_eui", value: "2CF7F1C0443001F2", group: "1740592361707" },
+      { variable: "raw_packet", value: "gEgAAEiABAADuiaeSZE1aqJfUsWHZ3GfVDF3B/ye/FwjSSketOMikg==", group: "1740592361707" },
+      { variable: "replay", value: false, group: "1740592361707" },
+      { variable: "type", value: "uplink", group: "1740592361707" },
+    ];
+    const result = eval(transpiledCode);
+
+    expect(result).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ variable: "payload", value: "4a004b510000011c0000184b01020000000027914c001c000005f4", group: "1740592361707" }),
+        expect.objectContaining({ variable: "port", value: 3, group: "1740592361707" }),
+        expect.objectContaining({ variable: "air_temperature", value: 7.5, group: "1740592361707" }),
+        expect.objectContaining({ variable: "air_humidity", value: 81, group: "1740592361707" }),
+        expect.objectContaining({ variable: "light_intensity", value: 284, group: "1740592361707" }),
+        expect.objectContaining({ variable: "uv_index", value: 0, group: "1740592361707" }),
+        expect.objectContaining({ variable: "wind_speed", value: 2.4, group: "1740592361707" }),
+        expect.objectContaining({ variable: "wind_direction_sensor", value: 258, group: "1740592361707" }),
+        expect.objectContaining({ variable: "rain_gauge", value: 0, group: "1740592361707" }),
+        expect.objectContaining({ variable: "barometric_pressure", value: 101290, group: "1740592361707" }),
+        expect.objectContaining({ variable: "_peak_wind_gust", value: 2.8, group: "1740592361707" }),
+        expect.objectContaining({ variable: "rain_accumulation", value: 1.524, group: "1740592361707" }),
+      ])
+    );
+  });
+});
