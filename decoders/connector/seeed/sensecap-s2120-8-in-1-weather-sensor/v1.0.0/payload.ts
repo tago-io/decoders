@@ -1,3 +1,4 @@
+//@ts-nocheck
 /* eslint-disable no-throw-literal */
 /* eslint-disable vars-on-top */
 /* eslint-disable no-var */
@@ -9,6 +10,7 @@
 /**
  * Entry, decoder.js
  */
+
 function decodeUplink(input, port) {
   // init
   var bytes = bytes2HexString(input).toLocaleUpperCase();
@@ -67,12 +69,28 @@ function dataSplit(bytes) {
           dataValue,
         };
         break;
+      case "4A":
+        dataValue = remainingValue.substring(2, 22);
+        bytes = remainingValue.substring(22);
+        dataObj = {
+          dataId: dataId,
+          dataValue: dataValue,
+        };
+        break;
       case "02":
         dataValue = remainingValue.substring(2, 18);
         bytes = remainingValue.substring(18);
         dataObj = {
           dataId: "02",
           dataValue,
+        };
+        break;
+      case "4B":
+        dataValue = remainingValue.substring(2, 18);
+        bytes = remainingValue.substring(18);
+        dataObj = {
+          dataId: dataId,
+          dataValue: dataValue,
         };
         break;
       case "03":
@@ -106,6 +124,14 @@ function dataSplit(bytes) {
         dataObj = {
           dataId,
           dataValue,
+        };
+        break;
+      case "4C":
+        dataValue = bytes.substring(2, 14);
+        bytes = remainingValue.substring(14);
+        dataObj = {
+          dataId: dataId,
+          dataValue: dataValue,
         };
         break;
       default:
@@ -196,16 +222,10 @@ function dataIdAndDataValueJudge(dataId, dataValue) {
       messages = [
         {
           "Battery(%)": loraWANV2DataFormat(electricityWhether),
-          "Hardware Version": `${loraWANV2DataFormat(
-            hwv.substring(0, 2)
-          )}.${loraWANV2DataFormat(hwv.substring(2, 4))}`,
-          "Firmware Version": `${loraWANV2DataFormat(
-            bdv.substring(0, 2)
-          )}.${loraWANV2DataFormat(bdv.substring(2, 4))}`,
-          measureInterval:
-            parseInt(loraWANV2DataFormat(sensorAcquisitionInterval)) * 60,
-          gpsInterval:
-            parseInt(loraWANV2DataFormat(gpsAcquisitionInterval)) * 60,
+          "Hardware Version": `${loraWANV2DataFormat(hwv.substring(0, 2))}.${loraWANV2DataFormat(hwv.substring(2, 4))}`,
+          "Firmware Version": `${loraWANV2DataFormat(bdv.substring(0, 2))}.${loraWANV2DataFormat(bdv.substring(2, 4))}`,
+          measureInterval: parseInt(loraWANV2DataFormat(sensorAcquisitionInterval)) * 60,
+          gpsInterval: parseInt(loraWANV2DataFormat(gpsAcquisitionInterval)) * 60,
         },
       ];
       break;
@@ -214,10 +234,8 @@ function dataIdAndDataValueJudge(dataId, dataValue) {
       const gpsAcquisitionIntervalFive = dataValue.substring(4, 8);
       messages = [
         {
-          measureInterval:
-            parseInt(loraWANV2DataFormat(sensorAcquisitionIntervalFive)) * 60,
-          gpsInterval:
-            parseInt(loraWANV2DataFormat(gpsAcquisitionIntervalFive)) * 60,
+          measureInterval: parseInt(loraWANV2DataFormat(sensorAcquisitionIntervalFive)) * 60,
+          gpsInterval: parseInt(loraWANV2DataFormat(gpsAcquisitionIntervalFive)) * 60,
         },
       ];
       break;
@@ -316,6 +334,79 @@ function dataIdAndDataValueJudge(dataId, dataValue) {
           status,
           channelType: type,
           sensorEui: sensecapId,
+        },
+      ];
+      break;
+    case "4A":
+      const temperaturee = dataValue.substring(0, 4);
+      const humidityy = dataValue.substring(4, 6);
+      const illuminationn = dataValue.substring(6, 14);
+      const uvv = dataValue.substring(14, 16);
+      const windSpeedd = dataValue.substring(16, 20);
+      messages = [
+        {
+          measurementValue: loraWANV2DataFormat(temperaturee, 10),
+          measurementId: "4097",
+          type: "Air Temperature",
+        },
+        {
+          measurementValue: loraWANV2DataFormat(humidityy),
+          measurementId: "4098",
+          type: "Air Humidity",
+        },
+        {
+          measurementValue: loraWANV2DataFormat(illuminationn),
+          measurementId: "4099",
+          type: "Light Intensity",
+        },
+        {
+          measurementValue: loraWANV2DataFormat(uvv, 10),
+          measurementId: "4190",
+          type: "UV Index",
+        },
+        {
+          measurementValue: loraWANV2DataFormat(windSpeedd, 10),
+          measurementId: "4105",
+          type: "Wind Speed",
+        },
+      ];
+      break;
+    case "4B":
+      console.log("hi");
+      const windDirectionn = dataValue.substring(0, 4);
+      const rainfalll = dataValue.substring(4, 12);
+      const airPressuree = dataValue.substring(12, 16);
+      messages = [
+        {
+          measurementValue: loraWANV2DataFormat(windDirectionn),
+          measurementId: "4104",
+          type: "Wind Direction Sensor",
+        },
+        {
+          measurementValue: loraWANV2DataFormat(rainfalll, 1000),
+          measurementId: "4113",
+          type: "Rain Gauge",
+        },
+        {
+          measurementValue: loraWANV2DataFormat(airPressuree, 0.1),
+          measurementId: "4101",
+          type: "Barometric Pressure",
+        },
+      ];
+      break;
+    case "4C":
+      const peakWind = dataValue.substring(0, 4);
+      const rainAccumulation = dataValue.substring(4, 12);
+      messages = [
+        {
+          measurementValue: loraWANV2DataFormat(peakWind, 10),
+          measurementId: "4191",
+          type: " Peak Wind Gust",
+        },
+        {
+          measurementValue: loraWANV2DataFormat(rainAccumulation, 1000),
+          measurementId: "4213",
+          type: "Rain Accumulation",
         },
       ];
       break;
@@ -473,17 +564,14 @@ function toTagoFormat(result) {
   return arrayToTago;
 }
 
-const payload_raw = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const payload_raw = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 if (payload_raw) {
   try {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(payload_raw.value, "hex");
-    const payload_aux = toTagoFormat(decodeUplink(buffer));
+    const result = decodeUplink(buffer);
+    console.log(result);
+    const payload_aux = toTagoFormat(result);
     payload = payload.concat(payload_aux.map((x) => ({ ...x })));
   } catch (e) {
     // Print the error to the Live Inspector.
@@ -494,3 +582,4 @@ if (payload_raw) {
 }
 
 // console.log(JSON.stringify(payload));
+// console.log(payload);
