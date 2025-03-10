@@ -1,0 +1,1 @@
+This is a connector for the Digi X-ON SparkFun IoT Node, along with the parser.
