@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "SN50v3-CB is a Long Range NB-IoT/LTE-M Sensor Node designed for industrial applications. It supports ultra-long range communication with high interference immunity and low current consumption, suitable for applications such as smart metering and building automation. The device uses an STM32 microcontroller with an ARM Cortex-M0+ core and features Flash memory. It supports multiple uplink methods including MQTT, UDP, TCP, and CoAP, and allows BLE configuration and OTA updates. Powered by a Li-SOCI2 battery, it is designed for long-term use. Optional built-in SIM card and default IoT server connection are available.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/mqtt/v1.0.0/payload.js"
+  ]
+}
