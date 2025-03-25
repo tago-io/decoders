@@ -18,7 +18,7 @@ function parseJsonPayload(payload: object) {
 
     const entry = {
       variable: variableName,
-      value: value,
+      value: typeof value === "object" ? JSON.stringify(value) : value,
     };
 
     if (unitMap[variableName]) {
@@ -30,7 +30,6 @@ function parseJsonPayload(payload: object) {
 
   return result;
 }
-
 
 /**
  * Parses the HEX format payload (CFGMOD=1) and returns an array of data objects.
@@ -45,12 +44,12 @@ function parseHexPayload(hexString: string) {
 
   // Device ID (IMEI)
   const imeiHex = buffer.slice(0, 8).toString("hex");
-  const imei = imeiHex.startsWith('f') ? imeiHex.substring(1) : imeiHex; // Remove the leading 'f' if it exists and keep as hex string
+  const imei = imeiHex.startsWith("f") ? imeiHex.substring(1) : imeiHex; // Remove the leading 'f' if it exists and keep as hex string
   data.push({ variable: "device_id", value: imei });
 
   // SIM Card ID (IMSI)
   const imsiHex = buffer.slice(8, 16).toString("hex");
-  const imsi = imsiHex.startsWith('f') ? imsiHex.substring(1) : imsiHex; // Remove the leading 'f' if it exists and keep as hex string
+  const imsi = imsiHex.startsWith("f") ? imsiHex.substring(1) : imsiHex; // Remove the leading 'f' if it exists and keep as hex string
   data.push({ variable: "sim_card_id", value: imsi });
 
   // Version
@@ -120,18 +119,45 @@ function parseHexPayload(hexString: string) {
   return data;
 }
 
-// Handle Received Data
-const data = payload.find((x) => ["payload_raw", "payload", "data"].includes(x.variable));
-if (data) {
+let payloadData = null;
+let originalPayload = payload;
+
+payloadData = payload.find((x) => ["payload_raw", "payload", "data"].includes(x.variable))?.value;
+
+if (!payloadData && Array.isArray(payload)) {
+  const isMqtt = (obj) => obj && typeof obj === "object" && obj.IMEI && (obj.Model || obj.IMSI);
+
+  if (Array.isArray(payload[0]) && payload[0].length > 0) {
+    const potentialDevice = payload[0][0];
+    if (isMqtt(potentialDevice)) {
+      payloadData = potentialDevice;
+    }
+  } else if (isMqtt(payload[0])) {
+    payloadData = payload[0];
+  }
+}
+
+if (payloadData) {
   let parsedData = [];
 
-  if (data?.value.includes("IMEI")) {
-    const jsonPayload = JSON.parse(data.value);
-    parsedData = parseJsonPayload(jsonPayload);
-  } else {
-
-    parsedData = parseHexPayload(data.value);
+  try {
+    if (typeof payloadData === "string") {
+      if (payloadData.includes("IMEI")) {
+        // Try to parse JSON string with IMEI
+        const jsonPayload = JSON.parse(payloadData);
+        parsedData = parseJsonPayload(jsonPayload);
+      } else {
+        // Assume it's a hex payload
+        parsedData = parseHexPayload(payloadData);
+      }
+    } else if (typeof payloadData === "object" && payloadData.IMEI) {
+      // Already parsed object with IMEI
+      parsedData = parseJsonPayload(payloadData);
+    }
+  } catch (error) {
+    console.error(error);
+    payload = [{ variable: "parse_error", value: error.message }];
   }
 
-  payload = payload.concat(parsedData);
+  payload = parsedData;
 }
