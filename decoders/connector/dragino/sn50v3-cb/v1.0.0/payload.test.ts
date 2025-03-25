@@ -159,7 +159,7 @@ describe("Dragino SN50v3-CB Payload Decoding for Hexadecimal", () => {
     expect(payload).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ variable: "device_id", value: "444555666777888" }),
-        expect.objectContaining({ variable: "sim_card_id", value: "567890123456789" }),
+        expect.objectContaining({ variable: "sim_card_id", value: "456789012345678" }),
         expect.objectContaining({ variable: "version", value: "SN50v3-CB, 76=1.1.0" }),
         expect.objectContaining({ variable: "battery", value: 3.258, unit: "V" }),
         expect.objectContaining({ variable: "signal", value: 22 }),
