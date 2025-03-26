@@ -1,1 +1,1 @@
-This is a connector for the Digi X-ON SparkFun IoT Node, along with the parser.
+The SparkFun IoT Node for LoRaWAN® is a compact, feature-rich development board powered by the RP2040 microcontroller and the Digi XBee® LR module. It offers seamless long-range LoRaWAN® connectivity, making it ideal for prototyping and deploying IoT solutions in remote or industrial environments.

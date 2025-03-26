@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../schema/connector.json",
-  "name": "Digi X-ON SparkFun IoT Node",
+  "name": "SparkFun IoT Node",
   "images": {
     "logo": "./assets/logo.png"
   },
