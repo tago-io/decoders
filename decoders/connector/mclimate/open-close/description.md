@@ -1,0 +1,1 @@
+MClimate Open/Close Sensor LoRaWAN® is a device detecting the event of opening or closing windows, doors, cabinets and more. It features long battery life, LED, temperature sensor and a button that triggers an uplink. The device sends an uplink for every event of opening/closing and keeps an internal counter of the total number of events.

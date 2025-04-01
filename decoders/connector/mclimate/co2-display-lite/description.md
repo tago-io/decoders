@@ -1,0 +1,1 @@
+MClimate CO2 Display lite LoRaWAN is a stand-alone CO2 sensor powered entirely by solar energy using an organic solar panel. The device features a 1.54" e-ink screen, temperature and humidity sensor, LUX sensor and NDIR CO2 sensor.

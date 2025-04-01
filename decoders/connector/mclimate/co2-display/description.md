@@ -1,0 +1,1 @@
+MClimate CO2 Display is a stand-alone CO2 sensor powered entirely by solar energy using an organic solar panel. The device features a 2.9" e-ink screen, sensor for movement (PIR), temperature and humidity sensor, LUX sensor and NDIR CO2 sensor.

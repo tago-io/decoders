@@ -1,0 +1,1 @@
+MClimate CO2 Sensor and Notifier is a device that uses NDIR technology to measure the actual CO2 and has built in temperature and humidity sensors. The device also has acoustic and visual notification abilities to indicate occupants whether a room should be ventilated.

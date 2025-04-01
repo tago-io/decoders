@@ -1,0 +1,1 @@
+MClimate Multipurpose Button LoRaWAN is a simple device with many applications. Featuring a single button with 3 types of clicks and a temperature sensor, only your imagination limits what happens when the customer presses the button.

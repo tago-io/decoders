@@ -1,0 +1,1 @@
+The MClimate Vicki is a smart radiator thermostat valve that contains a temperature and humidity sensor allowing for temperature control and monitoring temperature and humidity from distance through a LoRaWAN® network. Manual target temperature selection is possible by rotating the outer ring of the device. The target temperature is displayed on the device.
