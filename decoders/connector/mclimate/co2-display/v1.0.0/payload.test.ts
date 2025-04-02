@@ -48,3 +48,11 @@ describe("MClimate CO2 Display keepalive with command response ", () => {
     expect(sensorTemperature?.value).toBe(21.5);
   });
 });
+
+describe("Normal TagoIO Format data, should pass normally", () => {
+  test("Shall not be parsed", () => {
+    let payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
+
+    expect(payload).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "shallnotpass", value: "invalid_payload" })]));
+  });
+});

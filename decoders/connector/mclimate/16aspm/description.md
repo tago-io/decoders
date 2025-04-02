@@ -1,1 +1,1 @@
-The МClimate 16A Switch & Power Meter LoRaWAN (16ASPM) is a miniature device that features a wet 16A relay and an electricity meter inside. The device has 4 terminals L, N, N, Lout, connecting and disconnecting Lout from Lin. The device operates in LoRaWAN Class C, features FUOTA (Firmware Upgrades Over The Air) and has overheating protection
+The МClimate 16A Switch & Power Meter LoRaWAN (16ASPM) is a miniature device that features a wet 16A relay and an electricity meter inside.

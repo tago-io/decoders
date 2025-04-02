@@ -1,1 +1,1 @@
-MClimate Wireless Thermostat is a stand-alone thermostat powered entirely by solar energy using an organic solar panel. The device features a 2.9" e-ink screen, sensor for movement (PIR), temperature and humidity sensor, LUX sensor and 3 buttons. The user can change the target temperature and see current indoor conditions.
+Wireless Thermostat is a stand-alone thermostat powered entirely by solar energy using an organic solar panel.

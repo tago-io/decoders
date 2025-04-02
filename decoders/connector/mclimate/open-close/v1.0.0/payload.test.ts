@@ -46,3 +46,11 @@ describe("MClimate Open/Close keepalive with command response ", () => {
     expect(temperature?.value).toBe(21.7);
   });
 });
+
+describe("Normal TagoIO Format data, should pass normally", () => {
+  test("Shall not be parsed", () => {
+    let payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
+
+    expect(payload).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "shallnotpass", value: "invalid_payload" })]));
+  });
+});

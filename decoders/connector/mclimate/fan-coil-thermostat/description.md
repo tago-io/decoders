@@ -1,1 +1,1 @@
-MClimate Fan Coil Thermostat (FCT) is a thermostat compatible with 2-pipe and 4-pipe Fan Coil Units with 4 SPST relays, 1 DPST dry relay and 0-10V input/output. It features a 4.2" e-ink display, digital temperature and humidity sensor, and 4 buttons.
+Fan Coil Thermostat LoRaWAN is a thermostat compatible with 2-pipe and 4-pipe Fan Coil Units with 4 SPST relays, 1 DPST dry relay and 0-10V input/output.

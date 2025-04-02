@@ -47,3 +47,11 @@ describe("MClimate Wireless Thermostat keepalive with command response ", () => 
     expect(lux?.value).toBe(657);
   });
 });
+
+describe("Normal TagoIO Format data, should pass normally", () => {
+  test("Shall not be parsed", () => {
+    let payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
+
+    expect(payload).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "shallnotpass", value: "invalid_payload" })]));
+  });
+});

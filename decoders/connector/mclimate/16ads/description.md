@@ -1,1 +1,1 @@
-The МClimate 16ADS is a miniature device that features a 16A dry relay. The device is small enough to fit behind most wall switches and outlets. The device operates in LoRaWAN Class C, features FUOTA (Firmware Upgrades Over The Air) and has overheating protection
+The МClimate 16ADS is a miniature device that features a 16A dry relay.

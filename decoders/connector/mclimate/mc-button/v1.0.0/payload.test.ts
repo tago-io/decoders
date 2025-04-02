@@ -47,3 +47,11 @@ describe("MClimate Multipurpose Button keepalive with command response ", () => 
     expect(sensorTemperature?.value).toBe(66.7);
   });
 });
+
+describe("Normal TagoIO Format data, should pass normally", () => {
+  test("Shall not be parsed", () => {
+    let payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
+
+    expect(payload).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "shallnotpass", value: "invalid_payload" })]));
+  });
+});

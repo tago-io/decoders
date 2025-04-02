@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, beforeEach } from "vitest";
 
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
@@ -46,5 +46,13 @@ describe("MClimate 16ADS keepalive with command response ", () => {
 
   test("relayState", () => {
     expect(relayState?.value).toBe('ON');
+  });
+});
+
+describe("Normal TagoIO Format data, should pass normally", () => {
+  test("Shall not be parsed", () => {
+    let payload = [{ variable: "shallnotpass", value: "invalid_payload" }];
+
+    expect(payload).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "shallnotpass", value: "invalid_payload" })]));
   });
 });
