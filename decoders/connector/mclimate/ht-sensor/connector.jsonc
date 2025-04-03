@@ -2,7 +2,7 @@
   "$schema": "../../../../schema/connector.json",
   "name": "MClimate Humidity and Temperature Sensor",
   "images": {
-    "logo": "./assets/ht-sensor.jpg"
+    "logo": "./assets/ht-sensor.png"
   },
   "versions": {
     "v1.0.0": {
