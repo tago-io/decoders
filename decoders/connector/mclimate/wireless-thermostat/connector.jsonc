@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../schema/connector.json",
+  "name": "MClimate Wireless Thermostat",
+  "images": {
+    "logo": "./assets/wireless-thermostat.png"
+  },
+  "versions": {
+    "v1.0.0": {
+      "src": "./v1.0.0/payload.js",
+      "manifest": "./v1.0.0/payload-config.jsonc"
+    }
+  }
+}

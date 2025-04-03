@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../../schema/connector.json",
+  "name": "МClimate 16A Switch & Power Meter (16ASPM)",
+  "images": {
+    "logo": "./assets/16aspm.png"
+  },
+  "versions": {
+    "v1.0.0": {
+      "src": "./v1.0.0/payload.js",
+      "manifest": "./v1.0.0/payload-config.jsonc"
+    }
+  }
+}
