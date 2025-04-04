@@ -25,3 +25,41 @@ describe("Shall not be parsed", () => {
   });
 });
 
+describe("Test payload var", () => {
+  payload = [
+    { variable: "shallnotpass", value: "04096113950292" },
+    { variable: "fport", value: 9 },
+    { variable: "payload", value: "3200000DE800786432FF11" }
+  ];
+  payload = decoderRun(file_path, { payload });
+  test("Is Array", () => {
+    expect(Array.isArray(payload)).toBe(true);
+  });
+
+  test("Payload Parsed", () => {
+    expect(payload).toEqual([
+      { variable: "shallnotpass", value: "04096113950292" },
+      { variable: "fport", value: 9 },
+      { variable: "payload", value: "3200000DE800786432FF11" },
+      { variable: "amp_hour_accumulation", value: 356 },
+      {
+        variable: "average_amps",
+        value: 12,
+        metadata: {
+          max_amps: 24,
+          min_amps: 6
+        }
+      },
+      {
+        variable: "capacitor_voltage",
+        value: 5
+      },
+      {
+        variable: "temperature",
+        value: -32,
+        unit: "C"
+      }
+    ]);
+  });
+});
+
