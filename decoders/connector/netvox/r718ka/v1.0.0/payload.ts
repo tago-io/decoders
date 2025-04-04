@@ -61,7 +61,7 @@ function decodePort7_r718ka(bytes) {
 }
 
 const payload_r718ka = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
-const port_r718ka = payload.find((x) => x.variable === "port" || x.variable === "fPort")?.value;
+const port_r718ka = payload.find((x) => x.variable === "port" || x.variable === "fPort" || x.variable === "fport")?.value;
 
 if (payload_r718ka) {
   try {
