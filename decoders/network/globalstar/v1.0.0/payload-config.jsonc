@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "EUI / IMEI / UUID",
+    "case": "upper"
+  },
+  "device_parameters": [],
+  "middleware_endpoint": "kpn.middleware.tago.io",
+  "documentation_url": "https://help.tago.io/portal/en/community/topic/how-to-integrate-with-kpn-things"
+}
