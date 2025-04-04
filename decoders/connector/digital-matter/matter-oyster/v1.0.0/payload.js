@@ -112,7 +112,7 @@ const port = payload.find(
 if (data) {
   const serie = data.serie || new Date().getTime();
   data = data.value;
-  const vars_to_tago = Decoder(data, port.value);
+  const vars_to_tago = Decoder(data, Number(port.value));
 
   let location;
   if (vars_to_tago.latitudeDeg && vars_to_tago.longitudeDeg) {
