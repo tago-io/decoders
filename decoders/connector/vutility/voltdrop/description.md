@@ -1,0 +1,1 @@
+The VoltDrop is a leading-edge IoT and cloud-enabled polyphase full-power meter with a safe and easy install that takes only minutes. VoltDrop lets you see your power use in three dimensions with revenue-grade accuracy. VoltDrop delivers real-time true RMS three-phase measurements for Voltage, Power Factor, and aggregated Apparent Energy (kVAh).
