@@ -122,4 +122,8 @@ function toTagoFormat(payloadArray, group, prefix = '') {
     return result;
 }
 const group = payload[0].group || String(new Date().getTime());
-payload = toTagoFormat(payload, group);
+const decoded = toTagoFormat(payload, group);
+
+// Keep all original variables, including "payload", and append decoded results
+payload = [...payload, ...decoded];
+

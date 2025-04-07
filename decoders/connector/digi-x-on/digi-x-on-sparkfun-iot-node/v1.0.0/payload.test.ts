@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, test } from "vitest";
 
 import { DataToSend } from "@tago-io/sdk/lib/types";
 
-// Load the JS decoder code
+// Load and transpile the JS decoder code
 const decoderFile = readFileSync(join(__dirname, "./payload.js"), "utf8");
 const transpiled = ts.transpile(decoderFile);
 
@@ -22,7 +22,7 @@ describe("SparkFun Decoder (toTagoFormat)", () => {
   test("Decodes AQI sensor (0x05) with value", () => {
     eval(transpiled);
 
-    const aqiVar = payload.find(item => item.variable === "AQI");
+    const aqiVar = payload.find((item) => item.variable === "AQI");
     expect(aqiVar).toBeDefined();
     expect(typeof aqiVar?.value).toBe("number");
   });
@@ -33,19 +33,29 @@ describe("SparkFun Decoder (toTagoFormat)", () => {
 
     eval(transpiled);
 
-    const unknown = payload.find(item => item.variable === "unknown_sensor");
+    const unknown = payload.find((item) => item.variable === "unknown_sensor");
     expect(unknown).toBeDefined();
     expect(unknown?.value).toBe("FF");
   });
+});
 
-  test("Handles empty or missing payload", () => {
-    payload = [{ variable: "foo", value: "1234" }];
+describe("Allow normal variables to pass", () => {
+  beforeEach(() => {
+    payload = [
+      { variable: "shallnotbedecoded", value: "04096113950292" },
+      { variable: "fport", value: 9 },
+    ];
     (globalThis as any).payload = payload;
+  });
 
+  test("Non-payload variables are passed through unchanged", () => {
     eval(transpiled);
 
-    const error = payload.find(item => item.variable === "parser_error");
-    expect(error).toBeDefined();
-    expect(error?.value).toMatch(/No Payload/i);
+    expect(payload).toEqual(
+      expect.arrayContaining([
+        { variable: "shallnotbedecoded", value: "04096113950292" },
+        { variable: "fport", value: 9 },
+      ])
+    );
   });
 });
