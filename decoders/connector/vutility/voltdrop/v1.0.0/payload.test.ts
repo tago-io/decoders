@@ -5,10 +5,9 @@ import { decoderRun } from "../../../../../src/functions/decoder-run";
 
 const file_path = "decoders/connector/vutility/voltdrop/v1.0.0/payload.js";
 
-let payload: DataToSend[] = [];
 
 describe("Shall not be parsed", () => {
-  payload = [
+  let payload: DataToSend[] = [
     { variable: "shallnotpass", value: "04096113950292" },
     { variable: "fport", value: 9 },
   ];
@@ -26,7 +25,7 @@ describe("Shall not be parsed", () => {
 });
 
 describe("Test payload var", () => {
-  payload = [
+  let payload: DataToSend[] = [
     { variable: "shallnotpass", value: "04096113950292" },
     { variable: "fport", value: 9 },
     { variable: "payload", value: "29FFFFFFFFFFFFFFFFFFFF" }
@@ -40,7 +39,7 @@ describe("Test payload var", () => {
     expect(payload).toEqual([
       { variable: "shallnotpass", value: "04096113950292" },
       { variable: "fport", value: 9 },
-      { variable: "payload", value: "3200000DE800786432FF11" },
+      { variable: "payload", value: "29FFFFFFFFFFFFFFFFFFFF" },
       {
         variable: "current", value: "4095.9375,4095.9375,4095.9375",
         metadata: {

@@ -1,1 +1,1 @@
-The HotDrop is an easy-to-scale, simple-to-install metering solution that provides up to minute-by-minute data to improve energy consumption data without the complexities and high price tag of traditional metering devices.
+Minute-by-minute energy consumption and current sensor

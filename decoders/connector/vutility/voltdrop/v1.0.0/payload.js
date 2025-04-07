@@ -4,7 +4,6 @@
  * @param {number[]} input.bytes - Array of bytes represented as numbers as it has been sent from the device
  * @param {number} input.fPort - The Port Field on which the uplink has been sent
  * @param {Date} input.recvTime - The uplink message time recorded by the LoRaWAN network server
- * @returns {DecodedUplink} The decoded object
  */ function voltDropDecoder(input) {
   const data = [];
   const packetList = {
@@ -251,62 +250,66 @@
   //return result;
   return data;
 }
+
 function getSignalData(originalPayload) {
+
   const snr = originalPayload.find((x) => x.variable === "snr")?.value;
-  const rssi = originalPayload.find((x) => x.variable === "rssi");
+  const rssi = originalPayload.find((x) => x.variable === "rssi")?.value;
   const spreadingFactor = originalPayload.find((x) => x.variable === "lora_spreading_factor")?.value;
+  let signalRating = "Unknown";
+  let qualityScore = undefined;
 
-  let qualityScore = 0;
-
-  if (spreadingFactor === 7) {
-    qualityScore = ((snr + 7.5) / 17.5) * 100;
-  } else if (spreadingFactor === 8) {
-    qualityScore = ((snr + 10) / 20) * 100;
-  } else if (spreadingFactor === 9) {
-    qualityScore = ((snr + 12.5) / 22.5) * 100;
-  } else if (spreadingFactor === 10) {
-    qualityScore = ((snr + 15) / 25) * 100;
-  } else {
-    qualityScore = 0;
-  }
-
-  qualityScore = Math.min(Math.max(qualityScore, 0), 100);
-
-  let signalRating = "";
-  if (qualityScore >= 80) {
-    signalRating = "Excellent";
-  } else if (qualityScore >= 60) {
-    signalRating = "Good";
-  } else if (qualityScore >= 40) {
-    signalRating = "Fair";
-  } else if (qualityScore >= 20) {
-    signalRating = "Poor";
-  } else {
-    signalRating = "Critical";
-  }
-
-  return [
-    {
-      variable: "signal_strength",
-      value: rssi?.value,
-      time: rssi?.time,
-      metadata: {
-        rssi: rssi?.value,
-        snr: snr,
-        spreading_factor: spreadingFactor,
-        quality_score: qualityScore,
-        signal_rating: signalRating
-      }
+  if (snr && rssi && spreadingFactor) {
+    if (spreadingFactor === 7) {
+      qualityScore = ((snr + 7.5) / 17.5) * 100;
+    } else if (spreadingFactor === 8) {
+      qualityScore = ((snr + 10) / 20) * 100;
+    } else if (spreadingFactor === 9) {
+      qualityScore = ((snr + 12.5) / 22.5) * 100;
+    } else if (spreadingFactor === 10) {
+      qualityScore = ((snr + 15) / 25) * 100;
+    } else {
+      qualityScore = 0;
     }
-  ];
+
+    qualityScore = Math.min(Math.max(qualityScore, 0), 100);
+
+    if (qualityScore >= 80) {
+      signalRating = "Excellent";
+    } else if (qualityScore >= 60) {
+      signalRating = "Good";
+    } else if (qualityScore >= 40) {
+      signalRating = "Fair";
+    } else if (qualityScore >= 20) {
+      signalRating = "Poor";
+    } else {
+      signalRating = "Critical";
+    }
+    return [
+      {
+        variable: "signal_strength",
+        value: rssi.value,
+        time: rssi.time,
+        metadata: {
+          rssi: rssi.value,
+          snr: snr,
+          spreading_factor: spreadingFactor,
+          quality_score: qualityScore,
+          signal_rating: signalRating
+        }
+      }
+    ];
+  }
+  return [];
 }
+
+
 const payload_raw = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 if (payload_raw) {
   try {
     const decodedPayload = voltDropDecoder(payload_raw.value);
     const signalData = getSignalData(payload);
-    const acceptableNetworkDataVariables = [];
-    payload = payload.filter((x) => acceptableNetworkDataVariables.includes(x.variable)).concat(decodedPayload, signalData);
+    payload = payload.concat(decodedPayload, signalData);
   } catch (error) {
     // Print the error to the Live Inspector.
     console.error(error);
