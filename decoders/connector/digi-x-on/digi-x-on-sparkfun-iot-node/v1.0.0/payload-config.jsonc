@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**SparkFun IoT Node for LoRaWAN®**\n\nAt the heart of the IoT Node is the RP2040 microcontroller from Raspberry Pi®, offering compatibility with popular development environments like Arduino, MicroPython, and the Raspberry Pi Pico SDK.\n\n**Key Features:**\n- 16 MB Flash\n- 8 MB PSRAM\n- Qwiic® connector for easy sensor integration\n- On-board LiPo battery charging with fuel gauge\n- microSD card slot\n- RGB LED and user button\n- Multiple GPIO pins for custom use\n\n**Connectivity:**\nThe Digi XBee® LR for LoRaWAN® module is pre-mounted and directly wired to a serial port on the RP2040, giving developers direct control using Digi’s provided libraries.\n\n**LoRaWAN® Capability:**\n- Long-range, NLOS communication using LoRa™ modulation\n- Seamless onboarding with Digi’s X-ON Cloud platform\n- Automatic connection and two-way device management\n\nThis board is perfect for rapid prototyping and production-ready applications needing secure and reliable LoRaWAN® connectivity.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/digi-x-on/v1.0.0/payload.ts"
+  ]
+}
