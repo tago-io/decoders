@@ -221,12 +221,8 @@ function transformData(data, parentKey = "") {
 
 if (!bIsRunNodeRed) {
   var node = function () {};
-  node.warn = function (arg) {
-    console.log(arg);
-  };
-  node.error = function (arg) {
-    console.error(arg);
-  };
+  node.warn = function (arg) {};
+  node.error = function (arg) {};
 }
 
 function addZero(i) {
@@ -1211,7 +1207,6 @@ if (WISE2410Payloadd) {
       arrayIndex++;
       message.SourceAddress = null;
     } else if ((hexArr[0] & MASK_HEADER_ADDRESS_MODE) === MASK_HEADER_ADDRESS_2_OCTECT) {
-      console.log("2 octects source address");
       arrayIndex++;
       for (i = arrayIndex; i < arrayIndex + 2; i++) {
         sourceAddress = sourceAddress + addZero(hexArr[i].toString(16));
@@ -1219,7 +1214,6 @@ if (WISE2410Payloadd) {
       message.SourceAddress = sourceAddress;
       arrayIndex += 2;
     } else if ((hexArr[0] & MASK_HEADER_ADDRESS_MODE) === MASK_HEADER_ADDRESS_8_OCTECT) {
-      console.log("8 octects source address");
       arrayIndex++;
       for (i = arrayIndex; i < arrayIndex + 8; i++) {
         sourceAddress = sourceAddress + addZero(hexArr[i].toString(16));
@@ -1236,20 +1230,17 @@ if (WISE2410Payloadd) {
     }
 
     if (calculateCRC != hexArr[hexArr.length - 1]) {
-      console.log("Frame CRC check failed.");
       msg.payload = "Frame CRC check failed.";
     }
 
     //check if frame legnth is correct
     if (message.SourceAddress != null && !checkFrameLength()) {
-      console.log("Frame length error");
       msg.payload = "Frame length error";
     }
 
     // Parse Payload
     parsePayLoad(arrayIndex);
   } catch (error) {
-    console.log("Error: Parser failed. " + error);
     msg.payload = "Error: Parser failed. " + error;
     var output = [msg, null];
     if (typeof lostPacketInfo.LOG_INDEX != "undefined") {

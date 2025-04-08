@@ -36,8 +36,6 @@ describe("Dragino SN50v3-CB Payload Decoder for MQTT", () => {
   ];
   payload = decoderRun(file_path, { payload });
 
-  console.log(payload);
-
   test("Output Result", () => {
     expect(payload).toEqual(
       expect.arrayContaining([
