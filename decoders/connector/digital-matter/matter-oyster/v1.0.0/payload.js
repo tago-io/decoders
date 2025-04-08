@@ -80,13 +80,13 @@ function Decoder(bytes, port) {
   return decoded;
 }
 
-function toTagoFormat(object_item, serie, prefix = "") {
+function toTagoFormat(object_item, group, prefix = "") {
   const result = [];
   for (const key in object_item) {
     result.push({
       variable: `${prefix}${key}`,
       value: object_item[key],
-      serie,
+      group,
     });
   }
 
@@ -110,7 +110,7 @@ const port = payload.find(
 );
 
 if (data) {
-  const serie = data.serie || new Date().getTime();
+  const group = data.group || new Date().getTime();
   data = data.value;
   const vars_to_tago = Decoder(data, Number(port.value));
 
@@ -123,13 +123,13 @@ if (data) {
         lat: vars_to_tago.latitudeDeg,
         lng: vars_to_tago.longitudeDeg,
       },
-      serie,
+      group,
     };
     delete vars_to_tago.latitudeDeg;
     delete vars_to_tago.longitudeDeg;
   }
 
-  payload = payload.concat(toTagoFormat(vars_to_tago, serie));
+  payload = payload.concat(toTagoFormat(vars_to_tago, group));
   if (location) payload.push(location);
   payload = payload.filter((x) => !ignore_vars.includes(x.variable));
 }
