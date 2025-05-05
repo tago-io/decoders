@@ -21,8 +21,6 @@ describe("The data below should not be parsed", () => {
 
   payload = decoderRun(file_path, { payload });
 
-  console.log(payload);
-
   test("Output Result", () => {
     expect(Array.isArray(payload)).toBe(true);
   });
