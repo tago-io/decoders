@@ -83,7 +83,7 @@ describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, 
 
     test("Check if data is correct", () => {
         expect(adcTemperature.value).toBe(26.375);
-        expect(adcTemperature.units).toBe("C")
+        expect(adcTemperature.unit).toBe("C")
         expect(fport.value).toBe(31);
         expect(voboType.value).toBe('VoBoTC');
         expect(payloadType.value).toBe('One Analog Input');
@@ -110,9 +110,9 @@ describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, 
 
     test("Check if data is correct", () => {
         expect(coldJointTemperature.value).toBe(25.515625);
-        expect(coldJointTemperature.units).toBe('C');
+        expect(coldJointTemperature.unit).toBe('C');
         expect(batteryVoltage.value).toBe(3.4612669944763184)
-        expect(batteryVoltage.units).toBe('V')
+        expect(batteryVoltage.unit).toBe('V')
         expect(fport.value).toBe(41);
         expect(voboType.value).toBe('VoBoTC');
         expect(payloadType.value).toBe('Two Analog Inputs');
@@ -243,21 +243,21 @@ describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, 
 
     test("Check if data is correct", () => {
         expect(coldJointTemperature.value).toBe(22.203125);
-        expect(coldJointTemperature.units).toBe('C');
+        expect(coldJointTemperature.unit).toBe('C');
         expect(batteryVoltage.value).toBe(3.3329999446868896);
-        expect(batteryVoltage.units).toBe('V');
+        expect(batteryVoltage.unit).toBe('V');
         expect(tc1.value).toBe(1371.5);
-        expect(tc1.units).toBe('C');
+        expect(tc1.unit).toBe('C');
         expect(tc2.value).toBe(1371.5);
-        expect(tc2.units).toBe('C');
+        expect(tc2.unit).toBe('C');
         expect(tc3.value).toBe(1371.5);
-        expect(tc3.units).toBe('C');
+        expect(tc3.unit).toBe('C');
         expect(tc4.value).toBe(1371.5);
-        expect(tc4.units).toBe('C');
+        expect(tc4.unit).toBe('C');
         expect(tc5.value).toBe(1371.5);
-        expect(tc5.units).toBe('C');
+        expect(tc5.unit).toBe('C');
         expect(tc6.value).toBe(1371.5);
-        expect(tc6.units).toBe('C');
+        expect(tc6.unit).toBe('C');
         expect(fport.value).toBe(111);
         expect(voboType.value).toBe('VoBoTC');
         expect(payloadType.value).toBe('Analog Input Variable Length');
@@ -288,17 +288,17 @@ describe(`fPort: ${testPayloads.data[7].fport} - ${testPayloads.data[7].name}`, 
 
     test("Check if data is correct", () => {
         expect(tc7.value).toBe(1371.5);
-        expect(tc7.units).toBe('C');
+        expect(tc7.unit).toBe('C');
         expect(tc8.value).toBe(1371.5);
-        expect(tc8.units).toBe('C');
+        expect(tc8.unit).toBe('C');
         expect(tc9.value).toBe(1371.5);
-        expect(tc9.units).toBe('C');
+        expect(tc9.unit).toBe('C');
         expect(tc10.value).toBe(1371.5);
-        expect(tc10.units).toBe('C');
+        expect(tc10.unit).toBe('C');
         expect(tc11.value).toBe(1371.5);
-        expect(tc11.units).toBe('C');
+        expect(tc11.unit).toBe('C');
         expect(tc12.value).toBe(1371.5);
-        expect(tc12.units).toBe('C');
+        expect(tc12.unit).toBe('C');
         expect(fport.value).toBe(111);
         expect(voboType.value).toBe('VoBoTC');
         expect(payloadType.value).toBe('Analog Input Variable Length');

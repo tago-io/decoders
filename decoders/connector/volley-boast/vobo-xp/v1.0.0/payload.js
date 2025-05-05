@@ -12,7 +12,7 @@ function customDecoder(bytes, fport) {
             {
                 variable: decoded.data.analogSensorString0,
                 value: decoded.data.sensorData0,
-                units: decoded.data.engUnitsString0
+                unit: decoded.data.engUnitsString0
             }
         ];
         tagoDecoded.push(
@@ -26,12 +26,12 @@ function customDecoder(bytes, fport) {
             {
                 variable: decoded.data.analogSensorString0,
                 value: decoded.data.sensorData0,
-                units: decoded.data.engUnitsString0
+                unit: decoded.data.engUnitsString0
             },
             {
                 variable: decoded.data.analogSensorString1,
                 value: decoded.data.sensorData1,
-                units: decoded.data.engUnitsString1
+                unit: decoded.data.engUnitsString1
             }
         ];
         tagoDecoded.push(
@@ -55,7 +55,7 @@ function customDecoder(bytes, fport) {
         var tagoDecoded = decoded.data.ainPayloads.map((payloadObj, index) => ({
             variable: decoded.data[`analogSensorString${index}`],
             value: payloadObj.sensorData0,
-            units: decoded.data[`engUnitsString${index}`]
+            unit: decoded.data[`engUnitsString${index}`]
         }));
         tagoDecoded.push(
             { variable: "fport", value: decoded.data.fport },

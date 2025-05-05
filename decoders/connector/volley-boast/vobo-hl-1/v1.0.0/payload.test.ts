@@ -400,7 +400,7 @@ describe(`fPort: ${testPayloads.data[10].fport} - ${testPayloads.data[10].name}`
 
     test("Check if data is correct", () => {
         expect(adcTemperature.value).toBe(26.375);
-        expect(adcTemperature.units).toBe("C")
+        expect(adcTemperature.unit).toBe("C")
         expect(fport.value).toBe(30);
         expect(voboType.value).toBe('VoBoXX');
         expect(payloadType.value).toBe('One Analog Input');
@@ -428,9 +428,9 @@ describe(`fPort: ${testPayloads.data[11].fport} - ${testPayloads.data[11].name}`
 
     test("Check if data is correct", () => {
         expect(ain1.value).toBe(9.999750137329102);
-        expect(ain1.units).toBe('mA');
+        expect(ain1.unit).toBe('mA');
         expect(ain2.value).toBe(2.5325000286102295);
-        expect(ain2.units).toBe('V');
+        expect(ain2.unit).toBe('V');
         expect(fport.value).toBe(40);
         expect(voboType.value).toBe('VoBoXX');
         expect(payloadType.value).toBe('Two Analog Inputs');
@@ -605,11 +605,11 @@ describe(`fPort: ${testPayloads.data[16].fport} - ${testPayloads.data[16].name}`
 
     test("Check if data is correct", () => {
         expect(ain1.value).toBe(1);
-        expect(ain1.units).toBe('ADC code');
+        expect(ain1.unit).toBe('ADC code');
         expect(ain2.value).toBe(2);
-        expect(ain2.units).toBe('ADC code');
+        expect(ain2.unit).toBe('ADC code');
         expect(ain3.value).toBe(1);
-        expect(ain3.units).toBe('ADC code');
+        expect(ain3.unit).toBe('ADC code');
         expect(fport.value).toBe(110);
         expect(voboType.value).toBe('VoBoXX');
         expect(payloadType.value).toBe('Analog Input Variable Length');
