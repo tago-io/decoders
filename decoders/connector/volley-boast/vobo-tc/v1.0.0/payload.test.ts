@@ -25,24 +25,42 @@ describe(`fPort: ${testPayloads.data[0].fport} - ${testPayloads.data[0].name}`, 
 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    const batteryLevel = payload.find((item) => item.variable === 'batteryLevel');
+    const fatalErrorsTotal = payload.find((item) => item.variable === 'fatalErrorsTotal');
+    const rssiAvg = payload.find((item) => item.variable === 'rssiAvg');
+    const failedJoinAttemptsTotal = payload.find((item) => item.variable === 'failedJoinAttemptsTotal');
+    const configUpdateOccurred = payload.find((item) => item.variable === 'configUpdateOccurred');
+    const firmwareRevision = payload.find((item) => item.variable === 'firmwareRevision');
+    const rebootsTotal = payload.find((item) => item.variable === 'rebootsTotal');
+    const failedTransmitsTotal = payload.find((item) => item.variable === 'failedTransmitsTotal');
+    const errorEventLogsTotal = payload.find((item) => item.variable === 'errorEventLogsTotal');
+    const warningEventLogsTotal = payload.find((item) => item.variable === 'warningEventLogsTotal');
+    const infoEventLogsTotal = payload.find((item) => item.variable === 'infoEventLogsTotal');
+    const measurementPacketsTotal = payload.find((item) => item.variable === 'measurementPacketsTotal');
+    const fport = payload.find((item) => item.variable === 'fport');
+    const voboType = payload.find((item) => item.variable === 'voboType');
+    const payloadType = payload.find((item) => item.variable === 'payloadType');
+
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual([
-            { variable: 'batteryLevel', value: 3532 },
-            { variable: 'fatalErrorsTotal', value: 0 },
-            { variable: 'rssiAvg', value: 57 },
-            { variable: 'failedJoinAttemptsTotal', value: 0 },
-            { variable: 'configUpdateOccurred', value: 0 },
-            { variable: 'firmwareRevision', value: 0 },
-            { variable: 'rebootsTotal', value: 3 },
-            { variable: 'failedTransmitsTotal', value: 0 },
-            { variable: 'errorEventLogsTotal', value: 0 },
-            { variable: 'warningEventLogsTotal', value: 0 },
-            { variable: 'infoEventLogsTotal', value: 0 },
-            { variable: 'measurementPacketsTotal', value: 4 },
-            { variable: 'fport', value: 21 },
-            { variable: 'voboType', value: 'VoBoTC' },
-            { variable: 'payloadType', value: 'Heartbeat 2.0' }
-        ]);
+        expect(batteryLevel.value).toBe(3532);
+        expect(fatalErrorsTotal.value).toBe(0);
+        expect(rssiAvg.value).toBe(57);
+        expect(failedJoinAttemptsTotal.value).toBe(0);
+        expect(configUpdateOccurred.value).toBe(0);
+        expect(firmwareRevision.value).toBe(0);
+        expect(rebootsTotal.value).toBe(3);
+        expect(failedTransmitsTotal.value).toBe(0);
+        expect(errorEventLogsTotal.value).toBe(0);
+        expect(warningEventLogsTotal.value).toBe(0);
+        expect(infoEventLogsTotal.value).toBe(0);
+        expect(measurementPacketsTotal.value).toBe(4);
+        expect(fport.value).toBe(21);
+        expect(voboType.value).toBe('VoBoTC');
+        expect(payloadType.value).toBe('Heartbeat 2.0');
     });
 });
 
@@ -54,8 +72,21 @@ describe(`fPort: ${testPayloads.data[1].fport} - ${testPayloads.data[1].name}`, 
 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    const adcTemperature = payload.find((item) => item.variable === 'AnalogSensor15');
+    const fport = payload.find((item) => item.variable === 'fport');
+    const voboType = payload.find((item) => item.variable === 'voboType');
+    const payloadType = payload.find((item) => item.variable === 'payloadType');
+
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual({ variable: 'AnalogSensor15', value: 26.375, units: 'C' });
+        expect(adcTemperature.value).toBe(26.375);
+        expect(adcTemperature.unit).toBe("C")
+        expect(fport.value).toBe(31);
+        expect(voboType.value).toBe('VoBoTC');
+        expect(payloadType.value).toBe('One Analog Input');
     });
 });
 
@@ -67,15 +98,24 @@ describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, 
 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    const coldJointTemperature = payload.find((item) => item.variable === 'Cold Joint Temperature');
+    const batteryVoltage = payload.find((item) => item.variable === 'Battery Voltage');
+    const fport = payload.find((item) => item.variable === 'fport');
+    const voboType = payload.find((item) => item.variable === 'voboType');
+    const payloadType = payload.find((item) => item.variable === 'payloadType');
+
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual([
-            { variable: 'Cold Joint Temperature', value: 25.515625, units: 'C' },
-            {
-                variable: 'Battery Voltage',
-                value: 3.4612669944763184,
-                units: 'V'
-            }
-        ]);
+        expect(coldJointTemperature.value).toBe(25.515625);
+        expect(coldJointTemperature.unit).toBe('C');
+        expect(batteryVoltage.value).toBe(3.4612669944763184)
+        expect(batteryVoltage.unit).toBe('V')
+        expect(fport.value).toBe(41);
+        expect(voboType.value).toBe('VoBoTC');
+        expect(payloadType.value).toBe('Two Analog Inputs');
     });
 });
 
@@ -87,13 +127,20 @@ describe(`fPort: ${testPayloads.data[3].fport} - ${testPayloads.data[3].name}`, 
 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    const wkup = payload.find((item) => item.variable === 'WKUP');
+    const fport = payload.find((item) => item.variable === 'fport');
+    const voboType = payload.find((item) => item.variable === 'voboType');
+    const payloadType = payload.find((item) => item.variable === 'payloadType');
+
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual([
-            { variable: 'WKUP', value: 0 },
-            { variable: 'fport', value: 51 },
-            { variable: 'voboType', value: 'VoBoTC' },
-            { variable: 'payloadType', value: 'Digital Inputs' }
-        ]);
+        expect(wkup.value).toBe(0);
+        expect(fport.value).toBe(51);
+        expect(voboType.value).toBe('VoBoTC');
+        expect(payloadType.value).toBe('Digital Inputs');
     });
 });
 
@@ -105,15 +152,24 @@ describe(`fPort: ${testPayloads.data[4].fport} - ${testPayloads.data[4].name}`, 
 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    const eventTimestamp = payload.find((item) => item.variable === 'eventTimestamp');
+    const eventCode = payload.find((item) => item.variable === 'eventCode');
+    const metadata = payload.find((item) => item.variable === 'metadata');
+    const fport = payload.find((item) => item.variable === 'fport');
+    const voboType = payload.find((item) => item.variable === 'voboType');
+    const payloadType = payload.find((item) => item.variable === 'payloadType');
+
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual([
-            { variable: 'eventTimestamp', value: 1689471305 },
-            { variable: 'eventCode', value: 32774 },
-            { variable: 'metadata', value: [0, 0, 0, 0, 0] },
-            { variable: 'fport', value: 61 },
-            { variable: 'voboType', value: 'VoBoTC' },
-            { variable: 'payloadType', value: 'Event Log' }
-        ]);
+        expect(eventTimestamp.value).toBe(1689471305);
+        expect(eventCode.value).toBe(32774);
+        expect(metadata.value).toStrictEqual([0, 0, 0, 0, 0]);
+        expect(fport.value).toBe(61);
+        expect(voboType.value).toBe('VoBoTC');
+        expect(payloadType.value).toBe('Event Log');
     });
 });
 
@@ -125,22 +181,38 @@ describe(`fPort: ${testPayloads.data[5].fport} - ${testPayloads.data[5].name}`, 
 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    const subgroupID = payload.find((item) => item.variable === 'subgroupID');
+    const sequenceNumber = payload.find((item) => item.variable === 'sequenceNumber');
+    const gain11 = payload.find((item) => item.variable === 'gain11');
+    const reserved1 = payload.find((item) => item.variable === 'reserved1');
+    const offset11 = payload.find((item) => item.variable === 'offset11');
+    const reserved2 = payload.find((item) => item.variable === 'reserved2');
+    const gain12 = payload.find((item) => item.variable === 'gain12');
+    const reserved3 = payload.find((item) => item.variable === 'reserved3');
+    const offset12 = payload.find((item) => item.variable === 'offset12');
+    const reserved4 = payload.find((item) => item.variable === 'reserved4');
+    const fport = payload.find((item) => item.variable === 'fport');
+    const voboType = payload.find((item) => item.variable === 'voboType');
+    const payloadType = payload.find((item) => item.variable === 'payloadType');
+
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual([
-            { variable: 'subgroupID', value: 5 },
-            { variable: 'sequenceNumber', value: 5 },
-            { variable: 'gain11', value: 1 },
-            { variable: 'reserved1', value: 0 },
-            { variable: 'offset11', value: 0 },
-            { variable: 'reserved2', value: 0 },
-            { variable: 'gain12', value: 1 },
-            { variable: 'reserved3', value: 0 },
-            { variable: 'offset12', value: 0 },
-            { variable: 'reserved4', value: 0 },
-            { variable: 'fport', value: 71 },
-            { variable: 'voboType', value: 'VoBoTC' },
-            { variable: 'payloadType', value: 'Configuration' }
-        ]);
+        expect(subgroupID.value).toBe(5);
+        expect(sequenceNumber.value).toBe(5);
+        expect(gain11.value).toBe(1);
+        expect(reserved1.value).toBe(0);
+        expect(offset11.value).toBe(0);
+        expect(reserved2.value).toBe(0);
+        expect(gain12.value).toBe(1);
+        expect(reserved3.value).toBe(0);
+        expect(offset12.value).toBe(0);
+        expect(reserved4.value).toBe(0);
+        expect(fport.value).toBe(71);
+        expect(voboType.value).toBe('VoBoTC');
+        expect(payloadType.value).toBe('Configuration');
     });
 });
 
@@ -153,21 +225,42 @@ describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, 
 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    const coldJointTemperature = payload.find((item) => item.variable === 'Cold Joint Temperature');
+    const batteryVoltage = payload.find((item) => item.variable === 'Battery Voltage');
+    const tc1 = payload.find((item) => item.variable === 'TC1');
+    const tc2 = payload.find((item) => item.variable === 'TC2');
+    const tc3 = payload.find((item) => item.variable === 'TC3');
+    const tc4 = payload.find((item) => item.variable === 'TC4');
+    const tc5 = payload.find((item) => item.variable === 'TC5');
+    const tc6 = payload.find((item) => item.variable === 'TC6');
+    const fport = payload.find((item) => item.variable === 'fport');
+    const voboType = payload.find((item) => item.variable === 'voboType');
+    const payloadType = payload.find((item) => item.variable === 'payloadType');
+
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual([
-            { variable: 'Cold Joint Temperature', value: 22.203125, units: 'C' },
-            {
-                variable: 'Battery Voltage',
-                value: 3.3329999446868896,
-                units: 'V'
-            },
-            { variable: 'TC1', value: 1371.5, units: 'C' },
-            { variable: 'TC2', value: 1371.5, units: 'C' },
-            { variable: 'TC3', value: 1371.5, units: 'C' },
-            { variable: 'TC4', value: 1371.5, units: 'C' },
-            { variable: 'TC5', value: 1371.5, units: 'C' },
-            { variable: 'TC6', value: 1371.5, units: 'C' }
-        ]);
+        expect(coldJointTemperature.value).toBe(22.203125);
+        expect(coldJointTemperature.unit).toBe('C');
+        expect(batteryVoltage.value).toBe(3.3329999446868896);
+        expect(batteryVoltage.unit).toBe('V');
+        expect(tc1.value).toBe(1371.5);
+        expect(tc1.unit).toBe('C');
+        expect(tc2.value).toBe(1371.5);
+        expect(tc2.unit).toBe('C');
+        expect(tc3.value).toBe(1371.5);
+        expect(tc3.unit).toBe('C');
+        expect(tc4.value).toBe(1371.5);
+        expect(tc4.unit).toBe('C');
+        expect(tc5.value).toBe(1371.5);
+        expect(tc5.unit).toBe('C');
+        expect(tc6.value).toBe(1371.5);
+        expect(tc6.unit).toBe('C');
+        expect(fport.value).toBe(111);
+        expect(voboType.value).toBe('VoBoTC');
+        expect(payloadType.value).toBe('Analog Input Variable Length');
     });
 });
 
@@ -179,15 +272,36 @@ describe(`fPort: ${testPayloads.data[7].fport} - ${testPayloads.data[7].name}`, 
 
     const payload = decoderRun(file_path, { payload: raw_payload });
 
+    test("Output Result", () => {
+        expect(Array.isArray(payload)).toBe(true);
+    });
+
+    const tc7 = payload.find((item) => item.variable === 'TC7');
+    const tc8 = payload.find((item) => item.variable === 'TC8');
+    const tc9 = payload.find((item) => item.variable === 'TC9');
+    const tc10 = payload.find((item) => item.variable === 'TC10');
+    const tc11 = payload.find((item) => item.variable === 'TC11');
+    const tc12 = payload.find((item) => item.variable === 'TC12');
+    const fport = payload.find((item) => item.variable === 'fport');
+    const voboType = payload.find((item) => item.variable === 'voboType');
+    const payloadType = payload.find((item) => item.variable === 'payloadType');
+
     test("Check if data is correct", () => {
-        expect(payload).toStrictEqual([
-            { variable: 'TC7', value: 1371.5, units: 'C' },
-            { variable: 'TC8', value: 1371.5, units: 'C' },
-            { variable: 'TC9', value: 1371.5, units: 'C' },
-            { variable: 'TC10', value: 1371.5, units: 'C' },
-            { variable: 'TC11', value: 1371.5, units: 'C' },
-            { variable: 'TC12', value: 1371.5, units: 'C' }
-        ]);
+        expect(tc7.value).toBe(1371.5);
+        expect(tc7.unit).toBe('C');
+        expect(tc8.value).toBe(1371.5);
+        expect(tc8.unit).toBe('C');
+        expect(tc9.value).toBe(1371.5);
+        expect(tc9.unit).toBe('C');
+        expect(tc10.value).toBe(1371.5);
+        expect(tc10.unit).toBe('C');
+        expect(tc11.value).toBe(1371.5);
+        expect(tc11.unit).toBe('C');
+        expect(tc12.value).toBe(1371.5);
+        expect(tc12.unit).toBe('C');
+        expect(fport.value).toBe(111);
+        expect(voboType.value).toBe('VoBoTC');
+        expect(payloadType.value).toBe('Analog Input Variable Length');
     });
 });
 

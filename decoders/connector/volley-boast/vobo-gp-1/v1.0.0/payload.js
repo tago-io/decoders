@@ -8,32 +8,43 @@ function customDecoder(bytes, fport) {
     //=======================================================
     // Insert your customization here
     if (fport == 30) {
-        var tagoDecoded = {
+        var tagoDecoded = [
+            {
             variable: decoded.data.analogSensorString0,
             value: decoded.data.sensorData0,
-            units: decoded.data.engUnitsString0
-        }
+            unit: decoded.data.engUnitsString0
+            }
+        ];
+        tagoDecoded.push(
+            { variable: "fport", value: decoded.data.fport },
+            { variable: "voboType", value: decoded.data.voboType },
+            { variable: "payloadType", value: decoded.data.payloadType }
+        );
     }
     else if (fport == 40) {
         var tagoDecoded = [
             {
                 variable: decoded.data.analogSensorString0,
                 value: decoded.data.sensorData0,
-                units: decoded.data.engUnitsString0
+                unit: decoded.data.engUnitsString0
             },
             {
                 variable: decoded.data.analogSensorString1,
                 value: decoded.data.sensorData1,
-                units: decoded.data.engUnitsString1
+                unit: decoded.data.engUnitsString1
             }
-        ]
+        ];
+        tagoDecoded.push(
+            { variable: "fport", value: decoded.data.fport },
+            { variable: "voboType", value: decoded.data.voboType },
+            { variable: "payloadType", value: decoded.data.payloadType }
+        );
     }
     else if (fport == 50) {
         var tagoDecoded = decoded.data.digitalSensorStrings.map((sensor, index) => ({
             variable: sensor,
             value: decoded.data.digitalSensorData[index]
         }));
-
         tagoDecoded.push(
             { variable: "fport", value: decoded.data.fport },
             { variable: "voboType", value: decoded.data.voboType },
@@ -44,14 +55,24 @@ function customDecoder(bytes, fport) {
         var tagoDecoded = decoded.data.ainPayloads.map((payloadObj, index) => ({
             variable: decoded.data[`analogSensorString${index}`],
             value: payloadObj.sensorData0,
-            units: decoded.data[`engUnitsString${index}`]
+            unit: decoded.data[`engUnitsString${index}`]
         }));
+        tagoDecoded.push(
+            { variable: "fport", value: decoded.data.fport },
+            { variable: "voboType", value: decoded.data.voboType },
+            { variable: "payloadType", value: decoded.data.payloadType }
+        );
     }
     else if (fport == 120) {
         var tagoDecoded = Object.entries(decoded.data.modbusSlots).map(([key, value]) => ({
             variable: key,
             value: value
         }));
+        tagoDecoded.push(
+            { variable: "fport", value: decoded.data.fport },
+            { variable: "voboType", value: decoded.data.voboType },
+            { variable: "payloadType", value: decoded.data.payloadType }
+        );
     }
     else {
         var tagoDecoded = Object.entries(decoded.data).map(([key, value]) => ({
@@ -63,13 +84,13 @@ function customDecoder(bytes, fport) {
     return tagoDecoded;
 }
 
-const DECODER_MAJOR_VERSION=2,DECODER_MINOR_VERSION=1,DECODER_PATCH_VERSION=1;function decodeUplink(a){return Decoder(a.bytes,a.fPort)}
-function Decoder(a,b){var c={},d=[];1==b?c=parseStandardPayload(a):2<=b&&9>=b?c=parseModbusStandardPayload(a,b):10==b?c=parseHeartbeat1p0Payload(a):20<=b&&29>=b?c=parseHeartbeat2p0Payload(a):30<=b&&39>=b?c=parseOneAnalogSensorPayload(a):40<=b&&49>=b?c=parseTwoAnalogSensorsPayload(a):50<=b&&59>=b?c=parseDigitalSensorsPayload(a):60<=b&&69>=b?c=parseEventLogPayload(a):70<=b&&79>=b?c=parseConfigurationPayload(a,b):100<=b&&109>=b?c=parseModbusGenericPayload(a,b):110<=b&&119>=b?c=parseAnalogInputVariableLengthPayload(a,
-b):120<=b&&129>=b?c=parseModbusStandardVariableLengthPayload(a,b):d.push("unknown FPort");a=addVoboMetadata(c,b);a.warnings=[];a.errors=d;return a}
+const DECODER_MAJOR_VERSION=2,DECODER_MINOR_VERSION=2,DECODER_PATCH_VERSION=0;function decodeUplink(a){return Decoder(a.bytes,a.fPort)}
+function Decoder(a,b){var c={},d=[];1==b?c=parseStandardPayload(a):2<=b&&9>=b?c=parseModbusStandardPayload(a,b):10==b?c=parseHeartbeat1p0Payload(a):20<=b&&29>=b?c=parseHeartbeat2p0Payload(a):30<=b&&39>=b?c=parseOneAnalogSensorPayload(a):40<=b&&49>=b?c=parseTwoAnalogSensorsPayload(a):50<=b&&59>=b?c=parseDigitalSensorsPayload(a):60<=b&&69>=b?c=parseEventLogPayload(a):70<=b&&79>=b?c=parseConfigurationPayload(a,b):80<=b&&89>=b?c=parseEventLogPayload(a):100<=b&&109>=b?c=parseModbusGenericPayload(a,b):
+110<=b&&119>=b?c=parseAnalogInputVariableLengthPayload(a,b):120<=b&&129>=b?c=parseModbusStandardVariableLengthPayload(a,b):d.push("unknown FPort");a=addVoboMetadata(c,b);a.warnings=[];a.errors=d;return a}
 function addVoboMetadata(a,b){var c={};c.data=a;var d=a="",e=b%10;0==e||1<=b&&10>b?a="VoBoXX":1==e?a="VoBoTC":2==e&&(a="VoBoXP");if(1==b)d="Standard";else if(2<=b&&9>=b)d="Modbus Standard";else if(10==b)d="Heartbeat 1.0";else if(20<=b&&29>=b)d="Heartbeat 2.0";else if(30<=b&&39>=b)d="One Analog Input",c.data.analogSensorString0=lookupAnalogSensorName(a,c.data.sensorNum0),c.data.engUnitsString0=lookupUnits(1,c.data.sensorUnits0);else if(40<=b&&49>=b)d="Two Analog Inputs",c.data.analogSensorString0=
 lookupAnalogSensorName(a,c.data.sensorNum0),c.data.engUnitsString0=lookupUnits(1,c.data.sensorUnits0),c.data.analogSensorString1=lookupAnalogSensorName(a,c.data.sensorNum1),c.data.engUnitsString1=lookupUnits(1,c.data.sensorUnits1);else if(50<=b&&59>=b)for(d="Digital Inputs",c.data.digitalSensorStrings=[],c.data.digitalSensorData=[],e=0;16>e;e++)1==(c.data.sensorValid0>>e&1)&&(c.data.digitalSensorStrings.push(lookupDigitalSensorName(a,e)),c.data.digitalSensorData.push(c.data.sensorData0>>e&1));else if(60<=
-b&&69>=b)d="Event Log";else if(70<=b&&79>=b)d="Configuration";else if(100<=b&&109>=b)d="Modbus Generic";else if(110<=b&&119>=b)for(d="Analog Input Variable Length",e=0;e<c.data.numOfAinPayloads;e++)c.data["analogSensorString"+e]=lookupAnalogSensorName(a,c.data.ainPayloads[e].sensorNum0),c.data["engUnitsString"+e]=lookupUnits(1,c.data.ainPayloads[e].sensorUnits0);else 120<=b&&129>=b&&(d="Modbus Standard Variable Length");c.data.fport=b;c.data.voboType=a;c.data.payloadType=d;return c}
-function parseStandardPayload(a){var b={};b.DIN1=a[0]&1;b.DIN2=a[0]>>1&1;b.DIN3=a[0]>>2&1;b.WKUP=a[0]>>3&1;b.ADC1=(a[0]&240)>>4|a[1]<<4;b.ADC2=(a[3]&15)<<8|a[2];b.ADC3=(a[3]&240)>>4|a[4]<<4;b.Battery=4*((a[6]&15)<<8|a[5]);b.Temperature=0==(a[7]>>7&1)?.125*((a[6]&240)>>4|a[7]<<4):-.125*(4096-((a[6]&240)>>4|a[7]<<4));b.Modbus0=a[9]<<8|a[8];return b}
+b&&69>=b)d="Event Log";else if(70<=b&&79>=b)d="Configuration";else if(80<=b&&89>=b)d="Notification";else if(100<=b&&109>=b)d="Modbus Generic";else if(110<=b&&119>=b)for(d="Analog Input Variable Length",e=0;e<c.data.numOfAinPayloads;e++)c.data["analogSensorString"+e]=lookupAnalogSensorName(a,c.data.ainPayloads[e].sensorNum0),c.data["engUnitsString"+e]=lookupUnits(1,c.data.ainPayloads[e].sensorUnits0);else 120<=b&&129>=b&&(d="Modbus Standard Variable Length");c.data.fport=b;c.data.voboType=a;c.data.payloadType=
+d;return c}function parseStandardPayload(a){var b={};b.DIN1=a[0]&1;b.DIN2=a[0]>>1&1;b.DIN3=a[0]>>2&1;b.WKUP=a[0]>>3&1;b.ADC1=(a[0]&240)>>4|a[1]<<4;b.ADC2=(a[3]&15)<<8|a[2];b.ADC3=(a[3]&240)>>4|a[4]<<4;b.Battery=4*((a[6]&15)<<8|a[5]);b.Temperature=0==(a[7]>>7&1)?.125*((a[6]&240)>>4|a[7]<<4):-.125*(4096-((a[6]&240)>>4|a[7]<<4));b.Modbus0=a[9]<<8|a[8];return b}
 function parseModbusStandardPayload(a,b){b=5*(b-1)-4;var c={};c["Modbus"+b++]=a[1]<<8|a[0];c["Modbus"+b++]=a[3]<<8|a[2];c["Modbus"+b++]=a[5]<<8|a[4];c["Modbus"+b++]=a[7]<<8|a[6];c["Modbus"+b]=a[9]<<8|a[8];return c}
 function parseHeartbeat1p0Payload(a){var b={};b.batteryLevelMV=4*((a[1]&15)<<8|a[0]);b.fwVersionMajor=a[2]&15|(a[1]&240)>>4;b.fwVersionMinor=a[3]&15|(a[2]&240)>>4;b.fwVersionPatch=a[4]&15|(a[3]&240)>>4;b.fwVersionCustom=(a[4]&240)>>4;b.recSignalLevels=-1*a[5];b.analogVoltageConfig=a[6]&31;b.analogPowerTimeConfig=parseFloat((((a[7]&31)<<3|(a[6]&224)>>5)/10).toFixed(1));b.failedTransmissionBeforeRejoinConfig=(a[8]&1)<<3|(a[7]&224)>>5;b.cycleThroughFSB=(a[8]&2)>>1;b.ackEnable=(a[8]&4)>>2;b.ackFreq=(a[8]&
 120)>>3;b.ackReq=(a[9]&7)<<1|(a[8]&128)>>7;b.batteryLevelThreshold=4*((a[10]&127)<<5|(a[9]&248)>>3);return b}
@@ -77,8 +98,8 @@ function parseHeartbeat2p0Payload(a){var b={};b.batteryLevel=(a[1]&15)<<8|a[0];b
 function bytesToFloat32(a){var b=new ArrayBuffer(4),c=new Uint8Array(b);c[0]=a[0];c[1]=a[1];c[2]=a[2];c[3]=a[3];return(new DataView(b)).getFloat32(0,!1)}function parseOneAnalogSensorPayload(a){var b={};b.sensorNum0=a[0];b.sensorUnits0=a[1];b.sensorData0=bytesToFloat32(a.slice(2,6));return b}
 function parseTwoAnalogSensorsPayload(a){var b={};b.sensorNum0=(a[0]&240)>>4;b.sensorUnits0=a[1];b.sensorData0=bytesToFloat32(a.slice(2,6));b.sensorNum1=a[0]&15;b.sensorUnits1=a[6];b.sensorData1=bytesToFloat32(a.slice(7,11));return b}function parseDigitalSensorsPayload(a){var b={};b.sensorValid0=a[1]<<8|a[0];b.sensorData0=a[3]<<8|a[2];return b}
 function parseEventLogPayload(a){var b={};b.eventTimestamp=a[0]+a[1]*Math.pow(2,8)+a[2]*Math.pow(2,16)+a[3]*Math.pow(2,24);b.eventCode=a[4]+a[5]*Math.pow(2,8);b.metadata=Array.prototype.slice.call(a.slice(6,11),0);return b}
-function parseVoboLibGeneralConfigurationPayload(a){var b={};b.subgroupID=a[0]&15;b.sequenceNumber=(a[0]&240)>>4;0==b.sequenceNumber&&(b.transRejoin=a[1]&15,b.ackFrequency=(a[1]&240)>>4,b.lowBattery=parseFloat(((a[2]&15)/10+2.5).toFixed(1)),b.reserved1=(a[2]&16)>>4,b.heartbeatAckEnable=!!((a[2]&32)>>5),b.operationMode=(a[2]&64)>>6,b.cycleSubBands=!!((a[2]&128)>>7),b.ackRetries=a[3]&7,b.reservedLL=(a[3]&56)>>3,b.ackEnable=!!((a[3]&64)>>6),b.heartbeatEnable=!!((a[3]&128)>>7),b.cycleTime=(a[6]&3)<<16|
-a[5]<<8|a[4],b.backOffReset=(a[6]&252)>>2,b.reservedRD=a[7]&63,b.reserved2=(a[7]&192)>>6,b.resendAttempts=a[8]&15,b.freqSubBand=(a[8]&240)>>4);if(1==b.sequenceNumber){b.timeSyncInterval=a[1];b.joinEUI="";for(let c=9;2<=c;c--)b.joinEUI+=a[c].toString(16).toUpperCase().padStart(2,0),2!=c&&(b.joinEUI+="-");b.joinNonceResetEnable=!!(a[10]&1);b.timeSyncWakeupEnable=!!((a[10]&2)>>1);b.reserved1=(a[10]&252)>>2}return b}
+function parseVoboLibGeneralConfigurationPayload(a,b){var c={};c.subgroupID=a[0]&15;c.sequenceNumber=(a[0]&240)>>4;0==c.sequenceNumber&&(c.transRejoin=a[1]&15,c.ackFrequency=(a[1]&240)>>4,70==b||71==b?c.lowBattery=parseFloat(((a[2]&15)/10+2.5).toFixed(1)):72==b&&(c.lowVoltThreshold=parseFloat(((a[2]&15)/10+2.5).toFixed(1))),c.reserved1=(a[2]&16)>>4,c.heartbeatAckEnable=!!((a[2]&32)>>5),c.operationMode=(a[2]&64)>>6,c.cycleSubBands=!!((a[2]&128)>>7),c.ackRetries=a[3]&7,c.reservedLL=(a[3]&56)>>3,c.ackEnable=
+!!((a[3]&64)>>6),c.heartbeatEnable=!!((a[3]&128)>>7),c.cycleTime=(a[6]&3)<<16|a[5]<<8|a[4],c.backOffReset=(a[6]&252)>>2,c.reservedRD=a[7]&63,c.reserved2=(a[7]&192)>>6,c.resendAttempts=a[8]&15,c.freqSubBand=(a[8]&240)>>4);if(1==c.sequenceNumber){c.timeSyncInterval=a[1];c.joinEUI="";for(b=9;2<=b;b--)c.joinEUI+=a[b].toString(16).toUpperCase().padStart(2,0),2!=b&&(c.joinEUI+="-");c.joinNonceResetEnable=!!(a[10]&1);c.timeSyncWakeupEnable=!!((a[10]&2)>>1);c.reserved1=(a[10]&252)>>2}return c}
 function parseVoboLibVoboSyncConfigurationPayload(a){var b={};b.subgroupID=a[0]&15;b.sequenceNumber=(a[0]&240)>>4;0==b.sequenceNumber&&(b.vbsNodeNumber=a[2]<<8|a[1],b.vbsTimeReference=a.slice(3,7).readUInt32LE(),b.reservedVCPDS=a[7]&15,b.reservedVMPDS=(a[7]&240)>>4,b.reservedVUDS=a[8]&15,b.reserved1=(a[8]&48)>>4,b.reservedVSAE=!!((a[8]&64)>>6),b.vbsEnable=!!((a[8]&128)>>7),b.reserved3=a[9]&63,b.reserved2=(a[9]&192)>>6);1==b.sequenceNumber&&(b.vbsMeasurementDelaySec=a[1]&127,b.reserved1=(a[1]&128)>>
 7,b.vbsUplinkDelaySec=a[2]&127,b.reserved2=(a[2]&128)>>7);return b}
 function parseVoboXXGeneralConfigurationPayload(a){var b={};b.subgroupID=a[0]&15;b.sequenceNumber=(a[0]&240)>>4;b.analogVoltage=parseFloat((a[1]/10).toFixed(1));b.powerTime=parseFloat((a[2]/10).toFixed(1));b.mbEnable=!!(a[3]&1);b.engUnitsEnable=!!(a[3]>>1&1);b.din1TransmitEnable=!!(a[3]>>2&1);b.din2TransmitEnable=!!(a[3]>>3&1);b.din3TransmitEnable=!!(a[3]>>4&1);b.wkupTransmitEnable=!!(a[3]>>5&1);b.ain1TransmitEnable=!!(a[3]>>6&1);b.ain2TransmitEnable=!!(a[3]>>7&1);b.ain3TransmitEnable=!!(a[4]&1);
@@ -110,8 +131,14 @@ function parseVoboTCCalibrationConfigurationPayload(a){var b={};b.subgroupID=a[0
 b.reserved2=(a[4]&128)>>7,b.gain6=parseFloat((((a[6]&7)<<8|a[5])/1E3).toFixed(3)),b.reserved3=(a[6]&248)>>3,b.offset6=parseFloat((((a[8]&127)<<8|a[7])/1E3-10).toFixed(3)),b.reserved4=(a[8]&128)>>7);3==b.sequenceNumber&&(b.gain7=parseFloat((((a[2]&7)<<8|a[1])/1E3).toFixed(3)),b.reserved1=(a[2]&248)>>3,b.offset7=parseFloat((((a[4]&127)<<8|a[3])/1E3-10).toFixed(3)),b.reserved2=(a[4]&128)>>7,b.gain8=parseFloat((((a[6]&7)<<8|a[5])/1E3).toFixed(3)),b.reserved3=(a[6]&248)>>3,b.offset8=parseFloat((((a[8]&
 127)<<8|a[7])/1E3-10).toFixed(3)),b.reserved4=(a[8]&128)>>7);4==b.sequenceNumber&&(b.gain9=parseFloat((((a[2]&7)<<8|a[1])/1E3).toFixed(3)),b.reserved1=(a[2]&248)>>3,b.offset9=parseFloat((((a[4]&127)<<8|a[3])/1E3-10).toFixed(3)),b.reserved2=(a[4]&128)>>7,b.gain10=parseFloat((((a[6]&7)<<8|a[5])/1E3).toFixed(3)),b.reserved3=(a[6]&248)>>3,b.offset10=parseFloat((((a[8]&127)<<8|a[7])/1E3-10).toFixed(3)),b.reserved4=(a[8]&128)>>7);5==b.sequenceNumber&&(b.gain11=parseFloat((((a[2]&7)<<8|a[1])/1E3).toFixed(3)),
 b.reserved1=(a[2]&248)>>3,b.offset11=parseFloat((((a[4]&127)<<8|a[3])/1E3-10).toFixed(3)),b.reserved2=(a[4]&128)>>7,b.gain12=parseFloat((((a[6]&7)<<8|a[5])/1E3).toFixed(3)),b.reserved3=(a[6]&248)>>3,b.offset12=parseFloat((((a[8]&127)<<8|a[7])/1E3-10).toFixed(3)),b.reserved4=(a[8]&128)>>7);return b}
-function parseConfigurationPayload(a,b){var c={},d=a[0]&15;0==d?c=parseVoboLibGeneralConfigurationPayload(a):1==d?c=parseVoboLibVoboSyncConfigurationPayload(a):70==b&&4==d?c=parseVoboXXGeneralConfigurationPayload(a):70==b&&5==d?c=parseVoboXXModbusGeneralConfigurationPayload(a):70!=b||6!=d&&7!=d?70!=b||8!=d&&9!=d&&10!=d?70==b&&11==d?c=parseVoboXXModbusPayloadsSlotsConfigurationPayload(a):70==b&&12==d?c=parseVoboXXEngineeringUnitsConfigurationPayload(a):71==b&&4==d?c=parseVoboTCGeneralConfigurationPayload(a):
-71==b&&5==d&&(c=parseVoboTCCalibrationConfigurationPayload(a)):c=parseVoboXXModbusGroupsConfigurationPayload(a):c=parseVoboXXModbusGroupsEnableConfigurationPayload(a);return c}
+function parseVoboXPGeneralConfigurationPayload(a){var b={};b.subgroupID=a[0]&15;b.sequenceNumber=(a[0]&240)>>4;0==b.sequenceNumber&&(b.analogVoltage=parseFloat((a[1]/10).toFixed(1)),b.powerTime=parseFloat((a[2]/10).toFixed(1)),b.mbEnable=!!(a[3]&1),b.reserved1=a[3]>>1&127,b.reserved2=a[4]&7,b.mbTransmitEnable=!!(a[4]>>3&1),b.ainPayloadType=a[4]>>4&1,b.reservedMAWE=!!(a[4]>>5&1),b.reservedMADE=!!(a[4]>>6&1),b.reservedMAME=!!(a[4]>>7&1),b.reservedDTC=a[6]<<8|a[5]);1==b.sequenceNumber&&(b.stateRLY1=
+a[1]&1,b.stateRLY2=a[1]>>1&1,b.stateRLY3=a[1]>>2&1,b.stateRLY4=a[1]>>3&1,b.reserved1=a[1]>>4&15,b.lorawanClass=a[2]&1,b.contMeasEnable=!!(a[2]>>1&1),b.reservedARDE=!!(a[2]>>2&1),b.pFailWarnEnable=!!(a[2]>>3&1),b.pcntDin1Enable=!!(a[2]>>4&1),b.pcntDin2Enable=!!(a[2]>>5&1),b.reserved2=a[2]>>6&3,b.pcntDin1Type=a[3]&3,b.pcntDin2Type=a[3]>>2&3,b.reserved3=a[3]>>4&15,b.pcntPeriod=a[4]&63,b.reserved4=a[4]>>6&3,b.contMeasCycleTime=a[5]&63,b.reserved5=a[5]>>6&3,b.pFailThreshold=parseFloat((a[6]/10).toFixed(1)),
+b.serialPHY=a[7]&1,b.reserved6=a[7]>>1&7,b.serialProtoRS485=a[7]>>4&1,b.reserved7=a[7]>>5&1,b.serialProtoRS232=a[7]>>6&1,b.reserved8=a[7]>>7&1);return b}
+function parseVoboXPTransmitEncodingConfigurationPayload(a){var b={};b.subgroupID=a[0]&15;b.sequenceNumber=(a[0]&240)>>4;b.txAin1=a[1]&15;b.txAin2=a[1]>>4&15;b.txAin3=a[2]&15;b.txDin1=a[2]>>4&15;b.txDin2=a[3]&15;b.txPcntDin1=a[3]>>4&15;b.txPcntDin2=a[4]&15;b.txWKUP=a[4]>>4&15;b.txTemp=a[5]&15;b.txVoltRLY1=a[5]>>4&15;b.txVoltRLY2=a[6]&15;b.txVoltRLY3=a[6]>>4&15;b.txVoltRLY4=a[7]&15;b.txVoltVIN=a[7]>>4&15;b.txVolt3V3=a[8]&15;b.txVoltVPP=a[8]>>4&15;b.txContMeasPeriod=a[9]&15;b.txContMeasCnt=a[9]>>4&
+1;b.reserved1=a[9]>>5&7;return b}function parseVoboXPRelayPulseConfigurationPayload(a){var b={};b.subgroupID=a[0]&15;b.sequenceNumber=(a[0]&240)>>4;0==b.sequenceNumber?(b.pulseDelayRLY1=a[2]<<8|a[1],b.pulsePeriodRLY1=a[4]<<8|a[3],b.pulseDelayRLY2=a[6]<<8|a[5],b.pulsePeriodRLY2=a[8]<<8|a[7]):1==b.sequenceNumber&&(b.pulseDelayRLY3=a[2]<<8|a[1],b.pulsePeriodRLY3=a[4]<<8|a[3],b.pulseDelayRLY4=a[6]<<8|a[5],b.pulsePeriodRLY4=a[8]<<8|a[7]);return b}
+function parseConfigurationPayload(a,b){var c={},d=a[0]&15;0==d?c=parseVoboLibGeneralConfigurationPayload(a,b):1==d?c=parseVoboLibVoboSyncConfigurationPayload(a):70==b&&4==d?c=parseVoboXXGeneralConfigurationPayload(a):70==b&&5==d?c=parseVoboXXModbusGeneralConfigurationPayload(a):70!=b||6!=d&&7!=d?70!=b||8!=d&&9!=d&&10!=d?70==b&&11==d?c=parseVoboXXModbusPayloadsSlotsConfigurationPayload(a):70==b&&12==d?c=parseVoboXXEngineeringUnitsConfigurationPayload(a):71==b&&4==d?c=parseVoboTCGeneralConfigurationPayload(a):
+71==b&&5==d?c=parseVoboTCCalibrationConfigurationPayload(a):72==b&&4==d?c=parseVoboXPGeneralConfigurationPayload(a):72==b&&5==d?c=parseVoboXXModbusGeneralConfigurationPayload(a):72!=b||6!=d&&7!=d?72!=b||8!=d&&9!=d&&10!=d?72==b&&11==d?c=parseVoboXXModbusPayloadsSlotsConfigurationPayload(a):72==b&&12==d?c=parseVoboXXEngineeringUnitsConfigurationPayload(a):72==b&&13==d?c=parseVoboXPTransmitEncodingConfigurationPayload(a):72==b&&14==d&&(c=parseVoboXPRelayPulseConfigurationPayload(a)):c=parseVoboXXModbusGroupsConfigurationPayload(a):
+c=parseVoboXXModbusGroupsEnableConfigurationPayload(a):c=parseVoboXXModbusGroupsConfigurationPayload(a):c=parseVoboXXModbusGroupsEnableConfigurationPayload(a);return c}
 function parseModbusGenericPayload(a,b){b={};for(var c=a.length,d=0;d<c-1;){var e=a[d]&63;if(0<e){var f=a[d]>>6&3;d++;if(0==f){var g=a[d+1]<<8|a[d];b["group"+e+"register1"]=g;d+=2}else if(1==f)b["group"+e+"register1"]=a[d+1]<<8|a[d],b["group"+e+"register2"]=a[d+3]<<8|a[d+2],d+=4;else if(2==f){f=[];var h=a[d]&127;d++;for(var k=0;k<h;k++)g=a[d+1]<<8|a[d],b["group"+e+"register"+(k+1)]=g,f.push(g),d+=2}else if(3==f){f=[];h=a[d]&127;d++;k=a[d]&127;d++;h-=k;g=Math.floor((c-d)/2);h>g&&(h=g);for(let l=0;l<
 h;l++)g=a[d+1]<<8|a[d],b["group"+e+"register"+(k+l+1)]=g,f.push(g),d+=2}}else break}return b}function parseAnalogInputVariableLengthPayload(a,b){b={};for(var c=[],d=a.length,e=0;e<d;){var f=a.slice(e,e+6);f=parseOneAnalogSensorPayload(f);c.push(f);e+=6}b.ainPayloads=c;b.numOfAinPayloads=c.length;return b}
 function parseModbusStandardVariableLengthPayload(a,b){b={};for(var c={},d=a.length,e=a[d-1],f=0;f<d-1;)c["Modbus"+(e+f/2)]=a[f+1]<<8|a[f],f+=2;b.modbusSlots=c;b.firstSlotNum=e;b.numModbusSlots=(d-1)/2;return b}
@@ -119,8 +146,8 @@ function lookupAnalogSensorName(a,b){var c=[{"Analog Sensor Number":"0","Analog 
 "Analog Sensor Name":"TC2"},{"Analog Sensor Number":"3","Analog Sensor Name":"TC3"},{"Analog Sensor Number":"4","Analog Sensor Name":"TC4"},{"Analog Sensor Number":"5","Analog Sensor Name":"TC5"},{"Analog Sensor Number":"6","Analog Sensor Name":"TC6"},{"Analog Sensor Number":"7","Analog Sensor Name":"TC7"},{"Analog Sensor Number":"8","Analog Sensor Name":"TC8"},{"Analog Sensor Number":"9","Analog Sensor Name":"TC9"},{"Analog Sensor Number":"10","Analog Sensor Name":"TC10"},{"Analog Sensor Number":"11",
 "Analog Sensor Name":"TC11"},{"Analog Sensor Number":"12","Analog Sensor Name":"TC12"},{"Analog Sensor Number":"13","Analog Sensor Name":"Cold Joint Temperature"}],e=[{"Analog Sensor Number":"0","Analog Sensor Name":"3.3V Supply Voltage"},{"Analog Sensor Number":"1","Analog Sensor Name":"AIN1"},{"Analog Sensor Number":"2","Analog Sensor Name":"AIN2"},{"Analog Sensor Number":"3","Analog Sensor Name":"AIN3"},{"Analog Sensor Number":"4","Analog Sensor Name":"DIN1"},{"Analog Sensor Number":"5","Analog Sensor Name":"DIN1 Pulse Count"},
 {"Analog Sensor Number":"6","Analog Sensor Name":"DIN2"},{"Analog Sensor Number":"7","Analog Sensor Name":"DIN2 Pulse Count"},{"Analog Sensor Number":"8","Analog Sensor Name":"RLY1 Voltage"},{"Analog Sensor Number":"9","Analog Sensor Name":"RLY2 Voltage"},{"Analog Sensor Number":"10","Analog Sensor Name":"RLY3 Voltage"},{"Analog Sensor Number":"11","Analog Sensor Name":"RLY4 Voltage"},{"Analog Sensor Number":"12","Analog Sensor Name":"WKUP"},{"Analog Sensor Number":"13","Analog Sensor Name":"VPP Voltage"},
-{"Analog Sensor Number":"14","Analog Sensor Name":"VIN Voltage"},{"Analog Sensor Number":"15","Analog Sensor Name":"ADC Temperature"},{"Analog Sensor Number":"16","Analog Sensor Name":"Cont Meas Period"},{"Analog Sensor Number":"17","Analog Sensor Name":"Cont Meas Count"}];var f=[],g="";if("VoBoXX"==a)f=c;else if("VoBoTC"==a)f=d;else if("VoBoXP"==a)f=e,c=(b&192)>>6,1==c?g="(Max)":2==c?g="(Min)":3==c&&(g="(Avg)"),b&=63;else throw errorMsg=a+' -- Invalid VoBo Type. Use "VoBoXX", "VoBoTC" or "VoBoXP"',
-Error(errorMsg);f=f.find(h=>h["Analog Sensor Number"]==b.toString());if("undefined"==typeof f)return"AnalogSensor"+b.toString();f=f["Analog Sensor Name"];"VoBoXP"==a&&(f=f+" "+g);return f}
+{"Analog Sensor Number":"14","Analog Sensor Name":"VIN Voltage"},{"Analog Sensor Number":"15","Analog Sensor Name":"ADC Temperature"},{"Analog Sensor Number":"16","Analog Sensor Name":"Cont Meas Period"},{"Analog Sensor Number":"17","Analog Sensor Name":"Cont Meas Count"}];var f=[],g="";if("VoBoXX"==a)f=c;else if("VoBoTC"==a)f=d;else if("VoBoXP"==a)f=e,c=(b&192)>>6,1==c?g=" (Max)":2==c?g=" (Min)":3==c&&(g=" (Avg)"),b&=63;else throw errorMsg=a+' -- Invalid VoBo Type. Use "VoBoXX", "VoBoTC" or "VoBoXP"',
+Error(errorMsg);f=f.find(h=>h["Analog Sensor Number"]==b.toString());if("undefined"==typeof f)return"AnalogSensor"+b.toString();f=f["Analog Sensor Name"];"VoBoXP"==a&&(f+=g);return f}
 function lookupDigitalSensorName(a,b){const c=[{"Digital Sensor Number":"0","Digital Sensor Name":"WKUP"},{"Digital Sensor Number":"1","Digital Sensor Name":"DIN1"},{"Digital Sensor Number":"2","Digital Sensor Name":"DIN2"},{"Digital Sensor Number":"3","Digital Sensor Name":"DIN3"}],d=[{"Digital Sensor Number":"0","Digital Sensor Name":"WKUP"}],e=[{"Digital Sensor Number":"0","Digital Sensor Name":"WKUP"},{"Digital Sensor Number":"1","Digital Sensor Name":"DIN1"},{"Digital Sensor Number":"2","Digital Sensor Name":"DIN2"}];
 var f=[];if("VoBoXX"==a)f=c;else if("VoBoTC"==a)f=d;else if("VoBoXP"==a)f=e;else throw errorMsg=a+' -- Invalid VoBo Type. Use "VoBoXX", "VoBoTC" or "VoBoXP"',Error(errorMsg);a=f.find(g=>g["Digital Sensor Number"]==b.toString());return"undefined"==typeof a?"DigitalSensor"+b.toString():a["Digital Sensor Name"]}
 function lookupUnits(a,b){var c="";c=[{"Units Code":"1",Description:"inches of water at 20 degC (68 degF)","Abbreviated Units":"inH2O (20 degC or 68 degF)"},{"Units Code":"2",Description:"inches of mercury at 0 degC (32 degF)","Abbreviated Units":"inHg (20 degC or 68 degF)"},{"Units Code":"3",Description:"feet of water at 20 degC (68 degF)","Abbreviated Units":"ftH2O (20 degC or 68 degF)"},{"Units Code":"4",Description:"millimeters of water at 20 degC (68 degF)","Abbreviated Units":"mmH2O (20 degC or 68 degF)"},
@@ -161,14 +188,14 @@ Description:"gallons per day","Abbreviated Units":"usg/d"},{"Units Code":"236",D
 // exports had to be commented out.
 //===========================================================
 
-const payload_vb = payload.find((x) => x.variable === "payload");
-const fPort_vb = payload.find((x) => x.variable === "port" || x.variable === "fPort")?.value;
+const payload_vb = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
+const fPort_vb = payload.find((x) => x.variable === "port" || x.variable === "fPort" || x.variable === "fport" || x.variable === "FPort")?.value;
 
 if (payload_vb) {
     try {
         const buffer = Buffer.from(payload_vb.value, "hex")
         const decoded = toTagoFormat(buffer, fPort_vb);
-        payload = decoded;
+        payload = payload.concat(decoded);
     } catch (error) {
         console.error(error);
         payload = [{ variable: "parse_error", value: error.message }];
