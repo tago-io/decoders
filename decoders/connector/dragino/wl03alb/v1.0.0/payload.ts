@@ -162,13 +162,13 @@ function Decoder(bytes: Buffer, port: number) {
 
 const wl03alb_payload = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
-const port = payload.find((x) => x.variable === "port" || x.variable === "fport");
+const port = payload.find((x) => x.variable === "port" || x.variable === "fport" || x.variable === "fPort");
 
-if (wl03alb_payload) {
+if (wl03alb_payload && port) {
   try {
     // Convert the data from Hex to Javascript Buffer.
     const buffer = Buffer.from(wl03alb_payload.value, "hex");
-    const group = new Date().getTime();
+    const group = port.group || String(new Date().getTime());
     const payload_aux = Decoder(buffer, Number(port.value));
     payload = payload.concat(toTagoFormat(payload_aux, group));
   } catch (e) {
