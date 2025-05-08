@@ -36,20 +36,40 @@ function parsePayload(payload_raw: string) {
 
     // port 100
     if (payloadLength > 5) {
+      // Check if we have enough bytes for the timestamp
+        if (payloadLength < 4) {
+        return data;
+      }
+  
       let time = (bytes[3] << 24) | (bytes[2] << 16) | (bytes[1] << 8) | bytes[0];
       const date = new Date(time * 1000);
 
       const status_code = Number(payload_raw.substr(8, 2));
       data.status_code = { value: status_code, date };
 
+      // Check if we have enough bytes for current volume
+      if (payloadLength < 9) {
+        return data;
+      }
+
       const current_volume = bytes.readUInt32LE(5) * 0.001;
       data.current_volume = { value: current_volume, unit: "m3", date };
+
+      // Check if we have enough bytes for first log datetime
+      if (payloadLength < 13) {
+        return data;
+      }
 
       const first_log_datetime = new Date(((bytes[12] << 24) | (bytes[11] << 16) | (bytes[10] << 8) | bytes[9]) * 1000).toISOString();
       data.first_log_datetime = {
         value: first_log_datetime,
         time: first_log_datetime,
       };
+
+       // Check if we have enough bytes for volume at log datetime
+       if (payloadLength < 17) {
+        return data;
+      }
 
       const volume_at_log_datetime = bytes.readUInt32LE(13) * 0.001;
       data.volume_at_log_datetime = {
