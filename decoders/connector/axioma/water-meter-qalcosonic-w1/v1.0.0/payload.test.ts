@@ -89,6 +89,20 @@ describe("Port 100 unit tests", () => {
   });
 });
 
+describe("Port 100 unit tests, smaller payload", () => {
+  const payloadHex = "f70a196810280000000000";
+  const result = preparePayload(payloadHex);
+
+  test("Output Result", () => {
+    expect(Array.isArray(result.payload)).toBe(true);
+  });
+
+  test("Port 100 variable values", () => {
+    expect(result.status_code?.value).toBe(10);
+    expect(result.current_volume?.value).toBe(0.04);
+  });
+});
+
 describe("Port 103 unit tests", () => {
   const payloadHex = "43b1315d30";
   const result = preparePayload(payloadHex);
