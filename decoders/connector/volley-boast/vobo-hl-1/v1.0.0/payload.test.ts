@@ -393,7 +393,7 @@ describe(`fPort: ${testPayloads.data[10].fport} - ${testPayloads.data[10].name}`
     });
 
 
-    const adcTemperature = payload.find((item) => item.variable === 'ADC Temperature');
+    const adcTemperature = payload.find((item) => item.variable === 'ADC_Temperature');
     const fport = payload.find((item) => item.variable === 'fport');
     const voboType = payload.find((item) => item.variable === 'voboType');
     const payloadType = payload.find((item) => item.variable === 'payloadType');
