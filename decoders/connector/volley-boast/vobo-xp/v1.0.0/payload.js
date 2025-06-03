@@ -10,7 +10,7 @@ function customDecoder(bytes, fport) {
     if (fport == 32) {
         var tagoDecoded = [
             {
-                variable: decoded.data.analogSensorString0,
+                variable: decoded.data.analogSensorString0.replaceAll(" ", "_"),
                 value: decoded.data.sensorData0,
                 unit: decoded.data.engUnitsString0
             }
@@ -24,12 +24,12 @@ function customDecoder(bytes, fport) {
     else if (fport == 42) {
         var tagoDecoded = [
             {
-                variable: decoded.data.analogSensorString0,
+                variable: decoded.data.analogSensorString0.replaceAll(" ", "_"),
                 value: decoded.data.sensorData0,
                 unit: decoded.data.engUnitsString0
             },
             {
-                variable: decoded.data.analogSensorString1,
+                variable: decoded.data.analogSensorString1.replaceAll(" ", "_"),
                 value: decoded.data.sensorData1,
                 unit: decoded.data.engUnitsString1
             }
@@ -53,7 +53,7 @@ function customDecoder(bytes, fport) {
     }
     else if (fport == 112) {
         var tagoDecoded = decoded.data.ainPayloads.map((payloadObj, index) => ({
-            variable: decoded.data[`analogSensorString${index}`],
+            variable: decoded.data[`analogSensorString${index}`].replaceAll(" ", "_"),
             value: payloadObj.sensorData0,
             unit: decoded.data[`engUnitsString${index}`]
         }));
@@ -84,7 +84,7 @@ function customDecoder(bytes, fport) {
     return tagoDecoded;
 }
 
-const DECODER_MAJOR_VERSION=2,DECODER_MINOR_VERSION=2,DECODER_PATCH_VERSION=0;function decodeUplink(a){return Decoder(a.bytes,a.fPort)}
+const DECODER_MAJOR_VERSION=2,DECODER_MINOR_VERSION=2,DECODER_PATCH_VERSION=1;function decodeUplink(a){return Decoder(a.bytes,a.fPort)}
 function Decoder(a,b){var c={},d=[];1==b?c=parseStandardPayload(a):2<=b&&9>=b?c=parseModbusStandardPayload(a,b):10==b?c=parseHeartbeat1p0Payload(a):20<=b&&29>=b?c=parseHeartbeat2p0Payload(a):30<=b&&39>=b?c=parseOneAnalogSensorPayload(a):40<=b&&49>=b?c=parseTwoAnalogSensorsPayload(a):50<=b&&59>=b?c=parseDigitalSensorsPayload(a):60<=b&&69>=b?c=parseEventLogPayload(a):70<=b&&79>=b?c=parseConfigurationPayload(a,b):80<=b&&89>=b?c=parseEventLogPayload(a):100<=b&&109>=b?c=parseModbusGenericPayload(a,b):
 110<=b&&119>=b?c=parseAnalogInputVariableLengthPayload(a,b):120<=b&&129>=b?c=parseModbusStandardVariableLengthPayload(a,b):d.push("unknown FPort");a=addVoboMetadata(c,b);a.warnings=[];a.errors=d;return a}
 function addVoboMetadata(a,b){var c={};c.data=a;var d=a="",e=b%10;0==e||1<=b&&10>b?a="VoBoXX":1==e?a="VoBoTC":2==e&&(a="VoBoXP");if(1==b)d="Standard";else if(2<=b&&9>=b)d="Modbus Standard";else if(10==b)d="Heartbeat 1.0";else if(20<=b&&29>=b)d="Heartbeat 2.0";else if(30<=b&&39>=b)d="One Analog Input",c.data.analogSensorString0=lookupAnalogSensorName(a,c.data.sensorNum0),c.data.engUnitsString0=lookupUnits(1,c.data.sensorUnits0);else if(40<=b&&49>=b)d="Two Analog Inputs",c.data.analogSensorString0=

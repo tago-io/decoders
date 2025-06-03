@@ -102,8 +102,8 @@ describe(`fPort: ${testPayloads.data[2].fport} - ${testPayloads.data[2].name}`, 
         expect(Array.isArray(payload)).toBe(true);
     });
 
-    const coldJointTemperature = payload.find((item) => item.variable === 'Cold Joint Temperature');
-    const batteryVoltage = payload.find((item) => item.variable === 'Battery Voltage');
+    const coldJointTemperature = payload.find((item) => item.variable === 'Cold_Joint_Temperature');
+    const batteryVoltage = payload.find((item) => item.variable === 'Battery_Voltage');
     const fport = payload.find((item) => item.variable === 'fport');
     const voboType = payload.find((item) => item.variable === 'voboType');
     const payloadType = payload.find((item) => item.variable === 'payloadType');
@@ -229,8 +229,8 @@ describe(`fPort: ${testPayloads.data[6].fport} - ${testPayloads.data[6].name}`, 
         expect(Array.isArray(payload)).toBe(true);
     });
 
-    const coldJointTemperature = payload.find((item) => item.variable === 'Cold Joint Temperature');
-    const batteryVoltage = payload.find((item) => item.variable === 'Battery Voltage');
+    const coldJointTemperature = payload.find((item) => item.variable === 'Cold_Joint_Temperature');
+    const batteryVoltage = payload.find((item) => item.variable === 'Battery_Voltage');
     const tc1 = payload.find((item) => item.variable === 'TC1');
     const tc2 = payload.find((item) => item.variable === 'TC2');
     const tc3 = payload.find((item) => item.variable === 'TC3');
