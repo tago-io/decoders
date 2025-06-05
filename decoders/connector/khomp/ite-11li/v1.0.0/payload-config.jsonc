@@ -9,6 +9,7 @@
     "../../../../network/lorawan-everynet/v1.0.0/payload.js",
     "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
     "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
-    "../../../../network/lorawan-tektelic/v1.0.0/payload.js"
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js"
   ]
 }
