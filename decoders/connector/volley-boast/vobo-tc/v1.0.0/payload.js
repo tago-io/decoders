@@ -10,7 +10,7 @@ function customDecoder(bytes, fport) {
     if (fport == 31) {
         var tagoDecoded = [
             {
-                variable: decoded.data.analogSensorString0.replaceAll(" ", "_"),
+                variable: decoded.data.analogSensorString0.replace(/[*?!<>.\-=$\s]/g, '_'),
                 value: decoded.data.sensorData0,
                 unit: decoded.data.engUnitsString0
             }
@@ -25,12 +25,12 @@ function customDecoder(bytes, fport) {
     else if (fport == 41) {
         var tagoDecoded = [
             {
-                variable: decoded.data.analogSensorString0.replaceAll(" ", "_"),
+                variable: decoded.data.analogSensorString0.replace(/[*?!<>.\-=$\s]/g, '_'),
                 value: decoded.data.sensorData0,
                 unit: decoded.data.engUnitsString0
             },
             {
-                variable: decoded.data.analogSensorString1.replaceAll(" ", "_"),
+                variable: decoded.data.analogSensorString1.replace(/[*?!<>.\-=$\s]/g, '_'),
                 value: decoded.data.sensorData1,
                 unit: decoded.data.engUnitsString1
             }
@@ -54,7 +54,7 @@ function customDecoder(bytes, fport) {
     }
     else if (fport == 111) {
         var tagoDecoded = decoded.data.ainPayloads.map((payloadObj, index) => ({
-            variable: decoded.data[`analogSensorString${index}`].replaceAll(" ", "_"),
+            variable: decoded.data[`analogSensorString${index}`].replace(/[*?!<>.\-=$\s]/g, '_'),
             value: payloadObj.sensorData0,
             unit: decoded.data[`engUnitsString${index}`]
         }));
