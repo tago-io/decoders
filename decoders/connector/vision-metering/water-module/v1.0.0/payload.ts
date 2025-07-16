@@ -1,6 +1,6 @@
 /**
  * Water Meter Device Payload Parser for TagoIO
- * Handles 4 packet types: Startup, Periodic, Fragmented Periodic, and Reed Switch
+ * Handles 3 packet types: Startup, Periodic and Reed Switch
  */
 
 import { DataCreate } from "@tago-io/sdk/lib/types";
@@ -31,7 +31,7 @@ const RESET_REASONS: any = {
  * @param {number} headerByte - The header byte from the payload
  * @returns {Object} Parsed header information
  */
-function parseHeader(headerByte) {
+function parseHeader(headerByte: number) {
   return {
     packetType: headerByte & 0x07, // Bits 0-2: packet type (3 bits)
     multiPacket: (headerByte >> 3) & 0x01, // Bit 3: multi packet flag (1 bit)
@@ -45,7 +45,7 @@ function parseHeader(headerByte) {
  * @param {number} offset - Offset in buffer
  * @returns {number} Voltage in volts
  */
-function parseBatteryVoltage(buffer, offset) {
+function parseBatteryVoltage(buffer: Buffer, offset: number) {
   const rawValue = buffer.readUInt8(offset); // Read single byte instead of 2 bytes
   // Formula: (raw_value + 110) / 100 to convert to voltage
   return ((rawValue + 110) / 100).toFixed(2);
@@ -57,7 +57,7 @@ function parseBatteryVoltage(buffer, offset) {
  * @param {number} offset - Offset in buffer
  * @returns {number} Consumption value
  */
-function parseConsumption(buffer, offset) {
+function parseConsumption(buffer: Buffer, offset: number) {
   return buffer.readUInt32BE(offset);
 }
 
@@ -67,7 +67,7 @@ function parseConsumption(buffer, offset) {
  * @param {number} offset - Offset in buffer
  * @returns {Array} Array of active reset reasons
  */
-function parseResetReason(buffer, offset) {
+function parseResetReason(buffer: Buffer, offset: number) {
   const resetValue = buffer.readUInt32BE(offset);
   const reasons = [];
 
@@ -90,7 +90,7 @@ function parseResetReason(buffer, offset) {
  * @param {number} offset - Starting offset
  * @returns {string} Extracted string
  */
-function parseNullTerminatedString(buffer, offset) {
+function parseNullTerminatedString(buffer: Buffer, offset: number) {
   let end = offset;
   while (end < buffer.length && buffer[end] !== 0) {
     end++;
@@ -105,7 +105,7 @@ function parseNullTerminatedString(buffer, offset) {
  * @param {string} time - Timestamp
  * @returns {Array} Array of data objects
  */
-function parseStartupPacket(buffer, group, time) {
+function parseStartupPacket(buffer: Buffer, group: string, time: string) {
   const data: DataCreate[] = [];
   // Battery voltage (offset 1, 2 bytes)
   const batteryVolt = parseBatteryVoltage(buffer, 1);
@@ -167,7 +167,7 @@ function parseStartupPacket(buffer, group, time) {
  * @param {string} time - Timestamp
  * @returns {Array} Array of data objects
  */
-function parsePeriodicPacket(buffer, group, time) {
+function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
   const data: DataCreate[] = [];
 
   // Battery voltage (offset 1, 2 bytes)
@@ -238,7 +238,7 @@ function parsePeriodicPacket(buffer, group, time) {
  * @param {string} time - Timestamp
  * @returns {Array} Array of data objects
  */
-function parseReedSwitchPacket(buffer, group, time) {
+function parseReedSwitchPacket(buffer: Buffer, group: string, time: string) {
   const data: DataCreate[] = [];
 
   // Battery voltage (offset 1, 2 bytes)
@@ -316,7 +316,7 @@ function parseReedSwitchPacket(buffer, group, time) {
  * @param {string} time - Timestamp
  * @returns {Array} Array of parsed data objects
  */
-function parseWaterMeterPayload(buffer, group, time) {
+function parseWaterMeterPayload(buffer: Buffer, group: string, time: string) {
   try {
     if (buffer.length < 1) {
       return [
