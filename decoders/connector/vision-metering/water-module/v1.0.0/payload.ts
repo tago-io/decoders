@@ -6,7 +6,7 @@
 import { DataCreate } from "@tago-io/sdk/lib/types";
 
 // Packet type constants
-const PACKET_TYPES = {
+const PACKET_TYPES: any = {
   0: "startup",
   1: "periodic",
   2: "reed_switch",
@@ -28,8 +28,6 @@ const RESET_REASONS: any = {
 
 /**
  * Parses the header byte to extract packet information
- * @param {number} headerByte - The header byte from the payload
- * @returns {Object} Parsed header information
  */
 function parseHeader(headerByte: number) {
   return {
@@ -41,9 +39,6 @@ function parseHeader(headerByte: number) {
 
 /**
  * Converts battery voltage from hex to actual voltage
- * @param {Buffer} buffer - Buffer containing voltage data
- * @param {number} offset - Offset in buffer
- * @returns {number} Voltage in volts
  */
 function parseBatteryVoltage(buffer: Buffer, offset: number) {
   const rawValue = buffer.readUInt8(offset); // Read single byte instead of 2 bytes
@@ -53,9 +48,6 @@ function parseBatteryVoltage(buffer: Buffer, offset: number) {
 
 /**
  * Parses consumption value from 4-byte big-endian format
- * @param {Buffer} buffer - Buffer containing consumption data
- * @param {number} offset - Offset in buffer
- * @returns {number} Consumption value
  */
 function parseConsumption(buffer: Buffer, offset: number) {
   return buffer.readUInt32BE(offset);
@@ -63,9 +55,6 @@ function parseConsumption(buffer: Buffer, offset: number) {
 
 /**
  * Parses reset reason from 4-byte value
- * @param {Buffer} buffer - Buffer containing reset reason
- * @param {number} offset - Offset in buffer
- * @returns {Array} Array of active reset reasons
  */
 function parseResetReason(buffer: Buffer, offset: number) {
   const resetValue = buffer.readUInt32BE(offset);
@@ -86,9 +75,6 @@ function parseResetReason(buffer: Buffer, offset: number) {
 
 /**
  * Extracts null-terminated string from buffer
- * @param {Buffer} buffer - Buffer containing string data
- * @param {number} offset - Starting offset
- * @returns {string} Extracted string
  */
 function parseNullTerminatedString(buffer: Buffer, offset: number) {
   let end = offset;
@@ -100,10 +86,6 @@ function parseNullTerminatedString(buffer: Buffer, offset: number) {
 
 /**
  * Parses startup packet (type 0)
- * @param {Buffer} buffer - Payload buffer
- * @param {string} group - Group identifier
- * @param {string} time - Timestamp
- * @returns {Array} Array of data objects
  */
 function parseStartupPacket(buffer: Buffer, group: string, time: string) {
   const data: DataCreate[] = [];
@@ -162,10 +144,6 @@ function parseStartupPacket(buffer: Buffer, group: string, time: string) {
 
 /**
  * Parses periodic packet (type 1)
- * @param {Buffer} buffer - Payload buffer
- * @param {string} group - Group identifier
- * @param {string} time - Timestamp
- * @returns {Array} Array of data objects
  */
 function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
   const data: DataCreate[] = [];
@@ -233,10 +211,6 @@ function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
 
 /**
  * Parses reed switch packet (type 2)
- * @param {Buffer} buffer - Payload buffer
- * @param {string} group - Group identifier
- * @param {string} time - Timestamp
- * @returns {Array} Array of data objects
  */
 function parseReedSwitchPacket(buffer: Buffer, group: string, time: string) {
   const data: DataCreate[] = [];
@@ -311,10 +285,6 @@ function parseReedSwitchPacket(buffer: Buffer, group: string, time: string) {
 
 /**
  * Main payload parser function
- * @param {string} hexPayload - Hexadecimal payload string
- * @param {string} group - Group identifier
- * @param {string} time - Timestamp
- * @returns {Array} Array of parsed data objects
  */
 function parseWaterMeterPayload(buffer: Buffer, group: string, time: string) {
   try {
