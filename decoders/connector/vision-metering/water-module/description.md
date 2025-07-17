@@ -1,0 +1,1 @@
+Vision Metering Water Module is a LoRa module for use with water meters equipped with either a pulsed or serial output.
