@@ -1,0 +1,1 @@
+Globally powered 5G tracking for high-value cargo.
