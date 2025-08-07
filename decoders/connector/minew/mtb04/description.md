@@ -1,1 +1,1 @@
-Globally powered 5G tracking via MQTT
+Tracking sensor via NB-IoT and MQTT
