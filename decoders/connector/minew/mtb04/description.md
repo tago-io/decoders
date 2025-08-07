@@ -1,0 +1,1 @@
+Globally powered 5G tracking via MQTT

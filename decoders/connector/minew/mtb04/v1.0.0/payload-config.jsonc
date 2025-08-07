@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Ultra-thin Shipping Label**\n\nMTB04 is an ultra-thin, one-time use, cost-effective 5G IoT Shipping Label designed for global logistics, cold chain transportation, and warehouse asset management. More details can be found [here](https://www.minew.com/product/mtb04-5g-shipping-label/).",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/mqtt/v1.0.0/payload.js"
+  ]
+}
