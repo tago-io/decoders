@@ -392,13 +392,12 @@ if (payload_raw && port) {
     try {
         // Convert the data from Hex to Javascript Buffer.
         const buffer = hexToNumberArray(payload_raw.value as string);
-        // payload.push(...Decoder(buffer, port.value, payload_raw.group));
-        payload.concat(Decoder(buffer, port.value, payload_raw.group))
+        payload.push(...Decoder(buffer, port.value, payload_raw.group));
     } catch (e) {
         // Print the error to the Live Inspector.
         console.error(e);
         // Return the variable parse_error for debugging.
-        // payload = [{ variable: "parse_error", value: e.message }];
+        payload = [{ variable: "parse_error", value: e.message }];
     }
 }
 
