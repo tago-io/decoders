@@ -4,7 +4,7 @@ import { decoderRun } from "../../../../../src/functions/decoder-run";
 const file_path = "decoders/connector/minew/mtb04/v1.0.0/payload.ts" as const;
 
 function preparePayload(payloadHex: string, metadata: Record<string, any> = {}) {
-  let payload = [{ variable: "payload", value: payloadHex, unit: "", metadata }];
+  let payload = [{ variable: "payload", value: payloadHex, unit: "", metadata, location: {}}];
   payload = decoderRun(file_path, { payload });
   
   // Decoder variables
@@ -16,6 +16,7 @@ function preparePayload(payloadHex: string, metadata: Record<string, any> = {}) 
   const tear_code = payload.find((item) => item.variable === "tear_code");
   const device_pid = payload.find((item) => item.variable === "device_pid");
   const device_imei = payload.find((item) => item.variable === "device_imei");
+  const location = payload.find((item) => item.variable === "location");
   
   // Error parsing
   const parser_error = payload.find((item) => item.variable === "parser_error");
@@ -31,6 +32,7 @@ function preparePayload(payloadHex: string, metadata: Record<string, any> = {}) 
     device_pid,
     device_imei,
     parser_error,
+    location,
   };
 }
 
@@ -73,6 +75,28 @@ describe("Minew MTB04 CBOR Decoder Unit Tests", () => {
       expect(result.tear_code?.value).toBe("teared");
     });
   });
+
+  describe("Valid CBOR payload Location decoding", () => {
+    const payloadHex = "bf636864729f0408010000ff63706c64bf6472656173bf64636f646519049d6474696d65c11a6895758bff6473746174bf6462617474bf63706374186463766f6c190ba0ff6463656c6cbf6472737270383cff6474656172bf64636f646500ffff63646576bf637069641464696d65696f333531353136313738343633333836ff6464617461bf64676e73739fbf677265636f7264739fbf6174c11a689575ac6164d8679ffa41f1b226fa42e8dd1e182affffffffff666d6f74696f6e9fbf677265636f7264739fbf6174c11a689575dc616402ffffffff6861626e5f74656d709fbf677265636f7264739fbf6174c11a689575db6164fa421d400063726566bf636d6178fa41a0e148636d696efac1100000ffffffffff6961626e5f696c6c756d9fbf677265636f7264739fbf6174c11a689575dc616419689563726566bf636d61781864ffffffffffffffff";
+    const metadata = {
+      mqtt_topic: "/cgw/xxxx/data-report"
+    };
+    const result = preparePayload(payloadHex, metadata);
+
+    test("Output result is type: array", () => {
+      expect(Array.isArray(result.payload)).toBe(true);
+    });
+
+    test("No parser errors", () => {
+      expect(result.parser_error).toBeUndefined();
+    });
+
+    test("Latitude is correctly decoded", () => {
+      expect(result.location?.value).toBe("30.211986541748047,116.43186950683594");
+      expect(result.location?.location).toEqual({ lat: 30.211986541748047, lng: 116.43186950683594 });
+    });
+  });
+
 });
 
 describe("Shall not be parsed", () => {
