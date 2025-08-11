@@ -3,8 +3,6 @@
  * Handles 3 packet types: Startup, Periodic and Reed Switch
  */
 
-import { DataCreate } from "@tago-io/sdk/lib/types";
-
 // Packet type constants
 const PACKET_TYPES: any = {
   0: "startup",
@@ -58,7 +56,7 @@ function parseConsumption(buffer: Buffer, offset: number) {
  */
 function parseResetReason(buffer: Buffer, offset: number) {
   const resetValue = buffer.readUInt32BE(offset);
-  const reasons = [];
+  const reasons: string[] = [];
 
   for (let bit = 0; bit < 32; bit++) {
     if ((resetValue >> bit) & 1) {
@@ -67,8 +65,6 @@ function parseResetReason(buffer: Buffer, offset: number) {
       }
     }
   }
-
-  console.log("resetValue", resetValue);
 
   return reasons.length > 0 ? reasons : ["Unknown"];
 }
@@ -322,15 +318,12 @@ function parseWaterMeterPayload(buffer: Buffer, group: string, time: string) {
     let parsedData: DataCreate[] = [];
     switch (header.packetType) {
       case 0: // Startup
-        console.log("Startup");
         parsedData = parseStartupPacket(buffer, group, time);
         break;
       case 1: // Periodic
-        console.log("Periodic");
         parsedData = parsePeriodicPacket(buffer, group, time);
         break;
       case 2: // Reed switch
-        console.log("Reed switch");
         parsedData = parseReedSwitchPacket(buffer, group, time);
         break;
       default:
@@ -359,7 +352,7 @@ function parseWaterMeterPayload(buffer: Buffer, group: string, time: string) {
 const dataPayload = payload.find((x) => x.variable === "payload")?.value;
 
 if (dataPayload) {
-  const group = dataPayload.group || new Date().getTime();
+  const group = dataPayload.group || new Date().getTime().toString();
   const time = dataPayload.time || new Date().toISOString();
   const hexData = Buffer.from(dataPayload, "hex");
   const parsedData = parseWaterMeterPayload(hexData, group, time);
