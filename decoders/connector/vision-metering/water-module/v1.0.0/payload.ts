@@ -56,7 +56,7 @@ function parseConsumption(buffer: Buffer, offset: number) {
  */
 function parseResetReason(buffer: Buffer, offset: number) {
   const resetValue = buffer.readUInt32BE(offset);
-  const reasons: any = [];
+  const reasons: string[] = [];
 
   for (let bit = 0; bit < 32; bit++) {
     if ((resetValue >> bit) & 1) {
