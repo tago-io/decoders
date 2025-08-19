@@ -1,0 +1,1 @@
+SigSys is an NB-IoT endpoint with modular expansion for sensing, Modbus, distance, and environmental monitoring.
