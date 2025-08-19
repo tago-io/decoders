@@ -167,7 +167,7 @@ function _decode(valuesString) {
     payload = _decode(String(raw.value));
   } catch (err) {
     var msg = err && err.message ? err.message : "Unknown Error";
-    // eslint-disable-next-line no-console
+   
     payload = [{ variable: "parse_error", value: msg }];
   }
 })();
