@@ -1,1 +1,1 @@
-SigSys is a versatile NB-IoT wireless endpoint designed for rapid deployment and cost-effective problem-solving. Its modular architecture supports interchangeable expansion boards, enabling quick adaptation for applications such as vibration monitoring, analog/digital sensing, Modbus RTU (RS485/RS232) integration, distance measurement, and temperature/humidity monitoring.
+SigSys is an NB-IoT endpoint with modular expansion for sensing, Modbus, distance, and environmental monitoring.
