@@ -5,7 +5,7 @@
     "required": true,
     "label": "Device EUI",
     "case": "lower",
-    "mask": "FF-FF-FF-FF-FF-FF-FF-FF",
+    "mask": "FF-FF-FF-FF-FF-FF-FF-FF"
   },
   "device_parameters": [],
   "middleware_endpoint": {

@@ -4,7 +4,7 @@
   "serial_number_config": {
     "required": true,
     "label": "EUI / IMEI / UUID",
-    "case": "upper",
+    "case": "upper"
   },
   "device_parameters": [],
   "middleware_endpoint": {

@@ -4,7 +4,7 @@
   "serial_number_config": {
     "required": true,
     "case": "upper",
-    "label": "Serial / Device EUI",
+    "label": "Serial / Device EUI"
   },
   "device_parameters": [
     {
@@ -14,15 +14,15 @@
         {
           "is_default": true,
           "label": "Hexadecimal",
-          "value": "hex",
+          "value": "hex"
         },
         {
           "label": "Base64",
-          "value": "base64",
-        },
+          "value": "base64"
+        }
       ],
-      "label": "Payload format",
-    },
+      "label": "Payload format"
+    }
   ],
   "middleware_endpoint": {
     "us-e1": "generic.middleware.tago.io",

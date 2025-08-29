@@ -4,7 +4,7 @@
   "serial_number_config": {
     "label": "EUI",
     "mask": "FF-FF-FF-FF-FF-FF-FF-FF",
-    "required": true,
+    "required": true
   },
   "device_parameters": [],
   "middleware_endpoint": {
