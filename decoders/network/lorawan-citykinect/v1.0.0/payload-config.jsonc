@@ -12,5 +12,5 @@
     "us-e1": "citykinect.middleware.tago.io",
     "eu-w1": "citykinect.middleware.eu-w1.tago.io"
   },
-  "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-citykinect-lorawan/190"
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-citykinect-lorawan"
 }
