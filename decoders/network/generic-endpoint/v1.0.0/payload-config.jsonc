@@ -26,7 +26,7 @@
   ],
   "middleware_endpoint": {
     "us-e1": "generic.middleware.tago.io",
-    "eu-w1": "generic-https.middleware.eu-w1.tago.io",
+    "eu-w1": "generic-https.middleware.eu-w1.tago.io"
   },
-  "documentation_url": "https://community.tago.io/t/how-to-integrate-tago-with-a-generic-https-endpoint",
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-tago-with-a-generic-https-endpoint"
 }
