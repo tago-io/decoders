@@ -4,7 +4,7 @@
   "serial_number_config": {
     "required": true,
     "case": "upper",
-    "label": "Serial / Device EUI"
+    "label": "Serial / Device EUI",
   },
   "device_parameters": [
     {
@@ -14,19 +14,19 @@
         {
           "is_default": true,
           "label": "Hexadecimal",
-          "value": "hex"
+          "value": "hex",
         },
         {
           "label": "Base64",
-          "value": "base64"
-        }
+          "value": "base64",
+        },
       ],
-      "label": "Payload format"
-    }
+      "label": "Payload format",
+    },
   ],
   "middleware_endpoint": {
     "us-e1": "generic.middleware.tago.io",
-    "eu-w1": "generic-https.middleware.eu-w1.tago.io"
+    "eu-w1": "generic-https.middleware.eu-w1.tago.io",
   },
-  "documentation_url": "https://community.tago.io/t/how-to-integrate-tago-with-a-generic-https-endpoint/1085"
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-tago-with-a-generic-https-endpoint",
 }

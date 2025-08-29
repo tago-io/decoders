@@ -4,12 +4,12 @@
   "serial_number_config": {
     "required": true,
     "label": "Device EUI",
-    "mask": "ff-ff-ff-ff-ff-ff-ff-ff"
+    "mask": "ff-ff-ff-ff-ff-ff-ff-ff",
   },
   "device_parameters": [],
   "middleware_endpoint": {
     "us-e1": "swisscom.middleware.tago.io",
     "eu-w1": "swisscom.middleware.eu-w1.tago.io"
   },
-  "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-swisscom-lorawan-ns/440"
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-tagoio-with-swisscom-lorawan-ns"
 }
