@@ -247,7 +247,7 @@ function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
         variable: "consumption_now",
         value: consumption,
         unit: "L",
-        group,
+        group: adjustedTime.toISOString(),
         time: adjustedTime.toISOString(),
         metadata: {
           packet_type: "periodic",
