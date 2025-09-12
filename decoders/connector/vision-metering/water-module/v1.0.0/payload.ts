@@ -81,10 +81,89 @@ function parseNullTerminatedString(buffer: Buffer, offset: number) {
 }
 
 /**
+ * Parses meter alert hex string into readable status with metadata
+ */
+function parseMeterAlert(alertHex: string) {
+  if (!alertHex || alertHex.length !== 8) {
+    return { type: "Invalid", metadata: {} };
+  }
+  
+  // Alert type mappings based on hex codes from the specification
+  const alertTypes: Record<string, { name: string; currentError: boolean; continuousError: boolean; historicalError: boolean }> = {
+    "00000001": { name: "Checksum", currentError: false, continuousError: true, historicalError: false },
+
+    "00000020": { name: "Backflow volume", currentError: false, continuousError: true, historicalError: false },
+    "00200000": { name: "Backflow volume", currentError: false, continuousError: false, historicalError: true },
+
+    "00000002": { name: "Hardware flow", currentError: false, continuousError: true, historicalError: false },
+    "00040000": { name: "Hardware flow", currentError: false, continuousError: false, historicalError: true },
+
+    "00000400": { name: "Undersized meter", currentError: true, continuousError: false, historicalError: false },
+    "00000010": { name: "Undersized meter", currentError: false, continuousError: true, historicalError: false },
+    "00100000": { name: "Undersized meter", currentError: false, continuousError: false, historicalError: true },
+
+    "00001000": { name: "No Usage", currentError: true, continuousError: false, historicalError: false },
+    "01000000": { name: "No Usage", currentError: false, continuousError: false, historicalError: true },
+
+    "00000080": { name: "Measurement interference", currentError: false, continuousError: true, historicalError: false },
+    "02000000": { name: "Measurement interference", currentError: false, continuousError: false, historicalError: true },
+
+    "00000800": { name: "Air in pipe", currentError: true, continuousError: false, historicalError: false },
+
+    "00000004": { name: "Hardware temperature", currentError: false, continuousError: true, historicalError: false },
+
+    "00004000": { name: "High medium temperature", currentError: true, continuousError: false, historicalError: false },
+    "00000200": { name: "High medium temperature", currentError: false, continuousError: true, historicalError: false },
+    "08000000": { name: "High medium temperature", currentError: false, continuousError: false, historicalError: true },
+
+    "00002000": { name: "Freezing risk", currentError: true, continuousError: false, historicalError: false },
+    "00000100": { name: "Freezing risk", currentError: false, continuousError: true, historicalError: false },
+    "04000000": { name: "Freezing risk", currentError: false, continuousError: false, historicalError: true },
+
+    "00020000": { name: "Low battery", currentError: true, continuousError: false, historicalError: false },
+
+    "00008000": { name: "Too much communication", currentError: true, continuousError: false, historicalError: true },
+
+    "00000008": { name: "Leakage Detection", currentError: false, continuousError: true, historicalError: false },
+    "00080000": { name: "Leakage Detection", currentError: false, continuousError: false, historicalError: true },
+
+    "00000040": { name: "Fallback mode - Only for HYDRUS 2.0 Bulk", currentError: false, continuousError: true, historicalError: false },
+    "00400000": { name: "Fallback mode - Only for HYDRUS 2.0 Bulk", currentError: false, continuousError: false, historicalError: true },
+
+    "00010000": { name: "Metrological log access", currentError: true, continuousError: false, historicalError: false },
+  };
+
+  // Direct mapping lookup
+  if (alertTypes[alertHex]) {
+    const alertInfo = alertTypes[alertHex];
+    return {
+      type: alertInfo.name,
+      metadata: {
+        "Current Error": alertInfo.currentError,
+        "Continuous Error": alertInfo.continuousError,
+        "Historical Error": alertInfo.historicalError,
+        "Raw Value": alertHex
+      }
+    };
+  }
+
+  // Default case
+  return {
+    type: "Unknown Alert",
+    metadata: {
+      "Current Error": false,
+      "Continuous Error": false,
+      "Historical Error": false,
+      "Raw Value": alertHex
+    }
+  };
+}
+
+/**
  * Parses startup packet (type 0)
  */
 function parseStartupPacket(buffer: Buffer, group: string, time: string) {
-  const data: DataCreate[] = [];
+  const data: any[] = [];
   // Battery voltage (offset 1, 2 bytes)
   const batteryVolt = parseBatteryVoltage(buffer, 1);
   data.push({
@@ -142,7 +221,7 @@ function parseStartupPacket(buffer: Buffer, group: string, time: string) {
  * Parses periodic packet (type 1)
  */
 function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
-  const data: DataCreate[] = [];
+  const data: any[] = [];
 
   // Battery voltage (offset 1, 2 bytes)
   const batteryVolt = parseBatteryVoltage(buffer, 1);
@@ -192,12 +271,16 @@ function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
   if (buffer.length > 26) {
     const alertString = parseNullTerminatedString(buffer, 26);
     if (alertString.length > 0) {
+      const alertInfo = parseMeterAlert(alertString);
       data.push({
         variable: "meter_alert",
-        value: alertString,
+        value: alertInfo.type,
         group,
         time,
-        metadata: { packet_type: "periodic" },
+        metadata: { 
+          packet_type: "periodic",
+          ...alertInfo.metadata
+        },
       });
     }
   }
@@ -209,7 +292,7 @@ function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
  * Parses reed switch packet (type 2)
  */
 function parseReedSwitchPacket(buffer: Buffer, group: string, time: string) {
-  const data: DataCreate[] = [];
+  const data: any[] = [];
 
   // Battery voltage (offset 1, 2 bytes)
   const batteryVolt = parseBatteryVoltage(buffer, 1);
@@ -251,12 +334,16 @@ function parseReedSwitchPacket(buffer: Buffer, group: string, time: string) {
   if (currentOffset < buffer.length) {
     const alertString = parseNullTerminatedString(buffer, currentOffset);
     if (alertString.length > 0) {
+      const alertInfo = parseMeterAlert(alertString);
       data.push({
         variable: "meter_alert",
-        value: alertString,
+        value: alertInfo.type,
         group,
         time,
-        metadata: { packet_type: "reed_switch" },
+        metadata: { 
+          packet_type: "reed_switch",
+          ...alertInfo.metadata
+        },
       });
       currentOffset += alertString.length + 1; // +1 for null terminator
     }
