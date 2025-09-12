@@ -234,16 +234,6 @@ function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
     metadata: { packet_type: "periodic" },
   });
 
-  // Consumption values (6 readings, 4 bytes each)
-  const consumptionLabels = [
-    "consumption_now",
-    "consumption_1h_ago",
-    "consumption_2h_ago",
-    "consumption_3h_ago",
-    "consumption_4h_ago",
-    "consumption_5h_ago",
-  ];
-
   for (let i = 0; i < 6; i++) {
     const offset = 2 + i * 4; // Start at offset 2, each consumption is 4 bytes
     if (offset + 3 < buffer.length) {
@@ -254,7 +244,7 @@ function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
       const adjustedTime = new Date(currentTime.getTime() - i * 60 * 60 * 1000); // Subtract i hours
 
       data.push({
-        variable: consumptionLabels[i],
+        variable: "consumption_now",
         value: consumption,
         unit: "L",
         group,
@@ -387,7 +377,7 @@ function parseWaterMeterPayload(buffer: Buffer, group: string, time: string) {
     const packetTypeName = PACKET_TYPES[header.packetType] || "unknown";
 
     // Add header information
-    const data: DataCreate[] = [
+    const data: any = [
       {
         variable: "packet_type",
         value: packetTypeName,
@@ -402,7 +392,7 @@ function parseWaterMeterPayload(buffer: Buffer, group: string, time: string) {
     ];
 
     // Parse based on packet type
-    let parsedData: DataCreate[] = [];
+    let parsedData: any = [];
     switch (header.packetType) {
       case 0: // Startup
         parsedData = parseStartupPacket(buffer, group, time);
