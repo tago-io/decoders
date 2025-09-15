@@ -163,7 +163,7 @@ function parseMeterAlert(alertHex: string) {
  * Parses startup packet (type 0)
  */
 function parseStartupPacket(buffer: Buffer, group: string, time: string) {
-  const data: any[] = [];
+  const data: DataCreate[] = [];
   // Battery voltage (offset 1, 2 bytes)
   const batteryVolt = parseBatteryVoltage(buffer, 1);
   data.push({
@@ -221,7 +221,7 @@ function parseStartupPacket(buffer: Buffer, group: string, time: string) {
  * Parses periodic packet (type 1)
  */
 function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
-  const data: any[] = [];
+  const data: DataCreate[] = [];
 
   // Battery voltage (offset 1, 2 bytes)
   const batteryVolt = parseBatteryVoltage(buffer, 1);
@@ -282,7 +282,7 @@ function parsePeriodicPacket(buffer: Buffer, group: string, time: string) {
  * Parses reed switch packet (type 2)
  */
 function parseReedSwitchPacket(buffer: Buffer, group: string, time: string) {
-  const data: any[] = [];
+  const data: DataCreate[] = [];
 
   // Battery voltage (offset 1, 2 bytes)
   const batteryVolt = parseBatteryVoltage(buffer, 1);
@@ -377,7 +377,7 @@ function parseWaterMeterPayload(buffer: Buffer, group: string, time: string) {
     const packetTypeName = PACKET_TYPES[header.packetType] || "unknown";
 
     // Add header information
-    const data: any = [
+    const data: DataCreate[] = [
       {
         variable: "packet_type",
         value: packetTypeName,
@@ -392,7 +392,7 @@ function parseWaterMeterPayload(buffer: Buffer, group: string, time: string) {
     ];
 
     // Parse based on packet type
-    let parsedData: any = [];
+    let parsedData: DataCreate[] = [];
     switch (header.packetType) {
       case 0: // Startup
         parsedData = parseStartupPacket(buffer, group, time);
