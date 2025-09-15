@@ -68,12 +68,13 @@ describe("Water Meter Payload Parser", () => {
 
       const packetType = payload.find((x) => x.variable === "packet_type");
       const batteryVoltage = payload.find((x) => x.variable === "battery_voltage");
-      const consumptionNow = payload.find((x) => x.variable === "consumption_now");
-      const consumption1h = payload.find((x) => x.variable === "consumption_1h_ago");
-      const consumption2h = payload.find((x) => x.variable === "consumption_2h_ago");
-      const consumption3h = payload.find((x) => x.variable === "consumption_3h_ago");
-      const consumption4h = payload.find((x) => x.variable === "consumption_4h_ago");
-      const consumption5h = payload.find((x) => x.variable === "consumption_5h_ago");
+      const consumptions = payload.filter((x) => x.variable === "consumption_now");
+      const consumptionNow = consumptions[0];
+      const consumption1h = consumptions[1];
+      const consumption2h = consumptions[2];
+      const consumption3h = consumptions[3];
+      const consumption4h = consumptions[4];
+      const consumption5h = consumptions[5];
 
       expect(packetType?.value).toBe("periodic");
       expect(batteryVoltage?.value).toBe(3.59);
@@ -127,6 +128,40 @@ describe("Water Meter Payload Parser", () => {
       expect(batteryVoltage?.metadata?.packet_type).toBe("reed_switch");
       expect(consumptionCurrent?.metadata?.packet_type).toBe("reed_switch");
       expect(firmwareVersion?.metadata?.packet_type).toBe("reed_switch");
+    });
+  });
+
+  describe("Meter Alert Types", () => {
+    test("Should parse leakage detection alert correctly", () => {
+      payload = [{ variable: "payload", value: "01da0019715200195fca00195c0f001957fc00194a1c00193d50303030383030303000383133383933393900" }];
+      (globalThis as any).payload = payload;
+      
+      eval(transpiled);
+      expect(Array.isArray(payload)).toBe(true);
+      expect(payload.length).toBeGreaterThan(1);
+
+      const meterAlert = payload.find((x) => x.variable === "meter_alert");
+
+      expect(meterAlert?.value).toBe("Leakage Detection");
+      expect(meterAlert?.metadata?.["Current Error"]).toBe(false);
+      expect(meterAlert?.metadata?.["Continuous Error"]).toBe(false);
+      expect(meterAlert?.metadata?.["Historical Error"]).toBe(true);
+    });
+
+    test("Should parse undersized meter alert correctly", () => {
+      payload = [{ variable: "payload", value: "01df0030b7fa0030b76f000000000030a62a0030a5a60030a307303030383030303000383838393835303300" }];
+      (globalThis as any).payload = payload;
+      
+      eval(transpiled);
+      expect(Array.isArray(payload)).toBe(true);
+      expect(payload.length).toBeGreaterThan(1);
+
+      const meterAlert = payload.find((x) => x.variable === "meter_alert");
+
+      expect(meterAlert?.value).toBe("Leakage Detection");
+      expect(meterAlert?.metadata?.["Current Error"]).toBe(false);
+      expect(meterAlert?.metadata?.["Continuous Error"]).toBe(false);
+      expect(meterAlert?.metadata?.["Historical Error"]).toBe(true);
     });
   });
 });
