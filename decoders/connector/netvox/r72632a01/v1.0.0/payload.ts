@@ -1,7 +1,7 @@
 /**
  * Configuration command mapping
  */
-function getCfgCmd(cfgcmd) {
+function getCfgCmd(cfgcmd: number) {
   const cfgcmdlist = {
     0x01: "ConfigReportReq",
     0x81: "ConfigReportRsp",
@@ -14,7 +14,7 @@ function getCfgCmd(cfgcmd) {
 /**
  * Device name mapping
  */
-function getDeviceName(dev) {
+function getDeviceName(dev: number) {
   const deviceName = {
     0x05: "RA07 Series",
     0x09: "R726 Series",
@@ -31,7 +31,7 @@ function getDeviceName(dev) {
 /**
  * Check if sensor value exists (not 0xFF, 0xFFFF, or 0xFFFFFFFF)
  */
-function checkSensorExist(val) {
+function checkSensorExist(val: number) {
   if ((val === 0xFF) || (val === 0xFFFF) || (val === 0xFFFFFFFF)) {
     return null; // Return null instead of -1 for TagoIO compatibility
   }
@@ -41,7 +41,7 @@ function checkSensorExist(val) {
 /**
  * Pad string with leading zeros
  */
-function padLeft(str, len) {
+function padLeft(str: string, len: number) {
   str = '' + str;
   if (str.length >= len) {
     return str;
@@ -53,7 +53,7 @@ function padLeft(str, len) {
 /**
  * Parse environmental sensor data based on sensor type
  */
-function parseSensorData(sensorType, bytes, group, time) {
+function parseSensorData(sensorType: number, bytes: number[], group: string, time: string) {
   const data: any[] = [];
   
   const retSensorVal1 = checkSensorExist(bytes[4] << 8 | bytes[5]);
@@ -257,8 +257,8 @@ function parseSensorData(sensorType, bytes, group, time) {
  * Main decoder function for TagoIO
  */
 // Find payload and port data from the received payload
-const payloadData = payload.find((x) => ["payload_raw", "payload", "data"].includes(x.variable));
-const portData = payload.find((x) => ["port", "fport"].includes(x.variable));
+const payloadData = payload.find((x: any) => ["payload_raw", "payload", "data"].includes(x.variable));
+const portData = payload.find((x: any) => ["port", "fport"].includes(x.variable));
 
 if (payloadData && portData) {
   try {
@@ -351,7 +351,7 @@ if (payloadData && portData) {
     }
 
     // Replace payload with parsed data
-    payload = data;
+    payload = payload.concat(data);
 
   } catch (error) {
     // Handle parsing errors

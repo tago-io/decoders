@@ -4,7 +4,7 @@ import { decoderRun } from "../../../../../src/functions/decoder-run";
 
 const file_path = "decoders/connector/netvox/r72632a01/v1.0.0/payload.ts" as const;
 
-function preparePayload(payloadHex, port) {
+function preparePayload(payloadHex: string, port: number) {
   let payload = [
     { variable: "payload", value: payloadHex, unit: "" },
     { variable: "fport", value: port, unit: "" },
@@ -63,8 +63,6 @@ describe("Port 6, CO2 values", () => {
     expect(Array.isArray(result.payload)).toBe(true);
   });
 
-  console.log(result.payload);
-
   test("Check variable values", () => {
     expect(result.battery_voltage?.value).toBe(12);
     expect(result.co2?.value).toBe(10);
@@ -79,8 +77,6 @@ describe("Port 6, Temp/Hum values", () => {
   test("Output Result", () => {
     expect(Array.isArray(result.payload)).toBe(true);
   });
-
-  console.log(result.payload);
 
   test("results", () => {
     expect(result.battery_voltage?.value).toBe(12);
