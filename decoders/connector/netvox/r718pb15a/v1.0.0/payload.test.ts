@@ -4,7 +4,7 @@ import { decoderRun } from "../../../../../src/functions/decoder-run";
 
 const file_path = "decoders/connector/netvox/r718pb15a/v1.0.0/payload.ts" as const;
 
-function preparePayload(payloadHex, port) {
+function preparePayload(payloadHex: string, port: number) {
   let payload = [
     { variable: "payload", value: payloadHex, unit: "" },
     { variable: "fport", value: port, unit: "" },
@@ -44,54 +44,6 @@ describe("Port 6, 0x01, unit tests", () => {
     expect(Array.isArray(result.payload)).toBe(true);
   });
 
-  console.log(result.payload);
-
-  /* 
-
-  {
-    variable: 'device_name',
-    value: 'R718PB15A',
-    group: '1759497957448-1ni',
-    time: '2025-10-03T13:25:57.448Z'
-  },
-  {
-    variable: 'battery_voltage',
-    value: 3.6,
-    unit: 'V',
-    group: '1759497957448-1ni',
-    time: '2025-10-03T13:25:57.448Z',
-    metadata: { status: 'normal' }
-  },
-  {
-    variable: 'soil_vwc',
-    value: 16.69,
-    unit: '%',
-    group: '1759497957448-1ni',
-    time: '2025-10-03T13:25:57.448Z'
-  },
-  {
-    variable: 'soil_temperature',
-    value: 27.1,
-    unit: '°C',
-    group: '1759497957448-1ni',
-    time: '2025-10-03T13:25:57.448Z'
-  },
-  {
-    variable: 'water_level',
-    value: 65535,
-    unit: 'mm',
-    group: '1759497957448-1ni',
-    time: '2025-10-03T13:25:57.448Z'
-  },
-  {
-    variable: 'soil_ec',
-    value: 0.1,
-    unit: 'mS/cm',
-    group: '1759497957448-1ni',
-    time: '2025-10-03T13:25:57.448Z'
-  }
-    */
-
   test("Check variable values", () => {
     expect(result.battery_voltage?.value).toBe(3.6);
     expect(result.soil_vwc?.value).toBe(16.69);
@@ -100,51 +52,3 @@ describe("Port 6, 0x01, unit tests", () => {
     expect(result.soil_ec?.value).toBe(0.1);
   });
 });
-
-// describe("Port 6, 0x02, unit tests", () => {
-//   const payloadHex = "014A022401010000000000";
-//   const port = 6;
-//   const result = preparePayload(payloadHex, port);
-
-//   test("Output result is type: array", () => {
-//     expect(Array.isArray(result.payload)).toBe(true);
-//   });
-
-//   test("Check variable values", () => {
-//     expect(result.battery?.value).toBe(3.6);
-//     expect(result.multiplier2?.value).toBe(1);
-//     expect(result.multiplier3?.value).toBe(1);
-//   });
-// });
-
-// describe("Port 7, 0x81, unit tests", () => {
-//   const payloadHex = "81BB010000000000000000";
-//   const port = 7;
-//   const result = preparePayload(payloadHex, port);
-
-//   test("Output Result", () => {
-//     expect(Array.isArray(result.payload)).toBe(true);
-//   });
-
-//   test("results", () => {
-//     expect(result.cmd?.value).toBe("config_report_rsp");
-//     expect(result.status?.value).toBe("failure");
-//   });
-// });
-
-// describe("Port 7, 0x82, unit tests", () => {
-//   const payloadHex = "824A003C003C0064000000";
-//   const port = 7;
-//   const result = preparePayload(payloadHex, port);
-
-//   test("Output Result", () => {
-//     expect(Array.isArray(result.payload)).toBe(true);
-//   });
-
-//   test("results", () => {
-//     expect(result.cmd?.value).toBe("read_config_report_rsp");
-//     expect(result.min_time?.value).toBe(60);
-//     expect(result.max_time?.value).toBe(60);
-//     expect(result.current_change?.value).toBe(100);
-//   });
-// });

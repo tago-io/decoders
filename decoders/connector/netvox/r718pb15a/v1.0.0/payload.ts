@@ -6,7 +6,7 @@
 /**
  * Configuration command mapping
  */
-function getCfgCmd(cfgcmd) {
+function getCfgCmd(cfgcmd: number) {
   const cfgcmdlist = {
     0x01: "ConfigReportReq",
     0x81: "ConfigReportRsp",
@@ -39,7 +39,7 @@ function getCfgCmd(cfgcmd) {
 /**
  * Device name mapping
  */
-function getDeviceName(dev) {
+function getDeviceName(dev: number) {
   const deviceName = {
     0x58: "R718PB15A"
   };
@@ -49,7 +49,7 @@ function getDeviceName(dev) {
 /**
  * Utility function to pad hex strings
  */
-function padLeft(str, len) {
+function padLeft(str: string, len: number) {
   str = '' + str;
   if (str.length >= len) {
     return str;
@@ -61,7 +61,7 @@ function padLeft(str, len) {
 /**
  * Parse sensor data payload for port 6
  */
-function parseSensorData(bytes, group, time) {
+function parseSensorData(bytes: number[], group: string, time: string) {
   const data: any[] = [];
   
   // Device information (always present)
@@ -539,7 +539,7 @@ function parseSensorData(bytes, group, time) {
 /**
  * Parse configuration command payload for port 7
  */
-function parseConfigData(bytes, group, time) {
+function parseConfigData(bytes: number[], group: string, time: string) {
   const data: any[] = [];
   
   const cmdName = getCfgCmd(bytes[0]);
@@ -623,11 +623,11 @@ function parseConfigData(bytes, group, time) {
 // Main payload processing logic
 try {
   // Find payload and port data
-  const payloadData = payload.find((x) => ["payload_raw", "payload", "data"].includes(x.variable));
-  const portData = payload.find((x) => ["port", "fport"].includes(x.variable));
+  const payloadData = payload.find((x: any) => ["payload_raw", "payload", "data"].includes(x.variable));
+  const portData = payload.find((x: any) => ["port", "fport"].includes(x.variable));
 
   if (!payloadData || !payloadData.value) {
-    console.error("No payload data found");
+    payload = [{ variable: "parse_error", value: "No payload data found" }];
   } else {
     // Convert hex string to bytes array
     const hexString = payloadData.value.toString();
@@ -637,7 +637,7 @@ try {
     }
 
     if (bytes.length === 0) {
-      console.error("Invalid payload: empty bytes array");
+      payload = [{ variable: "parse_error", value: "Invalid payload: empty bytes array" }];
     } else {
       const port = portData ? parseInt(portData.value) : 6; // Default to port 6
       const group = payloadData.group || `${Date.now()}-${Math.random().toString(36).substring(2, 5)}`;
@@ -661,12 +661,10 @@ try {
           }];
       }
 
-      // Replace payload with parsed data
-      payload = parsedData;
+      payload = payload.concat(parsedData);
     }
   }
 } catch (error) {
-  console.error(`Payload parsing error: ${error.message}`);
   payload = [{
     variable: "parser_error",
     value: `Parsing failed: ${error.message}`,
