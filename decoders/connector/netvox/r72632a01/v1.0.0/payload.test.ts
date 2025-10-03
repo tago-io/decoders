@@ -11,7 +11,6 @@ function preparePayload(payloadHex: string, port: number) {
   ] as any;
   payload = decoderRun(file_path, { payload });
 
-  const parse_error = payload.find((item) => item.variable === "parse_error");
   const battery_voltage = payload.find((item) => item.variable === "battery_voltage");
   const soil_nitrogen = payload.find((item) => item.variable === "soil_nitrogen");
   const soil_phosphorus = payload.find((item) => item.variable === "soil_phosphorus");

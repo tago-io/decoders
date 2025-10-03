@@ -2,7 +2,7 @@
  * Configuration command mapping
  */
 function getCfgCmd(cfgcmd: number) {
-  const cfgcmdlist = {
+  const cfgcmdlist: Record<number, string> = {
     0x01: "ConfigReportReq",
     0x81: "ConfigReportRsp",
     0x02: "ReadConfigReportReq",
