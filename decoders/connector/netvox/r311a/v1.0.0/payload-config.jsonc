@@ -20,6 +20,7 @@
     "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
     "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
     "../../../../network/lorawan-helium/v1.0.0/payload.js",
-    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js"
   ]
 }
