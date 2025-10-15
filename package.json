@@ -5,26 +5,27 @@
   "scripts": {
     "test": "vitest",
     "linter": "biome lint --diagnostic-level=error .",
-    "start": "npx --yes tsx --env-file .env src/main.ts"
+    "start": "npx --yes tsx --env-file .env src/main.ts",
+    "build": "rm -rf ./build; tsc --build"
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
-    "@swc/core": "1.5.24",
-    "@tago-io/sdk": "11.2.1",
-    "@types/node": "20.12.12",
-    "@types/uuid": "9.0.8",
-    "@types/validator": "13.11.10",
-    "ajv": "8.13.0",
+    "@swc/core": "1.13.5",
+    "@tago-io/sdk": "12.2.1",
+    "@types/node": "24.7.2",
+    "@types/uuid": "11.0.0",
+    "@types/validator": "13.15.3",
+    "ajv": "8.17.1",
     "ajv-formats": "3.0.1",
-    "better-sqlite3": "11.6.0",
+    "better-sqlite3": "12.4.1",
     "knex": "3.1.0",
-    "moment-timezone": "0.5.45",
+    "moment-timezone": "0.6.0",
     "sqlite3": "5.1.7",
-    "typescript": "5.5.2",
-    "uuid": "9.0.1",
-    "validator": "13.12.0",
-    "vitest": "1.6.0",
+    "typescript": "5.9.3",
+    "uuid": "13.0.0",
+    "validator": "13.15.15",
+    "vitest": "3.2.4",
     "vm2": "3.9.19",
-    "zod": "3.23.8"
+    "zod": "4.1.12"
   }
 }
