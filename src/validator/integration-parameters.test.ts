@@ -1,5 +1,5 @@
 import { expect, test, describe } from "vitest";
-import type { ZodError } from "zod";
+import type { ZodError } from "zod/v3";
 import { zIntegrationParameter, zIntegrationParameters } from "./integration-parameters";
 
 describe("Integration Parameter Schema", () => {

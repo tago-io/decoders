@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod/v3";
 import { zIntegrationParameters } from "./integration-parameters";
 import { zBufferOrString, zBufferPayloadSize } from "./common.js";
 

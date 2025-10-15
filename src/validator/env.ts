@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod/v3";
 
 const zEnv = z.object({
   DECODERS_ASSET_DOMAIN: z.string(),
