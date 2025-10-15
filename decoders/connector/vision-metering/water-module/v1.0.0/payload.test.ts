@@ -2,7 +2,7 @@ import { describe, test, expect, beforeEach } from "vitest";
 import { readFileSync } from "fs";
 import { join } from "path";
 
-import { DataToSend } from "@tago-io/sdk/lib/types";
+import { DataToSend } from "@tago-io/sdk";
 import * as ts from "typescript";
 
 const decoderFile = readFileSync(join(__dirname, "./payload.ts"), "utf8");
@@ -14,7 +14,7 @@ let payload: DataToSend[] = [];
 
 describe("Shall not be parsed", () => {
   beforeEach(() => {
-    payload = [{ variable: "shallnotpass", value: "04096113950292"}];
+    payload = [{ variable: "shallnotpass", value: "04096113950292" }];
     (globalThis as any).payload = payload;
   });
 
@@ -46,7 +46,7 @@ describe("Water Meter Payload Parser", () => {
       const resetReason = payload.find((x) => x.variable === "reset_reason");
       const rebootCounter = payload.find((x) => x.variable === "reboot_counter");
       const firmwareVersion = payload.find((x) => x.variable === "firmware_version");
-      
+
       expect(packetType?.value).toBe("startup");
       expect(batteryVoltage?.value).toBe(3.59);
       expect(batteryVoltage?.unit).toBe("V");
@@ -135,7 +135,7 @@ describe("Water Meter Payload Parser", () => {
     test("Should parse leakage detection alert correctly", () => {
       payload = [{ variable: "payload", value: "01da0019715200195fca00195c0f001957fc00194a1c00193d50303030383030303000383133383933393900" }];
       (globalThis as any).payload = payload;
-      
+
       eval(transpiled);
       expect(Array.isArray(payload)).toBe(true);
       expect(payload.length).toBeGreaterThan(1);
@@ -151,7 +151,7 @@ describe("Water Meter Payload Parser", () => {
     test("Should parse undersized meter alert correctly", () => {
       payload = [{ variable: "payload", value: "01df0030b7fa0030b76f000000000030a62a0030a5a60030a307303030383030303000383838393835303300" }];
       (globalThis as any).payload = payload;
-      
+
       eval(transpiled);
       expect(Array.isArray(payload)).toBe(true);
       expect(payload.length).toBeGreaterThan(1);
