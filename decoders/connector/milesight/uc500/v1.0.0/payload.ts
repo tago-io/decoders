@@ -17,7 +17,7 @@ var adc_alarm_chns = [0x85, 0x86];
  * @param {string} time - Timestamp
  * @returns {Array} Array of TagoIO data objects
  */
-function milesightDeviceDecode(bytes, group, time) {
+function milesightDeviceDecode(bytes: number[], group: string, time: string) {
   var data: any = [];
   var decoded: any = {};
 
@@ -244,7 +244,7 @@ function milesightDeviceDecode(bytes, group, time) {
  * @param {string} variableName - Variable name
  * @returns {string} Unit string
  */
-function getUnitForVariable(variableName) {
+function getUnitForVariable(variableName: string) {
   if (variableName.includes("analog_input") && !variableName.includes("type")) {
     return "V"; // Voltage or Current
   }
@@ -263,32 +263,56 @@ function getUnitForVariable(variableName) {
   return undefined;
 }
 
-// Helper functions (keeping original implementation)
-function readProtocolV(bytes) {
+/**
+ * Read protocol version
+ * @param {number} bytes - Byte array
+ * @returns {string} Protocol version
+ */
+function readProtocolV(bytes: number) {
   var major = (bytes & 0xf0) >> 4;
   var minor = bytes & 0x0f;
   return "v" + major + "." + minor;
 }
 
-function readHardwareV(bytes) {
+/**
+ *
+ * @param {number} bytes - Byte array
+ * @returns
+ */
+function readHardwareV(bytes: number[]) {
   var major = (bytes[0] & 0xff).toString(16);
   var minor = (bytes[1] & 0xff) >> 4;
   return "v" + major + "." + minor;
 }
 
-function readFirmwareV(bytes) {
+/**
+ * Read firmware version
+ * @param {number} bytes - Byte array
+ * @returns {string} Firmware version
+ */
+function readFirmwareV(bytes: number[]) {
   var major = (bytes[0] & 0xff).toString(16);
   var minor = (bytes[1] & 0xff).toString(16);
   return "v" + major + "." + minor;
 }
 
-function readTslV(bytes) {
+/**
+ * Read TSL version
+ * @param {number} bytes - Byte array
+ * @returns {string} TSL version
+ */
+function readTslV(bytes: number[]) {
   var major = bytes[0] & 0xff;
   var minor = bytes[1] & 0xff;
   return "v" + major + "." + minor;
 }
 
-function readSerialN(bytes) {
+/**
+ * Read serial number
+ * @param {number} bytes - Byte array
+ * @returns {string} Serial number
+ */
+function readSerialN(bytes: number[]) {
   var temp: any = [];
   for (var idx = 0; idx < bytes.length; idx++) {
     temp.push(("0" + (bytes[idx] & 0xff).toString(16)).slice(-2));
@@ -296,7 +320,12 @@ function readSerialN(bytes) {
   return temp.join("");
 }
 
-function readLoRaWANC(type) {
+/**
+ * Read LoRaWAN class type
+ * @param {number} type - LoRaWAN class type
+ * @returns {string} LoRaWAN class type
+ */
+function readLoRaWANC(type: number) {
   var class_map = {
     0: "Class A",
     1: "Class B",
@@ -306,52 +335,101 @@ function readLoRaWANC(type) {
   return getValue(class_map, type);
 }
 
-function readResetEvent(status) {
+/**
+ * Read reset event
+ * @param {number} status - Reset event status
+ * @returns {string} Reset event status
+ */
+function readResetEvent(status: number) {
   var status_map = { 0: "normal", 1: "reset" };
   return getValue(status_map, status);
 }
 
-function readOnOffStatus(status) {
+/**
+ * Read on/off status
+ * @param {number} status - On/off status
+ * @returns {string} On/off status
+ */
+function readOnOffStatus(status: number) {
   var status_map = { 0: "off", 1: "on" };
   return getValue(status_map, status);
 }
 
-function readAlarm(type) {
+/**
+ * Read alarm
+ * @param {number} type - Alarm type
+ * @returns {string} Alarm type
+ */
+function readAlarm(type: number) {
   var alarm_map = { 1: "threshold alarm", 2: "value change alarm" };
   return getValue(alarm_map, type);
 }
 
-function readAnalogInputType(type) {
+/**
+ * Read analog input type
+ * @param {number} type - Analog input type
+ * @returns {string} Analog input type
+ */
+function readAnalogInputType(type: number) {
   var type_map = { 0: "current", 1: "voltage" };
   return getValue(type_map, type);
 }
 
-// Data reading functions
-function readUI8(bytes) {
+/**
+ * Read unsigned 8-bit integer
+ * @param {number} bytes - Byte array
+ * @returns {number} Unsigned 8-bit integer
+ */
+function readUI8(bytes: number) {
   return bytes & 0xff;
 }
 
-function readI16LE(bytes) {
+/**
+ * Read signed 16-bit integer
+ * @param {number} bytes - Byte array
+ * @returns {number} Signed 16-bit integer
+ */
+function readI16LE(bytes: number[]) {
   var ref = readUI16LE(bytes);
   return ref > 0x7fff ? ref - 0x10000 : ref;
 }
 
-function readUI16LE(bytes) {
+/**
+ * Read unsigned 16-bit integer
+ * @param {number} bytes - Byte array
+ * @returns {number} Unsigned 16-bit integer
+ */
+function readUI16LE(bytes: number[]) {
   var value = (bytes[1] << 8) + bytes[0];
   return value & 0xffff;
 }
 
-function readUI32LE(bytes) {
+/**
+ * Read unsigned 32-bit integer
+ * @param {number} bytes - Byte array
+ * @returns {number} Unsigned 32-bit integer
+ */
+function readUI32LE(bytes: number[]) {
   var value = (bytes[3] << 24) + (bytes[2] << 16) + (bytes[1] << 8) + bytes[0];
   return value & 0xffffffff;
 }
 
-function readI32LE(bytes) {
+/**
+ * Read signed 32-bit integer
+ * @param {number} bytes - Byte array
+ * @returns {number} Signed 32-bit integer
+ */
+function readI32LE(bytes: number[]) {
   var ref = readUI32LE(bytes);
   return ref > 0x7fffffff ? ref - 0x100000000 : ref;
 }
 
-function readFloat16LE(bytes) {
+/**
+ * Read float 16-bit integer
+ * @param {number} bytes - Byte array
+ * @returns {number} Float 16-bit integer
+ */
+function readFloat16LE(bytes: number[]) {
   var bits = (bytes[1] << 8) | bytes[0];
   var sign = bits >>> 15 === 0 ? 1.0 : -1.0;
   var e = (bits >>> 10) & 0x1f;
@@ -360,7 +438,12 @@ function readFloat16LE(bytes) {
   return f;
 }
 
-function readFlLE(bytes) {
+/**
+ * Read float 32-bit integer
+ * @param {number} bytes - Byte array
+ * @returns {number} Float 32-bit integer
+ */
+function readFlLE(bytes: number[]) {
   var bits = (bytes[3] << 24) | (bytes[2] << 16) | (bytes[1] << 8) | bytes[0];
   var sign = bits >>> 31 === 0 ? 1.0 : -1.0;
   var e = (bits >>> 23) & 0xff;
@@ -369,7 +452,12 @@ function readFlLE(bytes) {
   return f;
 }
 
-function readString(bytes) {
+/**
+ * Read string
+ * @param {number} bytes - Byte array
+ * @returns {string} String
+ */
+function readString(bytes: number[]) {
   var str = "";
   for (var i = 0; i < bytes.length; i++) {
     if (bytes[i] === 0) {
@@ -380,7 +468,13 @@ function readString(bytes) {
   return str;
 }
 
-function includesContains(data, value) {
+/**
+ * Check if data contains value
+ * @param {number} data - Data array
+ * @param {number} value - Value to check
+ * @returns {boolean} True if data contains value, false otherwise
+ */
+function includesContains(data: number[], value: number) {
   var size = data.length;
   for (var i = 0; i < size; i++) {
     if (data[i] == value) {
@@ -390,7 +484,13 @@ function includesContains(data, value) {
   return false;
 }
 
-function getValue(map, key) {
+/**
+ * Get value from map
+ * @param {number} map - Map
+ * @param {number} key - Key
+ * @returns {string} Value
+ */
+function getValue(map: any, key: number) {
   if (RAW_VALUE) return key;
   var value = map[key];
   if (!value) value = "unknown";
