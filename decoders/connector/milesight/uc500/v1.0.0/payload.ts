@@ -184,9 +184,9 @@ function milesightDeviceDecode(bytes: number[], group: string, time: string) {
       if (gpio_2_type === 0x00) {
         historyData.gpio_input_2 = readOnOffStatus(readUI32LE(bytes.slice(i + 10, i + 14)));
       } else if (gpio_2_type === 0x01) {
-        historyData.gpio_output_2 = readOnOffStatus(readUInt32LE(bytes.slice(i + 10, i + 14)));
+        historyData.gpio_output_2 = readOnOffStatus(readUI32LE(bytes.slice(i + 10, i + 14)));
       } else if (gpio_2_type === 0x02) {
-        historyData.gpio_counter_2 = readUInt32LE(bytes.slice(i + 10, i + 14));
+        historyData.gpio_counter_2 = readUI32LE(bytes.slice(i + 10, i + 14));
       }
       historyData.analog_input_1 = readI32LE(bytes.slice(i + 14, i + 18)) / 1000;
       historyData.analog_input_2 = readI32LE(bytes.slice(i + 18, i + 22)) / 1000;
