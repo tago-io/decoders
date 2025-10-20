@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod/v3";
 import validator from "validator";
 
 const zBufferPayload = z.any().refine((val) => Buffer.isBuffer(val), "Invalid Payload Parser");
@@ -29,7 +29,6 @@ const zDomain = z.string().refine((val) => {
   });
 }, "Invalid domain");
 
-const zBufferOrString =  z.union([z.string(), z.instanceof(Buffer)]);
-
+const zBufferOrString = z.union([z.string(), z.instanceof(Buffer)]);
 
 export { zBufferPayload, zBufferPayloadSize, zDomain, zBufferOrString };

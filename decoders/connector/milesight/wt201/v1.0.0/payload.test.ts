@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach } from "vitest";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { DataToSend } from "@tago-io/sdk/lib/types";
+import { DataToSend } from "@tago-io/sdk";
 import * as ts from "typescript";
 
 const file = readFileSync(join(__dirname, "./payload.ts"));

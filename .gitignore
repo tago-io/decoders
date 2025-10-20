@@ -124,3 +124,8 @@ dist
 
 # .db file
 data
+
+# Ignore built ts files
+dist
+build
+.build
