@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Blecon Cloud Connected Bluetooth Smart Labels are BLE tracking labels for item monitoring. They use InPlay NanoBeacon IN100 with Blecon firmware and connect to the Blecon Beacon Network without pairing or dedicated gateways. Labels are under 1 mm thick with a printed antenna, integrated thin-film zinc-based power cell, and activation on placement. Designed for single-use or high-volume logistics and supply chain tracking. Features include device identity management, data encryption, sensor data handling, and automatic onboarding. Data is transmitted over BLE to the Blecon network for cloud connectivity.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/blecon/v1.0.0/payload.ts"
+  ]
+}

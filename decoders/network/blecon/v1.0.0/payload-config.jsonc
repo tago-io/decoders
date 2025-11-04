@@ -4,7 +4,7 @@
   "serial_number_config": {
     "required": true,
     "label": "Blecon Device ID",
-    "mask": "urn:uuid:aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "mask": "urn:uuid:PPPPPPPP-PPPP-PPPP-PPPP-PPPPPPPPPPPP",
     "case": ""
   },
   "device_parameters": [],
