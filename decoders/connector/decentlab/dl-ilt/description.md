@@ -1,0 +1,1 @@
+DL-ILT is a leaf temperature sensor over LoRaWAN®
