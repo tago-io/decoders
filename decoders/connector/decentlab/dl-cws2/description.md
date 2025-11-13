@@ -1,0 +1,1 @@
+DL-CWS2 is a high-precision winter road maintenance sensor with radiation shield over LoRaWAN®

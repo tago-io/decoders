@@ -1,0 +1,1 @@
+DL-ISD is a stem dendrometer sensor over LoRaWAN®
