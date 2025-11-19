@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "Blecon Device ID",
+    "mask": "urn:uuid:PPPPPPPP-PPPP-PPPP-PPPP-PPPPPPPPPPPP",
+    "case": ""
+  },
+  "device_parameters": [],
+  "middleware_endpoint": {
+    "us-e1": "blecon.middleware.us-e1.tago.io",
+    "eu-w1": "blecon.middleware.eu-w1.tago.io"
+  },
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-with-blecon"
+}

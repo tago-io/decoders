@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "L02S-BCN is a Bluetooth-connected smart beacon with onboard sensors for temperature, humidity, barometric pressure, and 3-axis acceleration. It uses a Nordic nRF54L series SoC and operates from a CR2477 coin cell in an IP67 enclosure. Features include two-way communication with cloud confirmation, OTA updates, encrypted payloads with authenticated identity, and globally synchronized timestamps. Supports embedded AI/ML on device. Communicates over Bluetooth via Blecon Hotspots for flexible deployment and roaming. Integrations noted by the manufacturer include AWS services, Memfault, and Edge Impulse.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/blecon/v1.0.0/payload.ts"
+  ]
+}
