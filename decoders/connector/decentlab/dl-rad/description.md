@@ -1,0 +1,1 @@
+DL-RAD is a radar distance/level sensor over LoRaWAN®
