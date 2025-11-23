@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "*     Temperature, humidity, VOC, O2, CO2, CO, SO2, NO2, NH3, H2S, EO, H2, NO, O3, C2H4, C2H4O,\n*    Dimension in mm : 90.4x50.4x35.1\n*",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/https/v1.0.0/payload.js"
+  ]
+}
