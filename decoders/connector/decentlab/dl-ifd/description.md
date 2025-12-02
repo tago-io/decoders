@@ -1,0 +1,1 @@
+DL-IFD is a fruit dendrometer sensor over LoRaWAN®
