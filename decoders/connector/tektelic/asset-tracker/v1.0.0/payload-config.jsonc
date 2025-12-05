@@ -7,10 +7,8 @@
   "device_parameters": [],
   "networks": [
     "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
-    "../../../../network/lorawan-actility/v1.0.0/payload.js",
-    "../../../../network/lorawan-brdot/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",,
     "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
-    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
     "../../../../network/lorawan-everynet/v1.0.0/payload.js",
     "../../../../network/lorawan-helium/v1.0.0/payload.js",
     "../../../../network/lorawan-kerlink/v1.0.0/payload.js",

@@ -6,10 +6,8 @@
   "device_annotation": "Install the dashboard template by clicking [here](https://admin.tago.io/template/660beb6c2bbc8d00091dd697).",
   "device_parameters": [],
   "networks": [
-    "../../../../network/lorawan-actility/v1.0.0/payload.js",
-    "../../../../network/lorawan-brdot/v1.0.0/payload.js",
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",,
     "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
-    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
     "../../../../network/lorawan-everynet/v1.0.0/payload.js",
     "../../../../network/lorawan-helium/v1.0.0/payload.js",
     "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
