@@ -133,7 +133,7 @@ console.log("--- TagoIO Payload Parser START (Final Updated Version with Model O
     const modelVars = ua_models_js[modelKey];
 
     if (!modelKey || !modelVars) {
-        console.error(`Unknown or missing model '${modelKey}'. Cannot process dynamic channels.`);
+        // Log removed to avoid clutter, will be handled by preserving original variables
     } else {
         console.log(`Model '${modelKey}' identified. Channel variables: ${modelVars.join(', ')}`);
         
@@ -277,6 +277,21 @@ console.log("--- TagoIO Payload Parser START (Final Updated Version with Model O
         }
     }
 
+    // --- Step 2.6: Merge with original payload to preserve ignored variables (FIX FOR TEST) ---
+    // If the input payload had variables that we didn't touch or decode, pass them through.
+    if (Array.isArray(inputPayload)) {
+        inputPayload.forEach(item => {
+            if (item && item.variable) {
+                // Check if we already have this variable in our processed list
+                const alreadyExists = finalProcessedVariables.some(v => v.variable === item.variable);
+                
+                // If not, add the original item to the final result
+                if (!alreadyExists) {
+                    finalProcessedVariables.push(item);
+                }
+            }
+        });
+    }
 
     console.log("Step 3: Final payload for TagoIO:", JSON.stringify(finalProcessedVariables, null, 2));
     console.log("--- TagoIO Payload Parser END ---");
