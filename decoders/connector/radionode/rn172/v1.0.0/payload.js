@@ -293,8 +293,7 @@ console.log("--- TagoIO Payload Parser START (Final Updated Version with Model O
         });
     }
 
-    console.log("Step 3: Final payload for TagoIO:", JSON.stringify(finalProcessedVariables, null, 2));
-    console.log("--- TagoIO Payload Parser END ---");
+    
 
     // Assign the final array back to the payload variable for TagoIO.
     payload = finalProcessedVariables;

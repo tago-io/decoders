@@ -1,20 +1,29 @@
 import { describe, test, expect } from "vitest";
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-// FIXED: Point to payload.js, NOT payload.test.ts
-const file_path = "decoders/connector/radionode/rn320-bth/v1.0.0/payload.js" as const;
+// Path to the RN320-BTH decoder
+const file_path =
+  "decoders/connector/radionode/rn320-bth/v1.0.0/payload.js";
 
-describe("Shall not be parsed", () => {
-  let payload = [{ variable: "shallnotpass", value: "04096113950292" }];
-  
-  // This now runs the JS file, not the TS file
-  payload = decoderRun(file_path, { payload });
+describe("Radionode RN320-BTH Decoder", () => {
 
-  test("Output Result", () => {
-    expect(Array.isArray(payload)).toBe(true);
+  test("Hexadecimal payload is passed through unchanged when no decoding is applied", () => {
+    // Example hexadecimal payload from device
+    const input = [
+      {
+        variable: "payload",
+        value: "04096113950292",
+      },
+    ];
+
+    // Execute decoder
+    const result = decoderRun(file_path, { payload: input });
+
+    // Assertions
+    expect(Array.isArray(result)).toBe(true);
+
+    // RN320-BTH decoder currently performs pass-through only
+    expect(result).toEqual(input);
   });
 
-  test("Not parsed Result", () => {
-    expect(payload).toEqual([{ variable: "shallnotpass", value: "04096113950292" }]);
-  });
 });

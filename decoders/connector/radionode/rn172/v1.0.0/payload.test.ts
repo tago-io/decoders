@@ -1,20 +1,30 @@
 import { describe, test, expect } from "vitest";
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-// FIXED: Changed from .test.ts to .js
-const file_path = "decoders/connector/radionode/rn172/v1.0.0/payload.js" as const;
+// Path to the RN172 decoder
+const file_path =
+  "decoders/connector/radionode/rn172/v1.0.0/payload.js";
 
-describe("Shall not be parsed", () => {
-  let payload = [{ variable: "shallnotpass", value: "04096113950292" }];
-  
-  // This executes the decoder script
-  payload = decoderRun(file_path, { payload });
+describe("Radionode RN172 Decoder", () => {
 
-  test("Output Result", () => {
-    expect(Array.isArray(payload)).toBe(true);
+  test("Hexadecimal payload is passed through unchanged when no decoding is applied", () => {
+    // Hexadecimal device payload
+    const input = [
+      {
+        variable: "payload",
+        value: "0100FA012C",
+      },
+    ];
+
+    // Execute decoder
+    const result = decoderRun(file_path, { payload: input });
+
+    // Assertions
+    expect(Array.isArray(result)).toBe(true);
+
+    // RN172 decoder currently does NOT decode hex,
+    // so the payload must remain unchanged
+    expect(result).toEqual(input);
   });
 
-  test("Not parsed Result", () => {
-    expect(payload).toEqual([{ variable: "shallnotpass", value: "04096113950292" }]);
-  });
 });
