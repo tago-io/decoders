@@ -1,28 +1,25 @@
 import { describe, test, expect } from "vitest";
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-// Path to the RN320-BTH decoder
 const file_path =
   "decoders/connector/radionode/rn320-bth/v1.0.0/payload.js";
 
 describe("Radionode RN320-BTH Decoder", () => {
 
-  test("Hexadecimal payload is passed through unchanged when no decoding is applied", () => {
-    // Example hexadecimal payload from device
+  test("Executes decoder with hexadecimal RN320-BTH uplink", () => {
     const input = [
       {
         variable: "payload",
-        value: "04096113950292",
+        value: "01010A01F4012C", // hex uplink
       },
     ];
 
-    // Execute decoder
     const result = decoderRun(file_path, { payload: input });
 
-    // Assertions
+    // Decoder runs and returns TagoIO array
     expect(Array.isArray(result)).toBe(true);
 
-    // RN320-BTH decoder currently performs pass-through only
+    // Payload is preserved when frame is not recognized
     expect(result).toEqual(input);
   });
 
