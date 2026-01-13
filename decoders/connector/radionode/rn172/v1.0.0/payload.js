@@ -1,67 +1,57 @@
-console.log("--- TagoIO Payload Parser START (Final Updated Version with Model Override) ---");
+/**
+ * Radionode RN172 Payload Decoder
+ */
 
-// Wrap the entire script in a self-executing function to avoid global scope issues.
 (function() {
     let inputPayload = payload;
     let finalProcessedVariables = [];
     let mainData = {};
-    let isModelOverridden = false; // Flag to track if the model was overridden
-
-    console.log("Step 1: Initial 'payload' received:", JSON.stringify(inputPayload, null, 2));
+    let isModelOverridden = false;
 
     // --- Step 1.1: Input Normalization & Parsing ---
-    if (Array.isArray(inputPayload) && typeof inputPayload[0] === 'object') {
-        mainData = inputPayload[0];
-    } else if (typeof inputPayload === 'object' && inputPayload !== null) {
-        mainData = inputPayload;
-    } else if (typeof inputPayload === 'string') {
-        // Handle form-urlencoded format
-        inputPayload.trim().split('&').forEach(pair => {
+    // Extract the raw string from TagoIO array/object or handle raw string
+    let rawString = "";
+    if (typeof inputPayload === 'string') {
+        rawString = inputPayload;
+    } else if (Array.isArray(inputPayload) && inputPayload[0] && inputPayload[0].value) {
+        rawString = inputPayload[0].value;
+    } else if (typeof inputPayload === 'object' && inputPayload !== null && inputPayload.value) {
+        rawString = inputPayload.value;
+    }
+
+    if (rawString) {
+        // Handle form-urlencoded format (e.g., model=UA10&C000=...)
+        rawString.trim().split('&').forEach(pair => {
             const [k, v] = pair.split('=');
             if (k && v) {
                 try {
                     mainData[decodeURIComponent(k)] = decodeURIComponent(v);
                 } catch (e) {
-                    console.warn(`Decode error for pair '${pair}': ${e.message}`);
+                    console.warn(`Decode error: ${e.message}`);
                 }
             }
         });
 
         // Handle ATCQ format
-        const atcqMatch = inputPayload.match(/ATCQ\s+([^,]+),([^,]+),([^,]+),([^,]+)/);
+        const atcqMatch = rawString.match(/ATCQ\s+([^,]+),([^,]+),([^,]+),([^,]+)/);
         if (atcqMatch) {
-            console.log("Input matches ATCQ format. Parsing sensor data...");
             const [, co2_val, o3_val, temp_val, hum_val] = atcqMatch;
-            const values = [parseFloat(co2_val), parseFloat(o3_val), parseFloat(temp_val), parseFloat(hum_val)];
-            if (values.every(v => !isNaN(v))) {
-                mainData.co2 = values[0];
-                mainData.o3 = values[1];
-                mainData.temperature = values[2];
-                mainData.humidity = values[3];
-                mainData.model = 'UA58-APC';
-            } else {
-                console.warn("ATCQ values could not be parsed as numbers.");
-            }
+            mainData.co2 = parseFloat(co2_val);
+            mainData.o3 = parseFloat(o3_val);
+            mainData.temperature = parseFloat(temp_val);
+            mainData.humidity = parseFloat(hum_val);
+            mainData.model = 'UA58-APC';
         }
-        
-        // Handle ATCD format
-        const atcdMatch = inputPayload.match(/ATCD\s+(\S+,\S+)/);
-        if (atcdMatch) {
-            console.log("Input matches ATCD format. Parsing sensor data...");
-            const [temp, hum] = atcdMatch[1].split(',').map(Number);
-            if (!isNaN(temp) && !isNaN(hum)) {
-                mainData.temperature = temp;
-                mainData.humidity = hum;
-                mainData.model = 'UA-DEVICE';
-            }
-        }
-    } else {
-        console.error("Invalid payload format. Expected string, object, or array of objects.");
-        payload = [];
-        return;
-    }
 
-    console.log("Step 2: Parsing dynamic and static keys.");
+        // Handle ATCD format
+        const atcdMatch = rawString.match(/ATCD\s+(\S+,\S+)/);
+        if (atcdMatch) {
+            const [temp, hum] = atcdMatch[1].split(',').map(Number);
+            mainData.temperature = temp;
+            mainData.humidity = hum;
+            mainData.model = 'UA-DEVICE';
+        }
+    }
 
     // --- Step 2.1: Define the Models Lookup Table ---
     const ua_models_js = {
@@ -100,71 +90,51 @@ console.log("--- TagoIO Payload Parser START (Final Updated Version with Model O
         "UA59-CO2": ["CO2", "TEMP"],
         "UA60-PMVT": ["PM25", "PM10", "PM01", "TVOC", "TEMP", "RH"],
         "UA-DEVICE": ["TEMP", "RH"],
-        "UA-DEVICE_NULL": ["TEMP", "RH"], // New model to handle null values
+        "UA-DEVICE_NULL": ["TEMP", "RH"],
         "RN400-PG": [],
         "RN172WC": []
     };
 
     // --- Step 2.2: Identify the Model and Override if necessary ---
     let modelKey = mainData.model || mainData.SMODEL;
-    let originalSModel = modelKey; // Store the original SMODEL
+    let originalSModel = modelKey;
 
-    // Override the model if the payload structure matches UA58-APC.
     if (modelKey === 'UA-DEVICE' && mainData.C000) {
         const channelData = mainData.C000.split('|').filter(x => x.trim() !== '');
-        // Check if the payload has 4 sensor values + 1 timestamp
         if (channelData.length === 5) {
             modelKey = 'UA58-APC';
             isModelOverridden = true;
-            console.log(`SMODEL '${originalSModel}' overridden to '${modelKey}' based on payload structure.`);
-        }
-    }
-    
-    // Check for the specific UA-DEVICE payload with a NULL value
-    if (modelKey === 'UA-DEVICE' && mainData.C000) {
-        const channelData = mainData.C000.split('|');
-        if (channelData[3] && channelData[3].trim() === 'NULL') {
+        } else if (channelData[3] && channelData[3].trim() === 'NULL') {
             modelKey = 'UA-DEVICE_NULL';
             isModelOverridden = true;
-            console.log(`SMODEL '${originalSModel}' overridden to '${modelKey}' based on NULL value in payload.`);
         }
     }
 
     const modelVars = ua_models_js[modelKey];
 
-    if (!modelKey || !modelVars) {
-        // Log removed to avoid clutter, will be handled by preserving original variables
-    } else {
-        console.log(`Model '${modelKey}' identified. Channel variables: ${modelVars.join(', ')}`);
-        
+    if (modelKey && modelVars) {
         for (const key in mainData) {
-            // Check for patterns like C000, P001, CH1, etc.
             if (key.match(/^(C|P|CH)\d+/)) {
-                console.log(`Dynamic key '${key}' found. Parsing data...`);
                 const channelData = mainData[key].split('|').map(x => x.trim());
 
+                const timestamp = parseFloat(channelData[0]);
+                const time = !isNaN(timestamp) ? new Date(timestamp * 1000) : new Date();
+
                 if (modelKey === 'UA-DEVICE_NULL') {
-                    // Specific parsing for payloads with NULL value
                     if (channelData.length >= 3) {
-                         const timestamp = parseFloat(channelData[0]);
                          let valueIndex = 1;
-                         
                          for (let i = 0; i < modelVars.length; i++) {
                              const varName = modelVars[i];
                              const value = parseFloat(channelData[valueIndex]);
-
-                             // Add a range check for temperature values
                              if (varName === 'TEMP' && (value < -50 || value > 100)) {
-                                 console.warn(`Ignoring out-of-range temperature value: ${value}`);
                                  valueIndex++;
                                  continue;
                              }
-                             
                              if (!isNaN(value) && varName !== '----') {
                                  const entry = {
                                      variable: varName.toLowerCase().replace(/[^a-z0-9]/g, '_'),
                                      value: value,
-                                     time: new Date(timestamp * 1000)
+                                     time: time
                                  };
                                  if (varName === 'RH') entry.unit = '%';
                                  finalProcessedVariables.push(entry);
@@ -173,128 +143,69 @@ console.log("--- TagoIO Payload Parser START (Final Updated Version with Model O
                          }
                     }
                 } else {
-                    // Original parsing logic
                     if (channelData.length >= modelVars.length + 1) {
-                        const timestamp = parseFloat(channelData[0]);
                         for (let i = 0; i < modelVars.length; i++) {
                             const varName = modelVars[i];
                             const value = parseFloat(channelData[i + 1]);
-
-                            // Add a range check for temperature values
-                            if (varName === 'TEMP' && (value < -50 || value > 100)) {
-                                console.warn(`Ignoring out-of-range temperature value: ${value}`);
-                                continue;
-                            }
+                            if (varName === 'TEMP' && (value < -50 || value > 100)) continue;
 
                             if (!isNaN(value) && varName !== '----') {
                                 const entry = {
                                     variable: varName.toLowerCase().replace(/[^a-z0-9]/g, '_'),
                                     value: value,
-                                    time: new Date(timestamp * 1000)
+                                    time: time
                                 };
-
-                                // Add specific units based on the variable name
                                 if (varName === 'CO2') entry.unit = 'ppm';
                                 else if (varName === 'O3') entry.unit = 'ppb';
                                 else if (varName === 'RH') entry.unit = '%';
                                 else if (varName === 'mA') entry.unit = 'mA';
                                 else if (varName === 'mV') entry.unit = 'mV';
                                 else if (varName.startsWith('PM')) entry.unit = 'ug/m3';
-                                
                                 finalProcessedVariables.push(entry);
                             }
                         }
-                    } else {
-                        console.warn(`Mismatch in number of channel values (${channelData.length - 1}) and expected variables (${modelVars.length}) for model '${modelKey}'.`);
                     }
                 }
-                
-                // Remove the processed key to prevent double-handling
                 delete mainData[key];
             }
         }
     }
 
-    // --- Step 2.3: Process the RN172WC 'tags' payload separately ---
+    // --- Step 2.3: Process RN172WC tags ---
     if (modelKey === "RN172WC" && mainData.tags) {
-        console.log("Processing RN172WC 'tags' payload...");
         const tagValues = mainData.tags.split('|').filter(s => s.trim() !== '');
-        
         if (tagValues.length >= 2) {
             const temp = parseFloat(tagValues[0].trim());
             const rh = parseFloat(tagValues[1].trim());
-
-            if (!isNaN(temp)) {
-                finalProcessedVariables.push({ variable: 'temperature', value: temp, unit: 'C' });
-            }
-            if (!isNaN(rh)) {
-                finalProcessedVariables.push({ variable: 'humidity', value: rh, unit: '%' });
-            }
+            if (!isNaN(temp)) finalProcessedVariables.push({ variable: 'temperature', value: temp, unit: 'C' });
+            if (!isNaN(rh)) finalProcessedVariables.push({ variable: 'humidity', value: rh, unit: '%' });
         }
     }
 
-    // --- Step 2.4: Process Static Keys ---
+    // --- Step 2.4/2.5: Process Static Keys ---
     const directMappings = {
         mac: 'mac',
-        ver: 'version',
         model: 'model',
-        ip: 'ip',
-        splrate: 'splrate',
-        rsti: 'rsti',
-        interval: 'interval',
-        tags: 'tags',
-        sig: 'signal',
         bat: 'battery',
-        SMODEL: 'sensor_model',
-        analog_1: 'analog_1',
-        analog_2: 'analog_2',
-        co2: 'co2',
-        o3: 'o3'
+        SMODEL: 'sensor_model'
     };
 
     for (const key in directMappings) {
         if (mainData.hasOwnProperty(key)) {
-            let value = mainData[key];
-            const variableName = directMappings[key];
-            const numValue = parseFloat(value);
-            if (!isNaN(numValue)) value = numValue;
-
-            const entry = { variable: variableName, value };
-            if (key === 'temperature') entry.unit = 'C';
-            if (key === 'humidity') entry.unit = '%';
-            if (key === 'co2') entry.unit = 'ppm';
-            if (key === 'o3') entry.unit = 'ppb';
-            finalProcessedVariables.push(entry);
-        }
-    }
-    
-    // --- Step 2.5: Override the sensor_model variable ---
-    if (isModelOverridden) {
-        const smodelIndex = finalProcessedVariables.findIndex(item => item.variable === 'sensor_model');
-        if (smodelIndex !== -1) {
-            finalProcessedVariables[smodelIndex].value = modelKey;
-            console.log(`Updated 'sensor_model' to '${modelKey}'.`);
+            let val = mainData[key];
+            if (key === 'SMODEL' && isModelOverridden) val = modelKey;
+            finalProcessedVariables.push({ variable: directMappings[key], value: val });
         }
     }
 
-    // --- Step 2.6: Merge with original payload to preserve ignored variables (FIX FOR TEST) ---
-    // If the input payload had variables that we didn't touch or decode, pass them through.
+    // --- Step 2.6: Final Merge ---
     if (Array.isArray(inputPayload)) {
         inputPayload.forEach(item => {
-            if (item && item.variable) {
-                // Check if we already have this variable in our processed list
-                const alreadyExists = finalProcessedVariables.some(v => v.variable === item.variable);
-                
-                // If not, add the original item to the final result
-                if (!alreadyExists) {
-                    finalProcessedVariables.push(item);
-                }
+            if (item && item.variable && !finalProcessedVariables.some(v => v.variable === item.variable)) {
+                finalProcessedVariables.push(item);
             }
         });
     }
 
-    
-
-    // Assign the final array back to the payload variable for TagoIO.
     payload = finalProcessedVariables;
 })();

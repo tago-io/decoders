@@ -1,30 +1,23 @@
 import { describe, test, expect } from "vitest";
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-// Path to the RN172 decoder
-const file_path =
-  "decoders/connector/radionode/rn172/v1.0.0/payload.js";
+const file_path = "decoders/connector/radionode/rn172/v1.0.0/payload.js" as const;
 
-describe("Radionode RN172 Decoder", () => {
-
-  test("Hexadecimal payload is passed through unchanged when no decoding is applied", () => {
-    // Hexadecimal device payload
+describe("Radionode RN172 Decoder - Functional Validation", () => {
+  test("Successfully parses UA58-APC (CO2, O3, Temp, Humidity)", () => {
     const input = [
       {
         variable: "payload",
-        value: "0100FA012C",
+        value: "model=UA58-APC&SMODEL=UA58-APC&C000=1705152000|500|20|25.5|45.2",
       },
     ];
 
-    // Execute decoder
     const result = decoderRun(file_path, { payload: input });
+    const values = Object.fromEntries(result.map((it) => [it.variable, it.value]));
 
-    // Assertions
-    expect(Array.isArray(result)).toBe(true);
-
-    // RN172 decoder currently does NOT decode hex,
-    // so the payload must remain unchanged
-    expect(result).toEqual(input);
+    expect(values.co2).toBe(500);
+    expect(values.o3).toBe(20);
+    expect(values.temp).toBe(25.5);
+    expect(values.rh).toBe(45.2);
   });
-
 });
