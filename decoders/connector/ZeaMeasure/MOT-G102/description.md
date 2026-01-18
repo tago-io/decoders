@@ -1,0 +1,1 @@
+A smart BLE gateway that collects and transmits the data of BLE temperature & humidity sensor to the cloud.
