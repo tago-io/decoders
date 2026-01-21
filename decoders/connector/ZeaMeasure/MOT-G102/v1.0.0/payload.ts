@@ -11,7 +11,7 @@
 */
 
 // ========== BLE 广播数据解析函数 ==========
-function parseBLEData(data) {
+function parseBLEData(data:string) {
     if (typeof data !== "string" || data.length < 20) return [null, null, null, null];
 
     if (data.startsWith("02010603") && ["C4C2", "C4C4"].includes(data.substring(18, 22)) && data.length >= 50) {
@@ -68,8 +68,8 @@ function parseBLEData(data) {
 }
 
 // ========== 主格式化函数 ==========
-function toTagoFormat(object_item, prefix = '') {
-    const result = [];
+function toTagoFormat(object_item:{}, prefix = '') {
+    const result = [] as any;
     const ignore_vars = ['dataList', 'devices'];
 
     // ✅ 分支①：新结构 (带 dataList)

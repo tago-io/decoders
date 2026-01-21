@@ -1,1 +1,1 @@
-A smart BLE gateway that collects and transmits the data of BLE temperature & humidity sensor to the cloud.
+BLE gateway for ZenMeasure wireless temp tags
