@@ -1,0 +1,1 @@
+The RADIONODE RN172WCD is a Wi-Fi sensor transmitter for industrial monitoring. It supports UA-series gas, thermal, and analog sensors and sends data via Wi-Fi, MODBUS TCP, or HTTP/HTTPS. It includes a display, buzzer, LED alerts, and remote Telnet setup for HVAC, gas, and BMS automation.

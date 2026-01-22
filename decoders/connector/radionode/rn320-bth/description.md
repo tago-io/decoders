@@ -1,0 +1,1 @@
+The Radionode RN320-BTH is a robust wireless environmental sensor featuring a 10-year battery life and LoRaWAN technology. It includes embedded temperature/humidity sensors, data backup via retransmission and microSD storage, an E-paper display, and easy QR code setup for remote monitoring on Radionode365.
