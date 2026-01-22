@@ -3,7 +3,7 @@ import { join } from "path";
 import * as ts from "typescript";
 import { beforeEach, describe, expect, test } from "vitest";
 
-import { DataToSend } from "@tago-io/sdk/lib/types";
+import { DataToSend } from "@tago-io/sdk";
 
 const file = readFileSync(join(__dirname, "./payload.js"));
 const transpiledCode = ts.transpile(file.toString());
