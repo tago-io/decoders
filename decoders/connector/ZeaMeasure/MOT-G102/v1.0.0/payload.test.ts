@@ -3,7 +3,7 @@ import { DataToSend } from "@tago-io/sdk/lib/types";
 
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-const file_path = "decoders/connector/ZenMeasure/MOT-G102/v1.0.0/payload.ts" as const;; // e.g. decoders/connector/your-decoder/v1.0.0/payload.ts
+const file_path = "decoders/connector/zenmeasure/mot-g102/v1.0.0/payload.ts"; 
 
 let payload: DataToSend[] = [];
 
