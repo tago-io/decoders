@@ -1,0 +1,1 @@
+BLE gateway for ZenMeasure wireless temp tags
