@@ -166,7 +166,7 @@ function toTagoFormat(object_item:{}, prefix = '') {
         if (ignore_vars.includes(key)) continue;
         result.push({
             variable: prefix + key,
-            value: object_item[key],
+            value: object_item[key]
         });
     }
 
@@ -174,6 +174,7 @@ function toTagoFormat(object_item:{}, prefix = '') {
 }
 
 // ========== 主入口：自动判断结构类型 ==========
+console.log(payload[0].variable)
 if (!payload[0].variable) {
     const group = payload[0].group || String(new Date().getTime());
     payload = toTagoFormat(payload[0], group);
