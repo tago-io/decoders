@@ -1,0 +1,11 @@
+{
+    "$schema": "../../../../../schema/connector_details.json",
+    "description": "../description.md",
+    "install_text": "### The ZenMeasure BLE Gateway Lite is a compact IoT gateway designed to work seamlessly with ZenMeasure’s BLE temperature and humidity tags. It automatically collects data from nearby BLE data loggers and uploads it to cloud via Wi-Fi, enabling wireless and continuous environmental monitoring. Together with ZenMeasure’s long-lasting BLE temperature and humidity tags, the gateway forms a complete end-to-end solution for cold chain logistics, biopharmaceuticals, food & retail, and warehousing, improving data visibility, operational efficiency, and compliance.\r\nCommunication: Bluetooth Low Energy (BLE)\r\nCompatible Devices: ZenMeasure BLE temperature & humidity tags\r\nConnectivity: Wi-Fi\r\nCloud Integration: TagoIO and third-party platforms via open APIs\r\nFunctionality: Automatic data collection and cloud upload\r\nApplications: Cold chain transport, warehouses, cold storage, retail stores",
+    "install_end_text": "",
+    "device_annotation": "",
+    "device_parameters": [],
+    "networks": [
+        "../../../../network/https/v1.0.0/payload.js"
+    ]
+}
