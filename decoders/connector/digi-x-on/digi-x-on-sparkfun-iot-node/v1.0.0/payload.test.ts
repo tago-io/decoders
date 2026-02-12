@@ -3,7 +3,7 @@ import { join } from "path";
 import * as ts from "typescript";
 import { beforeEach, describe, expect, test } from "vitest";
 
-import { DataToSend } from "@tago-io/sdk/lib/types";
+import { DataToSend } from "@tago-io/sdk";
 
 // Load and transpile the JS decoder code
 const decoderFile = readFileSync(join(__dirname, "./payload.js"), "utf8");

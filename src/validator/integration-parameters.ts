@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod/v3";
 
 const zIntegrationParameterBase = z.object({
   default: z.string().default(""),
@@ -32,10 +32,10 @@ const zIntegrationParameterSwitch = zIntegrationParameterBase.extend({
 });
 
 const zIntegrationParameter = z.preprocess((value) => {
-  if (typeof value === "object") {
-    return { type: "text", ...value };
-  }
-  return value;
+    if (typeof value === "object") {
+      return { type: "text", ...value };
+    }
+    return value;
 }, z.discriminatedUnion("type", [zIntegrationParameterText, zIntegrationParameterNumber, zIntegrationParameterDrop, zIntegrationParameterSwitch]));
 
 const zIntegrationParameters = zIntegrationParameter.array().transform((data) => {
@@ -43,7 +43,7 @@ const zIntegrationParameters = zIntegrationParameter.array().transform((data) =>
     return JSON.stringify(data);
   }
   return data;
-});;
+});
 
 type IntegrationParameter = z.infer<typeof zIntegrationParameter>;
 type IntegrationParameters = z.infer<typeof zIntegrationParameters>;

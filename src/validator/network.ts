@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod/v3";
 import { zBufferPayloadSize, zDomain } from "./common";
 import { zIntegrationParameters } from "./integration-parameters";
 
