@@ -1,0 +1,1 @@
+Dual Ultrasonic Distance Sensor with LoRaWAN connectivity
