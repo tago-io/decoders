@@ -44,8 +44,7 @@ function decodeRegistration(bytes: Buffer) {
   // power
   data.power = (bytes[2] >> 3) & 0x1f;
   // offlineCacheEnable
-  data.offlineCacheEnable =
-    ((bytes[2] >> 2) & 0x01) === 0 ? "Disable" : "Enable";
+  data.offlineCacheEnable = ((bytes[2] >> 2) & 0x01) === 0 ? "Disable" : "Enable";
   // alarmEnable
   data.alarmEnable = ((bytes[2] >> 1) & 0x01) === 0 ? "Disable" : "Enable";
   // singleKeyEnable
@@ -66,11 +65,9 @@ function decodeRegistration(bytes: Buffer) {
   // switchEnable
   data.switchEnable = (bytes[3] & 0x01) === 0 ? "Disable" : "Enable";
   // heartbeatReportInterval
-  data.heartbeatReportInterval =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 30;
+  data.heartbeatReportInterval = (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 30;
   // blePositionReportInterval
-  data.blePositionReportInterval =
-    (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5;
+  data.blePositionReportInterval = (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5;
   // div
   data.div = bytes[8] & 0xff;
   // bleEnable
@@ -83,14 +80,8 @@ function decodeRegistration(bytes: Buffer) {
     const byte3 = bytes[12 + 4 * i];
     const byte4 = bytes[13 + 4 * i];
 
-    const part1 = ((byte1 << 8) | byte2)
-      .toString(16)
-      .padStart(4, "0")
-      .toUpperCase();
-    const part2 = ((byte3 << 8) | byte4)
-      .toString(16)
-      .padStart(4, "0")
-      .toUpperCase();
+    const part1 = ((byte1 << 8) | byte2).toString(16).padStart(4, "0").toUpperCase();
+    const part2 = ((byte3 << 8) | byte4).toString(16).padStart(4, "0").toUpperCase();
 
     positioningUUID += part1 + part2;
   }
@@ -98,9 +89,7 @@ function decodeRegistration(bytes: Buffer) {
   // accelerometerThreshold
   data.accelerometerThreshold = (50 + bytes[26] * 5) * 0.001 + "g";
   // version
-  data.version = (((bytes[27] << 8) & 0xff00) | (bytes[28] & 0xff))
-    .toString(16)
-    .toUpperCase();
+  data.version = (((bytes[27] << 8) & 0xff00) | (bytes[28] & 0xff)).toString(16).toUpperCase();
   // cfmmsg
   data.cfmmsg = bytes[29];
   // hbCount
@@ -119,14 +108,8 @@ function decodeRegistration(bytes: Buffer) {
     const byte3 = bytes[36 + 4 * i];
     const byte4 = bytes[37 + 4 * i];
 
-    const part1 = ((byte1 << 8) | byte2)
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const part2 = ((byte3 << 8) | byte4)
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const part1 = ((byte1 << 8) | byte2).toString(16).toUpperCase().padStart(4, "0");
+    const part2 = ((byte3 << 8) | byte4).toString(16).toUpperCase().padStart(4, "0");
 
     assetBeaconUUID += part1 + part2;
   }
@@ -136,8 +119,7 @@ function decodeRegistration(bytes: Buffer) {
   // vibrationShockDetectionReportPeriod
   data.vibrationShockDetectionReportPeriod = bytes[51] * 30;
   // gnssPositionReportInterval
-  data.gnssPositionReportInterval =
-    (((bytes[52] << 8) & 0xff00) | (bytes[53] & 0xff)) * 5;
+  data.gnssPositionReportInterval = (((bytes[52] << 8) & 0xff00) | (bytes[53] & 0xff)) * 5;
 
   return data;
 }
@@ -147,8 +129,7 @@ function decodeHeartbeat(bytes: Buffer) {
   const data: any = {};
   data.type = "Heartbeat";
   // snrEnable
-  data.snrEnable =
-    (bytes[0] & 0x0f) === 0 ? "No SNR field" : "SNR field Enable";
+  data.snrEnable = (bytes[0] & 0x0f) === 0 ? "No SNR field" : "SNR field Enable";
   // voltage
   data.voltage = bytes[1] / 100 + 1.5;
   // rssi
@@ -184,18 +165,15 @@ function decodeGNSSPosition(bytes: Buffer) {
   const data: any = {};
   data.type = "GNSSPosition";
   // longitude
-  const longitude =
-    (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
+  const longitude = (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
   data.longitude = hex2float(longitude);
 
   // latitude
-  const latitude =
-    (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
+  const latitude = (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
   data.latitude = hex2float(latitude);
 
   // time
-  const time =
-    (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
+  const time = (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
   data.time = timestampToTime((time + 8 * 60 * 60) * 1000);
 
   return data;
@@ -207,20 +185,8 @@ function decodePositionBeacon(bytes: Buffer) {
   data.type = "PositionBeacon";
   data.length = bytes[0] & 0x0f;
   for (let i = 0; i < data.length; i++) {
-    const major = (
-      ((bytes[6 + 5 * i] << 8) & 0xff00) |
-      (bytes[7 + 5 * i] & 0xff)
-    )
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = (
-      ((bytes[8 + 5 * i] << 8) & 0xff00) |
-      (bytes[9 + 5 * i] & 0xff)
-    )
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = (((bytes[6 + 5 * i] << 8) & 0xff00) | (bytes[7 + 5 * i] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
+    const minor = (((bytes[8 + 5 * i] << 8) & 0xff00) | (bytes[9 + 5 * i] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[10 + 5 * i] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -236,20 +202,8 @@ function decodeAssetBeacon(bytes: Buffer) {
   data.type = "AssetBeacon";
   data.qty = bytes[1] & 0xff;
   for (let i = 0; i < data.qty; i++) {
-    const major = (
-      ((bytes[2 + 5 * i] << 8) & 0xff00) |
-      (bytes[3 + 5 * i] & 0xff)
-    )
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = (
-      ((bytes[4 + 5 * i] << 8) & 0xff00) |
-      (bytes[5 + 5 * i] & 0xff)
-    )
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = (((bytes[2 + 5 * i] << 8) & 0xff00) | (bytes[3 + 5 * i] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
+    const minor = (((bytes[4 + 5 * i] << 8) & 0xff00) | (bytes[5 + 5 * i] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[6 + 5 * i] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -285,17 +239,8 @@ function decodeOfflineCachePosition(bytes: Buffer) {
   for (let i = 0; i < data.length; i++) {
     const flag = (data.cacheDataType >> (7 - i)) & 0x01;
     if (flag === 0) {
-      const major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff))
-        .toString(16)
-        .toUpperCase()
-        .padStart(4, "0");
-      const minor = (
-        ((bytes[index + 2] << 8) & 0xff00) |
-        (bytes[index + 3] & 0xff)
-      )
-        .toString(16)
-        .toUpperCase()
-        .padStart(4, "0");
+      const major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
+      const minor = (((bytes[index + 2] << 8) & 0xff00) | (bytes[index + 3] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
       const rssi = bytes[index + 4] - 256;
 
       data["beacon" + beaconIndex] = major + minor;
@@ -305,25 +250,13 @@ function decodeOfflineCachePosition(bytes: Buffer) {
     } else if (flag === 1) {
       const gnss: any = {};
       // longitude
-      const longitude =
-        (bytes[index] << 24) |
-        (bytes[index + 1] << 16) |
-        (bytes[index + 2] << 8) |
-        bytes[index + 3];
+      const longitude = (bytes[index] << 24) | (bytes[index + 1] << 16) | (bytes[index + 2] << 8) | bytes[index + 3];
       gnss.longitude = hex2float(longitude);
       // latitude
-      const latitude =
-        (bytes[index + 4] << 24) |
-        (bytes[index + 5] << 16) |
-        (bytes[index + 6] << 8) |
-        bytes[index + 7];
+      const latitude = (bytes[index + 4] << 24) | (bytes[index + 5] << 16) | (bytes[index + 6] << 8) | bytes[index + 7];
       gnss.latitude = hex2float(latitude);
       // time
-      const time =
-        (bytes[index + 8] << 24) |
-        (bytes[index + 9] << 16) |
-        (bytes[index + 10] << 8) |
-        bytes[index + 11];
+      const time = (bytes[index + 8] << 24) | (bytes[index + 9] << 16) | (bytes[index + 10] << 8) | bytes[index + 11];
       gnss.time = timestampToTime((time + 8 * 60 * 60) * 1000);
 
       data["longitude" + gnssIndex] = gnss.longitude;
@@ -394,12 +327,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

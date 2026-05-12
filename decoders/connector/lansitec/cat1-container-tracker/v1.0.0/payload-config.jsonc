@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Track high-value containers, pallets, or equipment anywhere in the world with the Lansitec Cat-1 Container Tracker. Powered by dual Li/SOCl2 batteries for up to five years of maintenance-free service (at 30-minute reporting intervals), this device seamlessly combines GNSS (<2.5 m accuracy) for precise positioning with Cat-1 cellular connectivity to deliver real-time data—even in harsh climates. Its IP68 enclosure defends against dust and water, while built-in features like tamper detection, door open/close sensing, and vibration shock alerts help protect assets from unauthorized movement or damage. Optional Bluetooth tags expand your monitoring capabilities, letting you track secondary items packed inside cargo containers or transit cases. Whether you need to secure machines on remote worksites or ensure that perishable goods arrive intact, the Cat-1 Container Tracker keeps you informed and in control every step of the way.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}

@@ -80,8 +80,7 @@ function decodeRegistration(bytes: Buffer) {
   // repting
   data.repting = ((bytes[3] >> 3) & 0x01) === 0 ? "false" : "true";
   // temperatureReportPeriod
-  data.temperatureReportPeriod =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 10;
+  data.temperatureReportPeriod = (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 10;
   // crc
   data.crc = ((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff);
   return data;
@@ -158,12 +157,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

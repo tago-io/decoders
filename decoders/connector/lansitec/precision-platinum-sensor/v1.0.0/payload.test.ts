@@ -1,8 +1,7 @@
-import { describe, test, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-const file_path =
-  "decoders/connector/lansitec/precision-platinum-sensor/v1.0.0/payload.ts" as const;
+const file_path = "decoders/connector/lansitec/precision-platinum-sensor/v1.0.0/payload.ts" as const;
 
 function preparePayload(payloadHex: string) {
   let payload: {
@@ -55,8 +54,6 @@ describe("Shall not be parsed", () => {
   });
 
   test("Not parsed Result", () => {
-    expect(payload).toEqual([
-      { variable: "shallnotpass", value: "04096113950292" },
-    ]);
+    expect(payload).toEqual([{ variable: "shallnotpass", value: "04096113950292" }]);
   });
 });

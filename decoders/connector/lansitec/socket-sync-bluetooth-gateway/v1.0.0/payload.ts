@@ -63,11 +63,9 @@ function decodeRegistration(bytes: Buffer) {
   // power
   data.power = (bytes[2] >> 3) & 0x1f;
   // continuousBleReceiveEnable
-  data.continuousBleReceiveEnable =
-    ((bytes[2] >> 1) & 0x1) === 0 ? "Disable" : "Enable";
+  data.continuousBleReceiveEnable = ((bytes[2] >> 1) & 0x1) === 0 ? "Disable" : "Enable";
   // powerDownFlag
-  data.powerDownFlag =
-    (bytes[2] & 0x1) === 0 ? "Normal status" : "Automatic shutdown status";
+  data.powerDownFlag = (bytes[2] & 0x1) === 0 ? "Normal status" : "Automatic shutdown status";
   // dr
   data.dr = (bytes[3] >> 4) & 0x0f;
   // deviceType
@@ -80,11 +78,9 @@ function decodeRegistration(bytes: Buffer) {
     data.deviceType = "PlugGateway";
   }
   // rssiSortMethod
-  data.rssiSortMethod =
-    (bytes[3] & 0x01) === 0 ? "SortByAverage" : "SortByTheMaximumValue";
+  data.rssiSortMethod = (bytes[3] & 0x01) === 0 ? "SortByAverage" : "SortByTheMaximumValue";
   // positionReportInterval
-  data.positionReportInterval =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
+  data.positionReportInterval = (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
   // bleReceivingDuration
   data.bleReceivingDuration = bytes[6] * 30;
   // heartbeatInterval
@@ -132,14 +128,8 @@ function decodeBeacon(bytes: Buffer) {
   for (let i = 0; i < data.length; i++) {
     const index = 1 + 6 * i;
     const uuidTailNumber = bytes[index];
-    const major = ((bytes[index + 1] << 8) | bytes[index + 2])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = ((bytes[index + 3] << 8) | bytes[index + 4])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = ((bytes[index + 1] << 8) | bytes[index + 2]).toString(16).toUpperCase().padStart(4, "0");
+    const minor = ((bytes[index + 3] << 8) | bytes[index + 4]).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 5] - 256;
 
     data["uuidTailNumber" + (i + 1)] = uuidTailNumber;
@@ -158,14 +148,8 @@ function decodeAlarmBeaconList(bytes: Buffer) {
   for (let i = 0; i < data.length; i++) {
     const index = 1 + 6 * i;
     const uuidTailNumber = bytes[index];
-    const major = ((bytes[index + 1] << 8) | bytes[index + 2])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = ((bytes[index + 3] << 8) | bytes[index + 4])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = ((bytes[index + 1] << 8) | bytes[index + 2]).toString(16).toUpperCase().padStart(4, "0");
+    const minor = ((bytes[index + 3] << 8) | bytes[index + 4]).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 5] - 256;
 
     data["uuidTailNumber" + (i + 1)] = uuidTailNumber;
@@ -216,12 +200,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

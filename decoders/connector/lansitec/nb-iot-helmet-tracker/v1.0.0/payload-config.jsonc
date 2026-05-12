@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The Lansitec NBM3 Helmet Sensor integrates NB-IoT/LTE-M, GNSS, and Bluetooth 5.0 for real-time personnel tracking and safety alerts in demanding industrial or commercial settings. Equipped with a 3D accelerometer, barometer, and smart sensing features (fall detection, panic alarm, overstay alerts), it automatically adjusts power usage based on movement. Rated IP66 and IK10, this rugged device easily fits into construction, factory, and distribution center operations, enabling managers to locate and protect workers or visitors at all times.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}

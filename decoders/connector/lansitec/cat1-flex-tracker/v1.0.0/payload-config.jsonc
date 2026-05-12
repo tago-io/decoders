@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Achieve ultimate installation flexibility with the Cat-1 Flex Tracker. Built with a soft, adhesive-friendly silicone gel base, this device effortlessly attaches to curved, uneven, or cylindrical surfaces, making it perfect for tracking tools, medical supplies, or equipment with non-flat exteriors. Compatible with cylinders having a diameter of 20mm. It can last up to 10 years with 3 LoRa messages per day in typical usage scenarios.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}

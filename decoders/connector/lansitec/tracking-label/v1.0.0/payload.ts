@@ -41,15 +41,10 @@ function decodeRegistration(bytes: Buffer) {
     data.positionMode = "Demand";
   }
   data.bleEnable = (bytes[3] & 0x01) === 0 ? "Disable" : "Enable";
-  data.blePositionReportInterval =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
-  data.gnssPositionReportInterval =
-    (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5;
+  data.blePositionReportInterval = (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
+  data.gnssPositionReportInterval = (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5;
   data.heartbeatReportInterval = (bytes[8] & 0xff) * 30;
-  data.version =
-    (bytes[9] & 0xff).toString(16).toUpperCase() +
-    "." +
-    (bytes[10] & 0xff).toString(16).toUpperCase();
+  data.version = (bytes[9] & 0xff).toString(16).toUpperCase() + "." + (bytes[10] & 0xff).toString(16).toUpperCase();
   data.cfmsg = "1 Confirmed every " + (bytes[11] & 0xff) + " Heartbeat";
   data.hbCount = "Disconnect Judgement " + (bytes[12] & 0xff);
   data.fallDetection = (bytes[13] & 0xff) * 0.5 + " meters";
@@ -92,18 +87,15 @@ function decodeGNSSPosition(bytes: Buffer) {
   const data: any = {};
   data.type = "GNSSPosition";
   // longitude
-  const longitude =
-    (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
+  const longitude = (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
   data.longitude = hex2float(longitude);
 
   // latitude
-  const latitude =
-    (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
+  const latitude = (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
   data.latitude = hex2float(latitude);
 
   // time
-  const time =
-    (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
+  const time = (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
   data.time = timestampToTime((time + 8 * 60 * 60) * 1000);
 
   return data;
@@ -118,14 +110,8 @@ function decodeBeacon(bytes: Buffer) {
 
   for (let i = 0; i < data.length; i++) {
     const index = 6 + 5 * i;
-    const major = ((bytes[index] << 8) | bytes[index + 1])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = ((bytes[index + 2] << 8) | bytes[index + 3])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = ((bytes[index] << 8) | bytes[index + 1]).toString(16).toUpperCase().padStart(4, "0");
+    const minor = ((bytes[index + 2] << 8) | bytes[index + 3]).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 4] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -200,12 +186,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

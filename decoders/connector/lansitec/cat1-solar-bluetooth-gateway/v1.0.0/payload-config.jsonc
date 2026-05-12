@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The Lansitec Solar Bluetooth Gateway (Cat-1) scans and restructures data from nearby BLE sensors, beacons, and controllers, transmitting it to the cloud through a global LTE Cat-1 network. Equipped with a 3W solar panel and a 5300 mAh rechargeable battery, it operates maintenance-free in extreme environments. The device’s IP66-rated enclosure, adjustable reporting intervals, and support for multiple Bluetooth protocols (iBeacon, Eddystone, private) make it ideal for monitoring assets, vehicles, or personnel over wide areas.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}

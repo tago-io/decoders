@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Powered by LTE Cat-1, LoRaWAN, and NB-IoT+NTN, our Livestock Tracking Tag ensures reliable connectivity, even in the most remote pastures. The tag has a built-in GNSS which delivers precise positioning, while geo-fence alerts notify you instantly if animals stray. And to ensure farmers get uninterrupted service, we have integrated a solar-powered rechargeable battery, which keeps it running for the long haul. Lightweight, rugged, and animal-friendly, the tag is built to endure harsh outdoor conditions.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}

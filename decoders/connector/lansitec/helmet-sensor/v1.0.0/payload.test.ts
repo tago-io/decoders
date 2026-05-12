@@ -1,8 +1,7 @@
-import { describe, test, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 import { decoderRun } from "../../../../../src/functions/decoder-run";
 
-const file_path =
-  "decoders/connector/lansitec/helmet-sensor/v1.0.0/payload.ts" as const;
+const file_path = "decoders/connector/lansitec/helmet-sensor/v1.0.0/payload.ts" as const;
 
 function preparePayload(payloadHex: string) {
   let payload: {
@@ -17,12 +16,8 @@ function preparePayload(payloadHex: string) {
   const battery = payload.find((item) => item.variable === "battery");
   const rssi = payload.find((item) => item.variable === "rssi");
   const snr = payload.find((item) => item.variable === "snr");
-  const bleReceivingNumber = payload.find(
-    (item) => item.variable === "bleReceivingNumber"
-  );
-  const gnssSearchingNumber = payload.find(
-    (item) => item.variable === "gnssSearchingNumber"
-  );
+  const bleReceivingNumber = payload.find((item) => item.variable === "bleReceivingNumber");
+  const gnssSearchingNumber = payload.find((item) => item.variable === "gnssSearchingNumber");
   const chargeTime = payload.find((item) => item.variable === "chargeTime");
   const wearTime = payload.find((item) => item.variable === "wearTime");
   const moveState = payload.find((item) => item.variable === "moveState");
@@ -71,8 +66,6 @@ describe("Shall not be parsed", () => {
   });
 
   test("Not parsed Result", () => {
-    expect(payload).toEqual([
-      { variable: "shallnotpass", value: "04096113950292" },
-    ]);
+    expect(payload).toEqual([{ variable: "shallnotpass", value: "04096113950292" }]);
   });
 });

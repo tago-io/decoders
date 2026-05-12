@@ -46,14 +46,11 @@ function decodeRegistration(bytes: Buffer) {
 
   data.fallDetectionThreshold = bytes[5] & 0xff;
   data.heartbeatPeriod = ((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff);
-  data.blePositionReportInterval =
-    ((bytes[8] << 8) & 0xff00) | (bytes[9] & 0xff);
+  data.blePositionReportInterval = ((bytes[8] << 8) & 0xff00) | (bytes[9] & 0xff);
   data.blePositionBeaconReceivingDuration = bytes[10] & 0xff;
-  data.gnssPositionReportInterval =
-    ((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff);
+  data.gnssPositionReportInterval = ((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff);
   data.gnssReceivingDuration = bytes[13] & 0xff;
-  data.assetBeaconReportInterval =
-    ((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff);
+  data.assetBeaconReportInterval = ((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff);
   data.assetBeaconReceivingDuration = bytes[16] & 0xff;
   data.softwareVersion = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
   let imsi = "";
@@ -89,8 +86,7 @@ function decodeHeartbeat(bytes: Buffer) {
   data.bleReceivingCount = bytes[7] & 0xff;
   data.gnssOnCount = bytes[8] & 0xff;
   data.temperature = (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) + "°C";
-  data.movementDuration =
-    (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
+  data.movementDuration = (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
   data.messageId = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
   return data;
 }
@@ -125,19 +121,12 @@ function decodeGNSSPosition(bytes: Buffer) {
 function decodeBeacon(bytes: Buffer) {
   const data: any = {};
   data.type = "BeaconMessage";
-  data.beaconType =
-    (bytes[0] & 0x01) === 0 ? "PositioningBeacon" : "AssetBeacon";
+  data.beaconType = (bytes[0] & 0x01) === 0 ? "PositioningBeacon" : "AssetBeacon";
   data.beaconCount = bytes[1] & 0x0f;
   for (let i = 0; i < data.beaconCount; i++) {
     const index = 2 + 5 * i;
-    let major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff))
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    let minor = (((bytes[index + 2] << 8) & 0xff00) | (bytes[index + 3] & 0xff))
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    let major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
+    let minor = (((bytes[index + 2] << 8) & 0xff00) | (bytes[index + 3] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
     let rssi = bytes[index + 4] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -173,10 +162,7 @@ function decodeConfigParameterResponse(bytes: Buffer) {
     let parameterValue = getParameterValue(bytes, index, commandBitFieldLength);
     commandBitField.parameterValue = parameterValue;
     commandBitField.name = getParameterName(parameterType);
-    commandBitField.parameterDefinition = getParameterDefinition(
-      parameterType,
-      parameterValue
-    );
+    commandBitField.parameterDefinition = getParameterDefinition(parameterType, parameterValue);
     index = index + commandBitFieldLength;
     parameter.push(commandBitField);
   }
@@ -257,20 +243,14 @@ function getParameterDefinition(parameterType: any, parameterValue: any) {
     0x02: val * 5 + "s, The interval of Bluetooth position repor, unit: 5s",
     0x03: val * 5 + "s, The interval of GNSS position report, unit: 5s",
     0x04: val * 5 + "s, The interval of asset beacons report, unit: 5s",
-    0x05:
-      val * 1 + "s, The duration of BLE position beacon receiving, unit: 1s",
+    0x05: val * 1 + "s, The duration of BLE position beacon receiving, unit: 1s",
     0x06: val * 5 + "s, The duration of GNSS position receiving, unit: 5s",
     0x07: val * 1 + "s, The duration of asset beacon receiving, unit 1s",
     0x0a: "PosBeaconUUIDFilter",
     0x0b: "AssetBeaconUUIDFilter",
     0x0e: "ISMI",
     0x1c: val === 0 ? "Disable" : "Enable",
-    0x20:
-      val === 0
-        ? "Period Mode"
-        : val === 1
-        ? " Autonomous Mode"
-        : "On-demand Mode",
+    0x20: val === 0 ? "Period Mode" : val === 1 ? " Autonomous Mode" : "On-demand Mode",
     0x29: val === 0 ? "Disable" : "Enable",
     0x2a: val === 0 ? "Disable" : "Enable",
     0x2b: val === 0 ? "Disable" : "Enable",
@@ -366,12 +346,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

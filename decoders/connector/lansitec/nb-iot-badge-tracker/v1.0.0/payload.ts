@@ -51,18 +51,15 @@ function decodeRegistration(bytes: Buffer) {
 
   data.heartbeatPeriod = (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 30;
 
-  data.blePositionReportInterval =
-    (((bytes[8] << 8) & 0xff00) | (bytes[9] & 0xff)) * 5;
+  data.blePositionReportInterval = (((bytes[8] << 8) & 0xff00) | (bytes[9] & 0xff)) * 5;
 
   data.blePositionBeaconReceivingDuration = bytes[10] & 0xff;
 
-  data.gnssPositionReportInterval =
-    (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
+  data.gnssPositionReportInterval = (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
 
   data.gnssReceivingDuration = (bytes[13] & 0xff) * 5;
 
-  data.assetBeaconReportInterval =
-    (((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff)) * 5;
+  data.assetBeaconReportInterval = (((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff)) * 5;
 
   data.assetBeaconReceivingDuration = bytes[16] & 0xff;
 
@@ -108,11 +105,9 @@ function decodeHeartbeat(bytes: Buffer) {
   if (0 === ((bytes[9] >> 7) & 0x01)) {
     data.temperature = (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) + "°C";
   } else {
-    data.temperature =
-      (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) * -1 + "°C";
+    data.temperature = (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) * -1 + "°C";
   }
-  data.movementDuration =
-    (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
+  data.movementDuration = (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
   data.chargeDuration = ((bytes[15] << 8) & 0xff00) | (bytes[16] & 0xff);
   data.messageId = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
   return data;
@@ -123,18 +118,15 @@ function decodeGNSSPosition(bytes: Buffer) {
   const data: any = {};
   data.type = "GNSSPosition";
   // longitude
-  const longitude =
-    (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
+  const longitude = (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
   data.longitude = hex2float(longitude);
 
   // latitude
-  const latitude =
-    (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
+  const latitude = (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
   data.latitude = hex2float(latitude);
 
   // time
-  const time =
-    (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
+  const time = (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
   data.time = timestampToTime((time + 8 * 60 * 60) * 1000);
 
   return data;
@@ -144,22 +136,12 @@ function decodeGNSSPosition(bytes: Buffer) {
 function decodeBeacon(bytes: Buffer) {
   const data: any = {};
   data.type = "BeaconMessage";
-  data.beaconType =
-    (bytes[0] & 0x01) === 0 ? "PositioningBeacon" : "AssetBeacon";
+  data.beaconType = (bytes[0] & 0x01) === 0 ? "PositioningBeacon" : "AssetBeacon";
   data.beaconCount = bytes[1] & 0x0f;
   for (let i = 0; i < data.beaconCount; i++) {
     const index = 2 + 5 * i;
-    const major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff))
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = (
-      ((bytes[index + 2] << 8) & 0xff00) |
-      (bytes[index + 3] & 0xff)
-    )
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
+    const minor = (((bytes[index + 2] << 8) & 0xff00) | (bytes[index + 3] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 4] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -194,17 +176,10 @@ function decodeConfigParameterResponse(bytes: Buffer) {
     const parameterType = bytes[index + 1] & 0xff;
     commandBitField.parameterType = parameterType;
     const commandBitFieldLength = getCommandBitFieldLength(parameterType);
-    const parameterValue = getParameterValue(
-      bytes,
-      index,
-      commandBitFieldLength
-    );
+    const parameterValue = getParameterValue(bytes, index, commandBitFieldLength);
     commandBitField.parameterValue = parameterValue;
     commandBitField.name = getParameterName(parameterType);
-    commandBitField.parameterDefinition = getParameterDefinition(
-      parameterType,
-      parameterValue
-    );
+    commandBitField.parameterDefinition = getParameterDefinition(parameterType, parameterValue);
     index = index + commandBitFieldLength;
     parameter.push(commandBitField);
   }
@@ -289,24 +264,16 @@ function getParameterDefinition(parameterType: any, parameterValue: any) {
     0x02: val * 5 + "s, The interval of Bluetooth position repor, unit: 5s",
     0x03: val * 5 + "s, The interval of GNSS position report, unit: 5s",
     0x04: val * 5 + "s, The interval of asset beacons report, unit: 5s",
-    0x05:
-      val * 1 + "s, The duration of BLE position beacon receiving, unit: 1s",
+    0x05: val * 1 + "s, The duration of BLE position beacon receiving, unit: 1s",
     0x06: val * 5 + "s, The duration of GNSS position receiving, unit: 5s",
     0x07: val * 1 + "s, The duration of asset beacon receiving, unit 1s",
-    0x08:
-      val / 2 +
-      "s, The threshold of the fall detection, the unit is 0.5 meters",
+    0x08: val / 2 + "s, The threshold of the fall detection, the unit is 0.5 meters",
     0x0a: "PosBeaconUUIDFilter",
     0x0b: "AssetBeaconUUIDFilter",
     0x0e: "ISMI",
     0x1e: val === 0 ? "Disable" : "Enable",
     0x1f: val === 0 ? "Disable" : "Enable",
-    0x20:
-      val === 0
-        ? "Period Mode"
-        : val === 1
-        ? " Autonomous Mode"
-        : "On-demand Mode",
+    0x20: val === 0 ? "Period Mode" : val === 1 ? " Autonomous Mode" : "On-demand Mode",
     0x29: val === 0 ? "Disable" : "Enable",
     0x2a: val === 0 ? "Disable" : "Enable",
     0x2b: val === 0 ? "Disable" : "Enable",
@@ -376,12 +343,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Purpose-built for indoor deployments, the Lansitec Indoor Bluetooth Gateway marries long-range BLE 5.0 scanning with global NB-IoT / LTE-M back-haul to stream beacon and sensor data straight to the cloud. The compact 120 × 120 × 31 mm unit mounts on any wall or ceiling, draws 5 V / 1 A power, and carries a 600 mAh backup battery for ≈ 10 h of outage resilience. With TLS 1.2 security, geo-fencing and edge payload filtering, it is a plug-and-play cornerstone for indoor RTLS, safety and analytics systems.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}

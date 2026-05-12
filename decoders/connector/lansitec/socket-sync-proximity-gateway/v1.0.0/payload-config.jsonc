@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Enhance indoor safety and tracking precision with the SocketSync Proximity Gateway. Combining Bluetooth 5.0 and LoRaWAN technology, this compact device not only collects and forwards BLE sensor data to the LoRaWAN network but also alerts you with buzzing and flashing when a Bluetooth beacon enters a predefined proximity range. By calculating distance based on the signal strength (RSSI), the SocketSync Proximity Gateway helps you protect sensitive areas, manage high-value equipment, and monitor personnel in real time. Thanks to its configurable alarm range, adjustable reporting intervals, and robust power options, this gateway provides a versatile solution for security, asset management, and workflow efficiency across diverse indoor scenarios.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js"
+  ]
+}

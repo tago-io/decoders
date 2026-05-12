@@ -80,8 +80,7 @@ function decodeRegistration(bytes: Buffer) {
   // repting
   data.repting = ((bytes[3] >> 3) & 0x01) === 0 ? "false" : "true";
   // temperatureReportPeriod
-  data.temperatureReportPeriod =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 10;
+  data.temperatureReportPeriod = (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 10;
   // crc
   data.crc = ((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff);
   return data;
@@ -101,14 +100,10 @@ function decodeTemperature(bytes: Buffer) {
   // temp
   for (let i = 0; i < data.number; i++) {
     const tempIndex = i + 1;
-    data["temp" + tempIndex] =
-      (((bytes[3 + 2 * i] << 8) & 0xff00) | (bytes[4 + 2 * i] & 0xff)) / 100 +
-      "℃";
+    data["temp" + tempIndex] = (((bytes[3 + 2 * i] << 8) & 0xff00) | (bytes[4 + 2 * i] & 0xff)) / 100 + "℃";
   }
   // crc
-  data.crc =
-    ((bytes[3 + 2 * data.number] << 8) & 0xff00) |
-    (bytes[4 + 2 * data.number] & 0xff);
+  data.crc = ((bytes[3 + 2 * data.number] << 8) & 0xff00) | (bytes[4 + 2 * data.number] & 0xff);
 
   return data;
 }
@@ -153,12 +148,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

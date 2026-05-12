@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "The Lansitec Cat-1 Badge Tracker is a credit-card-thin tag that blends LTE Cat-1, multi-GNSS and BLE 5.0 for seamless indoor/outdoor visibility of people and moveable assets. A 600 mAh rechargeable cell powers up to 6 months of smart reporting, while a 3-axis accelerometer unlocks fall detection, motion-based power saving and tamper alerts—making it the go-to badge for safety, security and utilisation analytics.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": ["../../../../network/mqtt/v1.0.0/payload.js"]
+}

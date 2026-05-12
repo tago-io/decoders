@@ -50,18 +50,13 @@ function decodeRegistration(bytes: Buffer) {
   // bleEnable
   data.bleEnable = (bytes[3] & 0x01) == 0 ? "Disable" : "Enable";
   // blePositionReportInterval
-  data.blePositionReportInterval =
-    (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
+  data.blePositionReportInterval = (((bytes[4] << 8) & 0xff00) | (bytes[5] & 0xff)) * 5;
   // gnssPositionReportInterval
-  data.gnssPositionReportInterval =
-    (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5;
+  data.gnssPositionReportInterval = (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 5;
   // heartbeatPeriod
   data.heartbeatPeriod = (bytes[8] & 0xff) * 30;
   // version
-  data.version =
-    (bytes[9] & 0xff).toString(16).toUpperCase() +
-    "." +
-    (bytes[10] & 0xff).toString(16).toUpperCase();
+  data.version = (bytes[9] & 0xff).toString(16).toUpperCase() + "." + (bytes[10] & 0xff).toString(16).toUpperCase();
   // cfmmsg
   data.cfmmsg = "1 Confirmed every " + (bytes[11] & 0xff) + " Heartbeat";
   // hbCount
@@ -109,20 +104,16 @@ function decodeGNSSPosition(bytes: Buffer) {
   // wearState
   data.wearState = (bytes[0] & 0x01) == 0 ? "Do not wear" : "Wear";
   // pressure
-  const pressure =
-    (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
+  const pressure = (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
   data.pressure = pressure / 10 + "pa";
   // longitude
-  const longitude =
-    (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
+  const longitude = (bytes[5] << 24) | (bytes[6] << 16) | (bytes[7] << 8) | bytes[8];
   data.longitude = hex2float(longitude);
   // latitude
-  const latitude =
-    (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
+  const latitude = (bytes[9] << 24) | (bytes[10] << 16) | (bytes[11] << 8) | bytes[12];
   data.latitude = hex2float(latitude);
   // time
-  const time =
-    (bytes[13] << 24) | (bytes[14] << 16) | (bytes[15] << 8) | bytes[16];
+  const time = (bytes[13] << 24) | (bytes[14] << 16) | (bytes[15] << 8) | bytes[16];
   data.time = timestampToTime((time + 8 * 60 * 60) * 1000);
 
   return data;
@@ -151,10 +142,7 @@ function decodeUUIDReport(bytes: Buffer) {
 
     let beaconUUID = "";
     for (let j = 0; j < 16; j++) {
-      beaconUUID += (bytes[2 + 17 * i + j] & 0xff)
-        .toString(16)
-        .toUpperCase()
-        .padStart(2, "0");
+      beaconUUID += (bytes[2 + 17 * i + j] & 0xff).toString(16).toUpperCase().padStart(2, "0");
     }
     beaconUUIDList.push({ beaconTypeId, beaconUUID });
   }
@@ -170,21 +158,14 @@ function decodeBeacon(bytes: Buffer) {
   // wearState
   data.wearState = (bytes[0] & 0x01) == 0 ? "Not wearing" : "Wearing";
   // pressure
-  const pressure =
-    (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
+  const pressure = (bytes[1] << 24) | (bytes[2] << 16) | (bytes[3] << 8) | bytes[4];
   data.pressure = pressure / 10 + "pa";
   // numner
   data.number = bytes[5] & 0x0f;
   for (let i = 0; i < data.number; i++) {
     const index = 7 + 5 * i;
-    const major = ((bytes[index] << 8) | bytes[index + 1])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = ((bytes[index + 2] << 8) | bytes[index + 3])
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = ((bytes[index] << 8) | bytes[index + 1]).toString(16).toUpperCase().padStart(4, "0");
+    const minor = ((bytes[index + 2] << 8) | bytes[index + 3]).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 4] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -259,12 +240,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");

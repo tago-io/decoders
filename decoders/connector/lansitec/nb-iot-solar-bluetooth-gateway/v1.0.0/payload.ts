@@ -32,8 +32,7 @@ function decodeRegistration(bytes: Buffer) {
 
   data.heartbeatPeriod = (((bytes[6] << 8) & 0xff00) | (bytes[7] & 0xff)) * 30;
 
-  data.bleDeviceReportInterval =
-    (((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff)) * 5;
+  data.bleDeviceReportInterval = (((bytes[14] << 8) & 0xff00) | (bytes[15] & 0xff)) * 5;
 
   data.bleReceivingDuration = bytes[16] & 0xff;
 
@@ -64,11 +63,9 @@ function decodeHeartbeat(bytes: Buffer) {
   if (0 === ((bytes[9] >> 7) & 0x01)) {
     data.temperature = (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) + "°C";
   } else {
-    data.temperature =
-      (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) * -1 + "°C";
+    data.temperature = (((bytes[9] << 8) & 0xff00) | (bytes[10] & 0xff)) * -1 + "°C";
   }
-  data.movementDuration =
-    (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
+  data.movementDuration = (((bytes[11] << 8) & 0xff00) | (bytes[12] & 0xff)) * 5;
   data.chargeDuration = ((bytes[15] << 8) & 0xff00) | (bytes[16] & 0xff);
   data.messageId = ((bytes[17] << 8) & 0xff00) | (bytes[18] & 0xff);
   return data;
@@ -93,17 +90,10 @@ function decodeConfigParameterResponse(bytes: Buffer) {
       commandBitField.name = getParameterName(parameterType);
       commandBitField.parameterDefinition = "DeviceReportRule";
     } else {
-      const parameterValue = getParameterValue(
-        bytes,
-        index,
-        commandBitFieldLength
-      );
+      const parameterValue = getParameterValue(bytes, index, commandBitFieldLength);
       commandBitField.parameterValue = parameterValue;
       commandBitField.name = getParameterName(parameterType);
-      commandBitField.parameterDefinition = getParameterDefinition(
-        parameterType,
-        parameterValue
-      );
+      commandBitField.parameterDefinition = getParameterDefinition(parameterType, parameterValue);
     }
 
     index = index + commandBitFieldLength;
@@ -121,17 +111,8 @@ function decodeBleDeviceMessage(bytes: Buffer) {
   data.number = bytes[1] & 0x0f;
   for (let i = 0; i < data.number; i++) {
     const index = 2 + 5 * i;
-    const major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff))
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
-    const minor = (
-      ((bytes[index + 2] << 8) & 0xff00) |
-      (bytes[index + 3] & 0xff)
-    )
-      .toString(16)
-      .toUpperCase()
-      .padStart(4, "0");
+    const major = (((bytes[index] << 8) & 0xff00) | (bytes[index + 1] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
+    const minor = (((bytes[index + 2] << 8) & 0xff00) | (bytes[index + 3] & 0xff)).toString(16).toUpperCase().padStart(4, "0");
     const rssi = bytes[index + 4] - 256;
 
     data[`beacon${i + 1}`] = major + minor;
@@ -292,12 +273,7 @@ function toTagoFormat(object_item: any, group: any, prefix = "") {
   return result;
 }
 
-const data = payload.find(
-  (x) =>
-    x.variable === "payload_raw" ||
-    x.variable === "payload" ||
-    x.variable === "data"
-);
+const data = payload.find((x) => x.variable === "payload_raw" || x.variable === "payload" || x.variable === "data");
 
 if (data) {
   const buffer = Buffer.from(data.value, "hex");
