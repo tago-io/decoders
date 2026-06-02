@@ -50,9 +50,6 @@
       "description": "Multilingual support for device_annotation field"
     }
   },
-  "required": [
-    "description",
-    "networks"
-  ],
+  "required": ["description", "networks"],
   "additionalProperties": false
 }

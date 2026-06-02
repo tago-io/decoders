@@ -7,9 +7,9 @@ export async function up(knex: Knex): Promise<void> {
       table.text("name").notNullable();
       table.text("version").notNullable();
       table.text("description").defaultTo(null);
-      table.text("serial_number");  // JSON stringify
+      table.text("serial_number"); // JSON stringify
       table.text("documentation_url");
-      table.text('device_parameters');  // JSON stringify
+      table.text("device_parameters"); // JSON stringify
       table.text("middleware_endpoint");
       table.text("logo");
       table.text("icon");
@@ -30,8 +30,8 @@ export async function up(knex: Knex): Promise<void> {
       table.text("name").notNullable();
       table.text("version").notNullable();
       table.text("description").defaultTo(null);
-      table.text('networks');  // JSON stringify
-      table.text('device_parameters');  // JSON stringify
+      table.text("networks"); // JSON stringify
+      table.text("device_parameters"); // JSON stringify
       table.text("install_text");
       table.text("install_end_text");
       table.text("device_annotation");

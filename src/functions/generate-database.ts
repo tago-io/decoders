@@ -1,8 +1,8 @@
 import path from "node:path";
 import fs from "node:fs";
 import knex, { type Knex } from "knex";
-import { createNetworks } from "../helpers/create-networks";
-import { createConnectors } from "../helpers/create-connectors";
+import { createNetworks } from "../helpers/create-networks.ts";
+import { createConnectors } from "../helpers/create-connectors.ts";
 
 let knexClient: Knex;
 

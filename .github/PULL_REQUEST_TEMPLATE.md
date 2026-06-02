@@ -1,28 +1,29 @@
-## Decoder Description
+## Summary
 
-Explain the functionality of your decoder or any other relevant information.
+<!-- One to three sentences: decoder path, what changed, and why. For new decoders, name network vs connector and manufacturer/device. -->
 
-## Type of change
+## Test plan
 
-- [ ] Adding a new Decoder of Connector
-- [ ] Adding a new Decoder of Network
-- [ ] Update or fixing an issue in existing Decoder
+- [ ] `pnpm run check` (or `pnpm run linter` + `pnpm test`)
+- [ ] `pnpm test`
+- [ ] `pnpm start validator`
+- [ ] Unit tests added or updated for the decoder
+- [ ] Non-decoding payload test ("shall not pass") where the decoder must ignore out-of-scope payloads
+- [ ] `pnpm start generate` (maintainers only, when cutting a release)
 
-## Decoder Information and Payload to test and review
+### New or updated decoder
 
-- [ ] Documentation of the hardware or protocol:
-- [ ] Payload of example the test the decoder:
+- [ ] Folder under `decoders/network/` or `decoders/connector/` follows [README](./README.md) layout
+- [ ] `network.jsonc` or `connector.jsonc` validates against `schema/`
+- [ ] Version folders use SemVer; per-version `manifest.jsonc` present
+- [ ] Decoder source is TypeScript with unit tests
+- [ ] `description`, `install_text`, and `device_annotation` are objective (no subjective marketing, no off-platform links)
 
+### Review context
 
-## Checklist for Adding a New Decoder
+- **Type:** <!-- new network / new connector / fix existing -->
+- **Decoder path:** <!-- e.g. decoders/connector/manufacturer/device -->
+- **Hardware or protocol documentation:**
+- **Example test payload:**
 
-- [ ] Created a new folder under `./decoders/network/` or `./decoders/connector/` with the name of your decoder.
-- [ ] Added a `network.jsonc` or `connector.jsonc` file that follows the structure defined in `./schema/`.
-- [ ] Created version folders and added `manifest.jsonc` files for each version.
-- [ ] Followed the folder structure guidelines for manufacturer and sensor/device model.
-- [ ] The code has unit test and it's in TypeScript.
-
-## Additional Notes
-
-Please add any other information that you think is important.
-
+Closes #

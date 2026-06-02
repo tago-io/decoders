@@ -1,0 +1,54 @@
+name: New decoder request
+description: Request a decoder for hardware or a protocol not yet in the catalog
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: Device or protocol, manufacturer, and what variables the decoder should expose on TagoIO.
+    validations:
+      required: true
+  - type: dropdown
+    id: decoder_type
+    attributes:
+      label: Decoder type
+      options:
+        - Network
+        - Connector
+    validations:
+      required: true
+  - type: input
+    id: manufacturer
+    attributes:
+      label: Manufacturer or network name
+    validations:
+      required: true
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Documentation links
+      description: Datasheet, payload format spec, or integration guide (prefer public URLs).
+    validations:
+      required: true
+  - type: textarea
+    id: sample_payload
+    attributes:
+      label: Sample payload
+      description: Raw payload or uplink example (redact secrets and customer identifiers).
+    validations:
+      required: false
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Contributors can implement decoders via pull request. See [README](https://github.com/tago-io/decoders/blob/main/README.md#submitting-a-decoder-pull-request).

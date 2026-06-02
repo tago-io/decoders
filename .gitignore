@@ -1,3 +1,9 @@
+# macOS
+.DS_Store
+
+# npm (repo uses pnpm)
+package-lock.json
+
 # Logs
 logs
 *.log

@@ -1,65 +1,78 @@
-name: Commit
+name: CI
 
 on:
   push:
   pull_request:
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-
   linter:
     runs-on: ubuntu-latest
-    needs: setup
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-    - run: npm run linter
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm run linter
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm run typecheck
 
   test:
     runs-on: ubuntu-latest
-    needs: setup
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-    - run: npm test
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm test
 
   validator:
     runs-on: ubuntu-latest
-    needs: setup
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-    - run: npm start validator
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm start validator
 
   generate:
     runs-on: ubuntu-latest
-    needs: [linter, test, validator]
+    needs: [linter, typecheck, test, validator]
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - run: npm ci
-    - name: Generate Database
-      run: npm start generate
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install
+      - name: Generate Database
+        run: pnpm start generate

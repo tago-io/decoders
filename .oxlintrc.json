@@ -1,0 +1,70 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "vitest", "oxc", "import"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error"
+  },
+  "globals": {
+    "payload": "readonly"
+  },
+  "ignorePatterns": ["**/node_modules/**", "decoders/**/v1.0.0/*.ts", "decoders/**/v1.0.0/payload.js"],
+  "rules": {
+    "no-var": "error",
+    "no-debugger": "error",
+    "curly": "error",
+    "typescript/no-namespace": "error",
+    "typescript/prefer-as-const": "error",
+    "typescript/no-explicit-any": "warn",
+    "unicorn/prefer-array-flat-map": "warn",
+    "unicorn/prefer-node-protocol": "warn",
+    "import/no-default-export": "warn",
+    "no-unused-vars": "error",
+    "typescript/no-unused-vars": "error",
+    "no-underscore-dangle": ["error", { "allow": ["__filename", "__dirname"] }],
+    "no-shadow": "off",
+    "vitest/no-conditional-expect": "off",
+    "vitest/require-to-throw-message": "off"
+  },
+  "overrides": [
+    {
+      "files": ["global.d.ts"],
+      "rules": {
+        "typescript/no-explicit-any": "off"
+      }
+    },
+    {
+      "files": ["vite.config.ts"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": ["decoders/**/payload.js", "decoders/**/payload.test.js"],
+      "rules": {
+        "no-var": "warn",
+        "curly": "warn",
+        "no-unused-vars": "warn",
+        "typescript/no-unused-vars": "warn",
+        "no-inner-declarations": "warn",
+        "no-undef": "warn",
+        "no-prototype-builtins": "warn"
+      }
+    },
+    {
+      "files": ["decoders/**/payload.ts", "decoders/**/payload.test.ts"],
+      "rules": {
+        "no-var": "warn",
+        "curly": "warn",
+        "no-unused-vars": "warn",
+        "typescript/no-unused-vars": "warn",
+        "no-inner-declarations": "warn",
+        "no-prototype-builtins": "warn"
+      }
+    }
+  ],
+  "env": {
+    "builtin": true,
+    "node": true
+  }
+}

@@ -31,7 +31,7 @@ interface Metadata {
     {
       label: string;
       value: string | number | boolean;
-    }
+    },
   ];
   [key: string]: any;
 }

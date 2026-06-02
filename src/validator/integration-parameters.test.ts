@@ -1,6 +1,12 @@
 import { expect, test, describe } from "vitest";
 import type { ZodError } from "zod";
-import { zIntegrationParameter, zIntegrationParameters } from "./integration-parameters";
+import { zIntegrationParameter, zIntegrationParameters } from "./integration-parameters.ts";
+
+type FlattenedFieldErrors = Record<string, string[] | undefined>;
+
+function flattenFieldErrors(error: unknown): FlattenedFieldErrors {
+  return (error as ZodError).flatten().fieldErrors as FlattenedFieldErrors;
+}
 
 describe("Integration Parameter Schema", () => {
   describe("Success", () => {
@@ -96,8 +102,8 @@ describe("Integration Parameter Schema", () => {
         };
         zIntegrationParameter.parse(data);
       } catch (error) {
-        const errorF = (error as ZodError).flatten();
-        expect(errorF.fieldErrors.default?.[0]).toBe("Expected boolean, received number");
+        const fieldErrors = flattenFieldErrors(error);
+        expect(fieldErrors.default?.[0]).toBe("Invalid input: expected boolean, received number");
       }
     });
 
@@ -109,8 +115,8 @@ describe("Integration Parameter Schema", () => {
         };
         zIntegrationParameter.parse(data);
       } catch (error) {
-        const errorF = (error as ZodError).flatten();
-        expect(errorF.fieldErrors.type?.[0]).toContain("Invalid discriminator value");
+        const fieldErrors = flattenFieldErrors(error);
+        expect(fieldErrors.type?.[0]).toContain("Invalid discriminator value");
       }
     });
 
@@ -122,8 +128,8 @@ describe("Integration Parameter Schema", () => {
         };
         zIntegrationParameter.parse(data);
       } catch (error) {
-        const errorF = (error as ZodError).flatten();
-        expect(errorF.fieldErrors.group?.[0]).toContain("Invalid enum value");
+        const fieldErrors = flattenFieldErrors(error);
+        expect(fieldErrors.group?.[0]).toContain("Invalid option");
       }
     });
 
@@ -135,8 +141,8 @@ describe("Integration Parameter Schema", () => {
         };
         zIntegrationParameter.parse(data);
       } catch (error) {
-        const errorF = (error as ZodError).flatten();
-        expect(errorF.fieldErrors.name?.[0]).toBe("Expected string, received boolean");
+        const fieldErrors = flattenFieldErrors(error);
+        expect(fieldErrors.name?.[0]).toBe("Invalid input: expected string, received boolean");
       }
     });
 
@@ -149,8 +155,8 @@ describe("Integration Parameter Schema", () => {
         };
         zIntegrationParameter.parse(data);
       } catch (error) {
-        const errorF = (error as ZodError).flatten();
-        expect(errorF.fieldErrors.options?.[0]).toBe("Expected array, received boolean");
+        const fieldErrors = flattenFieldErrors(error);
+        expect(fieldErrors.options?.[0]).toBe("Invalid input: expected array, received boolean");
       }
     });
 
@@ -167,8 +173,8 @@ describe("Integration Parameter Schema", () => {
         };
         zIntegrationParameter.parse(data);
       } catch (error) {
-        const errorF = (error as ZodError).flatten();
-        expect(errorF.fieldErrors.options?.[0]).toBe("Expected string, received boolean");
+        const fieldErrors = flattenFieldErrors(error);
+        expect(fieldErrors.options?.[0]).toBe("Invalid input: expected string, received boolean");
       }
     });
 
@@ -187,8 +193,8 @@ describe("Integration Parameter Schema", () => {
         ];
         zIntegrationParameters.parse(data);
       } catch (error) {
-        const errorF = (error as ZodError).flatten();
-        expect(errorF.fieldErrors?.["0"]?.[0]).toContain("Invalid discriminator value");
+        const fieldErrors = flattenFieldErrors(error);
+        expect(fieldErrors["0"]?.[0]).toContain("Invalid discriminator value");
       }
     });
   });

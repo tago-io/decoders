@@ -1,12 +1,15 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import Ajv, { JSONSchemaType } from "ajv";
-import addFormats from "ajv-formats";
-import networkSchema from "../../schema/network.json" assert { type: "json" };
-import networkDetailsSchema from "../../schema/network_details.json" assert { type: "json" };
-import connectorSchema from "../../schema/connector.json" assert { type: "json" };
-import connectorDetailsSchema from "../../schema/connector_details.json" assert { type: "json" };
-import type { Connector, Network, Versions } from "../../schema/types";
+import AjvModule from "ajv";
+import addFormatsModule from "ajv-formats";
+
+const Ajv = (AjvModule as typeof AjvModule & { default?: typeof AjvModule }).default ?? AjvModule;
+const addFormats = (addFormatsModule as typeof addFormatsModule & { default?: typeof addFormatsModule }).default ?? addFormatsModule;
+import networkSchema from "../../schema/network.json" with { type: "json" };
+import networkDetailsSchema from "../../schema/network_details.json" with { type: "json" };
+import connectorSchema from "../../schema/connector.json" with { type: "json" };
+import connectorDetailsSchema from "../../schema/connector_details.json" with { type: "json" };
+import type { Connector, Network, Versions } from "../../schema/types.ts";
 
 const isVerbose = process.argv[2] === "--verbose";
 
@@ -24,10 +27,7 @@ function validateVersions(versionsObj: Versions, filePath: string, validateType:
   const versionKeys = Object.keys(versionsObj);
 
   for (const version of versionKeys) {
-    const detailsPath = path.join(
-      filePath,
-      versionsObj[version].manifest
-    );
+    const detailsPath = path.join(filePath, versionsObj[version].manifest);
 
     if (!fs.existsSync(detailsPath)) {
       throw `${validateType} manifest version file not found in ${filePath}`;
@@ -73,18 +73,12 @@ async function validateNetworkFiles(directoryPath: string): Promise<void> {
         throw `network.jsonc manifest file not found in ${filePath}`;
       }
 
-      const networkData: Network = JSON.parse(
-        fs.readFileSync(networkPath, "utf8")
-      );
+      const networkData: Network = JSON.parse(fs.readFileSync(networkPath, "utf8"));
 
       const isNetworkValid = validateNetwork(networkData);
 
       if (!isNetworkValid) {
-        throw `Validation errors in ${networkPath}.\n\n${JSON.stringify(
-          validateNetwork.errors,
-          null,
-          2
-        )}\n`;
+        throw `Validation errors in ${networkPath}.\n\n${JSON.stringify(validateNetwork.errors, null, 2)}\n`;
       }
 
       validateVersions(networkData.versions, filePath, "network");
@@ -126,17 +120,11 @@ async function validateConnectorFiles(directoryPath: string): Promise<void> {
           throw `connector.jsonc manifest file not found in ${modelPath}`;
         }
 
-        const connectorData: Connector = JSON.parse(
-          fs.readFileSync(connectorPath, "utf8")
-        );
+        const connectorData: Connector = JSON.parse(fs.readFileSync(connectorPath, "utf8"));
 
         const isConnectorValid = validateConnector(connectorData);
         if (!isConnectorValid) {
-          throw `Validation errors in ${connectorPath}.\n\n${JSON.stringify(
-            validateConnector.errors,
-            null,
-            2
-          )}`;
+          throw `Validation errors in ${connectorPath}.\n\n${JSON.stringify(validateConnector.errors, null, 2)}`;
         }
 
         validateVersions(connectorData.versions, modelPath, "connector");

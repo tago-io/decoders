@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { zBufferPayloadSize, zDomain } from "./common";
-import { zIntegrationParameters } from "./integration-parameters";
+import { zBufferPayloadSize, zDomain } from "./common.ts";
+import { zIntegrationParameters } from "./integration-parameters.ts";
 
 const zSerialNumber = z
   .object({

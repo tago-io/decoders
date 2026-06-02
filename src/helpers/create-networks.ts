@@ -1,27 +1,22 @@
 import path from "node:path";
 import fs from "node:fs";
 import type { Knex } from "knex";
-import type { Network, NetworkDetails } from "../../schema/types";
-import { generateID } from "../helpers/generate-id";
-import { readFileFromPath } from "../helpers/read-file";
-import { buildTS } from "../helpers/build-ts";
-import { zNetwork } from "../validator/network";
-import { resolvePayload } from "./resolve-payload";
-import { generateAssetURL } from "./create-asset-url";
+import type { Network, NetworkDetails } from "../../schema/types.ts";
+import { generateID } from "../helpers/generate-id.ts";
+import { readFileFromPath } from "../helpers/read-file.ts";
+import { zNetwork } from "../validator/network.ts";
+import { resolvePayload } from "./resolve-payload.ts";
+import { generateAssetURL } from "./create-asset-url.ts";
 
 async function createNetworkVersion(knexClient: Knex, mainObj: Network, filePath: string) {
   const versionKeys = Object.keys(mainObj.versions);
 
   if (versionKeys.length > 1) {
     throw `The decoders system allows only one version for now, it will be available soon. ${filePath}`;
-
   }
 
   for (const version of versionKeys) {
-    const detailsPath = path.join(
-      filePath,
-      mainObj.versions[version].manifest
-    );
+    const detailsPath = path.join(filePath, mainObj.versions[version].manifest);
 
     if (!fs.existsSync(detailsPath)) {
       throw `Network manifest version file not found in ${filePath}`;
@@ -62,9 +57,7 @@ async function createNetworks(knexClient: Knex, directoryPath: string): Promise<
     if (!fs.existsSync(networkPath)) {
       throw `network.jsonc manifest file not found in ${filePath}`;
     }
-    const networkData: Network = JSON.parse(
-      fs.readFileSync(networkPath, "utf8")
-    );
+    const networkData: Network = JSON.parse(fs.readFileSync(networkPath, "utf8"));
     await createNetworkVersion(knexClient, networkData, filePath);
   }
 }
