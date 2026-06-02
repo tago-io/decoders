@@ -31,19 +31,22 @@ const zIntegrationParameterSwitch = zIntegrationParameterBase.extend({
   default: z.boolean().default(false),
 });
 
-const zIntegrationParameter = z.preprocess((value) => {
-  if (typeof value === "object") {
-    return { type: "text", ...value };
-  }
-  return value;
-}, z.discriminatedUnion("type", [zIntegrationParameterText, zIntegrationParameterNumber, zIntegrationParameterDrop, zIntegrationParameterSwitch]));
+const zIntegrationParameter = z.preprocess(
+  (value) => {
+    if (typeof value === "object") {
+      return { type: "text", ...value };
+    }
+    return value;
+  },
+  z.discriminatedUnion("type", [zIntegrationParameterText, zIntegrationParameterNumber, zIntegrationParameterDrop, zIntegrationParameterSwitch])
+);
 
 const zIntegrationParameters = zIntegrationParameter.array().transform((data) => {
   if (data) {
     return JSON.stringify(data);
   }
   return data;
-});;
+});
 
 type IntegrationParameter = z.infer<typeof zIntegrationParameter>;
 type IntegrationParameters = z.infer<typeof zIntegrationParameters>;

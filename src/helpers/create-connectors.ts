@@ -1,13 +1,12 @@
 import path from "node:path";
 import fs from "node:fs";
 import type { Knex } from "knex";
-import type { Connector, ConnectorDetails } from "../../schema/types";
-import { extractNameAndVersionFromPath, generateID } from "../helpers/generate-id";
-import { readFileFromPath } from "../helpers/read-file";
-import { buildTS } from "../helpers/build-ts";
-import { zConnector } from "../validator/connector";
-import { resolvePayload } from "./resolve-payload";
-import { generateAssetURL } from "./create-asset-url";
+import type { Connector, ConnectorDetails } from "../../schema/types.ts";
+import { extractNameAndVersionFromPath, generateID } from "../helpers/generate-id.ts";
+import { readFileFromPath } from "../helpers/read-file.ts";
+import { zConnector } from "../validator/connector.ts";
+import { resolvePayload } from "./resolve-payload.ts";
+import { generateAssetURL } from "./create-asset-url.ts";
 
 async function createConnectorVersion(knexClient: Knex, mainObj: Connector, filePath: string) {
   const versionKeys = Object.keys(mainObj.versions);

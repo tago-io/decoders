@@ -11,7 +11,7 @@ const zBufferPayloadSize = (sizeKb: number) => {
         message: "Invalid Payload Parser",
       });
 
-      return z.never;
+      return;
     }
 
     if (Buffer.byteLength(val) > sizeKb * 1000) {
@@ -29,7 +29,6 @@ const zDomain = z.string().refine((val) => {
   });
 }, "Invalid domain");
 
-const zBufferOrString =  z.union([z.string(), z.instanceof(Buffer)]);
-
+const zBufferOrString = z.union([z.string(), z.instanceof(Buffer)]);
 
 export { zBufferPayload, zBufferPayloadSize, zDomain, zBufferOrString };

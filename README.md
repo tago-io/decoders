@@ -52,14 +52,14 @@ Here's an example of a `connector.jsonc` file for a connector decoder:
   "$schema": "../../../schema/connector.json",
   "name": "Abeeway Compact Tracker", // Searchable Field on the TagoIO platform.
   "images": {
-    "logo": "./assets/logo.png"
+    "logo": "./assets/logo.png",
   },
   "versions": {
     "v1.0.0": {
       "src": "./v1.0.0/payload.js",
-      "manifest": "./v1.0.0/payload-config.jsonc"
-    }
-  }
+      "manifest": "./v1.0.0/payload-config.jsonc",
+    },
+  },
 }
 ```
 
@@ -85,15 +85,15 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
         {
           "is_default": false,
           "label": "One variable with all beacons",
-          "value": "simple"
+          "value": "simple",
         },
         {
           "is_default": true,
           "label": "Split beacon in different variables",
-          "value": "splitted"
-        }
-      ]
-    }
+          "value": "splitted",
+        },
+      ],
+    },
   ],
   "networks": [
     "../../../network/lorawan-actility/v1.0.0/payload.js",
@@ -109,8 +109,8 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
     "../../../network/lorawan-ttn/v1.0.0/payload.js",
     "../../../network/lorawan-twtg/v1.0.0/payload.js",
     "../../../network/lorawan-twtg/v3/v1.0.0/payload.js",
-    "../../../network/lorawan-brodt/v1.0.0/payload.js"
-  ]
+    "../../../network/lorawan-brodt/v1.0.0/payload.js",
+  ],
 }
 ```
 
@@ -119,15 +119,12 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 ### Network Decoder
 
 1. **Create a new folder:**
-
    - Navigate to [`./decoders/network/`](./decoders/network/) and create a new folder named after your network decoder.
 
 2. **Create the manifest file:**
-
    - Inside this folder, create a `network.jsonc` file. Follow the structure defined in [`network.json`](./schema/network.json).
 
 3. **Create version folders:**
-
    - For each version of your network decoder, create a new folder inside your network decoder's folder. Name the folder with the version number.
    - The pattern utilized for versioning is the [SemVer](https://semver.org/)
 
@@ -137,15 +134,12 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 ### Connector Decoder
 
 1. **Create a new folder:**
-
    - Navigate to [`./decoders/connector/`](./decoders/connector/) and create a new folder named after the manufacturer and the name of your connector decoder.
 
 2. **Create the manifest file:**
-
    - Inside this folder, create a `connector.jsonc` file. Follow the structure defined in [`connector.json`](./schema/connector.json).
 
 3. **Create version folders:**
-
    - For each version of your connector decoder, create a new folder inside your connector decoder's folder. Name the folder with the version number.
    - The pattern utilized for versioning is the [SemVer](https://semver.org/)
 
@@ -155,20 +149,17 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 ## Submitting a Decoder Pull Request
 
 1. **Create a new branch:**
-
    - Create a new branch for your decoder.
 
 2. **Add your decoder:**
-
    - Follow the instructions above to add your decoder.
 
 3. **Include Non-Decoding Test Cases:**
-
    - Add unit tests to verify that payloads not intended for decoding remain unchanged. This ensures that additional data pass through the decoder without modification. Use the following template:
 
    ```typescript
    import { describe, expect, test, beforeEach } from "vitest";
-   import { DataToSend } from "@tago-io/sdk/lib/types";
+   import type { DataToSend } from "@tago-io/sdk";
 
    import { decoderRun } from "../../../../../src/functions/decoder-run";
 
@@ -197,38 +188,45 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 
 4. **Run these commands to validate your changes:**
 
+   Requires **Node.js 24+** and [pnpm 11](https://pnpm.io/installation) (see `packageManager` in `package.json`). Dev dependency versions are pinned in the `catalog` block of `pnpm-workspace.yaml` (root `package.json` uses `catalog:`). Validator and generate scripts run via Node's native TypeScript support (`pnpm start`).
+
+   ```bash
+   corepack enable
+   corepack use pnpm@11.5.0
+   pnpm install
+   ```
+
+   Then:
    - **Run the linter to check code style:**
 
    ```bash
-   npm run linter
+   pnpm run linter
    ```
 
    - **Run all unit tests to ensure functionality:**
 
    ```bash
-   npm test
+   pnpm test
    ```
 
    - **Validate your manifest files:**
 
    ```bash
-   npm start validator
+   pnpm start validator
    ```
 
    - **Generate database:**
 
    ```bash
-   npm start generate
+   pnpm start generate
    ```
 
    - Make sure all commands execute successfully without errors before submitting your PR. This helps maintain code quality and ensures all documentation is up to date.
 
 5. **Commit your changes:**
-
    - Commit your changes and open a pull request for review.
 
 6. **Review and feedback:**
-
    - Wait for the Pull Request to be reviewed. You may need to make some changes based on the feedback you receive.
 
 7. **Merge your changes:**

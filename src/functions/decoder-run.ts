@@ -8,7 +8,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { VM } from "vm2";
 import moment from "moment-timezone";
-import { buildTS } from "../helpers/build-ts";
+import { buildTS } from "../helpers/build-ts.ts";
 
 function decoderRun(file_path: string, params = {}) {
   let file = fs.readFileSync(path.join(__dirname, "../../", file_path), "utf-8");

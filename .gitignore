@@ -1,3 +1,9 @@
+# macOS
+.DS_Store
+
+# npm (repo uses pnpm)
+package-lock.json
+
 # Logs
 logs
 *.log
@@ -121,6 +127,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Editor/workspace settings
+.vscode/
 
 # .db file
 data

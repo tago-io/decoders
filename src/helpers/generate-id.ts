@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import mappedIds from "../../map-ids.json";
+import mappedIds from "../../map-ids.json" with { type: "json" };
 
 type TypeVersion = {
   name: string;
@@ -22,7 +22,7 @@ function generateID({ name, version }: TypeVersion, isConnector = false): string
   }
 
   const combinedString = `${normalizedName}-${version}`;
-  const hash = createHash('md5').update(combinedString).digest('hex');
+  const hash = createHash("md5").update(combinedString).digest("hex");
 
   const id = hash.substring(0, 24);
 
@@ -31,15 +31,15 @@ function generateID({ name, version }: TypeVersion, isConnector = false): string
 }
 
 function extractNameAndVersionFromPath(path: string): { name: string; version: string } {
-  const parts = path.split('/');
-  const networkIndex = parts.indexOf('network');
+  const parts = path.split("/");
+  const networkIndex = parts.indexOf("network");
 
   if (networkIndex === -1 || networkIndex + 2 >= parts.length) {
-    throw new Error('Invalid path format');
+    throw new Error("Invalid path format");
   }
 
   const lastSegment = parts[parts.length - 1];
-  if (lastSegment.includes('.')) {
+  if (lastSegment.includes(".")) {
     parts.pop();
   }
 
@@ -47,7 +47,7 @@ function extractNameAndVersionFromPath(path: string): { name: string; version: s
   const version = parts[networkIndex + 2];
 
   if (!name || !version) {
-    throw new Error('missing name or version on path');
+    throw new Error("missing name or version on path");
   }
 
   return { name, version };

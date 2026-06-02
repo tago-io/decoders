@@ -1,0 +1,55 @@
+name: Decoder bug
+description: Incorrect parsing, validation failure, or manifest error in an existing decoder
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is wrong? Include decoder path, version, and what you expected vs what you got.
+    validations:
+      required: true
+  - type: input
+    id: decoder_path
+    attributes:
+      label: Decoder path
+      description: Path under decoders/, e.g. decoders/connector/acme/sensor-name
+      placeholder: decoders/connector/manufacturer/device
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Input payload, device parameters, and fPort or network context if relevant.
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+      description: Variables and values you expected after decoding.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+      description: What the decoder produced instead (or error from validator/tests).
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Low
+        - Medium
+        - High
+        - Critical
+    validations:
+      required: true

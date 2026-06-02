@@ -1,5 +1,5 @@
 import { describe, expect, test, beforeEach } from "vitest";
-import { DataToSend } from "@tago-io/sdk/lib/types";
+import { DataToSend } from "@tago-io/sdk";
 
 import { decoderRun } from "../../../../src/functions/decoder-run";
 

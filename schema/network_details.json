@@ -8,11 +8,7 @@
       "properties": {
         "case": {
           "type": "string",
-          "enum": [
-            "upper",
-            "lower",
-            ""
-          ],
+          "enum": ["upper", "lower", ""],
           "description": "Defines the case of the serial number."
         },
         "label": {
@@ -65,7 +61,5 @@
     }
   },
   "additionalProperties": false,
-  "required": [
-    "description"
-  ]
+  "required": ["description"]
 }

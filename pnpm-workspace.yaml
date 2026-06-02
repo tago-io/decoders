@@ -1,0 +1,38 @@
+# https://pnpm.io/pnpm-workspace_yaml
+# Root-only repo (no packages: field). Project settings live here in pnpm v11+.
+
+engineStrict: true
+savePrefix: ""
+
+# pnpm 11 defaults to 1440 minutes. This repo upgrades dev tooling often; disable age gate locally and in CI.
+minimumReleaseAge: 0
+
+allowBuilds:
+  "@swc/core": true
+  "better-sqlite3": true
+  esbuild: true
+  sqlite3: true
+
+# https://pnpm.io/catalogs — version pins for the root package (package.json uses catalog:)
+catalog:
+  "@swc/core": ^1.15.40
+  "@tago-io/sdk": ^12.2.2
+  "@types/node": ^24.12.4
+  "@types/validator": ^13.15.10
+  ajv: ^8.20.0
+  ajv-formats: ^3.0.1
+  better-sqlite3: ^12.10.0
+  knex: ^3.2.10
+  moment-timezone: ^0.6.2
+  oxfmt: ^0.53.0
+  oxlint: ^1.68.0
+  oxlint-tsgolint: ^0.23.0
+  sqlite3: ^6.0.1
+  typescript: ^6.0.3
+  uuid: ^14.0.0
+  validator: ^13.15.35
+  vitest: ^4.1.8
+  vm2: ^3.11.5
+  zod: ^4.4.3
+
+catalogMode: prefer

@@ -1,12 +1,12 @@
-import { describe, it, expect } from 'vitest';
-import { buildTS } from './build-ts';
+import { describe, it, expect } from "vitest";
+import { buildTS } from "./build-ts.ts";
 
 const cleanCode = (code: string): string => {
-  return code.replace(/\s+/g, '');
+  return code.replace(/\s+/g, "");
 };
 
-describe('buildTS function', () => {
-  it('should transform TypeScript code correctly', () => {
+describe("buildTS function", () => {
+  it("should transform TypeScript code correctly", () => {
     const inputCode = `
       function add(a: number, b: number): number {
         return a + b;
@@ -26,7 +26,7 @@ describe('buildTS function', () => {
     expect(cleanCode(transformedCode)).toBe(cleanCode(expectedCode));
   });
 
-  it('should throw an error for invalid TypeScript code', () => {
+  it("should throw an error for invalid TypeScript code", () => {
     const invalidCode = `
       function add(a: number, b: number) {
         return new.Date(); // wrong code
