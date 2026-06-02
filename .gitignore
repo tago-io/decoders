@@ -128,5 +128,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Editor/workspace settings
+.vscode/
+
 # .db file
 data

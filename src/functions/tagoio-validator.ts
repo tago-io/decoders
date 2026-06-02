@@ -1,10 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import AjvModule from "ajv";
-import addFormatsModule from "ajv-formats";
-
-const Ajv = (AjvModule as typeof AjvModule & { default?: typeof AjvModule }).default ?? AjvModule;
-const addFormats = (addFormatsModule as typeof addFormatsModule & { default?: typeof addFormatsModule }).default ?? addFormatsModule;
+import { Ajv } from "ajv";
+import ajvFormats from "ajv-formats";
 import networkSchema from "../../schema/network.json" with { type: "json" };
 import networkDetailsSchema from "../../schema/network_details.json" with { type: "json" };
 import connectorSchema from "../../schema/connector.json" with { type: "json" };
@@ -14,6 +11,9 @@ import type { Connector, Network, Versions } from "../../schema/types.ts";
 const isVerbose = process.argv[2] === "--verbose";
 
 const ajv = new Ajv({ allErrors: true, removeAdditional: "all" });
+// ajv-formats ships CommonJS; under nodenext the default import is the module
+// namespace, so the callable plugin lives on `.default`.
+const addFormats = ajvFormats.default;
 addFormats(ajv);
 
 // Compile Network schemas

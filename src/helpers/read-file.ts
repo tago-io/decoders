@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+function readFileFromPath(filePath: string, file: string, utf: true): string | null;
+function readFileFromPath(filePath: string, file?: string, utf?: boolean): Buffer | null;
 function readFileFromPath(filePath: string, file?: string, utf?: boolean): Buffer | string | null {
   if (!file) {
     return null;

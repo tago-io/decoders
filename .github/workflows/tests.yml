@@ -10,8 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11.5.0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -24,8 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11.5.0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -38,8 +34,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11.5.0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -52,8 +46,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11.5.0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -67,12 +59,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11.5.0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: pnpm
       - run: pnpm install
-      - name: Generate Database
-        run: pnpm start generate
+      - run: pnpm start generate

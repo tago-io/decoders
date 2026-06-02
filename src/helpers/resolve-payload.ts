@@ -2,15 +2,21 @@ import { buildTS } from "./build-ts.ts";
 import { readFileFromPath } from "./read-file.ts";
 
 function resolvePayload(path: string, filename: string): Buffer {
-  let payload_decoder: Buffer;
+  if (filename.endsWith(".ts")) {
+    const source = readFileFromPath(path, filename, true);
+    if (source === null) {
+      throw new Error(`Decoder source not found: ${path}/${filename}`);
+    }
 
-  if (String(filename).endsWith(".ts")) {
-    payload_decoder = Buffer.from(buildTS(readFileFromPath(path, filename, true) as string), "utf-8");
-  } else {
-    payload_decoder = readFileFromPath(path, filename) as Buffer;
+    return Buffer.from(buildTS(source), "utf-8");
   }
 
-  return payload_decoder;
+  const file = readFileFromPath(path, filename);
+  if (file === null) {
+    throw new Error(`Decoder file not found: ${path}/${filename}`);
+  }
+
+  return file;
 }
 
 export { resolvePayload };

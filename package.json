@@ -5,12 +5,11 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "linter": "oxlint .",
-    "lint": "oxlint .",
-    "lint:fix": "oxlint . --fix",
+    "linter": "oxlint --type-aware .",
+    "lint:fix": "oxlint --type-aware . --fix",
     "format": "oxfmt --check .",
     "format:fix": "oxfmt --write .",
-    "check": "oxlint . && oxfmt --check .",
+    "check": "oxlint --type-aware . && oxfmt --check .",
     "typecheck": "tsc --noEmit",
     "ci": "pnpm run check && pnpm run typecheck && pnpm test && pnpm start validator",
     "start": "node --env-file=.env src/main.ts"

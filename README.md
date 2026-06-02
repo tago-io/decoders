@@ -188,7 +188,7 @@ Here's an example of a `connector_details.jsonc` file for a connector decoder:
 
 4. **Run these commands to validate your changes:**
 
-   Requires **Node.js 24+** and [pnpm 11](https://pnpm.io/installation) (see `packageManager` in `package.json`). Dev dependency versions are pinned in the `catalog` block of `pnpm-workspace.yaml` (root `package.json` uses `catalog:`). Validator and generate scripts run via Node’s native TypeScript support (`pnpm start`).
+   Requires **Node.js 24+** and [pnpm 11](https://pnpm.io/installation) (see `packageManager` in `package.json`). Dev dependency versions are pinned in the `catalog` block of `pnpm-workspace.yaml` (root `package.json` uses `catalog:`). Validator and generate scripts run via Node's native TypeScript support (`pnpm start`).
 
    ```bash
    corepack enable

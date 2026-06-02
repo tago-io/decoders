@@ -1,11 +1,15 @@
 import { expect, test, describe } from "vitest";
-import type { ZodError } from "zod";
+import { ZodError } from "zod";
 import { zIntegrationParameter, zIntegrationParameters } from "./integration-parameters.ts";
 
 type FlattenedFieldErrors = Record<string, string[] | undefined>;
 
 function flattenFieldErrors(error: unknown): FlattenedFieldErrors {
-  return (error as ZodError).flatten().fieldErrors as FlattenedFieldErrors;
+  if (!(error instanceof ZodError)) {
+    throw error;
+  }
+
+  return error.flatten().fieldErrors as FlattenedFieldErrors;
 }
 
 describe("Integration Parameter Schema", () => {
