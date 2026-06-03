@@ -1,239 +1,225 @@
-# TagoIO - Decoders - Parsers - Codecs
+<br/>
+<p align="center">
+  <img src="https://assets.tago.io/tagoio/tagoio.png" width="200px" alt="TagoIO"></img>
+</p>
 
-This repository contains the necessary tools and guidelines for creating and managing decoders for the TagoIO platform. Decoders are scripts that interpret the payload data from an IoT Device or protocol and convert it into a TagoIO data format.
+# TagoIO Decoders
 
-To help you get started, we've included a comprehensive video tutorial on how to add a new decoder: [Watch the tutorial](https://www.youtube.com/watch?v=7ejN2q0YWo0).
+Open-source catalog of IoT payload decoders for LoRaWAN, MQTT, Sigfox, and device connector codecs on the TagoIO platform.
 
-## Table of Contents
+---
 
-- [Folder Structure](#folder-structure)
-- [Manifests](#manifests)
-- [Adding a New Decoder](#adding-a-new-decoder)
-  - [Network Decoder](#network-decoder)
-  - [Connector Decoder](#connector-decoder)
-- [Submitting a Decoder Pull Request](#submitting-a-decoder-pull-request)
+To help you get started, watch the [video tutorial on adding a new decoder](https://www.youtube.com/watch?v=7ejN2q0YWo0).
 
-## Folder Structure
+## What it is
 
-The project follows this folder structure:
+Decoders are scripts that parse raw payloads from IoT devices and network servers into the TagoIO data format. This repository organizes them by network (LoRaWAN stack, MQTT broker, HTTP ingress) and connector (manufacturer and device model).
 
-- [`./decoders/`](./decoders/): This directory contains the network and connector decoders.
-  - `./network/network-name/`: This directory should be named with the network name/model.
-  - `./connector/manufacturer-name/`: This directory should be named after the manufacturer of the device for which the decoder is being created. It groups together all decoders related to the specific manufacturer.
-    - `./connector/manufacturer-name/sensor-name/`: This directory should be named after the specific sensor or device model for which the decoder is being created. It contains all versions of the decoder for that specific sensor or device model.
-- [`./schema/`](./schema/): This directory contains the JSON schemas for the network and connector decoders.
+## Folder structure
+
+```
+decoders/
+  network/<slug>/                Network decoder (runs before connector decoders)
+    network.jsonc                Catalog entry
+    assets/                      Banner, icon, logo images
+    v1.0.0/
+      manifest.jsonc             Version details
+      payload.ts                 Decoder source (TypeScript)
+      payload.js                 Built output for the platform
+      payload.test.ts            Vitest unit tests
+
+  connector/<manufacturer>/<device>/
+    connector.jsonc              Catalog entry
+    connector_details.jsonc      Parameters, linked networks, description
+    description.md               Long description (searchable on TagoIO)
+    assets/                      Logo image
+    v1.0.0/
+      payload-config.jsonc       Version details
+      payload.ts                 Decoder source (TypeScript)
+      payload.js                 Built output for the platform
+      payload.test.ts            Vitest unit tests
+
+schema/                          JSON schemas for all manifest types
+src/                             Build, validate, and test harness
+```
+
+## Setup
+
+Requires **Node.js 24+** and **pnpm 11**. Dev dependency versions are pinned in the `catalog` block of `pnpm-workspace.yaml`.
+
+```bash
+corepack enable
+corepack use pnpm@11.5.0
+pnpm install
+```
 
 ## Manifests
 
-Manifests are JSONC files that describe the details of each version of a decoder. They are essential for ensuring that the decoder is correctly identified and processed by the TagoIO platform.
+Manifests are JSONC files that describe each decoder and its versions. The JSON schemas in `schema/` validate them.
 
-### Network Decoders
+### Network decoders
 
-- **Images**
-  - **Banner**: Expected dimension `1500x375`
-  - **Icon**: Expected dimension `64x64`
-  - **Logo**: Expected dimension `443x160`
-- **Manifest File:** `network.jsonc`
-- **Details File:** `network_details.jsonc`
+- **Manifest:** `network.jsonc` (schema: [`network.json`](./schema/network.json))
+- **Version details:** `v<semver>/manifest.jsonc` (schema: [`network_details.json`](./schema/network_details.json))
+- **Images:** banner 1500x375, icon 64x64, logo 443x160
 
-### Connector Decoders
+### Connector decoders
 
-- **Images**
-  - **Logo**: Expected dimension `443x625` or `443x443`
-- **Manifest File:** `connector.jsonc`
-- **Details File:** `connector_details.jsonc`
+- **Manifest:** `connector.jsonc` (schema: [`connector.json`](./schema/connector.json))
+- **Version details:** `v<semver>/payload-config.jsonc` (schema: [`connector_details.json`](./schema/connector_details.json))
+- **Images:** logo 443x625 or 443x443
 
-### Example: Connector Manifest
-
-Here's an example of a `connector.jsonc` file for a connector decoder:
+### Example: connector manifest
 
 ```jsonc
 {
-  "$schema": "../../../schema/connector.json",
-  "name": "Abeeway Compact Tracker", // Searchable Field on the TagoIO platform.
+  "$schema": "../../../../schema/connector.json",
+  "name": "Abeeway Compact Tracker",
   "images": {
-    "logo": "./assets/logo.png",
+    "logo": "./assets/logo.png"
   },
   "versions": {
     "v1.0.0": {
       "src": "./v1.0.0/payload.js",
-      "manifest": "./v1.0.0/payload-config.jsonc",
-    },
-  },
+      "manifest": "./v1.0.0/payload-config.jsonc"
+    }
+  }
 }
 ```
 
-### Example: Connector Details
+### Example: connector details
 
-Here's an example of a `connector_details.jsonc` file for a connector decoder:
-
-**🚨 IMPORTANT:** The fields `description`, `install_text`, and `device_annotation` must be objective and cannot be subjective, e.g. "Best sensor". They also must not contain external links that are outside the scope of TagoIO.
+The fields `description`, `install_text`, and `device_annotation` must be factual. No subjective claims and no links outside the scope of TagoIO.
 
 ```jsonc
 {
-  "$schema": "../../../schema/connector_details.json",
-  "description": "./description.md", // Searchable Field on the TagoIO platform.
+  "$schema": "../../../../schema/connector_details.json",
+  "description": "./description.md",
   "install_text": "**Compact tracker**\n\nMulti-mode tracker with embedded sensors combining GPS, Low-power GPS, Wi-Fi Sniffer, BLE",
   "device_annotation": "",
-  "device_parameters": [
-    {
-      "name": "beacon_decoder",
-      "type": "dropdown",
-      "label": "Beacon decoder type",
-      "group": "main",
-      "options": [
-        {
-          "is_default": false,
-          "label": "One variable with all beacons",
-          "value": "simple",
-        },
-        {
-          "is_default": true,
-          "label": "Split beacon in different variables",
-          "value": "splitted",
-        },
-      ],
-    },
-  ],
+  "device_parameters": [],
   "networks": [
-    "../../../network/lorawan-actility/v1.0.0/payload.js",
-    "../../../network/lorawan-chirpstack/v1.0.0/payload.js",
-    "../../../network/lorawan-citylink/v1.0.0/payload.js",
-    "../../../network/lorawan-helium/v1.0.0/payload.js",
-    "../../../network/lorawan-everynet/v1.0.0/payload.js",
-    "../../../network/lorawan-kerlink/v1.0.0/payload.js",
-    "../../../network/lorawan-loriot/v1.0.0/payload.js",
-    "../../../network/lorawan-machineq/v1.0.0/payload.js",
-    "../../../network/lorawan-senet/v1.0.0/payload.js",
-    "../../../network/lorawan-swisscom/v1.0.0/payload.js",
-    "../../../network/lorawan-ttn/v1.0.0/payload.js",
-    "../../../network/lorawan-twtg/v1.0.0/payload.js",
-    "../../../network/lorawan-twtg/v3/v1.0.0/payload.js",
-    "../../../network/lorawan-brodt/v1.0.0/payload.js",
-  ],
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttn/v1.0.0/payload.js"
+  ]
 }
 ```
 
-## Adding a New Decoder
+Every path in the `networks` array must point at a real file under `decoders/network/`.
 
-### Network Decoder
+## Adding a new decoder
 
-1. **Create a new folder:**
-   - Navigate to [`./decoders/network/`](./decoders/network/) and create a new folder named after your network decoder.
+### Network decoder
 
-2. **Create the manifest file:**
-   - Inside this folder, create a `network.jsonc` file. Follow the structure defined in [`network.json`](./schema/network.json).
+1. Create a folder under `decoders/network/` named after your network.
+2. Add a `network.jsonc` following [`network.json`](./schema/network.json).
+3. Create a version folder (`v1.0.0/`) with a `manifest.jsonc` following [`network_details.json`](./schema/network_details.json).
+4. Write the decoder in `payload.ts` and build `payload.js`.
+5. Add unit tests in `payload.test.ts`.
 
-3. **Create version folders:**
-   - For each version of your network decoder, create a new folder inside your network decoder's folder. Name the folder with the version number.
-   - The pattern utilized for versioning is the [SemVer](https://semver.org/)
+### Connector decoder
 
-4. **Create version manifest files:**
-   - Inside each version folder, create a `manifest.jsonc` file. Follow the structure defined in [`network_details.json`](./schema/network_details.json).
+1. Create a folder under `decoders/connector/<manufacturer>/<device>/`.
+2. Add a `connector.jsonc` following [`connector.json`](./schema/connector.json).
+3. Create a version folder (`v1.0.0/`) with a `payload-config.jsonc` following [`connector_details.json`](./schema/connector_details.json).
+4. Write the decoder in `payload.ts` and build `payload.js`.
+5. Add unit tests in `payload.test.ts`.
 
-### Connector Decoder
+Version folders use [SemVer](https://semver.org/). Breaking changes to output variables or types require a new version folder.
 
-1. **Create a new folder:**
-   - Navigate to [`./decoders/connector/`](./decoders/connector/) and create a new folder named after the manufacturer and the name of your connector decoder.
+## Testing
 
-2. **Create the manifest file:**
-   - Inside this folder, create a `connector.jsonc` file. Follow the structure defined in [`connector.json`](./schema/connector.json).
+### Unit tests
 
-3. **Create version folders:**
-   - For each version of your connector decoder, create a new folder inside your connector decoder's folder. Name the folder with the version number.
-   - The pattern utilized for versioning is the [SemVer](https://semver.org/)
+Tests use Vitest and the `decoderRun()` helper from `src/functions/decoder-run.ts`, which executes decoders in a local VM.
 
-4. **Create version manifest files:**
-   - Inside each version folder, create a `manifest.jsonc` file. Follow the structure defined in [`connector_details.json`](./schema/connector_details.json).
+```bash
+pnpm test                                        # all tests
+pnpm test -- decoders/connector/abeeway/compact-tracker/v1.0.0/payload.test.ts  # single decoder
+```
 
-## Submitting a Decoder Pull Request
+### Non-decoding test ("shall not pass")
 
-1. **Create a new branch:**
-   - Create a new branch for your decoder.
+Every decoder that must ignore payloads outside its scope needs a test proving it leaves unrelated data untouched:
 
-2. **Add your decoder:**
-   - Follow the instructions above to add your decoder.
+```typescript
+import { describe, expect, test, beforeEach } from "vitest";
+import { DataToSend } from "@tago-io/sdk";
 
-3. **Include Non-Decoding Test Cases:**
-   - Add unit tests to verify that payloads not intended for decoding remain unchanged. This ensures that additional data pass through the decoder without modification. Use the following template:
+import { decoderRun } from "../../../../src/functions/decoder-run";
 
-   ```typescript
-   import { describe, expect, test, beforeEach } from "vitest";
-   import type { DataToSend } from "@tago-io/sdk";
+const file_path = "decoders/connector/your-manufacturer/your-device/v1.0.0/payload.ts";
 
-   import { decoderRun } from "../../../../../src/functions/decoder-run";
+let payload: DataToSend[] = [];
 
-   const file_path = "DECODER-FILE-PATH"; // e.g. decoders/connector/your-decoder/v1.0.0/payload.ts
+describe("Shall not be parsed", () => {
+  beforeEach(() => {
+    payload = [
+      { variable: "shallnotpass", value: "04096113950292" },
+    ];
+  });
+  payload = decoderRun(file_path, { payload });
 
-   let payload: DataToSend[] = [];
+  test("Output Result", () => {
+    expect(Array.isArray(payload)).toBe(true);
+  });
 
-   describe("Shall not be parsed", () => {
-     let payload = [
-       { variable: "shallnotpass", value: "04096113950292" },
-       { variable: "fport", value: 9 },
-     ];
-     payload = decoderRun(file_path, { payload });
-     test("Output Result", () => {
-       expect(Array.isArray(payload)).toBe(true);
-     });
+  test("Not parsed Result", () => {
+    expect(payload).toEqual([
+      { variable: "shallnotpass", value: "04096113950292" },
+    ]);
+  });
+});
+```
 
-     test("Not parsed Result", () => {
-       expect(payload).toEqual([
-         { variable: "shallnotpass", value: "04096113950292" },
-         { variable: "fport", value: 9 },
-       ]);
-     });
-   });
-   ```
+## Validation and build
 
-4. **Run these commands to validate your changes:**
+Run these before submitting a PR:
 
-   Requires **Node.js 24+** and [pnpm 11](https://pnpm.io/installation) (see `packageManager` in `package.json`). Dev dependency versions are pinned in the `catalog` block of `pnpm-workspace.yaml` (root `package.json` uses `catalog:`). Validator and generate scripts run via Node's native TypeScript support (`pnpm start`).
+```bash
+pnpm run check        # oxlint + oxfmt --check
+pnpm test             # all unit tests
+pnpm start validator  # validate manifests against schema/
+```
 
-   ```bash
-   corepack enable
-   corepack use pnpm@11.5.0
-   pnpm install
-   ```
+Maintainers building a release also run:
 
-   Then:
-   - **Run the linter to check code style:**
+```bash
+pnpm start generate   # build data/decoders.db
+```
 
-   ```bash
-   pnpm run linter
-   ```
+All commands:
 
-   - **Run all unit tests to ensure functionality:**
+| Command | What it does |
+|---------|-------------|
+| `pnpm run check` | Lint (oxlint) and format check (oxfmt) |
+| `pnpm run typecheck` | TypeScript type check (`tsc --noEmit`) |
+| `pnpm run linter` | oxlint only |
+| `pnpm run format:fix` | oxfmt auto-fix (src/, schema/, configs) |
+| `pnpm test` | Vitest (all decoder and harness tests) |
+| `pnpm start validator` | Validate manifests against JSON schemas |
+| `pnpm start generate` | Build `data/decoders.db` for release |
+| `pnpm run ci` | check + typecheck + test + validator |
 
-   ```bash
-   pnpm test
-   ```
+## Submitting a pull request
 
-   - **Validate your manifest files:**
+1. Create a branch for your decoder.
+2. Follow the folder structure and manifest rules above.
+3. Write TypeScript source with unit tests, including a shall-not-pass test where applicable.
+4. Run `pnpm run check`, `pnpm test`, and `pnpm start validator`. All must pass.
+5. Open a pull request. The [PR template](.github/PULL_REQUEST_TEMPLATE.md) has a checklist.
+6. Wait for review. You may need to make changes based on feedback.
 
-   ```bash
-   pnpm start validator
-   ```
+## License
 
-   - **Generate database:**
+This repository is licensed under the [Apache License 2.0](LICENSE.md). Contributors retain
+copyright on their decoder code and license it under the same terms by submitting.
 
-   ```bash
-   pnpm start generate
-   ```
-
-   - Make sure all commands execute successfully without errors before submitting your PR. This helps maintain code quality and ensures all documentation is up to date.
-
-5. **Commit your changes:**
-   - Commit your changes and open a pull request for review.
-
-6. **Review and feedback:**
-   - Wait for the Pull Request to be reviewed. You may need to make some changes based on the feedback you receive.
-
-7. **Merge your changes:**
-   - Once your Pull Request is approved, it will be merged into the main codebase.
-
-### 📝 Note: The decoder code should be in TypeScript and have Unit Tests respecting the rules.
+Logos and brand images under `decoders/` belong to their respective owners (device
+manufacturers, network providers) and are not covered by the Apache License. See
+[LICENSE.md](LICENSE.md#third-party-assets).
 
 ---
 
-For more detailed information, please refer to the examples provided in the repository and the schema files located in the `./schema/` directory.
+Built by the TagoIO team. Software licensed under [Apache-2.0](LICENSE.md). TagoIO logos and branding are not covered by Apache-2.0; see [Copyright Notice](LICENSE.md#copyright-notice) in LICENSE.md.
