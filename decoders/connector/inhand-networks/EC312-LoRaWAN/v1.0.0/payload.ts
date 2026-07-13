@@ -1,7 +1,7 @@
 /**
  * EC312-LoRaWAN - connector for TagoIO.
  *
- * The EC312-LoRaWAN gateway delivers uplinks through the LoRaWAN ChirpStack
+ * The EC312-LoRaWAN delivers uplinks through the LoRaWAN ChirpStack
  * network integration, which runs BEFORE this connector and has already
  * converted the uplink into TagoIO variables.
  *
