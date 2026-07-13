@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**EC312-LoRaWAN**\n\nIndustrial LoRaWAN DebianOS edge computer with a built-in ChirpStack LoRaWAN Network Server. Forwards LoRaWAN uplinks to TagoIO through the LoRaWAN ChirpStack network integration.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js"
+  ]
+}
