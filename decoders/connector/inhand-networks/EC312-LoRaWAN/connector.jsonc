@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../schema/connector.json",
-  "name": "InHand EC-LoRaWAN",
+  "name": "InHand EC312-LoRaWAN",
   "images": {
     "logo": "./assets/logo.png"
   },
