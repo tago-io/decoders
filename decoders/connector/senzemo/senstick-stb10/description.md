@@ -1,0 +1,1 @@
+Food simulant LoRaWAN sensor for HACCP compliance. Monitors dual temperature readings that reflect thermal inertia, reducing false alarms in cold chain and food storage monitoring.

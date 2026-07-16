@@ -1,0 +1,1 @@
+Senzemo Senstick SSM40 is a LoRaWAN soil moisture sensor

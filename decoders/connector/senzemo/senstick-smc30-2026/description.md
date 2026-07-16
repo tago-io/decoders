@@ -1,0 +1,1 @@
+Indoor microclimate LoRaWAN sensor. Collects temperature, relative humidity, and air pressure data. Suitable for indoor environments such as retail, hospitality, and facility monitoring.
