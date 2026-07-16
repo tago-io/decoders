@@ -102,6 +102,37 @@ describe("Senstick SRM10 - Data Packet with status (port 2, 9 bytes)", () => {
   });
 });
 
+describe("Senstick SRM10 - Total rain high-bit regression (port 2, 9 bytes)", () => {
+  beforeEach(() => {
+    payload = [
+      { variable: "payload_raw", value: "000000008000000000" },
+      { variable: "port", value: "2" },
+    ];
+    payload = decoderRun(file_path, { payload });
+  });
+
+  test("Total rain stays positive when top byte has bit 7 set", () => {
+    const total_rain = payload.find((x) => x.variable === "total_rain");
+    expect(total_rain?.value).toBe(429496729.6);
+  });
+});
+
+describe("Senstick SRM10 - Total rain high-bit regression (port 2, 8 bytes)", () => {
+  beforeEach(() => {
+    payload = [
+      { variable: "payload_raw", value: "0000008000000000" },
+      { variable: "port", value: "2" },
+    ];
+    payload = decoderRun(file_path, { payload });
+  });
+
+  test("Total rain stays positive when top byte has bit 7 set", () => {
+    const total_rain = payload.find((x) => x.variable === "total_rain");
+    expect(total_rain?.value).toBe(429496729.6);
+  });
+});
+
+
 describe("Senstick SRM10 - Config Packet (port 3)", () => {
   beforeEach(() => {
     payload = [

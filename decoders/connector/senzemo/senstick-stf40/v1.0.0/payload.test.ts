@@ -7,6 +7,32 @@ const file_path = "decoders/connector/senzemo/senstick-stf40/v1.0.0/payload.ts";
 
 let payload: DataToSend[] = [];
 
+describe("Port 2 - Data packet (4 bytes, negative temperature)", () => {
+  beforeEach(() => {
+    payload = [
+      { variable: "payload_raw", value: "0c1cffd8" },
+      { variable: "port", value: "2" },
+    ];
+    payload = decoderRun(file_path, { payload });
+  });
+
+  test("Output Result", () => {
+    expect(Array.isArray(payload)).toBe(true);
+  });
+
+  test("Battery voltage parsed correctly", () => {
+    const battery_voltage = payload.find((x) => x.variable === "battery_voltage");
+    expect(battery_voltage?.value).toBe(3100);
+    expect(battery_voltage?.unit).toBe("mV");
+  });
+
+ test("Probe temperature parsed as negative", () => {
+    const probe_temperature = payload.find((x) => x.variable === "probe_temperature");
+    expect(probe_temperature?.value).toBe(-0.4);
+    expect(probe_temperature?.unit).toBe("°C");
+  });
+});
+
 describe("Port 1 - Alarm packet", () => {
   beforeEach(() => {
     payload = [

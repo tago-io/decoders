@@ -17,21 +17,24 @@ if (payload_raw) {
         else if (port === 2) {
             if (bytes.length === 4) {
                 const battery_voltage = (bytes[0] << 8) + bytes[1];
-                const probe_temperature = ((bytes[2] << 8) + bytes[3]) / 100;
+                const raw_temp = (bytes[2] << 8) + bytes[3];
+                const probe_temperature = (raw_temp > 0x7fff ? raw_temp - 0x10000 : raw_temp) / 100;
                 parsedResults.push({ variable: "battery_voltage", value: battery_voltage, unit: "mV" });
                 parsedResults.push({ variable: "probe_temperature", value: probe_temperature, unit: "°C" });
             }
             else if (bytes.length === 5) {
                 const status = bytes[0];
                 const battery_voltage = (bytes[1] << 8) + bytes[2];
-                const probe_temperature = ((bytes[3] << 8) + bytes[4]) / 100;
+                const raw_temp = (bytes[2] << 8) + bytes[3];
+                const probe_temperature = (raw_temp > 0x7fff ? raw_temp - 0x10000 : raw_temp) / 100;
                 parsedResults.push({ variable: "status", value: status, unit: "" });
                 parsedResults.push({ variable: "battery_voltage", value: battery_voltage, unit: "mV" });
                 parsedResults.push({ variable: "probe_temperature", value: probe_temperature, unit: "°C" });
             }
             else if (bytes.length === 12) {
                 const battery_voltage = (bytes[0] << 8) + bytes[1];
-                const probe_temperature = ((bytes[2] << 8) + bytes[3]) / 100;
+                const raw_temp = (bytes[2] << 8) + bytes[3];
+                const probe_temperature = (raw_temp > 0x7fff ? raw_temp - 0x10000 : raw_temp) / 100;
                 const sensor_voltage = (bytes[4] << 8) + bytes[5];
                 const ntc_resistance = (bytes[6] << 24) + (bytes[7] << 16) + (bytes[8] << 8) + bytes[9];
                 const vdda = (bytes[10] << 8) + bytes[11];
@@ -44,7 +47,8 @@ if (payload_raw) {
             else if (bytes.length === 13) {
                 const status = bytes[0];
                 const battery_voltage = (bytes[1] << 8) + bytes[2];
-                const probe_temperature = ((bytes[3] << 8) + bytes[4]) / 100;
+                const raw_temp = (bytes[2] << 8) + bytes[3];
+                const probe_temperature = (raw_temp > 0x7fff ? raw_temp - 0x10000 : raw_temp) / 100;
                 const sensor_voltage = (bytes[5] << 8) + bytes[6];
                 const ntc_resistance = (bytes[7] << 24) + (bytes[8] << 16) + (bytes[9] << 8) + bytes[10];
                 const vdda = (bytes[11] << 8) + bytes[12];

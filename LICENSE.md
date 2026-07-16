@@ -29,5 +29,5 @@ on the TagoIO platform. These assets are not covered by the Apache License 2.0.
 
 ---
 
-*This software is provided by TagoIO Inc. under the Apache License 2.0. For questions or
-additional permissions, please contact us.*
+_This software is provided by TagoIO Inc. under the Apache License 2.0. For questions or
+additional permissions, please contact us._

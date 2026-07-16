@@ -68,6 +68,26 @@ describe("Senzemo Senstick STP40 decoder", () => {
     });
   });
 
+  describe("Data Packet (4 bytes) - negative temperature - port 2", () => {
+  beforeEach(() => {
+    payload = [
+      { variable: "payload_raw", value: "FFD80C80" },
+      { variable: "port", value: "2" },
+    ];
+    payload = decoderRun(file_path, { payload });
+  });
+
+  test("Temperature parsed as negative", () => {
+    const temperature = payload.find((x) => x.variable === "temperature");
+    expect(temperature?.value).toBe(-0.4);
+  });
+
+  test("Battery parsed correctly", () => {
+    const battery = payload.find((x) => x.variable === "battery");
+    expect(battery?.value).toBe(3200);
+  });
+});
+
   describe("Config Packet - port 3", () => {
     beforeEach(() => {
       payload = [

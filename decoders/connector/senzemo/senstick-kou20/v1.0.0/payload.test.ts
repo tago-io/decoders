@@ -48,6 +48,17 @@ describe("Port 2 - Data packet (4 bytes, no status)", () => {
     const status = payload.find((x) => x.variable === "status");
     expect(status).toBeUndefined();
   });
+  test("Negative temperature parsed correctly", () => {
+    const payload_negative = decoderRun(file_path, {
+      payload: [
+        { variable: "payload_raw", value: "FFD80E74" },
+        { variable: "port", value: "2" },
+      ],
+    });
+    const temperature = payload_negative.find((x) => x.variable === "temperature");
+    expect(temperature?.value).toBe(-0.4);
+    expect(temperature?.unit).toBe("°C");
+  });
 });
 
 describe("Port 2 - Data packet (5 bytes, with status)", () => {
@@ -75,6 +86,17 @@ describe("Port 2 - Data packet (5 bytes, with status)", () => {
     const battery = payload.find((x) => x.variable === "battery");
     expect(battery?.value).toBe(3300);
     expect(battery?.unit).toBe("mV");
+  });
+  test("Negative temperature parsed correctly", () => {
+    const payload_negative = decoderRun(file_path, {
+      payload: [
+        { variable: "payload_raw", value: "01FFD80CE4" },
+        { variable: "port", value: "2" },
+      ],
+    });
+    const temperature = payload_negative.find((x) => x.variable === "temperature");
+    expect(temperature?.value).toBe(-0.4);
+    expect(temperature?.unit).toBe("°C");
   });
 });
 

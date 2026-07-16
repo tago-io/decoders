@@ -26,7 +26,7 @@ if (payload_raw) {
       if (bytes.length === 8) {
         const cur_rain_int_cnt = bytes[0];
         const cur_rain_cnt = (bytes[1] << 8) + bytes[2];
-        const tot_rain_cnt = (bytes[3] << 24) + (bytes[4] << 16) + (bytes[5] << 8) + bytes[6];
+        const tot_rain_cnt = bytes[3] * 0x1000000 + (bytes[4] << 16) + (bytes[5] << 8) + bytes[6];
         const battery_level = bytes[7];
 
         parsedResults.push({ variable: "current_rain", value: Number((cur_rain_int_cnt * 0.2).toFixed(1)), unit: "mm" });
@@ -37,7 +37,7 @@ if (payload_raw) {
         const status = bytes[0];
         const cur_rain_int_cnt = bytes[1];
         const cur_rain_cnt = (bytes[2] << 8) + bytes[3];
-        const tot_rain_cnt = (bytes[4] << 24) + (bytes[5] << 16) + (bytes[6] << 8) + bytes[7];
+        const tot_rain_cnt = bytes[4] * 0x1000000 + (bytes[5] << 16) + (bytes[6] << 8) + bytes[7];
         const battery_level = bytes[8];
 
         parsedResults.push({ variable: "status", value: status, unit: "" });

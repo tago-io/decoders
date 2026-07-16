@@ -18,14 +18,14 @@ if (payload_raw) {
     // Port 2: Data packet
     else if (port === 2) {
       if (bytes.length === 4) {
-        const temperature = ((bytes[0] << 8) + bytes[1]) / 100;
+        const temperature = bytes.readInt16BE(0) / 100;
         const battery = (bytes[2] << 8) + bytes[3];
 
         parsedResults.push({ variable: "temperature", value: temperature, unit: "°C" });
         parsedResults.push({ variable: "battery", value: battery, unit: "mV" });
       } else if (bytes.length === 5) {
         const status = bytes[0];
-        const temperature = ((bytes[1] << 8) + bytes[2]) / 100;
+        const temperature = bytes.readInt16BE(1) / 100;
         const battery = (bytes[3] << 8) + bytes[4];
 
         parsedResults.push({ variable: "status", value: status, unit: "" });
