@@ -76,14 +76,14 @@ Manifests are JSONC files that describe each decoder and its versions. The JSON 
   "$schema": "../../../../schema/connector.json",
   "name": "Abeeway Compact Tracker",
   "images": {
-    "logo": "./assets/logo.png",
+    "logo": "./assets/logo.png"
   },
   "versions": {
     "v1.0.0": {
       "src": "./v1.0.0/payload.js",
-      "manifest": "./v1.0.0/payload-config.jsonc",
-    },
-  },
+      "manifest": "./v1.0.0/payload-config.jsonc"
+    }
+  }
 }
 ```
 
@@ -101,8 +101,8 @@ The fields `description`, `install_text`, and `device_annotation` must be factua
   "networks": [
     "../../../../network/lorawan-actility/v1.0.0/payload.js",
     "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
-    "../../../../network/lorawan-ttn/v1.0.0/payload.js",
-  ],
+    "../../../../network/lorawan-ttn/v1.0.0/payload.js"
+  ]
 }
 ```
 
@@ -155,7 +155,9 @@ let payload: DataToSend[] = [];
 
 describe("Shall not be parsed", () => {
   beforeEach(() => {
-    payload = [{ variable: "shallnotpass", value: "04096113950292" }];
+    payload = [
+      { variable: "shallnotpass", value: "04096113950292" },
+    ];
   });
   payload = decoderRun(file_path, { payload });
 
@@ -164,7 +166,9 @@ describe("Shall not be parsed", () => {
   });
 
   test("Not parsed Result", () => {
-    expect(payload).toEqual([{ variable: "shallnotpass", value: "04096113950292" }]);
+    expect(payload).toEqual([
+      { variable: "shallnotpass", value: "04096113950292" },
+    ]);
   });
 });
 ```
@@ -187,16 +191,16 @@ pnpm start generate   # build data/decoders.db
 
 All commands:
 
-| Command                | What it does                            |
-| ---------------------- | --------------------------------------- |
-| `pnpm run check`       | Lint (oxlint) and format check (oxfmt)  |
-| `pnpm run typecheck`   | TypeScript type check (`tsc --noEmit`)  |
-| `pnpm run linter`      | oxlint only                             |
-| `pnpm run format:fix`  | oxfmt auto-fix (src/, schema/, configs) |
-| `pnpm test`            | Vitest (all decoder and harness tests)  |
+| Command | What it does |
+|---------|-------------|
+| `pnpm run check` | Lint (oxlint) and format check (oxfmt) |
+| `pnpm run typecheck` | TypeScript type check (`tsc --noEmit`) |
+| `pnpm run linter` | oxlint only |
+| `pnpm run format:fix` | oxfmt auto-fix (src/, schema/, configs) |
+| `pnpm test` | Vitest (all decoder and harness tests) |
 | `pnpm start validator` | Validate manifests against JSON schemas |
-| `pnpm start generate`  | Build `data/decoders.db` for release    |
-| `pnpm run ci`          | check + typecheck + test + validator    |
+| `pnpm start generate` | Build `data/decoders.db` for release |
+| `pnpm run ci` | check + typecheck + test + validator |
 
 ## Submitting a pull request
 
