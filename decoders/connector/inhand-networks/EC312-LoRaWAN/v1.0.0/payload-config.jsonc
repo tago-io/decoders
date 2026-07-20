@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "**EC312-LoRaWAN**\n\nUse this connector for LoRaWAN end-devices connected through an EC312-LoRaWAN edge computer. Uplinks reach TagoIO via the LoRaWAN ChirpStack network integration; this connector normalizes the raw frame payload to hexadecimal and passes the remaining variables through unchanged.",
+  "install_text": "**InHand EC312-LoRaWAN**\n\nUse this connector for LoRaWAN end-devices connected through an InHand EC312-LoRaWAN edge computer. Uplinks reach TagoIO via the LoRaWAN ChirpStack network integration; this connector normalizes the raw frame payload to hexadecimal and passes the remaining variables through unchanged.",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],
