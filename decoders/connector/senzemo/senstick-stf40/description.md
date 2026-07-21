@@ -1,1 +1,1 @@
-LoRaWAN food probe sensor. Measures food storage and cooking temperature.
+LoRaWAN food probe sensor

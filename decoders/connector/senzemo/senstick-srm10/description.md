@@ -1,1 +1,1 @@
- Senzemo Senstick SRM10 - rainfall gauge sensor
+rainfall gauge sensor

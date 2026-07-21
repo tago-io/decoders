@@ -1,1 +1,1 @@
-the Senzemo Senstick SPU30 - a LoRaWAN indoor air quality sensor measuring temperature, humidity, air pressure, CO2, and VOC index.
+LoRaWAN indoor microclumate and air quality sensor

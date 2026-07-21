@@ -1,1 +1,1 @@
-Temperature-only LoRaWAN sensor. Collects temperature data, suitable for food safety, HACCP, and cold chain monitoring.
+Temperature-only LoRaWAN sensor

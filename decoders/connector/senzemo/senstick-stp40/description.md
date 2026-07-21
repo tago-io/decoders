@@ -1,1 +1,1 @@
-Industrial LoRaWAN temperature probe sensor. Suitable for use across a range of industries, including cold rooms and food service.
+Industrial LoRaWAN temperature probe sensor

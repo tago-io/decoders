@@ -1,1 +1,1 @@
-LoRaWAN compost temperature sensor for waste management sites. Monitors compost pile temperature to support composting process control.
+LoRaWAN compost temperature sensor

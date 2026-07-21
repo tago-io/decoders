@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "**Senzemo Senstick STF40**\n\nLoRaWAN temperature probe sensor with battery, sensor voltage, NTC resistance, and status/alarm/config reporting.",
+  "install_text": "LoRaWAN food probe sensor. Measures food storage and cooking temperature.",
   "device_annotation": "",
   "device_parameters": [],
   "networks": [

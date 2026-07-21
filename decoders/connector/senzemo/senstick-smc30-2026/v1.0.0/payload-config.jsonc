@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "**Senstick SMC30 2026**\n\nLoRaWAN microclimate sensor reporting temperature, humidity, air pressure, and battery voltage",
+  "install_text": "microclimate LoRaWAN sensor. Collects temperature, relative humidity, and air pressure data. Suitable for indoor environments such as retail, hospitality, and facility monitoring.",
   "device_annotation": "",
   "device_parameters": [],
   "networks": [

@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "**Senstick STO10**\n\nTemperature, movement, and battery-monitoring LoRaWAN sensor.",
+  "install_text": "Temperature-only LoRaWAN sensor. Desined for cold chain monitoring.",
   "device_annotation": "",
   "device_parameters": [],
   "networks": [
