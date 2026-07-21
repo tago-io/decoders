@@ -1,0 +1,1 @@
+Food simulant LoRaWAN sensor - dual temperature readings reflecting thermal inertia

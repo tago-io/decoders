@@ -1,0 +1,1 @@
+microclimate LoRaWAN sensor

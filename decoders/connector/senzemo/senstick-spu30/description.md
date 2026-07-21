@@ -1,0 +1,1 @@
+LoRaWAN indoor microclumate and air quality sensor

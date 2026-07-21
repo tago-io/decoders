@@ -1,0 +1,1 @@
+LoRaWAN compost temperature sensor

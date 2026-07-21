@@ -1,0 +1,1 @@
+Temperature-only LoRaWAN sensor
