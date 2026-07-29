@@ -3,8 +3,8 @@
   "description": "../description.md",
   "serial_number_config": {
     "required": true,
-    "label": "EUI / Serial",
-    "case": "upper"
+    "label": "Core ID",
+    "case": ""
   },
   "device_parameters": [],
   "middleware_endpoint": {
