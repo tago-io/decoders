@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../schema/connector.json",
-  "name": "Senstick KOU20",
+  "name": "Senzemo Senstick KOU20",
   "images": {
     "logo": "./assets/logo.png"
   },
