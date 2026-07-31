@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../schema/network.json",
+  "name": "Particle",
+  "images": {
+    "logo": "",
+    "icon": "./assets/icon.png",
+    "banner": "./assets/banner.jpg"
+  },
+  "versions": {
+    "v1.0.0": {
+      "src": "./v1.0.0/payload.ts",
+      "manifest": "./v1.0.0/payload-config.jsonc"
+    }
+  }
+}
