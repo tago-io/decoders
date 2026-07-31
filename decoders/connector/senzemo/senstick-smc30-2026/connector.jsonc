@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../schema/connector.json",
-  "name": "Senstick SMC30 2026",
+  "name": "Senzemo Senstick SMC30 2026",
   "images": {
     "logo": "./assets/logo.png"
   },
