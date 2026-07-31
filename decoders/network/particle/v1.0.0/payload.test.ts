@@ -31,7 +31,7 @@ const locDataWithTowers = {
   req_id: 305,
 };
 
-function buildParticlePayload(data: string, event = "loc") {
+function buildParticlePayload(data: unknown, event = "loc") {
   return [
     {
       variable: "particle_payload",
@@ -231,6 +231,144 @@ describe("Temperature device frame as base64", () => {
   test("does not invent decoded variables from the binary frame", () => {
     expect(result).toHaveLength(3);
     expect(result).not.toEqual(expect.arrayContaining([expect.objectContaining({ variable: "cmd" })]));
+  });
+});
+
+// Binary publishes documented at https://docs.particle.io/integrations/webhooks/#binary-data
+describe("Binary publish as Data URL", () => {
+  const binary = "pyKYHEAbm4C7ndnAE7tO0A==";
+  const result = decoderRun(file_path, { payload: buildParticlePayload(`data:application/octet-stream;base64,${binary}`, "temp") });
+
+  test("strips the Data URL envelope and keeps the base64 frame", () => {
+    expect(result).toEqual(
+      expect.arrayContaining([
+        { variable: "data", value: binary, group: "1785270457272", time: "2026-07-28T20:27:36.834Z" },
+      ]),
+    );
+  });
+
+  test("does not leak the mime prefix into the value", () => {
+    const data = (result as Array<{ variable: string; value: string }>).find((item) => item.variable === "data");
+    expect(data?.value).not.toContain("data:");
+    expect(data?.value).not.toContain("base64,");
+  });
+});
+
+describe("Binary publish as Data URL wrapping JSON", () => {
+  const encoded = Buffer.from(JSON.stringify(locData)).toString("base64");
+  const result = decoderRun(file_path, { payload: buildParticlePayload(`data:application/octet-stream;base64,${encoded}`) });
+
+  test("decodes the wrapped JSON into variables", () => {
+    expect(result).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          variable: "location",
+          value: "38.3193345,-104.59641933",
+          location: { lat: 38.3193345, lng: -104.59641933 },
+        }),
+        expect.objectContaining({ variable: "cmd", value: "loc" }),
+      ]),
+    );
+  });
+});
+
+describe("Structured publish with binary buffer", () => {
+  // Particle.publish of a Variant map: { a: 1234, b: Buffer::fromHex(...) }
+  const structured = { a: 1234, b: { _type: "buffer", _data: "ncrk3+mvVzOLV1XWflF3HA==" } };
+
+  test("parses buffer and scalar fields when data arrives as an object", () => {
+    const result = decoderRun(file_path, { payload: buildParticlePayload(structured, "sensor") });
+    expect(result).toEqual(
+      expect.arrayContaining([
+        { variable: "a", value: 1234, group: "1785270457272", time: "2026-07-28T20:27:36.834Z" },
+        {
+          variable: "b",
+          value: "ncrk3+mvVzOLV1XWflF3HA==",
+          group: "1785270457272",
+          time: "2026-07-28T20:27:36.834Z",
+          metadata: { type: "buffer" },
+        },
+      ]),
+    );
+  });
+
+  test("parses the same structure when data arrives as a JSON string", () => {
+    const result = decoderRun(file_path, { payload: buildParticlePayload(JSON.stringify(structured), "sensor") });
+    expect(result).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ variable: "a", value: 1234 }),
+        expect.objectContaining({ variable: "b", value: "ncrk3+mvVzOLV1XWflF3HA==", metadata: { type: "buffer" } }),
+      ]),
+    );
+  });
+
+  test("does not silently drop sensor fields", () => {
+    const result = decoderRun(file_path, { payload: buildParticlePayload(structured, "sensor") });
+    expect(result).toHaveLength(4);
+  });
+});
+
+describe("Binary publish verbatim from Particle docs", () => {
+  // Exact payload from https://docs.particle.io/integrations/webhooks/#binary-data
+  const docBinary = "pyKYHEAbm4C7ndnAE7tO0KPAroHFk5Eqg45pJ7DGFyaFk7em9WnATJ49U0m1R/BEJpuKHeS8c/lNpOg0wlYXyQ==";
+  const result = decoderRun(file_path, { payload: buildParticlePayload(`data:application/octet-stream;base64,${docBinary}`, "binary") });
+
+  test("preserves the documented base64 frame untouched", () => {
+    expect(result).toEqual(
+      expect.arrayContaining([
+        { variable: "data", value: docBinary, group: "1785270457272", time: "2026-07-28T20:27:36.834Z" },
+      ]),
+    );
+  });
+
+  test("keeps base64 padding and the + and / characters intact", () => {
+    const data = (result as Array<{ variable: string; value: string }>).find((item) => item.variable === "data");
+    expect(data?.value).toMatch(/^[A-Za-z0-9+/]+={0,2}$/);
+    expect(data?.value).toHaveLength(88);
+  });
+});
+
+describe("Binary publish with extra Data URL parameters", () => {
+  const result = decoderRun(file_path, { payload: buildParticlePayload("data:application/octet-stream;charset=utf-8;base64,AQob", "binary") });
+
+  test("strips the envelope even with a charset parameter", () => {
+    expect(result).toEqual(expect.arrayContaining([expect.objectContaining({ variable: "data", value: "AQob" })]));
+  });
+});
+
+describe("Binary publish at the Device OS 6.3.0 size limit", () => {
+  const large = Buffer.alloc(16384, 0xab).toString("base64");
+  const result = decoderRun(file_path, { payload: buildParticlePayload(`data:application/octet-stream;base64,${large}`, "binary") });
+
+  test("carries a 16K frame through without truncation", () => {
+    const data = (result as Array<{ variable: string; value: string }>).find((item) => item.variable === "data");
+    expect(data?.value).toBe(large);
+    expect(data?.value).not.toContain("data:");
+  });
+});
+
+describe("Structured publish with buffers inside an array", () => {
+  const result = decoderRun(file_path, {
+    payload: buildParticlePayload({ list: [{ _type: "buffer", _data: "AQob" }, 42] }, "sensor"),
+  });
+
+  test("indexes array entries and tags nested buffers consistently", () => {
+    expect(result).toEqual(
+      expect.arrayContaining([
+        {
+          variable: "list_0",
+          value: "AQob",
+          group: "1785270457272",
+          time: "2026-07-28T20:27:36.834Z",
+          metadata: { type: "buffer" },
+        },
+        { variable: "list_1", value: 42, group: "1785270457272", time: "2026-07-28T20:27:36.834Z" },
+      ]),
+    );
+  });
+
+  test("does not emit the raw JSON of the array", () => {
+    expect(result).not.toEqual(expect.arrayContaining([expect.objectContaining({ variable: "list" })]));
   });
 });
 

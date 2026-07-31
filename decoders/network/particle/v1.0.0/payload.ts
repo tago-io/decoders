@@ -24,6 +24,7 @@ interface ParticleData {
   loc?: ParticleLoc;
   towers?: Array<{ str?: number; [key: string]: unknown }>;
   wps?: Array<{ str?: number; [key: string]: unknown }>;
+  [key: string]: unknown;
 }
 
 // Buffer.from silently drops invalid characters, so the format is validated before decoding.
@@ -53,7 +54,19 @@ function tryParseJson(text: string | null) {
   }
 }
 
+// Binary publishes arrive as a Data URL, e.g.
+// "data:application/octet-stream;base64,pyKYHEAbm4C7ndnAE7tO0A==".
+// https://docs.particle.io/integrations/webhooks/#binary-data
+function stripDataUrl(raw: string) {
+  const match = /^data:[^,]*;base64,(.*)$/.exec(raw);
+  return match ? match[1] : null;
+}
+
 function parseData(raw: string) {
+  const dataUrlBody = stripDataUrl(raw);
+  if (dataUrlBody !== null) {
+    return tryParseJson(decodeBase64(dataUrlBody));
+  }
   return tryParseJson(raw) ?? tryParseJson(decodeHex(raw)) ?? tryParseJson(decodeBase64(raw));
 }
 
@@ -80,6 +93,45 @@ function parseIndexedArray(variable: string, items: Array<{ str?: number; [key: 
     }
     return item;
   });
+}
+
+// Structured publishes wrap binary values as { _type: "buffer", _data: "<base64>" }.
+// https://docs.particle.io/integrations/webhooks/#binary-data
+function isStructuredBuffer(value: unknown): value is { _type: "buffer"; _data: string } {
+  return typeof value === "object" && value !== null && (value as { _type?: unknown })._type === "buffer" && typeof (value as { _data?: unknown })._data === "string";
+}
+
+const LOC_KEYS = ["cmd", "time", "req_id", "v", "trig", "src", "loc", "towers", "wps"];
+
+// Keys outside the documented loc frame still carry sensor readings, so they are
+// emitted generically instead of being dropped.
+function parseExtraKeys(data: ParticleData, group: string, time?: string) {
+  const result: DataItem[] = [];
+  for (const [key, value] of Object.entries(data)) {
+    if (LOC_KEYS.includes(key) || value === undefined || value === null) {
+      continue;
+    }
+    if (isStructuredBuffer(value)) {
+      result.push({ variable: key, value: value._data, group, time, metadata: { type: "buffer" } });
+    } else if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+      result.push({ variable: key, value, group, time });
+    } else if (Array.isArray(value)) {
+      // Buffers nested in arrays get the same treatment as top-level ones.
+      value.forEach((entry, index) => {
+        const variable = `${key}_${index}`;
+        if (isStructuredBuffer(entry)) {
+          result.push({ variable, value: entry._data, group, time, metadata: { type: "buffer" } });
+        } else if (typeof entry === "string" || typeof entry === "number" || typeof entry === "boolean") {
+          result.push({ variable, value: entry, group, time });
+        } else {
+          result.push({ variable, value: JSON.stringify(entry), group, time });
+        }
+      });
+    } else {
+      result.push({ variable: key, value: JSON.stringify(value), group, time });
+    }
+  }
+  return result;
 }
 
 function parseDataObject(data: ParticleData, group: string, fallbackTime?: string) {
@@ -110,6 +162,7 @@ function parseDataObject(data: ParticleData, group: string, fallbackTime?: strin
   if (Array.isArray(data.wps)) {
     result.push(...parseIndexedArray("wps", data.wps, group, time));
   }
+  result.push(...parseExtraKeys(data, group, time));
   return result;
 }
 
@@ -129,12 +182,18 @@ if (particleEntry) {
       varsToTago.push({ variable: "coreid", value: parsed.coreid, group, time: publishedAt });
     }
 
-    if (typeof parsed.data === "string" && parsed.data.length) {
+    // Structured publishes deliver data as an object; classic publishes as a string.
+    if (typeof parsed.data === "object" && parsed.data !== null) {
+      varsToTago.push(...parseDataObject(parsed.data, group, publishedAt));
+    } else if (typeof parsed.data === "string" && parsed.data.length) {
       const data = parseData(parsed.data);
       if (data) {
         varsToTago.push(...parseDataObject(data, group, publishedAt));
       } else {
-        varsToTago.push({ variable: "data", value: parsed.data, group, time: publishedAt });
+        // Binary frames are not decodable here: hand the payload to the device
+        // connector, dropping only the Data URL envelope.
+        const raw = stripDataUrl(parsed.data) ?? parsed.data;
+        varsToTago.push({ variable: "data", value: raw, group, time: publishedAt });
       }
     }
 
