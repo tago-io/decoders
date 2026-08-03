@@ -1,8 +1,8 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "microclimate LoRaWAN sensor. Collects temperature, relative humidity, and air pressure data. DASHBOARD:https://admin.tago.io/template/6a705a622a7e4d000b5c25a6?host=api.eu-w1.tago.io",
-  "device_annotation": "DASHBOARD:https://admin.tago.io/template/6a705a622a7e4d000b5c25a6?host=api.eu-w1.tago.io",
+  "install_text": "microclimate LoRaWAN sensor. Collects temperature, relative humidity, and air pressure data. DASHBOARD: https://admin.tago.io/template/6a705a622a7e4d000b5c25a6?host=api.eu-w1.tago.io",
+  "device_annotation": "DASHBOARD: https://admin.tago.io/template/6a705a622a7e4d000b5c25a6?host=api.eu-w1.tago.io",
   "device_parameters": [],
   "networks": [
     "../../../../network/lorawan-actility/v1.0.0/payload.js",
