@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "Temperature-only LoRaWAN sensor. Desined for cold chain monitoring. DASHBOARD: https://admin.tago.io/template/6a705ec5c197c9000ba4bd48?host=api.eu-w1.tago.io",
+  "install_text": "Temperature-only LoRaWAN sensor. Designed for cold chain monitoring. DASHBOARD: https://admin.tago.io/template/6a705ec5c197c9000ba4bd48?host=api.eu-w1.tago.io",
   "device_annotation": "DASHBOARD: https://admin.tago.io/template/6a705ec5c197c9000ba4bd48?host=api.eu-w1.tago.io",
   "device_parameters": [],
   "networks": [
