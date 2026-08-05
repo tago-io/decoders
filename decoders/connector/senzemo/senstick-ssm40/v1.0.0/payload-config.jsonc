@@ -1,8 +1,8 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "LoRa WAN soil moisture sensor",
-  "device_annotation": "",
+  "install_text": "LoRa WAN soil moisture sensor. DASHBOARD: https://admin.tago.io/template/6a706054c197c9000ba4d2d9?host=api.eu-w1.tago.io",
+  "device_annotation": "DASHBOARD: https://admin.tago.io/template/6a706054c197c9000ba4d2d9?host=api.eu-w1.tago.io",
   "device_parameters": [],
   "networks": [
     "../../../../network/lorawan-actility/v1.0.0/payload.js",

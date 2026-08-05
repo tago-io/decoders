@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../schema/connector.json",
-  "name": "Senstick SRM10",
+  "name": "Senzemo Senstick SRM10",
   "images": {
     "logo": "./assets/logo.png"
   },
