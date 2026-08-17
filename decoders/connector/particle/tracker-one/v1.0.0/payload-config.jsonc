@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "Tracker One is an asset tracking device based on the Particle Tracker SoM. It provides GNSS geolocation (GPS, GLONASS, BeiDou, Galileo) with untethered dead reckoning, complemented by Wi-Fi and cellular tower geolocation for indoor and low-signal environments.\n\nThe device includes an onboard inertial measurement unit (accelerometer/gyroscope) for motion and orientation detection, a temperature sensor, and Bluetooth Low Energy (BLE) support. It is housed in an IP67-rated enclosure with an internal Li-Po battery, USB-C port, and an M8 8-pin external connector supporting CAN bus, GPIO, and power for expansion.\n\nCellular connectivity is available in the following variants, all using the same data format:\n- LTE Cat M1 (North America) with EtherSIM\n- LTE Cat 1 with 3G/2G fallback (Europe/EMEA) with EtherSIM\n\nData is published to the Particle Cloud and can be forwarded to TagoIO via webhook integration. This connector supports all Tracker One variants and package configurations (single unit and bulk).\n",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/particle/v1.0.0/payload.ts"
+  ]
+}
