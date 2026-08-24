@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../schema/connector.json",
-  "name": "IG502",
+  "name": "InHand IG502",
   "images": {
     "logo": "./assets/logo.png"
   },
