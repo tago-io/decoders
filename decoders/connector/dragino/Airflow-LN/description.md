@@ -1,0 +1,1 @@
+The Dragino LoRaWAN Air Flow Sensor is designed for remote monitoring of low-to-medium air velocities in HVAC, refrigeration, and ventilation systems. It uses a thermal mass flow sensing element and offers multiple selectable measurement ranges (0-5/0-10/0-30 m/s), allowing users to optimize sensitivity based on specific application needs.
