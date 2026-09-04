@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "**SM-3EA**\n\nThree-phase current meter with per-phase current monitoring and Wi-Fi signal strength.",
+  "install_text": "**SM-3EA**\n\nThree-phase current meter for per-phase current monitoring.\n\n**Measured Parameters**\n- Current Phase A (mA)\n- Current Phase B (mA)\n- Current Phase C (mA)\n- Connection Type\n- Wi-Fi Signal Strength (dBm)\n\nThe device transmits a JSON object with 6 fields. Values are sent as numbers.",
   "install_end_text": "",
   "device_annotation": "",
   "device_parameters": [],
