@@ -1,14 +1,15 @@
 # IE Tecnologia SM-3EA
 
-Medidor de corrente trifásico com monitoramento das três fases.
+Three-phase current meter for per-phase current monitoring.
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Corrente Fase A** (mA)
-- **Corrente Fase B** (mA)
-- **Corrente Fase C** (mA)
-- **Intensidade do Sinal Wi-Fi** (dBm)
+- **Current Phase A** (mA)
+- **Current Phase B** (mA)
+- **Current Phase C** (mA)
+- **Connection Type**
+- **Wi-Fi Signal Strength** (dBm)
 
-## Formato do Payload
+## Payload Format
 
-O SM-3EA transmite um objeto JSON com 5 campos usando nomes curtos (ex: `ia`, `ib`, `ic`). Os valores são enviados como números. O decoder converte esses campos em variáveis individuais no formato TagoIO com nomes descritivos e unidades corretas.
+The SM-3EA transmits a JSON object with 6 fields using short tag names (e.g., `ia`, `ib`, `ic`). Values are sent as numbers. The decoder converts these into individual TagoIO variables with descriptive names and proper units.

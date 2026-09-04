@@ -1,14 +1,14 @@
 # IE Tecnologia SM-WU
 
-Medidor ultrassônico de nível e volume para reservatórios e tanques.
+Ultrasonic level and volume meter for reservoirs and tanks.
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Distância** (cm) — distância do sensor até a superfície do nível atual
-- **Nível** (cm) — nível calculado de acordo com configurações do equipamento
-- **Volume** (L) — volume calculado de acordo com configurações do equipamento
-- **Intensidade do Sinal Wi-Fi** (dBm)
+- **Distance** (cm) — distance from sensor to current level surface
+- **Level** (cm) — calculated according to device configuration
+- **Volume** (L) — calculated according to device configuration
+- **Wi-Fi Signal Strength** (dBm)
 
-## Formato do Payload
+## Payload Format
 
-O SM-WU transmite um objeto JSON com 4 campos usando nomes curtos (ex: `d`, `nivel`, `volume`). Todos os valores são enviados como strings. O decoder converte esses campos em variáveis individuais no formato TagoIO com nomes descritivos e unidades corretas.
+The SM-WU transmits a JSON object with 5 fields using short tag names (e.g., `d`, `nivel`, `volume`). All values are sent as strings. The decoder converts these into individual TagoIO variables with descriptive names and proper units.

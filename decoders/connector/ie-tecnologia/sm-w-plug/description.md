@@ -1,21 +1,21 @@
 # IE Tecnologia SM-W Plug
 
-Medidor de energia monofásico com relé integrado para controle de carga.
+Single-phase energy meter with integrated relay for load control.
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Potência Ativa** (W)
-- **Potência Reativa** (VAr)
-- **Potência Aparente** (VA)
-- **Tensão** (V)
-- **Corrente** (A)
-- **Fator de Potência**
-- **Ângulo de Fase** (°) — ângulo entre tensão e corrente
-- **Frequência** (Hz)
-- **Consumo de Energia Ativa** (kWh)
-- **Estado do Relé** — 0: desligado, 1: ligado
-- **Intensidade do Sinal Wi-Fi** (dBm)
+- **Active Power** (W)
+- **Reactive Power** (VAr)
+- **Apparent Power** (VA)
+- **Voltage** (V)
+- **Current** (A)
+- **Power Factor**
+- **Phase Angle** (°) — voltage-current angle
+- **Frequency** (Hz)
+- **Active Energy Consumption** (kWh)
+- **Relay State** — 0: off, 1: on
+- **Wi-Fi Signal Strength** (dBm)
 
-## Formato do Payload
+## Payload Format
 
-O SM-W Plug transmite um objeto JSON com 12 campos usando nomes curtos (ex: `pa`, `uarms`, `freq`, `rele`). Todos os valores são enviados como strings. O decoder converte esses campos em variáveis individuais no formato TagoIO com nomes descritivos e unidades corretas.
+The SM-W Plug transmits a JSON object with 12 fields using short tag names (e.g., `pa`, `uarms`, `freq`, `rele`). All values are sent as strings. The decoder converts these into individual TagoIO variables with descriptive names and proper units.

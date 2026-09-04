@@ -1,22 +1,22 @@
 # IE Tecnologia SM-W Lite
 
-Medidor de energia monofásico para monitoramento de parâmetros elétricos.
+Single-phase energy meter for monitoring electrical parameters.
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Potência Ativa** (W)
-- **Potência Reativa** (VAr)
-- **Potência Aparente** (VA)
-- **Tensão** (V)
-- **Corrente** (A)
-- **Fator de Potência**
-- **Ângulo de Fase** (°) — ângulo entre tensão e corrente
-- **Frequência** (Hz)
-- **Consumo de Energia Ativa** (kWh)
-- **Geração de Energia Ativa** (kWh)
-- **Temperatura do Equipamento** (°C)
-- **Intensidade do Sinal Wi-Fi** (dBm)
+- **Active Power** (W)
+- **Reactive Power** (VAr)
+- **Apparent Power** (VA)
+- **Voltage** (V)
+- **Current** (A)
+- **Power Factor**
+- **Phase Angle** (°) — voltage-current angle
+- **Frequency** (Hz)
+- **Active Energy Consumption** (kWh)
+- **Active Energy Generation** (kWh)
+- **Device Temperature** (°C)
+- **Wi-Fi Signal Strength** (dBm)
 
-## Formato do Payload
+## Payload Format
 
-O SM-W Lite transmite um objeto JSON com 13 campos usando nomes curtos (ex: `pa`, `uarms`, `freq`). Todos os valores são enviados como strings. O decoder converte esses campos em variáveis individuais no formato TagoIO com nomes descritivos e unidades corretas.
+The SM-W Lite transmits a JSON object with 13 fields using short tag names (e.g., `pa`, `uarms`, `freq`). All values are sent as strings. The decoder converts these into individual TagoIO variables with descriptive names and proper units.

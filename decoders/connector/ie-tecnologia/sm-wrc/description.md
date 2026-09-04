@@ -1,12 +1,12 @@
 # IE Tecnologia SM-WRC
 
-Controlador de relé com monitoramento de estado e intensidade de sinal Wi-Fi.
+Relay controller with state monitoring and Wi-Fi signal strength.
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Estado do Relé** — 0: desligado, 1: ligado
-- **Intensidade do Sinal Wi-Fi** (dBm)
+- **Relay State** — 0: off, 1: on
+- **Wi-Fi Signal Strength** (dBm)
 
-## Formato do Payload
+## Payload Format
 
-O SM-WRC transmite um objeto JSON com 3 campos usando nomes curtos (ex: `er`, `rssi`). Todos os valores são enviados como strings. O decoder converte esses campos em variáveis individuais no formato TagoIO com nomes descritivos e unidades corretas.
+The SM-WRC transmits a JSON object with 3 fields using short tag names (e.g., `er`, `rssi`). All values are sent as strings. The decoder converts these into individual TagoIO variables with descriptive names and proper units.

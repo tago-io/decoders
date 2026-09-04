@@ -1,13 +1,13 @@
-##IE TECNOLOGIA
 # IE Tecnologia SM-WT
 
-Medidor de temperatura e umidade com suporte aos sensores SHT40 e DS18B20.
+Temperature and humidity meter supporting SHT40 and DS18B20 sensors.
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Temperatura** (°C) — canal 1 (SHT40 ou DS18B20)
-- **Umidade Relativa** (%rH) — canal 1 (somente com sensor SHT40)
+- **Temperature** (°C) — channel 1 (SHT40 or DS18B20)
+- **Relative Humidity** (%rH) — channel 1 (SHT40 sensor only)
+- **Wi-Fi Signal Strength** (dBm)
 
-## Formato do Payload
+## Payload Format
 
-O SM-WT transmite um objeto JSON com 2 ou 3 campos dependendo do sensor utilizado. Com o sensor SHT40, envia temperatura e umidade. Com o sensor DS18B20, envia apenas temperatura. Todos os valores são enviados como strings.
+The SM-WT transmits a JSON object with 3 or 4 fields depending on the sensor used. With the SHT40 sensor, it sends temperature and humidity. With the DS18B20 sensor, it sends temperature only. All values are sent as strings.

@@ -1,14 +1,14 @@
 # IE Tecnologia SM-WA
 
-Medidor de consumo de água com monitoramento de vazão instantânea e consumo acumulado.
+Water consumption meter with instantaneous flow rate and accumulated consumption monitoring.
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Pulsos por Litro** (pulsos/L) — configuração do sensor
-- **Vazão Instantânea** (L/min) — calculada com base nos pulsos
-- **Consumo Total Acumulado** (Litros)
-- **Intensidade do Sinal Wi-Fi** (dBm)
+- **Pulses per Liter** (pulses/L) — sensor configuration
+- **Instantaneous Flow Rate** (L/min) — calculated from pulses
+- **Total Accumulated Consumption** (L)
+- **Wi-Fi Signal Strength** (dBm)
 
-## Formato do Payload
+## Payload Format
 
-O SM-WA transmite um objeto JSON com 5 campos usando nomes curtos (ex: `ppl`, `vazao`, `consumo`). Todos os valores são enviados como strings. O decoder converte esses campos em variáveis individuais no formato TagoIO com nomes descritivos e unidades corretas.
+The SM-WA transmits a JSON object with 5 fields using short tag names (e.g., `ppl`, `vazao`, `consumo`). All values are sent as strings. The decoder converts these into individual TagoIO variables with descriptive names and proper units.

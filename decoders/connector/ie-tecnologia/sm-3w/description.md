@@ -1,22 +1,22 @@
 # IE Tecnologia SM-3W
 
-Medidor de energia trifásico para monitoramento de parâmetros elétricos nas três fases (A, B, C).
+Three-phase energy meter for monitoring electrical parameters across three phases (A, B, C).
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Tensão** (V) — fases A, B, C
-- **Corrente** (A) — fases A, B, C e total
-- **Potência Ativa** (W) — fases A, B, C e total
-- **Potência Reativa** (VAr) — fases A, B, C e total
-- **Potência Aparente** (VA) — fases A, B, C e total
-- **Fator de Potência** — fases A, B, C e total
-- **Ângulo de Fase** (°) — ângulo entre tensão e corrente por fase
-- **Frequência** (Hz)
-- **Consumo de Energia Ativa** (kWh) — fases A, B, C e total
-- **Geração de Energia Ativa** (kWh) — fases A, B, C e total
-- **Ângulos entre Tensões de Fase** (°) — A-B, A-C, B-C
-- **Temperatura do Equipamento** (°C)
+- **Voltage** (V) — phases A, B, C
+- **Current** (A) — phases A, B, C and total
+- **Active Power** (W) — phases A, B, C and total
+- **Reactive Power** (VAr) — phases A, B, C and total
+- **Apparent Power** (VA) — phases A, B, C and total
+- **Power Factor** — phases A, B, C and total
+- **Phase Angle** (°) — voltage-current angle per phase
+- **Frequency** (Hz)
+- **Active Energy Consumption** (kWh) — phases A, B, C and total
+- **Active Energy Generation** (kWh) — phases A, B, C and total
+- **Voltage Phase Angles** (°) — A-B, A-C, B-C
+- **Device Temperature** (°C)
 
-## Formato do Payload
+## Payload Format
 
-O SM-3W transmite um objeto JSON com 40 campos usando nomes curtos (ex: `pa`, `uarms`, `freq`). Todos os valores são enviados como strings. O decoder converte esses campos em variáveis individuais no formato TagoIO com nomes descritivos e unidades corretas.
+The SM-3W transmits a JSON object with 40 fields using short tag names (e.g., `pa`, `uarms`, `freq`). All values are sent as strings. The decoder converts these into individual TagoIO variables with descriptive names and proper units.

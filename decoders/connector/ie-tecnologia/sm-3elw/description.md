@@ -1,27 +1,27 @@
 # IE Tecnologia SM-3ELW
 
-Medidor de energia trifásico com conectividade WiFi para monitoramento completo de parâmetros elétricos nas três fases (A, B, C).
+Three-phase energy meter with WiFi connectivity for comprehensive electrical parameter monitoring across three phases (A, B, C).
 
-## Parâmetros Medidos
+## Measured Parameters
 
-- **Tensão** (V) — fases A, B, C
-- **Corrente** (A) — fases A, B, C e total
-- **Potência Ativa** (W) — fases A, B, C e total
-- **Potência Reativa** (VAr) — fases A, B, C e total
-- **Potência Aparente** (VA) — fases A, B, C e total
-- **Fator de Potência** — fases A, B, C e total
-- **Ângulo de Fase** (°) — ângulo entre tensão e corrente por fase
-- **Frequência** (Hz)
-- **Consumo de Energia Ativa** (kWh) — fases A, B, C e total
-- **Consumo de Energia Reativa** (kVArh) — fases A, B, C e total
-- **Geração de Energia Ativa** (kWh) — fases A, B, C e total
-- **Geração de Energia Reativa** (kVArh) — fases A, B, C e total
-- **Delta de Energia** — diferença entre última e atual telemetria (ativa e reativa, consumo e geração)
-- **Ângulos entre Tensões de Fase** (°) — A-B, A-C, B-C
-- **Temperatura do Equipamento** (°C)
-- **Tipo de Conexão**
-- **Intensidade do Sinal Wi-Fi** (dBm)
+- **Voltage** (V) — phases A, B, C
+- **Current** (A) — phases A, B, C and total
+- **Active Power** (W) — phases A, B, C and total
+- **Reactive Power** (VAr) — phases A, B, C and total
+- **Apparent Power** (VA) — phases A, B, C and total
+- **Power Factor** — phases A, B, C and total
+- **Phase Angle** (°) — voltage-current angle per phase
+- **Frequency** (Hz)
+- **Active Energy Consumption** (kWh) — phases A, B, C and total
+- **Reactive Energy Consumption** (kVArh) — phases A, B, C and total
+- **Active Energy Generation** (kWh) — phases A, B, C and total
+- **Reactive Energy Generation** (kVArh) — phases A, B, C and total
+- **Energy Delta** — difference between last and current telemetry (active and reactive, consumption and generation)
+- **Voltage Phase Angles** (°) — A-B, A-C, B-C
+- **Device Temperature** (°C)
+- **Connection Type**
+- **Wi-Fi Signal Strength** (dBm)
 
-## Formato do Payload
+## Payload Format
 
-O SM-3ELW transmite um objeto JSON com 66 campos usando nomes curtos (ex: `pa`, `uarms`, `freq`, `delta_epa_c`). Todos os valores são enviados como strings. O decoder converte esses campos em variáveis individuais no formato TagoIO com nomes descritivos e unidades corretas.
+The SM-3ELW transmits a JSON object with 66 fields using short tag names (e.g., `pa`, `uarms`, `freq`, `delta_epa_c`). All values are sent as strings. The decoder converts these into individual TagoIO variables with descriptive names and proper units.
