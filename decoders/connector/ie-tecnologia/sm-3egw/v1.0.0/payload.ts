@@ -1,9 +1,4 @@
-/**
- * IE Tecnologia SM-3EGW — Decoder para medidor de energia trifásico com WiFi/Ethernet/GSM
- *
- * Converte o payload JSON enviado pelo SM-3EGW em variáveis TagoIO.
- * O dispositivo envia um objeto JSON com 67 campos usando tags curtas e valores em string.
- */
+/*IE Tecnologia SM-3EGW*/
 
 const VARIABLE_MAP: Record<string, { variable: string; unit: string }> = {
   id: { variable: "device_id", unit: "" },
@@ -99,7 +94,7 @@ function findPayload(payload: any[]): Record<string, string> | null {
   }
 
   for (const item of payload) {
-    // Caso 1: string JSON direta
+    
     if (typeof item === "string" && item.startsWith("{")) {
       try {
         const parsed = JSON.parse(item);
@@ -109,7 +104,7 @@ function findPayload(payload: any[]): Record<string, string> | null {
       } catch {}
     }
 
-    // Caso 2: variável payload/data/payload_raw com JSON string
+    
     if (item && item.variable && typeof item.value === "string") {
       const candidates = ["payload", "data", "payload_raw"];
       if (candidates.includes(item.variable)) {
@@ -122,12 +117,12 @@ function findPayload(payload: any[]): Record<string, string> | null {
       }
     }
 
-    // Caso 3: objeto JSON direto (HTTP POST com application/json)
+    
     if (item && typeof item === "object" && !item.variable && item.uarms !== undefined) {
       return item;
     }
 
-    // Caso 4: x-www-form-urlencoded — JSON inteiro virou chave do objeto
+    
     if (item && typeof item === "object" && !item.variable) {
       const keys = Object.keys(item);
       if (keys.length === 1 && keys[0].startsWith("{")) {
@@ -140,7 +135,7 @@ function findPayload(payload: any[]): Record<string, string> | null {
       }
     }
 
-    // Caso 5: qualquer variável com JSON do SM-3EGW
+    
     if (item && typeof item.value === "string" && item.value.startsWith("{")) {
       try {
         const parsed = JSON.parse(item.value);

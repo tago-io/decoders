@@ -1,7 +1,5 @@
 /**
- * IE Tecnologia SM-WU — Decoder para medidor ultrassônico de nível e volume
- *
- * Converte o payload JSON enviado pelo SM-WU em variáveis TagoIO.
+ * IE Tecnologia SM-WU
  */
 
 const VARIABLE_MAP: Record<string, { variable: string; unit: string }> = {

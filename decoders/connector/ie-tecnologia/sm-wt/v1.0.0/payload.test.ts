@@ -6,9 +6,7 @@ import { decoderRun } from "../../../../../src/functions/decoder-run";
 const file_path =
   "decoders/connector/ie-tecnologia/sm-wt/v1.0.0/payload.ts";
 
-/**
- * Teste 1: Payload SHT40 (temperatura + umidade + rssi)
- */
+
 describe("SM-WT — Sensor SHT40 (temperatura + umidade)", () => {
   let result: DataToSend[];
 
@@ -63,9 +61,7 @@ describe("SM-WT — Sensor SHT40 (temperatura + umidade)", () => {
   });
 });
 
-/**
- * Teste 2: Payload DS18B20 (somente temperatura)
- */
+
 describe("SM-WT — Sensor DS18B20 (somente temperatura)", () => {
   let result: DataToSend[];
 
@@ -97,9 +93,7 @@ describe("SM-WT — Sensor DS18B20 (somente temperatura)", () => {
   });
 });
 
-/**
- * Teste 3: JSON puro via HTTP POST direto
- */
+
 describe("SM-WT — JSON puro via HTTP POST direto", () => {
   let result: DataToSend[];
 
@@ -126,9 +120,7 @@ describe("SM-WT — JSON puro via HTTP POST direto", () => {
   });
 });
 
-/**
- * Teste 4 (obrigatório): Shall not pass
- */
+
 describe("Shall not be parsed", () => {
   let result: DataToSend[];
 

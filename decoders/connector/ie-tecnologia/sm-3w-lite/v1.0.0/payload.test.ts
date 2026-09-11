@@ -6,9 +6,6 @@ import { decoderRun } from "../../../../../src/functions/decoder-run";
 const file_path =
   "decoders/connector/ie-tecnologia/sm-3w-lite/v1.0.0/payload.ts";
 
-/**
- * Payload de exemplo da documentação do SM-3W Lite.
- */
 const SM3W_EXAMPLE_JSON = JSON.stringify({
   id: "12345678901234567890123",
   pa: "0.00",
@@ -52,9 +49,6 @@ const SM3W_EXAMPLE_JSON = JSON.stringify({
   tpsd: "30.08",
 });
 
-/**
- * Teste 1: Payload completo via variável "payload"
- */
 describe("SM-3W Lite — Payload completo via variável 'payload'", () => {
   let result: DataToSend[];
 
@@ -112,9 +106,6 @@ describe("SM-3W Lite — Payload completo via variável 'payload'", () => {
   });
 });
 
-/**
- * Teste 2: Payload via variável "data"
- */
 describe("SM-3W Lite — Payload via variável 'data'", () => {
   let result: DataToSend[];
 
@@ -137,9 +128,6 @@ describe("SM-3W Lite — Payload via variável 'data'", () => {
   });
 });
 
-/**
- * Teste 3: Valores realistas de operação
- */
 describe("SM-3W Lite — Valores realistas", () => {
   let result: DataToSend[];
 
@@ -225,9 +213,7 @@ describe("SM-3W Lite — Valores realistas", () => {
   });
 });
 
-/**
- * Teste 4: JSON puro via HTTP POST (envio direto do dispositivo)
- */
+
 describe("SM-3W Lite — JSON puro via HTTP POST direto", () => {
   let result: DataToSend[];
 
@@ -267,10 +253,7 @@ describe("SM-3W Lite — JSON puro via HTTP POST direto", () => {
   });
 });
 
-/**
- * Teste 5 (obrigatório): Shall not pass
- * Prova que o decoder não modifica dados que não são dele.
- */
+
 describe("Shall not be parsed", () => {
   let result: DataToSend[];
 

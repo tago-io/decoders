@@ -1,7 +1,5 @@
 /**
- * IE Tecnologia SM-WT — Decoder para medidor de temperatura e umidade
- *
- * Suporta sensores SHT40 (temperatura + umidade) e DS18B20 (somente temperatura).
+ * IE Tecnologia SM-WT
  */
 
 const VARIABLE_MAP: Record<string, { variable: string; unit: string }> = {
@@ -18,7 +16,7 @@ function findPayload(payload: any[]): Record<string, string> | null {
     return null;
   }
 
-  // JSON puro do SM-WT (envio direto via HTTP POST)
+  
   if (payload.length === 1 && payload[0] && !payload[0].variable && payload[0].t_canal1 !== undefined) {
     return payload[0];
   }

@@ -1,7 +1,5 @@
 /**
  * IE Tecnologia SM-WA — Decoder para medidor de consumo de água
- *
- * Converte o payload JSON enviado pelo SM-WA em variáveis TagoIO.
  */
 
 const VARIABLE_MAP: Record<string, { variable: string; unit: string }> = {

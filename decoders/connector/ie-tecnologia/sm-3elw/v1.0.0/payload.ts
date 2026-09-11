@@ -1,6 +1,4 @@
-/**
- * IE Tecnologia SM-3ELW — Decoder para medidor de energia trifásico com WiFi
- */
+/*IE Tecnologia SM-3ELW*/
 
 const VARIABLE_MAP: Record<string, { variable: string; unit: string }> = {
   id: { variable: "device_id", unit: "" },

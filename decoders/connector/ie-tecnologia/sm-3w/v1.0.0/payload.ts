@@ -1,17 +1,5 @@
 /**
- * IE Tecnologia SM-3W — Decoder para medidor de energia trifásico
- *
- * Converte o payload JSON enviado pelo SM-3W em variáveis TagoIO.
- * O dispositivo envia um objeto JSON com tags curtas e valores em string.
- *
- * Exemplo de payload:
- * {
- *   "id": "12345678901234567890123",
- *   "pa": "0.00",
- *   "uarms": "120.15",
- *   "freq": "60.00",
- *   ...
- * }
+ * IE Tecnologia SM-3W
  */
 
 const VARIABLE_MAP: Record<string, { variable: string; unit: string }> = {
