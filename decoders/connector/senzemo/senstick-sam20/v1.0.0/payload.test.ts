@@ -344,7 +344,41 @@ describe("Senstick SAM20 - undecodable raw frame", () => {
 
   test("Reports a parse error instead of decoding garbage", () => {
     const parse_error = payload.find((x) => x.variable === "parse_error");
-    expect(parse_error?.value).toBe('Could not decode "payload" as hex or base64');
+    expect(parse_error?.value).toBe('Could not decode "payload" as hex');
+  });
+});
+
+describe("Senstick SAM20 - review follow-ups", () => {
+  test("Rejects malformed hex in a hex-named variable instead of reading it as base64", () => {
+    const output = decoderRun(file_path, {
+      payload: [
+        { variable: "payload", value: "09331a3f26b3062Z" },
+        { variable: "port", value: 2 },
+      ],
+    });
+    expect(output.find((x: DataToSend) => x.variable === "parse_error")?.value).toBe('Could not decode "payload" as hex');
+  });
+
+  test("Takes group from serie and keeps the network timestamp (Orbiwise shape)", () => {
+    const output = decoderRun(file_path, {
+      payload: [
+        { variable: "dataFrame", value: "CTMaPyazBi8=", serie: "777", time: "2026-09-09T11:51:00.000Z" },
+        { variable: "port", value: 2 },
+      ],
+    });
+    const temperature = output.find((x: DataToSend) => x.variable === "temperature");
+    expect(temperature?.group).toBe("777");
+    expect(new Date(temperature?.time as Date).getTime()).toBe(Date.parse("2026-09-09T11:51:00.000Z"));
+  });
+
+  test("Reports the logged battery level in mV", () => {
+    const output = decoderRun(file_path, {
+      payload: [
+        { variable: "payload_raw", value: "092e119427940e100000050207d0138827740dac" },
+        { variable: "port", value: 2 },
+      ],
+    });
+    expect(output.find((x: DataToSend) => x.variable === "log_battery_level")?.unit).toBe("mV");
   });
 });
 

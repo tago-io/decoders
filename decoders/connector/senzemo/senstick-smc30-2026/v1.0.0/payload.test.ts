@@ -224,4 +224,13 @@ describe("Senstick SMC30 (2026) - network variable-name and encoding compatibili
       { variable: "FPort", value: String(PORT) },
     ])).toEqual(expected);
   });
+  test("Rejects malformed hex in a hex-named variable instead of reading it as base64", () => {
+    const output = decoderRun(file_path, {
+      payload: [
+        { variable: "payload", value: `${HEX.slice(0, -1)}Z` },
+        { variable: "port", value: PORT },
+      ],
+    });
+    expect(output.find((x: DataToSend) => x.variable === "parse_error")?.value).toBe('Could not decode "payload" as hex');
+  });
 });

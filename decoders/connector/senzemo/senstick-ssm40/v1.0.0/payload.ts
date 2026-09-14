@@ -43,7 +43,7 @@ const PORT_VARIABLES = ["port", "fport", "f_port"];
 function decodeRawFrame(value: string, variable: string): Buffer {
   const encodings: BufferEncoding[] = BASE64_VARIABLES.includes(variable.toLowerCase())
     ? ["base64", "hex"]
-    : ["hex", "base64"];
+    : ["hex"];
 
   let fallback: Buffer | undefined;
   for (const encoding of encodings) {
@@ -59,7 +59,7 @@ function decodeRawFrame(value: string, variable: string): Buffer {
   }
 
   if (!fallback) {
-    throw new Error(`Could not decode "${variable}" as hex or base64`);
+    throw new Error(`Could not decode "${variable}" as ${encodings.join(" or ")}`);
   }
   return fallback;
 }

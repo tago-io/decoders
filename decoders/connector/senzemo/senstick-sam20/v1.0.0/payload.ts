@@ -73,7 +73,7 @@ function decodeDataPacket(bytes: Buffer, port: number, group: string, time: Date
       { variable: "log_temperature", value: logTemperatureRaw / 100, unit: "°C", group, time },
       { variable: "log_humidity", value: logHumidityRaw / 100, unit: "%RH", group, time },
       { variable: "log_air_pressure", value: logAirPressureRaw / 10, unit: "hPa", group, time },
-      { variable: "log_battery_level", value: logBatteryLevel, unit: "", group, time },
+      { variable: "log_battery_level", value: logBatteryLevel, unit: "mV", group, time },
     );
   }
 
@@ -131,7 +131,7 @@ const PORT_VARIABLES = ["port", "fport", "f_port"];
 function decodeRawFrame(value: string, variable: string): Buffer {
   const encodings: BufferEncoding[] = BASE64_VARIABLES.includes(variable.toLowerCase())
     ? ["base64", "hex"]
-    : ["hex", "base64"];
+    : ["hex"];
 
   let fallback: Buffer | undefined;
   for (const encoding of encodings) {
@@ -147,7 +147,7 @@ function decodeRawFrame(value: string, variable: string): Buffer {
   }
 
   if (!fallback) {
-    throw new Error(`Could not decode "${variable}" as hex or base64`);
+    throw new Error(`Could not decode "${variable}" as ${encodings.join(" or ")}`);
   }
   return fallback;
 }
@@ -161,8 +161,8 @@ if (payload_raw) {
   try {
     const bytes = decodeRawFrame(payload_raw.value as string, payload_raw.variable as string);
     const port = port_variable ? Number(port_variable.value) : 0;
-    const group = payload_raw.group || `${new Date().getTime()}-${Math.random().toString(36).substring(2, 5)}`;
-    const time = new Date();
+    const group = payload_raw.group || payload_raw.serie || `${new Date().getTime()}-${Math.random().toString(36).substring(2, 5)}`;
+    const time = payload_raw.time ? new Date(payload_raw.time) : new Date();
 
     const parsed = sam20Decode(bytes, port, group, time);
     payload = payload.concat(parsed);
