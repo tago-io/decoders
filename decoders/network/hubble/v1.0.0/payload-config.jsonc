@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../../schema/network_details.json",
+  "description": "../description.md",
+  "serial_number_config": {
+    "required": true,
+    "label": "ID",
+    "case": ""
+  },
+  "device_parameters": [],
+  "middleware_endpoint": {
+    "us-e1": "hubble.middleware.us-e1.tago.io",
+    "eu-w1": "hubble.middleware.eu-w1.tago.io"
+  },
+  "documentation_url": "https://community.tago.io/t/how-to-integrate-with-hubble"
+}
