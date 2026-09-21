@@ -96,67 +96,43 @@ function runDecoder(payload: unknown) {
 describe("Hubble Uplink - Full packet", () => {
   const result = runDecoder([mock.full]);
 
-  test("expands into every variable", () => {
+  test("expands into every variable and drops the envelope", () => {
     expect(variableNames(result)).toEqual([
-      "hubble_payload",
-      "device",
       "payload",
-      "device_tags",
-      "location",
-      "network_type",
+      "gateway_location",
       "gateway_id",
       "gateway_service_id",
     ]);
   });
 
-  test("device carries the label and the compacted metadata", () => {
-    expect(findVariable(result, "device")).toEqual({
-      variable: "device",
-      value: "Simulated label 00000000",
+  test("payload is re-encoded from Base64 to hex", () => {
+    expect(findVariable(result, "payload")).toEqual({
+      variable: "payload",
+      value: "050400007b00",
+      time: mock.full.time,
+      group: mock.full.group,
+    });
+  });
+
+  test("gateway_location in TagoIO format with accuracy and network type as metadata", () => {
+    expect(findVariable(result, "gateway_location")).toEqual({
+      variable: "gateway_location",
+      location: { lat: 39.97317345947463, lng: -82.97440585562931 },
       metadata: {
-        id: "00000000-0000-4000-8000-000000000001",
-        name: "Simulated label 00000000",
-        rssi: -96,
-        timestamp: 1789417340,
-        counter: 99933,
-        sequence_number: 462,
+        altitude: 230.68304194167723,
+        horizontal_accuracy: 28,
+        vertical_accuracy: 8,
+        timestamp: 1789417242,
+        network_type: "TERRESTRIAL",
       },
       time: mock.full.time,
       group: mock.full.group,
     });
   });
 
-  test("payload is forwarded untouched", () => {
-    expect(findVariable(result, "payload")?.value).toBe("BQQAAHsA");
-  });
-
-  test("device_tags holds the tags and no value", () => {
-    const tags = findVariable(result, "device_tags");
-    expect(tags?.metadata).toEqual({ _env: "sandbox" });
-    expect(tags?.value).toBeUndefined();
-  });
-
-  test("location in TagoIO format with accuracy metadata", () => {
-    expect(findVariable(result, "location")?.location).toEqual({
-      lat: 39.97317345947463,
-      lng: -82.97440585562931,
-    });
-    expect(findVariable(result, "location")?.metadata).toEqual({
-      altitude: 230.68304194167723,
-      horizontal_accuracy: 28,
-      vertical_accuracy: 8,
-      timestamp: 1789417242,
-    });
-  });
-
-  test("network and gateway variables", () => {
-    expect(findVariable(result, "network_type")?.value).toBe("TERRESTRIAL");
+  test("gateway variables", () => {
     expect(findVariable(result, "gateway_id")?.value).toBe("b1d94f60-2c77-4f0a-9e1b-8ad3c6f25e08");
     expect(findVariable(result, "gateway_service_id")?.value).toBe("fca6");
-  });
-
-  test("keeps the raw record", () => {
-    expect(result[0]).toEqual(mock.full);
   });
 });
 
@@ -164,52 +140,35 @@ describe("Hubble Uplink - Packet without gateway", () => {
   const result = runDecoder([mock.without_gateway]);
 
   test("omits both gateway variables", () => {
-    expect(variableNames(result)).toEqual([
-      "hubble_payload",
-      "device",
-      "payload",
-      "device_tags",
-      "location",
-      "network_type",
-    ]);
+    expect(variableNames(result)).toEqual(["payload", "gateway_location"]);
   });
 });
 
 describe("Hubble Uplink - Minimal packet", () => {
   const result = runDecoder([mock.minimal]);
 
-  test("drops null fields and emits no device_tags", () => {
-    expect(variableNames(result)).toEqual([
-      "hubble_payload",
-      "device",
-      "payload",
-      "location",
-      "network_type",
-    ]);
-    expect(findVariable(result, "device")?.metadata).toEqual({
-      id: "00000000-0000-4000-8000-000000000001",
-      name: "Hubble Webhook Test",
-      timestamp: 1789416802,
-    });
+  test("drops null fields", () => {
+    expect(variableNames(result)).toEqual(["payload", "gateway_location"]);
   });
 
   test("altitude 0 survives: only null and undefined are dropped", () => {
-    expect(findVariable(result, "location")?.metadata).toEqual({
+    expect(findVariable(result, "gateway_location")?.metadata).toEqual({
       altitude: 0,
       timestamp: 1789416802,
+      network_type: "TERRESTRIAL",
     });
   });
 });
 
 describe("Hubble Uplink - Batch of readings", () => {
   const result = runDecoder([mock.full, mock.without_gateway]);
-  const devices = result.filter((item) => item.variable === "device");
+  const payloads = result.filter((item) => item.variable === "payload");
 
   test("decodes every reading and keeps its group", () => {
-    expect(devices).toHaveLength(2);
-    expect(devices[0].group).toBe(mock.full.group);
-    expect(devices[1].group).toBe(mock.without_gateway.group);
-    expect(devices[0].time).toBe(mock.full.time);
+    expect(payloads).toHaveLength(2);
+    expect(payloads[0].group).toBe(mock.full.group);
+    expect(payloads[1].group).toBe(mock.without_gateway.group);
+    expect(payloads[0].time).toBe(mock.full.time);
   });
 });
 
@@ -218,7 +177,7 @@ describe("Hubble Uplink - Record without time", () => {
   const result = runDecoder([withoutTime]);
 
   test("derives time from device.timestamp", () => {
-    expect(findVariable(result, "device")?.time).toBe(new Date(1789417340 * 1000).toISOString());
+    expect(findVariable(result, "payload")?.time).toBe(new Date(1789417340 * 1000).toISOString());
   });
 });
 
@@ -238,15 +197,19 @@ describe("Hubble Uplink - Malformed packet", () => {
     // The other packet still decoded.
     expect(findVariable(result, "gateway_service_id")?.value).toBe("fca6");
   });
+
+  test("does not keep the broken envelope either", () => {
+    expect(variableNames(result)).not.toContain("hubble_payload");
+  });
 });
 
 describe("Hubble Uplink - Packet without a device block", () => {
   const { device: _dropped, ...headless } = fullPacket;
   const result = runDecoder([repack(headless)]);
 
-  test("reports parse_error and emits no device variable", () => {
+  test("reports parse_error and emits no payload", () => {
     expect(findVariable(result, "parse_error")?.value).toBe("Packet has no device block");
-    expect(variableNames(result)).not.toContain("device");
+    expect(variableNames(result)).not.toContain("payload");
   });
 });
 
@@ -255,16 +218,15 @@ describe("Hubble Uplink - Out-of-range coordinates", () => {
   const result = runDecoder([offEarth]);
 
   test("drops only the location", () => {
-    expect(variableNames(result)).not.toContain("location");
-    expect(findVariable(result, "device")?.value).toBe("Simulated label 00000000");
+    expect(variableNames(result)).toEqual(["payload", "gateway_id", "gateway_service_id"]);
   });
 });
 
 describe("Hubble Uplink - Unknown network type", () => {
   const result = runDecoder([repack({ ...fullPacket, network_type: "LUNAR" })]);
 
-  test("passes through", () => {
-    expect(findVariable(result, "network_type")?.value).toBe("LUNAR");
+  test("passes through as metadata", () => {
+    expect(findVariable(result, "gateway_location")?.metadata).toMatchObject({ network_type: "LUNAR" });
   });
 });
 

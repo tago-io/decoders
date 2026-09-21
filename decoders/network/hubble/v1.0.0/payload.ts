@@ -2,22 +2,18 @@
  * Hubble network decoder.
  *
  * The Hubble middleware posts each webhook packet as a JSON string under the `hubble_payload`
- * variable, one request per device and several readings per request. This decoder expands that
- * envelope into TagoIO variables and keeps the raw records alongside them.
+ * variable, one request per device and several readings per request. This decoder replaces that
+ * envelope with TagoIO variables. The envelope itself is not stored: TagoIO keeps the original
+ * request as `raw_payload`, so device name, RSSI, counters and tags stay reachable from there.
  *
- * `device.payload` carries vendor bytes that are out of scope here: the network decoder forwards
- * the Base64 string untouched so the device connector can decode it afterwards.
+ * `device.payload` carries vendor bytes that are out of scope here. Hubble delivers them Base64
+ * encoded; the network decoder re-encodes them as hex, the form TagoIO payload parsers expect, so the
+ * device connector can decode them afterwards.
  */
 
 interface HubbleDevice {
-	id?: string;
-	name?: string;
 	payload?: string;
-	rssi?: number | null;
 	timestamp?: number;
-	counter?: number | null;
-	sequence_number?: number | null;
-	tags?: Record<string, string> | null;
 }
 
 interface HubbleLocation {
@@ -72,6 +68,10 @@ function compactMetadata(source: Record<string, unknown>) {
 	return result;
 }
 
+function base64ToHex(encoded: string) {
+	return Buffer.from(encoded, "base64").toString("hex");
+}
+
 function isWithinEarthBounds(latitude: number, longitude: number) {
 	if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
 		return false;
@@ -108,6 +108,36 @@ function buildStamp(item: any, deviceTimestamp: unknown) {
 	return stamp;
 }
 
+/**
+ * The position Hubble computed from the gateway that heard the tag. `network_type` rides along as
+ * metadata: it describes the gateway (terrestrial or satellite), not the device.
+ */
+function decodeGatewayLocation(packet: HubblePacket, stamp: Stamp) {
+	const location = packet.location;
+	if (
+		!location ||
+		typeof location.latitude !== "number" ||
+		typeof location.longitude !== "number" ||
+		!isWithinEarthBounds(location.latitude, location.longitude)
+	) {
+		return undefined;
+	}
+
+	const data: TagoData = {
+		variable: "gateway_location",
+		location: { lat: location.latitude, lng: location.longitude },
+		metadata: compactMetadata({
+			altitude: location.altitude,
+			horizontal_accuracy: location.horizontal_accuracy,
+			vertical_accuracy: location.vertical_accuracy,
+			timestamp: location.timestamp,
+			network_type: packet.network_type,
+		}),
+		...stamp,
+	};
+	return data;
+}
+
 /** Expands one Hubble packet into TagoIO variables. Absent blocks yield no variable at all. */
 function decodeHubblePacket(packet: HubblePacket, stamp: Stamp) {
 	const device = packet?.device;
@@ -115,59 +145,15 @@ function decodeHubblePacket(packet: HubblePacket, stamp: Stamp) {
 		throw new Error("Packet has no device block");
 	}
 
-	const data: TagoData[] = [
-		{
-			variable: "device",
-			value: device.name ?? device.id ?? "",
-			metadata: compactMetadata({
-				id: device.id,
-				name: device.name,
-				rssi: device.rssi,
-				timestamp: device.timestamp,
-				counter: device.counter,
-				sequence_number: device.sequence_number,
-			}),
-			...stamp,
-		},
-	];
+	const data: TagoData[] = [];
 
 	if (typeof device.payload === "string") {
-		data.push({ variable: "payload", value: device.payload, ...stamp });
+		data.push({ variable: "payload", value: base64ToHex(device.payload), ...stamp });
 	}
 
-	const tags = device.tags;
-	if (tags && typeof tags === "object" && Object.keys(tags).length > 0) {
-		// No `value` here: the tags are the content, and TagoIO keeps `value` optional.
-		data.push({ variable: "device_tags", metadata: { ...tags }, ...stamp });
-	}
-
-	const location = packet.location;
-	if (
-		location &&
-		typeof location.latitude === "number" &&
-		typeof location.longitude === "number" &&
-		isWithinEarthBounds(location.latitude, location.longitude)
-	) {
-		data.push({
-			variable: "location",
-			location: { lat: location.latitude, lng: location.longitude },
-			metadata: compactMetadata({
-				altitude: location.altitude,
-				horizontal_accuracy: location.horizontal_accuracy,
-				vertical_accuracy: location.vertical_accuracy,
-				timestamp: location.timestamp,
-			}),
-			...stamp,
-		});
-	}
-
-	if (typeof packet.network_type === "string") {
-		// Unknown values pass through: the middleware tolerates them and so must this.
-		data.push({
-			variable: "network_type",
-			value: packet.network_type,
-			...stamp,
-		});
+	const gatewayLocation = decodeGatewayLocation(packet, stamp);
+	if (gatewayLocation) {
+		data.push(gatewayLocation);
 	}
 
 	const gateway = packet.gateway;
@@ -192,8 +178,8 @@ function decodeHubblePacket(packet: HubblePacket, stamp: Stamp) {
 }
 
 /**
- * Decodes every `hubble_payload` in the batch and appends the result, keeping the raw records so
- * operators can still debug from stored data.
+ * Replaces every `hubble_payload` in the batch with its decoded variables. Items under any other
+ * variable pass through untouched.
  *
  * Never throws. A parser error is returned to the device's HTTP POST response, which would fail the
  * middleware's request and make Hubble redeliver the whole batch, so a malformed packet is reported
@@ -204,7 +190,7 @@ function decodeHubblePayload(items: any) {
 		return items;
 	}
 
-	const decoded: TagoData[] = [];
+	const result: TagoData[] = [];
 
 	for (const item of items) {
 		if (
@@ -212,12 +198,13 @@ function decodeHubblePayload(items: any) {
 			item.variable !== RAW_VARIABLE ||
 			typeof item.value !== "string"
 		) {
+			result.push(item);
 			continue;
 		}
 
 		try {
 			const packet = JSON.parse(item.value) as HubblePacket;
-			decoded.push(
+			result.push(
 				...decodeHubblePacket(
 					packet,
 					buildStamp(item, packet?.device?.timestamp),
@@ -227,7 +214,7 @@ function decodeHubblePayload(items: any) {
 			const message = error instanceof Error ? error.message : String(error);
 			// Surfaces in the device's Live Inspector.
 			console.error(`${RAW_VARIABLE} could not be decoded: ${message}`);
-			decoded.push({
+			result.push({
 				variable: "parse_error",
 				value: message,
 				...buildStamp(item, undefined),
@@ -235,7 +222,7 @@ function decodeHubblePayload(items: any) {
 		}
 	}
 
-	return [...items, ...decoded];
+	return result;
 }
 
 // `payload` is injected by the TagoIO runtime. The guard keeps the file loadable by the test suite,
