@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**SM-WL**\n\nSingle-phase energy meter with active and reactive energy monitoring.\n\n**Measured Parameters**\n- Active/Reactive/Apparent Power\n- Voltage (V)\n- Current (A)\n- Power Factor\n- Phase Angle (°)\n- Frequency (Hz)\n- Active/Reactive Energy Consumption/Generation\n- Energy Delta — difference between telemetries\n- Device Temperature (°C)\n- Wi-Fi Signal Strength (dBm)\n\nThe device transmits a JSON object with 19 fields. All values are sent as strings.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../../network/mqtt/v1.0.0/payload.js",
+    "../../../../../network/https/v1.0.0/payload.js"
+  ]
+}

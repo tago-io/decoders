@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**SM-3W Lite**\n\nThree-phase energy meter for monitoring electrical parameters across three phases (A, B, C).\n\n**Measured Parameters**\n- Voltage (V) — phases A, B, C\n- Current (A) — phases A, B, C and total\n- Active Power (W) — phases A, B, C and total\n- Reactive Power (VAr) — phases A, B, C and total\n- Apparent Power (VA) — phases A, B, C and total\n- Power Factor — phases A, B, C and total\n- Phase Angle (°) — voltage-current angle per phase\n- Frequency (Hz)\n- Active Energy Consumption (kWh) — phases A, B, C and total\n- Active Energy Generation (kWh) — phases A, B, C and total\n- Voltage Phase Angles (°) — A-B, A-C, B-C\n- Device Temperature (°C)\n\nThe device transmits a JSON object with 40 fields. All values are sent as strings.",
+  "install_end_text": "",
+  "device_annotation": "",
+  "device_parameters": [],
+  "networks": [
+    "../../../../../network/mqtt/v1.0.0/payload.js",
+    "../../../../../network/https/v1.0.0/payload.js"
+  ]
+}
