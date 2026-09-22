@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "a LoRaWAN indoor air quality sensor measuring temperature, humidity, air pressure, CO2, and VOC index.",
+  "install_text": "**Senstick SPU30**\n\nLoRaWAN indoor air quality sensor measuring temperature, humidity, air pressure, CO2, and TVOC.\n\n**Key features:**\n\n- LoRaWAN end-to-end encryption and data integrity protection\n- Monitors carbon dioxide, volatile organic compounds, temperature, relative humidity, and air pressure\n- Long battery life\n- Sending interval configurable via downlink\n- Li-Ion battery for long-term autonomous operation",
   "device_annotation": "",
   "device_parameters": [],
   "networks": [

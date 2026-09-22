@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "Temperature-only LoRaWAN sensor. Designed for cold chain monitoring. DASHBOARD: https://admin.tago.io/template/6a705ec5c197c9000ba4bd48?host=api.eu-w1.tago.io",
+  "install_text": "**Senstick STO10**\n\nTemperature-only LoRaWAN sensor. Designed for cold chain monitoring.\n\n**Key features:**\n\n- LoRaWAN end-to-end encryption and data integrity protection\n- Monitors temperature\n- Built in accelerometer for movement and tampering detection\n- Long battery life\n- Weatherproof enclosure\n- Easily replaceable AA alkaline battery\n- Can be configured remotely or locally with Senzemo app\n\nDASHBOARD: https://admin.tago.io/template/6a705ec5c197c9000ba4bd48?host=api.eu-w1.tago.io",
   "device_annotation": "DASHBOARD: https://admin.tago.io/template/6a705ec5c197c9000ba4bd48?host=api.eu-w1.tago.io",
   "device_parameters": [],
   "networks": [

@@ -1,8 +1,8 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "**Senstick STB10**\n\nFood simulant LoRaWAN sensor for HACCP compliance. Monitors dual temperature readings that reflect thermal inertia.\n\n**Key features:**\n\n- LoRaWAN end-to-end encryption and data integrity protection\n- Monitors ambient and buffered product temperature\n- Built in accelerometer for movement and tampering detection\n- Long battery life\n- Internal data logging (prevents data loss on weak connections)\n- Weatherproof enclosure\n- Easily replaceable AA alkaline battery\n- Can be configured remotely or locally with Senzemo app\n\nDASHBOARD: https://admin.tago.io/template/6a707c6e2a7e4d000b5e0b65?host=api.eu-w1.tago.io",
-  "device_annotation": "DASHBOARD: https://admin.tago.io/template/6a707c6e2a7e4d000b5e0b65?host=api.eu-w1.tago.io",
+  "install_text": "**Senstick Ambient SAM20**\n\nA discreet LoRaWAN ambient sensor for indoor monitoring of temperature, relative humidity, and air pressure.\n\n**Key features:**\n\n- LoRaWAN end-to-end encryption and data integrity protection\n- Monitors temperature, relative humidity, and air pressure\n- Built in tampering detection\n- Long battery life\n- Designed for indoor use\n- Diverse mounting options (screws, backplate, tape, nail)\n- Internal data logging (prevents data loss on weak connections)\n- Easily replaceable AA battery\n- Can be configured remotely or locally with Senzemo app\n\nDASHBOARD: https://admin.legacy.tago.io/template/6a9fd2358592a5000b252703",
+  "device_annotation": "DASHBOARD: https://admin.legacy.tago.io/template/6a9fd2358592a5000b252703",
   "device_parameters": [],
   "networks": [
     "../../../../network/lorawan-actility/v1.0.0/payload.js",

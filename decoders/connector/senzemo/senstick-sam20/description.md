@@ -1,0 +1,1 @@
+LoRaWAN ambient temperature, humidity, and air pressure sensor

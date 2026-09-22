@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "LoRaWAN food probe sensor. Measures food storage and cooking temperature.",
+  "install_text": "**Senstick STF40**\n\nLoRaWAN food probe sensor. Measures food storage and cooking temperature.\n\n**Key features:**\n\n- LoRaWAN end-to-end encryption and data integrity protection\n- Monitors probe temperature across a wide range, including active cooking conditions\n- Built in accelerometer for movement detection\n- Long battery life\n- Sealed probe and enclosure\n- Optional snap-on mounting kit\n- Easily replaceable AA lithium battery\n- Can be configured remotely or locally with Senzemo app",
   "device_annotation": "",
   "device_parameters": [],
   "networks": [

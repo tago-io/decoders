@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "microclimate LoRaWAN sensor. Collects temperature, relative humidity, and air pressure data. Suitable for indoor environments such as retail, hospitality, and facility monitoring.",
+  "install_text": "**Senstick Microclimate SMC40**\n\nMicroclimate LoRaWAN sensor. Collects temperature, relative humidity, and air pressure data. Suitable for indoor environments such as retail, hospitality, and facility monitoring.\n\n**Key features:**\n\n- LoRaWAN end-to-end encryption and data integrity protection\n- Monitors temperature, relative humidity, and air pressure\n- Built in accelerometer for movement and tampering detection\n- Long battery life\n- Weatherproof enclosure for harsh environments\n- Easily replaceable single AA battery\n- Can be configured remotely or locally with Senzemo app",
   "device_annotation": "",
   "device_parameters": [],
   "networks": [
