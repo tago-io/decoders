@@ -173,3 +173,64 @@ describe("Shall not be parsed", () => {
     expect(payload).toEqual([{ variable: "shallnotpass", value: "04096113950292" }]);
   });
 });
+
+// Networks hand the raw frame over under different variable names, encodings and port
+// spellings. Whichever one is used, the decoded output must be identical.
+describe("Senstick SMC30 (2026) - network variable-name and encoding compatibility", () => {
+  const HEX = "0929158827940e42";
+  const PORT = 2;
+  const BASE64 = Buffer.from(HEX, "hex").toString("base64");
+
+  // The decoders append their variables with payload.concat(), so their own
+  // contribution is the tail beyond the input they were handed.
+  function decodedFrom(input: DataToSend[]) {
+    const output = decoderRun(file_path, { payload: input });
+    return output.slice(input.length).map((x) => ({ variable: x.variable, value: x.value }));
+  }
+
+  const expected = decodedFrom([
+    { variable: "payload_raw", value: HEX },
+    { variable: "port", value: PORT },
+  ]);
+
+  test("The reference decoding is not empty", () => {
+    expect(expected.length).toBeGreaterThan(0);
+  });
+
+  test("Decodes TTI/TTN v3 output (frm_payload + fport)", () => {
+    expect(decodedFrom([
+      { variable: "frm_payload", value: HEX },
+      { variable: "fport", value: PORT },
+    ])).toEqual(expected);
+  });
+
+  test("Decodes ChirpStack/BrDot output (base64 data + fPort)", () => {
+    expect(decodedFrom([
+      { variable: "data", value: BASE64 },
+      { variable: "fPort", value: PORT },
+    ])).toEqual(expected);
+  });
+
+  test("Decodes Orbiwise output (base64 dataFrame + port)", () => {
+    expect(decodedFrom([
+      { variable: "dataFrame", value: BASE64 },
+      { variable: "port", value: PORT },
+    ])).toEqual(expected);
+  });
+
+  test("Decodes machineQ output (hex payload + FPort as a string)", () => {
+    expect(decodedFrom([
+      { variable: "payload", value: HEX },
+      { variable: "FPort", value: String(PORT) },
+    ])).toEqual(expected);
+  });
+  test("Rejects malformed hex in a hex-named variable instead of reading it as base64", () => {
+    const output = decoderRun(file_path, {
+      payload: [
+        { variable: "payload", value: `${HEX.slice(0, -1)}Z` },
+        { variable: "port", value: PORT },
+      ],
+    });
+    expect(output.find((x: DataToSend) => x.variable === "parse_error")?.value).toBe('Could not decode "payload" as hex');
+  });
+});

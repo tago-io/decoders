@@ -1,7 +1,7 @@
 {
   "$schema": "../../../../../schema/connector_details.json",
   "description": "../description.md",
-  "install_text": "Senstick SRM10 - Rain gauge sensor",
+  "install_text": "**Senstick Rainmeter SRM10**\n\nLoRaWAN tipping-bucket rain gauge sensor. Collects rainfall metering data.\n\n**Key features:**\n\n- LoRaWAN end-to-end encryption and data integrity protection\n- Tipping-bucket rainfall metering\n- Built in leakage alert\n- Built in manipulation and tamper alert\n- Long battery life\n- Weatherproof enclosure for outdoor use\n- Easily replaceable single AA battery\n- Optional metal pole holder and bird/leaf protector accessories\n- Can be configured remotely or locally with Senzemo app",
   "device_annotation": "",
   "device_parameters": [],
   "networks": [

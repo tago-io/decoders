@@ -1,9 +1,50 @@
-const payload_raw = payload.find((x) => ["payload_raw", "payload", "data"].includes(x.variable));
-const port_variable = payload.find((x) => x.variable === "port");
+// Valid frame sizes: alert (1), data (4/5), data + logging record (12/13), config (9).
+const VALID_FRAME_SIZES = [1, 4, 5, 9, 12, 13];
+
+function isValidFrameSize(length: number): boolean {
+  return VALID_FRAME_SIZES.includes(length);
+}
+
+// Raw frame arrives hex-encoded in `payload`/`payload_raw`/`frm_payload`, or base64 in
+// `data`/`dataFrame`, and the port under four different spellings, depending on network.
+const RAW_VARIABLES = ["payload_raw", "payload", "frm_payload", "data", "dataframe"];
+const BASE64_VARIABLES = ["data", "dataframe"];
+const PORT_VARIABLES = ["port", "fport", "f_port"];
+
+// Buffer.from() silently drops characters it cannot parse, so the guess is confirmed by
+// re-encoding; a string valid as both hex and base64 is settled by which length is a frame size.
+function decodeRawFrame(value: string, variable: string): Buffer {
+  const encodings: BufferEncoding[] = BASE64_VARIABLES.includes(variable.toLowerCase())
+    ? ["base64", "hex"]
+    : ["hex"];
+
+  let fallback: Buffer | undefined;
+  for (const encoding of encodings) {
+    const bytes = Buffer.from(value, encoding);
+    const canonical = encoding === "hex" ? value.toLowerCase() : value;
+    if (!bytes.length || bytes.toString(encoding) !== canonical) {
+      continue;
+    }
+    if (isValidFrameSize(bytes.length)) {
+      return bytes;
+    }
+    fallback = fallback ?? bytes;
+  }
+
+  if (!fallback) {
+    throw new Error(`Could not decode "${variable}" as ${encodings.join(" or ")}`);
+  }
+  return fallback;
+}
+
+const payload_raw = payload.find(
+  (x) => RAW_VARIABLES.includes(String(x.variable).toLowerCase()) && typeof x.value === "string",
+);
+const port_variable = payload.find((x) => PORT_VARIABLES.includes(String(x.variable).toLowerCase()));
 
 if (payload_raw) {
   try {
-    const bytes = Buffer.from(payload_raw.value as string, "hex");
+    const bytes = decodeRawFrame(payload_raw.value as string, payload_raw.variable as string);
     const port = port_variable ? Number(port_variable.value) : 0;
     const parsedResults: Data[] = [];
 

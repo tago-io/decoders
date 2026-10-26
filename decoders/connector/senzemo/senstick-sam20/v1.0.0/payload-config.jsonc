@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../../../schema/connector_details.json",
+  "description": "../description.md",
+  "install_text": "**Senstick Ambient SAM20**\n\nA discreet LoRaWAN ambient sensor for indoor monitoring of temperature, relative humidity, and air pressure.\n\n**Key features:**\n\n- LoRaWAN end-to-end encryption and data integrity protection\n- Monitors temperature, relative humidity, and air pressure\n- Built in tampering detection\n- Long battery life\n- Designed for indoor use\n- Diverse mounting options (screws, backplate, tape, nail)\n- Internal data logging (prevents data loss on weak connections)\n- Easily replaceable AA battery\n- Can be configured remotely or locally with Senzemo app\n\nDASHBOARD: https://admin.legacy.tago.io/template/6a9fd2358592a5000b252703",
+  "device_annotation": "DASHBOARD: https://admin.legacy.tago.io/template/6a9fd2358592a5000b252703",
+  "device_parameters": [],
+  "networks": [
+    "../../../../network/lorawan-actility/v1.0.0/payload.js",
+    "../../../../network/lorawan-brdot/v1.0.0/payload.js",
+    "../../../../network/lorawan-chirpstack/v1.0.0/payload.js",
+    "../../../../network/lorawan-citykinect/v1.0.0/payload.js",
+    "../../../../network/lorawan-everynet/v1.0.0/payload.js",
+    "../../../../network/lorawan-helium/v1.0.0/payload.js",
+    "../../../../network/lorawan-kerlink/v1.0.0/payload.js",
+    "../../../../network/lorawan-loriot/v1.0.0/payload.js",
+    "../../../../network/lorawan-machineq/v1.0.0/payload.js",
+    "../../../../network/lorawan-orbiwise/v1.0.0/payload.js",
+    "../../../../network/lorawan-senet/v1.0.0/payload.js",
+    "../../../../network/lorawan-senra/v1.0.0/payload.js",
+    "../../../../network/lorawan-swisscom/v1.0.0/payload.js",
+    "../../../../network/lorawan-tektelic/v1.0.0/payload.js",
+    "../../../../network/lorawan-ttittn-v3/v1.0.0/payload.js"
+  ]
+}
