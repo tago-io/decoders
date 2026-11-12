@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../schema/connector.json",
-  "name": "Custom Actility",
+  "name": "Custom Netmore/Actility",
   "images": {
     "logo": "./assets/logo.png"
   },

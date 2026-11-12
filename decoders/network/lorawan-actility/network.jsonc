@@ -1,6 +1,6 @@
 {
   "$schema": "../../../schema/network.json",
-  "name": "LoRaWAN Actility",
+  "name": "LoRaWAN Netmore/Actility",
   "images": {
     "logo": "./assets/logo.png",
     "icon": "./assets/icon.png",
